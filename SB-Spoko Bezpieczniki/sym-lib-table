@@ -1,0 +1,7 @@
+(sym_lib_table
+  (lib (name SB-Spoko-Bezpieczniki-rescue)(type Legacy)(uri "${KIPRJMOD}/SB-Spoko Bezpieczniki-rescue.lib")(options "")(descr ""))
+  (lib (name VN9D30Q100F)(type Legacy)(uri ${KIPRJMOD}/VN9D30Q100F/VN9D30Q100F.lib)(options "")(descr ""))
+  (lib (name 2021-04-21_19-47-52)(type Legacy)(uri ${KIPRJMOD}/ul_AP150112K5G13/KiCAD/2021-04-21_19-47-52/2021-04-21_19-47-52.lib)(options "")(descr ""))
+  (lib (name Autosport)(type Legacy)(uri ${KIPRJMOD}/AS222-35PN-933C/Autosport.lib)(options "")(descr ""))
+  (lib (name STM32L4P5RET6)(type Legacy)(uri ${KIPRJMOD}/STM32L4P5RET6/STM32L4P5RET6.lib)(options "")(descr ""))
+)
