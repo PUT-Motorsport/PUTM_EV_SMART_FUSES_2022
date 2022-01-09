@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A2 23386 16535
 encoding utf-8
-Sheet 1 20
+Sheet 1 24
 Title "Smart Fuses Schematic"
 Date ""
 Rev ""
@@ -13,218 +13,100 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Text Label 21000 1500 0    50   ~ 0
+Text GLabel 21200 1500 0    50   Input ~ 0
 MOSI
-Text Label 21000 1600 0    50   ~ 0
+Text GLabel 21200 1600 0    50   Input ~ 0
 MISO
-Text Label 21000 1700 0    50   ~ 0
+Text GLabel 21200 1700 0    50   Input ~ 0
 SS_0
-Text Label 7600 7250 0    50   ~ 0
+Text GLabel 8250 7250 0    50   Input ~ 0
 SCK
-Text Label 7600 7450 0    50   ~ 0
+Text GLabel 8250 7450 0    50   Input ~ 0
 MOSI
-Text Label 7600 7350 0    50   ~ 0
+Text GLabel 8250 7350 0    50   Input ~ 0
 MISO
-Text Label 7600 6850 0    50   ~ 0
+Text GLabel 8250 6850 0    50   Input ~ 0
 SS_0
-Text Label 7600 6950 0    50   ~ 0
+Text GLabel 8250 6950 0    50   Input ~ 0
 SS_1
-Text Label 7600 7150 0    50   ~ 0
+Text GLabel 8250 7150 0    50   Input ~ 0
 SS_3
-Text Label 7600 7050 0    50   ~ 0
+Text GLabel 8250 7050 0    50   Input ~ 0
 SS_2
-Text Label 20950 2600 0    50   ~ 0
+Text GLabel 21200 2600 0    50   Input ~ 0
 SCK
-Text Label 20950 2700 0    50   ~ 0
+Text GLabel 21200 2700 0    50   Input ~ 0
 MOSI
-Text Label 20950 2800 0    50   ~ 0
+Text GLabel 21200 2800 0    50   Input ~ 0
 MISO
-Text Label 20950 2900 0    50   ~ 0
+Text GLabel 21200 2900 0    50   Input ~ 0
 SS_1
-Text Label 20950 3800 0    50   ~ 0
+Text GLabel 21200 3800 0    50   Input ~ 0
 SCK
-Text Label 20950 3900 0    50   ~ 0
+Text GLabel 21200 3900 0    50   Input ~ 0
 MOSI
-Text Label 20950 4000 0    50   ~ 0
+Text GLabel 21200 4000 0    50   Input ~ 0
 MISO
 Wire Wire Line
-	22700 2000 21950 2000
+	22150 2000 21950 2000
 Wire Wire Line
-	22700 1500 21950 1500
+	22150 1500 21950 1500
 Wire Wire Line
-	22700 4100 21950 4100
+	22050 4100 21950 4100
 Wire Wire Line
-	22700 3200 21950 3200
-Text Label 22700 1500 2    50   ~ 0
+	22150 3200 21950 3200
+Text GLabel 22150 1500 2    50   Input ~ 0
 INVERTER
-Text Label 22700 2000 2    50   ~ 0
+Text GLabel 22150 2000 2    50   Input ~ 0
 TSAL_HV
 Wire Wire Line
 	21950 1400 22050 1400
 Wire Wire Line
 	21950 2600 22050 2600
-Text Label 21000 1400 0    50   ~ 0
+Text GLabel 21200 1400 0    50   Input ~ 0
 SCK
 Wire Wire Line
-	21950 1600 22700 1600
+	21950 1600 22150 1600
 Wire Wire Line
-	21000 1700 21300 1700
+	21200 1700 21300 1700
 Wire Wire Line
-	21000 1600 21300 1600
+	21200 1600 21300 1600
 Wire Wire Line
-	21000 1500 21300 1500
+	21200 1500 21300 1500
 Wire Wire Line
-	21000 1400 21300 1400
+	21200 1400 21300 1400
 Wire Wire Line
-	20950 2600 21300 2600
+	21200 2600 21300 2600
 Wire Wire Line
-	20950 2700 21300 2700
+	21200 2700 21300 2700
 Wire Wire Line
-	20950 2800 21300 2800
+	21200 2800 21300 2800
 Wire Wire Line
-	20950 2900 21300 2900
+	21200 2900 21300 2900
 Wire Wire Line
-	20950 3800 21300 3800
+	21200 3800 21300 3800
 Wire Wire Line
-	20950 3900 21300 3900
+	21200 3900 21300 3900
 Wire Wire Line
-	20950 4000 21300 4000
-Text Label 20950 4100 0    50   ~ 0
+	21200 4000 21300 4000
+Text GLabel 21200 4100 0    50   Input ~ 0
 SS_2
 Wire Wire Line
-	20950 4100 21300 4100
-Wire Wire Line
-	2500 4900 2700 4900
-Wire Wire Line
-	2700 4900 2700 5000
-Wire Wire Line
-	2100 8600 1900 8600
-Wire Wire Line
-	1900 8700 1800 8700
-Wire Wire Line
-	2100 8700 1900 8700
-Wire Wire Line
-	1900 8700 1900 8600
-Wire Wire Line
-	2100 8800 1900 8800
-Wire Wire Line
-	1900 7700 1750 7700
-Wire Wire Line
-	2100 7600 1900 7600
-Wire Wire Line
-	1900 8700 1900 8800
-Wire Wire Line
-	2100 7700 1900 7700
-Wire Wire Line
-	1900 7700 1900 7600
-Wire Wire Line
-	2100 7800 1900 7800
-Wire Wire Line
-	1900 7800 1900 7700
-Connection ~ 1900 7700
+	21200 4100 21300 4100
 Wire Wire Line
 	19350 5650 19450 5650
 Wire Wire Line
-	19750 5650 20300 5650
+	19750 5650 19850 5650
 Wire Wire Line
-	19750 5400 20300 5400
-Text Label 20300 5400 2    50   ~ 0
+	19750 5400 19850 5400
+Text GLabel 19850 5400 2    50   Input ~ 0
 V_BSPD
-Text Label 20300 5650 2    50   ~ 0
+Text GLabel 19850 5650 2    50   Input ~ 0
 V_EBS
 Wire Wire Line
 	19350 5400 19450 5400
 Text Notes 19350 5100 0    50   ~ 0
 Use PCT polyfuse\n
-$Sheet
-S 21450 11200 900  200 
-U 61B6A745
-F0 "TSMS Control" 50
-F1 "Optocoupler.sch" 50
-F2 "IN" I L 21450 11300 50 
-F3 "~OUT" O R 22350 11300 50 
-$EndSheet
-$Sheet
-S 21450 12300 900  200 
-U 61B72450
-F0 "HVD" 50
-F1 "Optocoupler.sch" 50
-F2 "IN" I L 21450 12400 50 
-F3 "~OUT" O R 22350 12400 50 
-$EndSheet
-$Sheet
-S 21450 12800 900  200 
-U 61B7897B
-F0 "AMS" 50
-F1 "Optocoupler.sch" 50
-F2 "IN" I L 21450 12900 50 
-F3 "~OUT" O R 22350 12900 50 
-$EndSheet
-$Sheet
-S 21450 11750 900  200 
-U 61B7C076
-F0 "Termic discharge" 50
-F1 "Optocoupler.sch" 50
-F2 "IN" I L 21450 11850 50 
-F3 "~OUT" O R 22350 11850 50 
-$EndSheet
-$Sheet
-S 21450 13300 900  200 
-U 61B82715
-F0 "Safety" 50
-F1 "Optocoupler.sch" 50
-F2 "IN" I L 21450 13400 50 
-F3 "~OUT" O R 22350 13400 50 
-$EndSheet
-$Sheet
-S 21450 13850 900  200 
-U 61B8593E
-F0 "Spare" 50
-F1 "Optocoupler.sch" 50
-F2 "IN" I L 21450 13950 50 
-F3 "~OUT" O R 22350 13950 50 
-$EndSheet
-Wire Wire Line
-	22350 13400 22700 13400
-Wire Wire Line
-	21250 13400 21450 13400
-Text Label 22700 13400 2    50   ~ 0
-SAFETY
-Wire Wire Line
-	21100 12400 21450 12400
-Text Label 21100 12400 0    50   ~ 0
-HVD
-Wire Wire Line
-	22350 12400 22700 12400
-Text Label 22700 12400 2    50   ~ 0
-N_HVD
-Wire Wire Line
-	21100 11300 21450 11300
-Text Label 21100 11300 0    50   ~ 0
-TSMS
-Wire Wire Line
-	22350 11300 22700 11300
-Text Label 22700 11300 2    50   ~ 0
-N_TSMS
-$Comp
-L power:+24V #PWR029
-U 1 1 61A4B2AA
-P 21250 13400
-F 0 "#PWR029" H 21250 13250 50  0001 C CNN
-F 1 "+24V" V 21265 13528 50  0000 L CNN
-F 2 "" H 21250 13400 50  0001 C CNN
-F 3 "" H 21250 13400 50  0001 C CNN
-	1    21250 13400
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	21450 11850 21100 11850
-Text Label 21100 11850 0    50   ~ 0
-TD
-Wire Wire Line
-	22350 11850 22700 11850
-Text Label 22700 11850 2    50   ~ 0
-N_TD
 $Sheet
 S 19250 14000 750  300 
 U 61A5C8B4
@@ -287,13 +169,13 @@ F11 "CS" I L 21300 4100 50
 F12 "VIN" I R 21950 3800 50 
 $EndSheet
 Wire Wire Line
-	18850 14100 19250 14100
-Text Label 18850 14100 0    50   ~ 0
+	19150 14100 19250 14100
+Text GLabel 19150 14100 0    50   Input ~ 0
 CAN_RX
-Text Label 18850 14200 0    50   ~ 0
+Text GLabel 19150 14200 0    50   Input ~ 0
 CAN_TX
 Wire Wire Line
-	19250 14200 18850 14200
+	19250 14200 19150 14200
 Wire Wire Line
 	9950 4500 9950 4400
 Wire Wire Line
@@ -355,22 +237,6 @@ $EndComp
 Wire Wire Line
 	9300 8900 9300 9000
 Connection ~ 9300 8900
-Wire Wire Line
-	21450 13950 21100 13950
-Wire Wire Line
-	22350 13950 22700 13950
-Text Label 21100 13950 0    50   ~ 0
-SPARE
-Text Label 22700 13950 2    50   ~ 0
-N_SPARE
-Wire Wire Line
-	21100 12900 21450 12900
-Wire Wire Line
-	22350 12900 22700 12900
-Text Label 21100 12900 0    50   ~ 0
-AMS
-Text Label 22700 12900 2    50   ~ 0
-N_AMS
 $Comp
 L power:GND #PWR016
 U 1 1 61B4BB7D
@@ -438,32 +304,28 @@ Wire Wire Line
 Wire Wire Line
 	11650 15000 11650 14900
 Wire Wire Line
-	10750 5550 11500 5550
-Text Label 11500 5550 2    50   ~ 0
-SAFETY
-Wire Wire Line
-	10750 5250 11500 5250
-Text Label 11500 5250 2    50   ~ 0
+	10750 5650 10850 5650
+Text GLabel 10850 5650 2    50   Input ~ 0
 N_HVD
 Wire Wire Line
-	10750 5050 11500 5050
-Text Label 11500 5050 2    50   ~ 0
+	10750 5250 10850 5250
+Text GLabel 10850 5250 2    50   Input ~ 0
 N_TSMS
 Wire Wire Line
-	10750 5150 11500 5150
-Text Label 11500 5150 2    50   ~ 0
+	10750 5450 10850 5450
+Text GLabel 10850 5450 2    50   Input ~ 0
 N_TD
 Wire Wire Line
-	10750 5650 11500 5650
-Text Label 11500 5650 2    50   ~ 0
+	10750 5150 10850 5150
+Text GLabel 10850 5150 2    50   Input ~ 0
 N_SPARE
 Wire Wire Line
-	10750 5450 11500 5450
-Text Label 11500 5450 2    50   ~ 0
+	10750 5050 10850 5050
+Text GLabel 10850 5050 2    50   Input ~ 0
 N_AMS
 Wire Wire Line
 	1850 1600 1850 1500
-Text Label 7600 5050 0    50   ~ 0
+Text GLabel 8250 5050 0    50   Input ~ 0
 N_RST
 Wire Wire Line
 	1850 1300 1850 1200
@@ -478,94 +340,44 @@ F 3 "" H 1850 1200 50  0001 C CNN
 	1    1850 1200
 	1    0    0    -1  
 $EndComp
-Text Label 15600 1750 0    50   ~ 0
-BUZZER_IN
 Wire Wire Line
-	2500 9300 3250 9300
+	8350 7850 8250 7850
 Wire Wire Line
-	2500 9200 3250 9200
-Text Label 3250 9200 2    50   ~ 0
-V_BSPD
-Text Label 3250 9300 2    50   ~ 0
-V_EBS
-Wire Wire Line
-	8350 7850 7600 7850
-Wire Wire Line
-	7600 7950 8350 7950
-Text Label 7600 7850 0    50   ~ 0
+	8250 7950 8350 7950
+Text GLabel 8250 7850 0    50   Input ~ 0
 CAN_RX
-Text Label 7600 7950 0    50   ~ 0
+Text GLabel 8250 7950 0    50   Input ~ 0
 CAN_TX
 Text Notes 7100 7850 0    50   ~ 0
 CAN1_RX
 Text Notes 7100 7950 0    50   ~ 0
 CAN1_TX
 Wire Wire Line
-	10750 5850 11500 5850
-Text Label 11500 5850 2    50   ~ 0
+	10750 5850 10850 5850
+Text GLabel 10850 5850 2    50   Input ~ 0
 LED_1_CONTROL
 Wire Wire Line
-	10750 5750 11500 5750
-Text Label 11500 5750 2    50   ~ 0
+	10750 5750 10850 5750
+Text GLabel 10850 5750 2    50   Input ~ 0
 LED_2_CONTROL
 Wire Wire Line
-	10750 6050 11500 6050
-Text Label 11500 6050 2    50   ~ 0
+	10750 6050 10850 6050
+Text GLabel 10850 6050 2    50   Input ~ 0
 BUZZER_CONTROL
 Wire Wire Line
-	8350 7350 7600 7350
+	8350 7350 8250 7350
 Wire Wire Line
-	8350 7450 7600 7450
+	8350 7450 8250 7450
 Wire Wire Line
-	8350 7250 7600 7250
+	8350 7250 8250 7250
 Wire Wire Line
-	8350 7150 7600 7150
+	8350 7150 8250 7150
 Wire Wire Line
-	8350 7050 7600 7050
+	8350 7050 8250 7050
 Wire Wire Line
-	8350 6950 7600 6950
+	8350 6950 8250 6950
 Wire Wire Line
-	8350 6850 7600 6850
-$Comp
-L power:+24V #PWR01
-U 1 1 622CE5ED
-P 1750 7700
-F 0 "#PWR01" H 1750 7550 50  0001 C CNN
-F 1 "+24V" H 1765 7873 50  0000 C CNN
-F 2 "" H 1750 7700 50  0001 C CNN
-F 3 "" H 1750 7700 50  0001 C CNN
-	1    1750 7700
-	0    -1   -1   0   
-$EndComp
-Connection ~ 1900 8700
-$Comp
-L power:+24V #PWR03
-U 1 1 62317911
-P 1800 8700
-F 0 "#PWR03" H 1800 8550 50  0001 C CNN
-F 1 "+24V" H 1815 8873 50  0000 C CNN
-F 2 "" H 1800 8700 50  0001 C CNN
-F 3 "" H 1800 8700 50  0001 C CNN
-	1    1800 8700
-	0    -1   -1   0   
-$EndComp
-Text Label 10450 1750 0    50   ~ 0
-LED_2_IN
-Wire Wire Line
-	2500 5000 2700 5000
-Wire Wire Line
-	2700 4900 2850 4900
-$Comp
-L power:+24V #PWR05
-U 1 1 6249BDB5
-P 2850 4900
-F 0 "#PWR05" H 2850 4750 50  0001 C CNN
-F 1 "+24V" H 2865 5073 50  0000 C CNN
-F 2 "" H 2850 4900 50  0001 C CNN
-F 3 "" H 2850 4900 50  0001 C CNN
-	1    2850 4900
-	0    1    1    0   
-$EndComp
+	8350 6850 8250 6850
 Wire Wire Line
 	3250 13400 3350 13400
 $Comp
@@ -596,96 +408,17 @@ F 3 "" H 3350 13600 50  0001 C CNN
 	1    3350 13600
 	0    -1   -1   0   
 $EndComp
-Connection ~ 2700 4900
 Wire Wire Line
-	1900 8800 1900 8900
-Wire Wire Line
-	1900 8900 2100 8900
-Connection ~ 1900 8800
-Wire Wire Line
-	2100 9800 1900 9800
-Wire Wire Line
-	1900 9800 1900 9700
-Wire Wire Line
-	2100 9700 1900 9700
-Wire Wire Line
-	1900 9800 1750 9800
-Connection ~ 1900 9800
-$Comp
-L power:GND #PWR02
-U 1 1 61D45519
-P 1750 9800
-F 0 "#PWR02" H 1750 9550 50  0001 C CNN
-F 1 "GND" H 1755 9627 50  0000 C CNN
-F 2 "" H 1750 9800 50  0001 C CNN
-F 3 "" H 1750 9800 50  0001 C CNN
-	1    1750 9800
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	2500 6100 2700 6100
-Wire Wire Line
-	2700 6000 2800 6000
-Wire Wire Line
-	2500 6000 2700 6000
-Wire Wire Line
-	2700 6000 2700 6100
-Wire Wire Line
-	2500 5900 2700 5900
-Wire Wire Line
-	2700 6000 2700 5900
-Connection ~ 2700 6000
-Wire Wire Line
-	2700 5900 2700 5800
-Wire Wire Line
-	2700 5800 2500 5800
-Connection ~ 2700 5900
-$Comp
-L power:GND #PWR04
-U 1 1 61D61F2A
-P 2800 6000
-F 0 "#PWR04" H 2800 5750 50  0001 C CNN
-F 1 "GND" H 2805 5827 50  0000 C CNN
-F 2 "" H 2800 6000 50  0001 C CNN
-F 3 "" H 2800 6000 50  0001 C CNN
-	1    2800 6000
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	2700 7000 2850 7000
-Wire Wire Line
-	2500 7100 2700 7100
-Wire Wire Line
-	2500 7000 2700 7000
-Wire Wire Line
-	2700 7000 2700 7100
-Wire Wire Line
-	2500 6900 2700 6900
-Wire Wire Line
-	2700 6900 2700 7000
-Connection ~ 2700 7000
-$Comp
-L power:GND #PWR06
-U 1 1 61D7F83D
-P 2850 7000
-F 0 "#PWR06" H 2850 6750 50  0001 C CNN
-F 1 "GND" H 2855 6827 50  0000 C CNN
-F 2 "" H 2850 7000 50  0001 C CNN
-F 3 "" H 2850 7000 50  0001 C CNN
-	1    2850 7000
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	21950 1800 22700 1800
-Text Label 22700 1900 2    50   ~ 0
+	21950 1800 22150 1800
+Text GLabel 22150 1900 2    50   Input ~ 0
 TSAL_LOGIC
 Wire Wire Line
-	21950 1900 22700 1900
-Text Label 22700 1800 2    50   ~ 0
+	21950 1900 22150 1900
+Text GLabel 22150 1800 2    50   Input ~ 0
 BOX_DV
 Wire Wire Line
-	21950 1700 22700 1700
-Text Label 22700 1700 2    50   ~ 0
+	21950 1700 22150 1700
+Text GLabel 22150 1700 2    50   Input ~ 0
 APPS
 Wire Wire Line
 	21200 5650 21300 5650
@@ -698,29 +431,29 @@ SPI1_MISO
 Text Notes 7100 7250 0    50   ~ 0
 SPI1_SCK
 Wire Wire Line
-	7600 8050 8350 8050
+	8250 8050 8350 8050
 Wire Wire Line
-	7600 8150 8350 8150
-Text Label 7600 8050 0    50   ~ 0
+	8250 8150 8350 8150
+Text GLabel 8250 8050 0    50   Input ~ 0
 SWDIO
-Text Label 7600 8150 0    50   ~ 0
+Text GLabel 8250 8150 0    50   Input ~ 0
 SWCLK
-Text Label 18900 3800 0    50   ~ 0
+Text GLabel 19150 3800 0    50   Input ~ 0
 SCK
-Text Label 18900 3900 0    50   ~ 0
+Text GLabel 19150 3900 0    50   Input ~ 0
 MOSI
-Text Label 18900 4000 0    50   ~ 0
+Text GLabel 19150 4000 0    50   Input ~ 0
 MISO
 Wire Wire Line
 	19900 3800 20000 3800
 Wire Wire Line
-	18900 3800 19250 3800
+	19150 3800 19250 3800
 Wire Wire Line
-	18900 3900 19250 3900
+	19150 3900 19250 3900
 Wire Wire Line
-	18900 4000 19250 4000
+	19150 4000 19250 4000
 Wire Wire Line
-	18900 4100 19250 4100
+	19150 4100 19250 4100
 $Sheet
 S 19250 3700 650  800 
 U 61DC1767
@@ -783,9 +516,9 @@ F 3 "" H 22050 1100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	20000 3800 20000 3500
-Text Label 22700 3200 2    50   ~ 0
+Text GLabel 22150 3200 2    50   Input ~ 0
 DASHBOARD
-Text Label 22700 4100 2    50   ~ 0
+Text GLabel 22050 4100 2    50   Input ~ 0
 WHEEL
 Text Notes 18800 1300 0    50   ~ 0
 VIN = VDD
@@ -1049,7 +782,7 @@ Wire Wire Line
 	9600 12000 9600 12100
 Connection ~ 9250 12000
 Wire Wire Line
-	9600 12000 9600 11150
+	9600 12000 9600 11900
 Connection ~ 9600 12000
 Wire Wire Line
 	7200 12800 7800 12800
@@ -1068,8 +801,6 @@ Text Notes 13200 11200 2    118  ~ 24
 3.3V Inline converter\n
 Text Notes 13250 13900 2    118  ~ 24
 STM Power filtration
-Text Notes 2900 4100 2    118  ~ 24
-Autosport conector\n
 Text Notes 9325 4013 0    118  ~ 24
 STM\n
 Text Notes 19300 1000 2    118  ~ 24
@@ -1103,12 +834,12 @@ Wire Notes Line width 20 rgb(132, 0, 0)
 Text Notes 19750 10700 2    118  ~ 24
 SWD
 Wire Wire Line
-	20150 11250 19650 11250
+	19850 11250 19650 11250
 Wire Wire Line
-	20150 11150 19650 11150
-Text Label 20150 11250 2    50   ~ 0
+	19850 11150 19650 11150
+Text GLabel 19850 11250 2    50   Input ~ 0
 SWDIO
-Text Label 20150 11150 2    50   ~ 0
+Text GLabel 19850 11150 2    50   Input ~ 0
 SWCLK
 $Comp
 L power:+3V3 #PWR025
@@ -1148,167 +879,73 @@ Wire Wire Line
 	12950 11900 12950 12000
 Connection ~ 12950 11900
 Wire Wire Line
-	21600 5650 22150 5650
-Text Label 22150 5650 2    50   ~ 0
+	21600 5650 21700 5650
+Text GLabel 21700 5650 2    50   Input ~ 0
 CONVERT_5V
 Wire Wire Line
-	19650 11450 20150 11450
-Text Label 20150 11450 2    50   ~ 0
+	19650 11450 19850 11450
+Text GLabel 19850 11450 2    50   Input ~ 0
 N_RST
 Wire Wire Line
-	21950 4300 22700 4300
-Text Label 22700 4300 2    50   ~ 0
+	21950 4300 22050 4300
+Text GLabel 22050 4300 2    50   Input ~ 0
 JETSON_???
-Wire Wire Line
-	3250 8500 2600 8500
-Wire Wire Line
-	1350 5000 2100 5000
-Wire Wire Line
-	1350 5500 2100 5500
-Wire Wire Line
-	1350 5600 2100 5600
-Text Label 3250 8500 2    50   ~ 0
-INVERTER
-Text Label 3250 9400 2    50   ~ 0
-BOXF_MB
-Wire Wire Line
-	2500 9400 3250 9400
-Text Label 1350 5500 0    50   ~ 0
-WS_FR
-Wire Wire Line
-	2500 9700 3250 9700
-Text Label 3250 9700 2    50   ~ 0
-BOX_DV
-Wire Wire Line
-	2500 9600 3250 9600
-Text Label 3250 9600 2    50   ~ 0
-APPS
-Wire Wire Line
-	1350 5400 2100 5400
-Text Label 1350 5400 0    50   ~ 0
-WS_FL
-Wire Wire Line
-	1350 5300 2100 5300
-Text Label 1350 5300 0    50   ~ 0
-WS_RR
-Wire Wire Line
-	1350 5100 2100 5100
-Text Label 1350 5100 0    50   ~ 0
-WS_RL
-Text Label 1350 5600 0    50   ~ 0
-DASHBOARD
-Wire Wire Line
-	2100 6200 2000 6200
-Text Label 5550 11150 3    50   ~ 0
+Text GLabel 5550 11700 1    50   Input ~ 0
 PUMP
 Wire Wire Line
-	2500 8100 2600 8100
-Wire Wire Line
-	2500 8200 2600 8200
-Wire Wire Line
-	2600 8200 2600 8100
-Wire Wire Line
-	2500 8300 2600 8300
-Wire Wire Line
-	2600 8300 2600 8200
-Connection ~ 2600 8200
-Wire Wire Line
-	2500 8600 2600 8600
-Wire Wire Line
-	2600 8600 2600 8500
-Connection ~ 2600 8500
-Wire Wire Line
-	2600 8500 2500 8500
-Wire Wire Line
-	2600 8500 2600 8400
-Wire Wire Line
-	2600 8400 2500 8400
-Wire Wire Line
-	2100 6300 2000 6300
-Wire Wire Line
-	2000 6300 2000 6200
-Connection ~ 2000 6200
-Wire Wire Line
-	5550 11800 5550 11150
-Wire Wire Line
-	2000 6100 2100 6100
-Wire Wire Line
-	2000 6100 2000 6200
-Text Label 1350 5700 0    50   ~ 0
-BUZZER_IN
-Text Label 1350 5900 0    50   ~ 0
-LED_1_IN
-Wire Wire Line
-	2100 5700 1350 5700
-Text Label 1350 5800 0    50   ~ 0
-LED_2_IN
-Wire Wire Line
-	1350 5800 2100 5800
-Wire Wire Line
-	1350 5900 2100 5900
-Wire Wire Line
-	2100 7100 2000 7100
-Wire Wire Line
-	2100 7200 2000 7200
-Wire Wire Line
-	2000 7200 2000 7100
-Connection ~ 2000 7100
-Wire Wire Line
-	2000 7100 2000 7000
-Wire Wire Line
-	2000 7000 2100 7000
+	5550 11800 5550 11700
 Wire Notes Line width 79 rgb(0, 0, 0)
 	3100 13800 3150 13800
 Wire Wire Line
 	3250 13800 3450 13800
-Text Label 3450 13800 2    50   ~ 0
+Text GLabel 3450 13800 2    50   Input ~ 0
 USED
-Text Label 18900 4100 0    50   ~ 0
+Text GLabel 19150 4100 0    50   Input ~ 0
 SS_3
 Wire Wire Line
 	11200 14800 11200 14900
 Connection ~ 11650 14900
 Wire Wire Line
-	13450 14900 13450 14200
+	13450 14900 13450 14800
 Connection ~ 13450 14900
-Text Label 13450 14200 3    50   ~ 0
+Text GLabel 13450 14800 1    50   Input ~ 0
 3.3V_STM_POWER
 Wire Wire Line
-	9150 4400 8400 4400
-Text Label 8400 4400 0    50   ~ 0
+	9150 4400 9050 4400
+Text GLabel 9050 4400 0    50   Input ~ 0
 3.3V_STM_POWER
 Connection ~ 9150 4400
 Wire Wire Line
 	22000 8300 21900 8300
 Wire Wire Line
-	20650 8300 21700 8300
+	20950 8300 21700 8300
 Wire Wire Line
 	22400 8300 22300 8300
 Wire Wire Line
 	22000 8600 21900 8600
 Wire Wire Line
-	20650 8600 21700 8600
+	20950 8600 21700 8600
 Wire Wire Line
 	22400 8600 22300 8600
 Wire Wire Line
 	22000 8900 21900 8900
 Wire Wire Line
-	20650 8900 21700 8900
+	20950 8900 21700 8900
 Wire Wire Line
 	22400 8900 22300 8900
 Wire Wire Line
 	22000 9200 21900 9200
 Wire Wire Line
-	20650 9200 21700 9200
+	20950 9200 21700 9200
 Wire Wire Line
 	22400 9200 22300 9200
-Text Label 20650 8300 0    50   ~ 0
+Text GLabel 20950 8300 0    50   Input ~ 0
 STM_OK
-Text Label 20650 8600 0    50   ~ 0
+Text GLabel 20950 8600 0    50   Input ~ 0
 STM_FATAL_ERROR
-Text Label 20650 8900 0    50   ~ 0
+Text GLabel 20950 8900 0    50   Input ~ 0
 STM_SOFT_ERROR
-Text Label 20650 9200 0    50   ~ 0
+Text GLabel 20950 9200 0    50   Input ~ 0
 STM_???
 Wire Wire Line
 	22400 9200 22400 8900
@@ -1354,8 +991,8 @@ $EndComp
 Wire Wire Line
 	1850 1600 1850 1700
 Wire Wire Line
-	2300 1600 1850 1600
-Text Label 2300 1600 2    50   ~ 0
+	2150 1600 1850 1600
+Text GLabel 2150 1600 2    50   Input ~ 0
 N_RST
 Connection ~ 1850 1600
 Text Notes 800  850  0    118  ~ 24
@@ -1371,10 +1008,9 @@ DESCRIPTION:
 Text Notes 18800 1200 0    50   ~ 10
 DESCRIPTION:
 Wire Wire Line
-	21950 4200 22700 4200
-Text Label 22700 4200 2    50   ~ 0
+	21950 4200 22050 4200
+Text GLabel 22050 4200 2    50   Input ~ 0
 INTEL_NUC
-NoConn ~ 19650 11550
 $Sheet
 S 15600 4600 1300 300 
 U 61E969CF
@@ -1385,23 +1021,23 @@ F3 "output" O R 16900 4750 50
 F4 "~enable" I L 15600 4800 50 
 $EndSheet
 Wire Wire Line
-	15600 4800 14750 4800
+	15600 4800 15500 4800
 Wire Wire Line
-	15650 5550 14750 5550
+	15650 5550 15500 5550
 Wire Wire Line
-	15650 6250 14750 6250
-Text Label 14750 6250 0    50   ~ 0
+	15650 6250 15500 6250
+Text GLabel 15500 6250 0    50   Input ~ 0
 EN_MOSFET
-Text Label 14750 5550 0    50   ~ 0
+Text GLabel 15500 5550 0    50   Input ~ 0
 EN_MOSFET
-Text Label 14750 4800 0    50   ~ 0
+Text GLabel 15500 4800 0    50   Input ~ 0
 EN_MOSFET
 Wire Wire Line
-	17750 4750 16900 4750
+	17000 4750 16900 4750
 Wire Wire Line
-	17750 5500 16900 5500
+	17000 5500 16900 5500
 Wire Wire Line
-	17750 6200 16900 6200
+	17000 6200 16900 6200
 $Sheet
 S 15650 6050 1250 300 
 U 61ECEEF9
@@ -1420,11 +1056,11 @@ F2 "input" I L 15650 5450 50
 F3 "output" O R 16900 5500 50 
 F4 "~enable" I L 15650 5550 50 
 $EndSheet
-Text Label 17750 4750 2    50   ~ 0
+Text GLabel 17000 4750 2    50   Input ~ 0
 BUZZER_CRL_OUT
-Text Label 17750 5500 2    50   ~ 0
+Text GLabel 17000 5500 2    50   Input ~ 0
 LED_1_CRL_OUT
-Text Label 17750 6200 2    50   ~ 0
+Text GLabel 17000 6200 2    50   Input ~ 0
 LED_2_CRL_OUT
 Wire Wire Line
 	8250 5250 8350 5250
@@ -1435,50 +1071,18 @@ Wire Wire Line
 Connection ~ 850  2000
 Wire Wire Line
 	850  2000 850  2100
-Text Label 12950 1750 0    50   ~ 0
-LED_1_IN
-Wire Wire Line
-	10450 1750 11300 1750
-Wire Wire Line
-	12950 1750 13800 1750
-Wire Wire Line
-	12950 1850 13800 1850
-Text Label 12950 1850 0    50   ~ 0
-LED_1_CRL_OUT
-Text Label 15600 1850 0    50   ~ 0
-BUZZER_CRL_OUT
-Wire Wire Line
-	5400 1850 6250 1850
-Wire Wire Line
-	7850 1850 8700 1850
-Wire Wire Line
-	15600 1750 16450 1750
-Text Label 7850 1750 0    50   ~ 0
-RTDS_IN
-Wire Wire Line
-	7850 1750 8700 1750
-Text Label 5400 1750 0    50   ~ 0
-BREAK_LIGHT_IN
-Wire Wire Line
-	5400 1750 6250 1750
-Text Label 7850 1850 0    50   ~ 0
-RTDS_GATE
-Text Label 5400 1850 0    50   ~ 0
-BREAK_LIGHT_GATE
 Wire Notes Line width 20 rgb(132, 0, 0)
 	4650 2900 18650 2900
 Text Notes 15500 3900 0    118  ~ 24
 Outputs Control
 Wire Notes Line width 20 rgb(132, 0, 0)
 	14050 2900 14050 16050
-Text Notes 17550 10050 2    787  ~ 157
+Text Notes 17550 10600 2    787  ~ 157
 BUS
 Text Notes 17500 9000 0    39   ~ 8
 TM
 Wire Notes Line width 20 rgb(132, 0, 0)
 	18650 7150 22900 7150
-Text Notes 15000 10400 0    50   ~ 0
-miejsce na przyszłą taśme/magistrale komunikacyją z resztą boxa\n
 Text Notes 21250 4800 0    50   ~ 0
 gdzie?\n
 Wire Notes Line rgb(0, 0, 0)
@@ -1555,8 +1159,6 @@ Wire Notes Line rgb(0, 0, 0)
 	1120 13990 1215 13990
 Wire Notes Line rgb(0, 0, 0)
 	1120 14150 1215 14150
-Text Label 1350 6200 0    50   ~ 0
-JETSON_???
 Wire Notes Line rgb(0, 0, 0)
 	1120 14970 1215 15050
 Wire Notes Line rgb(0, 0, 0)
@@ -1581,21 +1183,7 @@ Wire Notes Line rgb(0, 0, 0)
 	2355 14150 2240 14150
 Wire Notes Line rgb(0, 0, 0)
 	2240 14150 2240 13570
-Text Label 1350 6000 0    50   ~ 0
-RTDS_IN
-Text Label 1350 5200 0    50   ~ 0
-BREAK_LIGHT_IN
-Wire Wire Line
-	1350 5200 2100 5200
-Wire Wire Line
-	1350 6000 2100 6000
-Text Label 1350 7100 0    50   ~ 0
-INTEL_NUC
-Wire Wire Line
-	2000 7100 1350 7100
-Wire Wire Line
-	2000 6200 1350 6200
-Text Label 22700 1600 2    50   ~ 0
+Text GLabel 22150 1600 2    50   Input ~ 0
 BOXF_MB
 Wire Notes Line rgb(0, 0, 0)
 	2240 14790 2355 14790
@@ -1611,14 +1199,8 @@ Wire Notes Line width 79 rgb(0, 194, 194)
 	3100 14000 3150 14000
 Wire Wire Line
 	3250 14000 3450 14000
-Text Label 3450 14000 2    50   ~ 0
+Text GLabel 3450 14000 2    50   Input ~ 0
 CAN
-Text Label 1350 4900 0    50   ~ 0
-FAN_R
-Text Label 1350 5000 0    50   ~ 0
-FAN_L
-Wire Wire Line
-	1350 4900 2100 4900
 Wire Notes Line rgb(0, 0, 0)
 	1080 13775 1080 14790
 Wire Notes Line rgb(0, 0, 0)
@@ -1665,27 +1247,21 @@ Connection ~ 11600 11900
 Wire Wire Line
 	11600 11900 11800 11900
 Wire Wire Line
-	15650 5450 14750 5450
+	15650 5450 15500 5450
 Wire Wire Line
-	15650 6150 14750 6150
-Text Label 14750 6150 0    50   ~ 0
+	15650 6150 15500 6150
+Text GLabel 15500 6150 0    50   Input ~ 0
 LED_2_CONTROL
-Text Label 14750 4700 0    50   ~ 0
+Text GLabel 15500 4700 0    50   Input ~ 0
 BUZZER_CONTROL
 Wire Wire Line
-	15600 4700 14750 4700
-Text Label 14750 5450 0    50   ~ 0
+	15600 4700 15500 4700
+Text GLabel 15500 5450 0    50   Input ~ 0
 LED_1_CONTROL
 Wire Notes Line rgb(194, 0, 0)
 	1775 14650 1725 14650
 Wire Notes Line
 	2050 14600 1800 14750
-Text Notes 1700 12850 0    50   ~ 0
-Narazie rokład power tak zostawiłem
-Wire Wire Line
-	3300 9500 4050 9500
-Text Label 4050 9500 2    50   ~ 0
-SAFETY
 Wire Notes Line rgb(0, 0, 0)
 	2380 13780 2380 14795
 $Comp
@@ -1736,20 +1312,20 @@ STM CLOCK\n
 Wire Notes Line width 20 rgb(132, 0, 0)
 	2550 2600 2550 450 
 Wire Wire Line
-	3550 1850 4350 1850
+	3550 1850 3650 1850
 Wire Wire Line
-	3550 1450 4350 1450
+	3550 1450 3650 1450
 Wire Wire Line
-	8350 5450 7600 5450
+	8350 5450 8250 5450
 Wire Wire Line
-	8350 5550 7600 5550
-Text Label 7600 5450 0    50   ~ 0
+	8350 5550 8250 5550
+Text GLabel 8250 5450 0    50   Input ~ 0
 STM_CLK_IN
-Text Label 7600 5550 0    50   ~ 0
+Text GLabel 8250 5550 0    50   Input ~ 0
 STM_CKL_OUT
-Text Label 4350 1450 2    50   ~ 0
+Text GLabel 3650 1450 2    50   Input ~ 0
 STM_CLK_IN
-Text Label 4350 1850 2    50   ~ 0
+Text GLabel 3650 1850 2    50   Input ~ 0
 STM_CKL_OUT
 Wire Notes Line rgb(194, 0, 0)
 	1400 14050 1400 14425
@@ -1776,53 +1352,7 @@ Wire Notes Line rgb(194, 0, 0)
 Wire Notes Line rgb(194, 0, 0)
 	1725 14650 1400 14425
 Wire Wire Line
-	7600 5050 8350 5050
-Wire Wire Line
-	15600 1850 16450 1850
-$Sheet
-S 16450 1650 1100 300 
-U 61F846F6
-F0 "Buzzer mosfet" 50
-F1 "N_MOSFET.sch" 50
-F2 "IN" I L 16450 1750 50 
-F3 "CRL" I L 16450 1850 50 
-$EndSheet
-$Sheet
-S 11300 1650 1100 300 
-U 6231E241
-F0 "LED_2 mosfet" 50
-F1 "N_MOSFET.sch" 50
-F2 "IN" I L 11300 1750 50 
-F3 "CRL" I L 11300 1850 50 
-$EndSheet
-$Sheet
-S 13800 1650 1100 300 
-U 62432F8F
-F0 "LED_1 mosfet" 50
-F1 "N_MOSFET.sch" 50
-F2 "IN" I L 13800 1750 50 
-F3 "CRL" I L 13800 1850 50 
-$EndSheet
-$Sheet
-S 8700 1650 1100 300 
-U 625EC444
-F0 "RTDS mosfet" 50
-F1 "N_MOSFET.sch" 50
-F2 "IN" I L 8700 1750 50 
-F3 "CRL" I L 8700 1850 50 
-$EndSheet
-Wire Wire Line
-	10450 1850 11300 1850
-Text Label 10450 1850 0    50   ~ 0
-LED_2_CRL_OUT
-$Sheet
-S 6250 1650 1100 300 
-U 6262347B
-F0 "BREAK_LIGHT mosfet" 50
-F1 "N_MOSFET.sch" 50
-F2 "IN" I L 6250 1750 50 
-F3 "CRL" I L 6250 1850 50 
-$EndSheet
+	8250 5050 8350 5050
 Wire Wire Line
 	6050 11800 6150 11800
 Wire Wire Line
@@ -1850,44 +1380,6 @@ Connection ~ 6500 15450
 Wire Wire Line
 	6500 15450 6900 15450
 $Comp
-L power:+5V #PWR0103
-U 1 1 62E35228
-P 15750 14950
-F 0 "#PWR0103" H 15750 14800 50  0001 C CNN
-F 1 "+5V" V 15765 15078 50  0000 L CNN
-F 2 "" H 15750 14950 50  0001 C CNN
-F 3 "" H 15750 14950 50  0001 C CNN
-	1    15750 14950
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0104
-U 1 1 62E6D9BC
-P 15950 14850
-F 0 "#PWR0104" H 15950 14600 50  0001 C CNN
-F 1 "GND" H 15955 14677 50  0000 C CNN
-F 2 "" H 15950 14850 50  0001 C CNN
-F 3 "" H 15950 14850 50  0001 C CNN
-	1    15950 14850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	16250 14600 16250 14950
-Wire Wire Line
-	16550 14600 16550 14950
-Text Label 16250 14600 3    50   ~ 0
-CAN_L
-Text Label 16550 14600 3    50   ~ 0
-CAN_H
-Wire Wire Line
-	16800 14600 16800 15450
-Text Label 16800 14600 3    50   ~ 0
-RTDS_GATE
-Wire Wire Line
-	17050 14600 17050 15450
-Text Label 17050 14600 3    50   ~ 0
-BREAK_LIGHT_GATE
-$Comp
 L power:+3.3V #PWR0105
 U 1 1 630649E4
 P 12950 11550
@@ -1899,20 +1391,20 @@ F 3 "" H 12950 11550 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	22700 2700 21950 2700
-Text Label 22700 2700 2    50   ~ 0
+	22150 2700 21950 2700
+Text GLabel 22150 2700 2    50   Input ~ 0
 WS_FL
 Wire Wire Line
-	22700 2800 21950 2800
-Text Label 22700 2800 2    50   ~ 0
+	22150 2800 21950 2800
+Text GLabel 22150 2800 2    50   Input ~ 0
 WS_RR
 Wire Wire Line
-	22700 2900 21950 2900
-Text Label 22700 2900 2    50   ~ 0
+	22150 2900 21950 2900
+Text GLabel 22150 2900 2    50   Input ~ 0
 WS_RL
 Wire Wire Line
-	22700 3100 21950 3100
-Text Label 22700 3100 2    50   ~ 0
+	22150 3100 21950 3100
+Text GLabel 22150 3100 2    50   Input ~ 0
 FAN_R
 Wire Notes Line rgb(0, 0, 0)
 	2240 15060 2355 14965
@@ -1924,14 +1416,14 @@ Wire Notes Line rgb(0, 0, 0)
 	2210 14560 2095 14560
 Wire Notes Line rgb(0, 0, 0)
 	2095 14560 2095 15140
-Text Label 22700 3000 2    50   ~ 0
+Text GLabel 22150 3000 2    50   Input ~ 0
 FAN_L
 Wire Wire Line
-	22700 3000 21950 3000
-Text Label 22700 4400 2    50   ~ 0
+	22150 3000 21950 3000
+Text GLabel 22050 4400 2    50   Input ~ 0
 WS_FR
 Wire Wire Line
-	22700 4400 21950 4400
+	22050 4400 21950 4400
 Wire Notes Line rgb(0, 0, 0)
 	1385 14630 1385 15145
 Wire Notes Line rgb(0, 0, 0)
@@ -4221,36 +3713,8 @@ A1 94 01 00 00 00 01 43 29 03 00 00 00 02 86 52 06 00 00 00 04 0C A5 0C 00 00 00
 EndData
 $EndBitmap
 Connection ~ 5550 11800
-Text Label 9600 11150 3    50   ~ 0
+Text GLabel 9600 11900 1    50   Input ~ 0
 V_PUMP
-Wire Wire Line
-	2600 8200 3250 8200
-Text Label 3250 8200 2    50   ~ 0
-V_PUMP
-NoConn ~ 10750 8250
-NoConn ~ 10750 8050
-NoConn ~ 10750 7950
-NoConn ~ 10750 7850
-NoConn ~ 10750 7750
-NoConn ~ 10750 7650
-NoConn ~ 10750 7550
-NoConn ~ 10750 7450
-NoConn ~ 10750 7350
-NoConn ~ 10750 7250
-NoConn ~ 10750 7150
-NoConn ~ 10750 6550
-NoConn ~ 10750 6450
-NoConn ~ 10750 6350
-NoConn ~ 10750 6250
-NoConn ~ 10750 6150
-NoConn ~ 10750 5950
-NoConn ~ 8350 5750
-NoConn ~ 8350 5850
-NoConn ~ 8350 6750
-NoConn ~ 8350 7550
-NoConn ~ 8350 7650
-NoConn ~ 8350 7750
-NoConn ~ 8350 8250
 Wire Wire Line
 	11600 11900 11600 11650
 $Comp
@@ -4301,78 +3765,15 @@ Wire Wire Line
 Connection ~ 12100 12800
 Wire Wire Line
 	12100 12800 12100 12900
-$Comp
-L power:PWR_FLAG #FLG0104
-U 1 1 623C4EB3
-P 1800 8800
-F 0 "#FLG0104" H 1800 8875 50  0001 C CNN
-F 1 "PWR_FLAG" V 1800 8928 50  0000 L CNN
-F 2 "" H 1800 8800 50  0001 C CNN
-F 3 "~" H 1800 8800 50  0001 C CNN
-	1    1800 8800
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
-	1800 8800 1900 8800
-NoConn ~ 2100 9600
-NoConn ~ 2100 9300
-NoConn ~ 2100 9200
-NoConn ~ 2100 9100
-NoConn ~ 2100 9000
-NoConn ~ 2100 8500
-NoConn ~ 2100 8100
-NoConn ~ 2100 8000
-NoConn ~ 2100 7900
-NoConn ~ 2500 7800
-NoConn ~ 2500 7700
-NoConn ~ 2500 7600
-NoConn ~ 2500 7500
-NoConn ~ 2500 7400
-NoConn ~ 2500 7300
-NoConn ~ 2500 7200
-NoConn ~ 2100 7500
-NoConn ~ 2100 7400
-NoConn ~ 2100 7300
-NoConn ~ 2100 6900
-NoConn ~ 2100 6800
-NoConn ~ 2100 6700
-NoConn ~ 2100 6600
-NoConn ~ 2100 6500
-NoConn ~ 2100 6400
-NoConn ~ 2500 6800
-NoConn ~ 2500 6700
-NoConn ~ 2500 6400
-NoConn ~ 2500 6300
-NoConn ~ 2500 6200
-NoConn ~ 2500 5700
-NoConn ~ 2500 5600
-NoConn ~ 2500 5500
-NoConn ~ 2500 5400
-NoConn ~ 2500 5300
-NoConn ~ 2500 5200
-NoConn ~ 2500 5100
-Text Label 1350 8200 0    50   ~ 0
-WHEEL
-Wire Wire Line
-	1350 8200 2100 8200
-NoConn ~ 2500 9100
-Text Label 3250 9800 2    50   ~ 0
-TSAL_HV
-Wire Wire Line
-	3250 9800 2500 9800
-Wire Wire Line
-	19900 4400 20650 4400
-Text Label 20650 4400 2    50   ~ 0
+	19900 4400 20000 4400
+Text GLabel 20000 4400 2    50   Input ~ 0
 PUMP
-Wire Wire Line
-	2500 9000 3250 9000
-Text Label 3250 9000 2    50   ~ 0
-TSAL_LOGIC
-Text Label 5600 13850 3    50   ~ 0
+Text GLabel 5600 14350 1    50   Input ~ 0
 CONVERT_5V
 Connection ~ 5600 14450
 Wire Wire Line
-	5600 14450 5600 13850
+	5600 14450 5600 14350
 $Comp
 L power:+24V #PWR0108
 U 1 1 61CA73E6
@@ -4402,7 +3803,7 @@ L Device:LED_Small D20
 U 1 1 624271E8
 P 21800 8600
 F 0 "D20" V 21850 8500 50  0000 R CNN
-F 1 "I_AM_ON_FIRE!!!" H 21250 8550 50  0000 R CNN
+F 1 "I_AM_ON_FIRE!!!" H 21550 8550 50  0000 R CNN
 F 2 "Diode_SMD:D_0603_1608Metric" V 21800 8600 50  0001 C CNN
 F 3 "~" V 21800 8600 50  0001 C CNN
 	1    21800 8600
@@ -4413,7 +3814,7 @@ L Device:LED_Small D19
 U 1 1 61DE36F4
 P 21800 8300
 F 0 "D19" V 21846 8230 50  0000 R CNN
-F 1 "I'M FINE" H 20950 8250 50  0000 R CNN
+F 1 "I'M FINE" H 21300 8250 50  0000 R CNN
 F 2 "Diode_SMD:D_0603_1608Metric" V 21800 8300 50  0001 C CNN
 F 3 "~" V 21800 8300 50  0001 C CNN
 	1    21800 8300
@@ -4578,7 +3979,7 @@ L Device:LED_Small D22
 U 1 1 6247E7C4
 P 21800 9200
 F 0 "D22" V 21846 9130 50  0000 R CNN
-F 1 "WHAT_THE_F?" H 21150 9150 50  0000 R CNN
+F 1 "WHAT_THE_F?" H 21450 9150 50  0000 R CNN
 F 2 "Diode_SMD:D_0603_1608Metric" V 21800 9200 50  0001 C CNN
 F 3 "~" V 21800 9200 50  0001 C CNN
 	1    21800 9200
@@ -4600,7 +4001,7 @@ L Device:LED_Small D21
 U 1 1 62452316
 P 21800 8900
 F 0 "D21" V 21846 8830 50  0000 R CNN
-F 1 "COULD_BE_BETTER" H 21350 8850 50  0000 R CNN
+F 1 "COULD_BE_BETTER" H 21650 8850 50  0000 R CNN
 F 2 "Diode_SMD:D_0603_1608Metric" V 21800 8900 50  0001 C CNN
 F 3 "~" V 21800 8900 50  0001 C CNN
 	1    21800 8900
@@ -5069,20 +4470,104 @@ F 3 "~" H 19600 5400 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	3250 8800 2500 8800
-Text Label 3250 8800 2    50   ~ 0
-HVD
+	20100 14100 20000 14100
+Wire Wire Line
+	20100 14200 20000 14200
+Text GLabel 20100 14100 2    50   Input ~ 0
+CAR_CAN-
+Text GLabel 20100 14200 2    50   Input ~ 0
+CAR_CAN+
+Wire Notes Line rgb(0, 194, 194)
+	1525 13440 1645 13420
+Wire Notes Line rgb(0, 194, 194)
+	1645 13420 1645 13745
+Wire Notes Line rgb(0, 194, 194)
+	1645 13745 1525 13745
+Wire Notes Line rgb(0, 194, 194)
+	1525 13745 1525 13440
+Text GLabel 10850 6950 2    50   Input ~ 0
+STM_FATAL_ERROR
+Wire Wire Line
+	10850 6950 10750 6950
+Wire Wire Line
+	10850 6750 10750 6750
+Text GLabel 10850 6750 2    50   Input ~ 0
+STM_OK
+Text GLabel 10850 7050 2    50   Input ~ 0
+STM_???
+Text GLabel 10850 6850 2    50   Input ~ 0
+STM_SOFT_ERROR
+Wire Wire Line
+	10850 7050 10750 7050
+Wire Wire Line
+	10850 6850 10750 6850
+Text GLabel 22050 4000 2    50   Input ~ 0
+V_SAFETY
+Wire Wire Line
+	21950 4000 22050 4000
+Wire Wire Line
+	10750 5950 10850 5950
+Text GLabel 10850 5950 2    50   Input ~ 0
+EN_MOSFET
+Wire Wire Line
+	10750 5550 10850 5550
+Wire Wire Line
+	10750 5350 10850 5350
+NoConn ~ 10850 5350
+NoConn ~ 10850 5550
+Wire Wire Line
+	19850 11550 19650 11550
+NoConn ~ 19850 11550
+Wire Wire Line
+	20000 3900 19900 3900
+NoConn ~ 20000 3900
+Wire Wire Line
+	20000 4000 19900 4000
+NoConn ~ 20000 4000
+Wire Wire Line
+	20000 4100 19900 4100
+NoConn ~ 20000 4100
+Wire Wire Line
+	20000 4200 19900 4200
+NoConn ~ 20000 4200
+Wire Wire Line
+	20000 4300 19900 4300
+NoConn ~ 20000 4300
+Wire Wire Line
+	22050 3900 21950 3900
+NoConn ~ 22050 3900
+$Sheet
+S 7950 -2100 2150 1300
+U 62AF9E21
+F0 "Connectors" 50
+F1 "Connectors.sch" 50
+$EndSheet
 $Comp
-L Autosport:AS222-35PN-933 U1
-U 1 1 61A16C8B
-P 2300 4550
-F 0 "U1" H 2300 4465 50  0001 C CNN
-F 1 "AS222-35PN-933" H 2300 4374 50  0001 C CNN
-F 2 "AS222-35PN-933C:AS222-35PN-933C-ver3-drill_0.72_size_1.02" H 2300 4450 50  0001 C CNN
-F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+Sheet%7F1-1773721-8_as_interconnection%7F0919%7Fpdf%7FEnglish%7FENG_DS_1-1773721-8_as_interconnection_0919.pdf%7FAS222-35PN-933C" H 2300 4373 50  0001 C CNN
-	1    2300 4550
-	1    0    0    -1  
+L power:+5V #PWR0103
+U 1 1 62E35228
+P 16000 13500
+F 0 "#PWR0103" H 16000 13350 50  0001 C CNN
+F 1 "+5V" V 16015 13628 50  0000 L CNN
+F 2 "" H 16000 13500 50  0001 C CNN
+F 3 "" H 16000 13500 50  0001 C CNN
+	1    16000 13500
+	0    -1   -1   0   
 $EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 62E6D9BC
+P 16000 13400
+F 0 "#PWR0104" H 16000 13150 50  0001 C CNN
+F 1 "GND" V 16005 13227 50  0000 C CNN
+F 2 "" H 16000 13400 50  0001 C CNN
+F 3 "" H 16000 13400 50  0001 C CNN
+	1    16000 13400
+	0    1    1    0   
+$EndComp
+Text GLabel 16700 11800 2    50   Input ~ 0
+RTDS_GATE
+Text GLabel 16700 11900 2    50   Input ~ 0
+BREAK_LIGHT_GATE
 $Comp
 L Connector_Generic:Conn_02x20_Odd_Even J2
 U 1 1 61BF6F6C
@@ -5099,67 +4584,21 @@ Wire Wire Line
 Wire Wire Line
 	16100 13400 16000 13400
 Wire Wire Line
-	16100 13300 16000 13300
-Wire Wire Line
-	16100 13200 16000 13200
-Wire Wire Line
-	16100 13100 16000 13100
-Wire Wire Line
-	16100 13000 16000 13000
-Wire Wire Line
 	16100 12900 16000 12900
 Wire Wire Line
-	16100 12800 16000 12800
-Wire Wire Line
-	16100 12700 16000 12700
-Wire Wire Line
 	16100 12600 16000 12600
-Wire Wire Line
-	16100 12500 16000 12500
-Wire Wire Line
-	16100 12400 16000 12400
 Wire Wire Line
 	16100 12300 16000 12300
 Wire Wire Line
 	16100 12200 16000 12200
 Wire Wire Line
-	16100 12100 16000 12100
-Wire Wire Line
-	16100 12000 16000 12000
-Wire Wire Line
 	16100 11900 16000 11900
 Wire Wire Line
 	16100 11800 16000 11800
 Wire Wire Line
-	16100 11700 16000 11700
-Wire Wire Line
-	16100 11600 16000 11600
-Wire Wire Line
 	16700 13500 16600 13500
 Wire Wire Line
 	16700 13400 16600 13400
-Wire Wire Line
-	16700 13300 16600 13300
-Wire Wire Line
-	16700 13200 16600 13200
-Wire Wire Line
-	16700 13100 16600 13100
-Wire Wire Line
-	16700 13000 16600 13000
-Wire Wire Line
-	16700 12900 16600 12900
-Wire Wire Line
-	16700 12800 16600 12800
-Wire Wire Line
-	16700 12700 16600 12700
-Wire Wire Line
-	16700 12600 16600 12600
-Wire Wire Line
-	16700 12500 16600 12500
-Wire Wire Line
-	16700 12400 16600 12400
-Wire Wire Line
-	16700 12300 16600 12300
 Wire Wire Line
 	16700 12200 16600 12200
 Wire Wire Line
@@ -5167,77 +4606,929 @@ Wire Wire Line
 Wire Wire Line
 	16700 12000 16600 12000
 Wire Wire Line
-	16700 11900 16600 11900
+	16600 11800 16700 11800
 Wire Wire Line
-	16700 11800 16600 11800
+	16600 11900 16700 11900
+$Comp
+L power:+5V #PWR0109
+U 1 1 61FAA422
+P 16700 13500
+F 0 "#PWR0109" H 16700 13350 50  0001 C CNN
+F 1 "+5V" V 16715 13628 50  0000 L CNN
+F 2 "" H 16700 13500 50  0001 C CNN
+F 3 "" H 16700 13500 50  0001 C CNN
+	1    16700 13500
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0127
+U 1 1 6207B0DF
+P 16700 13400
+F 0 "#PWR0127" H 16700 13150 50  0001 C CNN
+F 1 "GND" V 16705 13227 50  0000 C CNN
+F 2 "" H 16700 13400 50  0001 C CNN
+F 3 "" H 16700 13400 50  0001 C CNN
+	1    16700 13400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0128
+U 1 1 620C1E0B
+P 16700 12000
+F 0 "#PWR0128" H 16700 11750 50  0001 C CNN
+F 1 "GND" V 16705 11827 50  0000 C CNN
+F 2 "" H 16700 12000 50  0001 C CNN
+F 3 "" H 16700 12000 50  0001 C CNN
+	1    16700 12000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR0129
+U 1 1 62107BFA
+P 16000 11900
+F 0 "#PWR0129" H 16000 11650 50  0001 C CNN
+F 1 "GND" V 16005 11727 50  0000 C CNN
+F 2 "" H 16000 11900 50  0001 C CNN
+F 3 "" H 16000 11900 50  0001 C CNN
+	1    16000 11900
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0130
+U 1 1 6214D653
+P 16000 12900
+F 0 "#PWR0130" H 16000 12650 50  0001 C CNN
+F 1 "GND" V 16005 12727 50  0000 C CNN
+F 2 "" H 16000 12900 50  0001 C CNN
+F 3 "" H 16000 12900 50  0001 C CNN
+	1    16000 12900
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0131
+U 1 1 62192D7D
+P 16000 12600
+F 0 "#PWR0131" H 16000 12350 50  0001 C CNN
+F 1 "GND" V 16005 12427 50  0000 C CNN
+F 2 "" H 16000 12600 50  0001 C CNN
+F 3 "" H 16000 12600 50  0001 C CNN
+	1    16000 12600
+	0    1    1    0   
+$EndComp
 Wire Wire Line
-	16700 11700 16600 11700
+	16600 11600 16700 11600
+Text GLabel 16700 11600 2    50   Input ~ 0
+WSS_RR
+Text GLabel 16700 11700 2    50   Input ~ 0
+WSS_RL
 Wire Wire Line
-	16700 11600 16600 11600
+	16600 11700 16700 11700
+Text GLabel 16000 11700 0    50   Input ~ 0
+WSS_FL
+Text GLabel 16000 11600 0    50   Input ~ 0
+WSS_FR
 Wire Wire Line
-	2500 8000 3250 8000
-Text Label 3250 8000 2    50   ~ 0
-SPARE
+	16000 11700 16100 11700
 Wire Wire Line
-	2500 8900 3250 8900
-Text Label 3250 8900 2    50   ~ 0
-TD
-Text Label 3250 7900 2    50   ~ 0
+	16000 11600 16100 11600
+Wire Wire Line
+	16600 12400 16700 12400
+Wire Wire Line
+	16600 12300 16700 12300
+Text GLabel 16700 12300 2    50   Input ~ 0
+INV_CAN-
+Text GLabel 16700 12400 2    50   Input ~ 0
+INV_CAN+
+Text GLabel 16700 12600 2    50   Input ~ 0
+CAR_CAN+
+Text GLabel 16700 12500 2    50   Input ~ 0
+CAR_CAN-
+Wire Wire Line
+	16700 12600 16600 12600
+Wire Wire Line
+	16700 12500 16600 12500
+Wire Wire Line
+	16600 12800 16700 12800
+Wire Wire Line
+	16600 12900 16700 12900
+Text GLabel 16700 12800 2    50   Input ~ 0
+RES_COS-
+Text GLabel 16700 12900 2    50   Input ~ 0
+RES_COS+
+Wire Wire Line
+	16600 13000 16700 13000
+Wire Wire Line
+	16600 13100 16700 13100
+Text GLabel 16700 13000 2    50   Input ~ 0
+RES_SIN-
+Text GLabel 16700 13100 2    50   Input ~ 0
+RES_SIN+
+Wire Wire Line
+	16600 13200 16700 13200
+Wire Wire Line
+	16600 13300 16700 13300
+Text GLabel 16700 13200 2    50   Input ~ 0
+RES_REF-
+Text GLabel 16700 13300 2    50   Input ~ 0
+RES_REF+
+Wire Wire Line
+	16700 12700 16600 12700
+$Comp
+L power:GND #PWR0132
+U 1 1 623CA275
+P 16700 12700
+F 0 "#PWR0132" H 16700 12450 50  0001 C CNN
+F 1 "GND" V 16705 12527 50  0000 C CNN
+F 2 "" H 16700 12700 50  0001 C CNN
+F 3 "" H 16700 12700 50  0001 C CNN
+	1    16700 12700
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	16100 12800 16000 12800
+Wire Wire Line
+	16100 12700 16000 12700
+Text GLabel 16000 12800 0    50   Input ~ 0
+SP_L-
+Text GLabel 16000 12700 0    50   Input ~ 0
+SP_L+
+Wire Wire Line
+	16100 13300 16000 13300
+Wire Wire Line
+	16100 13200 16000 13200
+Text GLabel 16000 13300 0    50   Input ~ 0
+WATER_P
+Text GLabel 16000 13200 0    50   Input ~ 0
+MONO_NTC
+Wire Wire Line
+	16100 13100 16000 13100
+Wire Wire Line
+	16100 13000 16000 13000
+Text GLabel 16000 13100 0    50   Input ~ 0
+WATER_NTC_2
+Text GLabel 16000 13000 0    50   Input ~ 0
+WATER_NTC_1
+Wire Wire Line
+	16000 12100 16100 12100
+Wire Wire Line
+	16000 12000 16100 12000
+Text GLabel 16000 12100 0    50   Input ~ 0
+USB_DP
+Text GLabel 16000 12000 0    50   Input ~ 0
+USB_DM
+Text GLabel 16000 12500 0    50   Input ~ 0
+USB_DEBUG_DP
+Text GLabel 16000 12400 0    50   Input ~ 0
+USB_DEBUG_DM
+Wire Wire Line
+	16000 12500 16100 12500
+Wire Wire Line
+	16000 12400 16100 12400
+NoConn ~ 16000 11800
+NoConn ~ 16700 12100
+NoConn ~ 16700 12200
+NoConn ~ 16000 12200
+NoConn ~ 16000 12300
+NoConn ~ 2750 5350
+Wire Wire Line
+	2750 5350 2650 5350
+NoConn ~ 2750 5250
+Wire Wire Line
+	2750 5250 2650 5250
+NoConn ~ 2750 5150
+Wire Wire Line
+	2750 5150 2650 5150
+NoConn ~ 2150 5250
+Wire Wire Line
+	2150 5250 2250 5250
+NoConn ~ 2150 8550
+Wire Wire Line
+	2150 8550 2250 8550
+NoConn ~ 2150 9650
+Wire Wire Line
+	2150 9650 2250 9650
+NoConn ~ 2150 9250
+Wire Wire Line
+	2150 9250 2250 9250
+NoConn ~ 2150 9150
+Wire Wire Line
+	2150 9150 2250 9150
+NoConn ~ 2150 9050
+Wire Wire Line
+	2150 9050 2250 9050
+NoConn ~ 2750 8050
+Wire Wire Line
+	2750 8050 2650 8050
+NoConn ~ 2750 7950
+Wire Wire Line
+	2750 7950 2650 7950
+NoConn ~ 2150 8150
+Wire Wire Line
+	2150 8150 2250 8150
+NoConn ~ 2150 8050
+Wire Wire Line
+	2150 8050 2250 8050
+NoConn ~ 2150 7950
+Wire Wire Line
+	2150 7950 2250 7950
+NoConn ~ 2150 7550
+Wire Wire Line
+	2150 7550 2250 7550
+NoConn ~ 2150 6050
+Wire Wire Line
+	2150 6050 2250 6050
+NoConn ~ 2150 5950
+Wire Wire Line
+	2150 5950 2250 5950
+NoConn ~ 2150 5850
+Wire Wire Line
+	2150 5850 2250 5850
+NoConn ~ 2150 5750
+Wire Wire Line
+	2150 5750 2250 5750
+Text GLabel 2850 6350 2    50   Input ~ 0
 TSMS
 Wire Wire Line
-	3250 7900 2500 7900
-Text Label 3250 8700 2    50   ~ 0
-AMS
+	2850 6350 2650 6350
 Wire Wire Line
-	3250 8700 2500 8700
+	2150 7450 2250 7450
 Wire Wire Line
-	1350 8400 2100 8400
+	2150 7350 2250 7350
+Text GLabel 2150 7450 0    50   Input ~ 0
+USB_DEBUG_DM
+Text GLabel 2150 7350 0    50   Input ~ 0
+USB_DEBUG_DP
+Text GLabel 2750 5750 2    50   Input ~ 0
+SP_L+
+Text GLabel 2750 5650 2    50   Input ~ 0
+SP_L-
 Wire Wire Line
-	1350 8300 2100 8300
-Text Label 1350 8400 0    50   ~ 0
+	2650 5750 2750 5750
+Wire Wire Line
+	2650 5650 2750 5650
+Text GLabel 2050 8250 0    50   Input ~ 0
+WHEEL
+Wire Wire Line
+	2050 8250 2250 8250
+Wire Wire Line
+	2050 8450 2250 8450
+Wire Wire Line
+	2050 8350 2250 8350
+Text GLabel 2050 8450 0    50   Input ~ 0
 INV_CAN-
-Text Label 1350 8300 0    50   ~ 0
+Text GLabel 2050 8350 0    50   Input ~ 0
 INV_CAN+
 Wire Wire Line
-	20550 14100 20000 14100
+	2050 9350 2250 9350
+Text GLabel 2050 9350 0    50   Input ~ 0
+V_SAFETY
 Wire Wire Line
-	20550 14200 20000 14200
-Text Label 20550 14100 2    50   ~ 0
+	2650 5450 2850 5450
+Wire Wire Line
+	2650 5550 2850 5550
+Text GLabel 2850 5450 2    50   Input ~ 0
+RES_COS-
+Text GLabel 2850 5550 2    50   Input ~ 0
+RES_COS+
+Wire Wire Line
+	2650 6850 2850 6850
+Text GLabel 2850 6850 2    50   Input ~ 0
+RES_REF+
+Text GLabel 2850 6750 2    50   Input ~ 0
+WATER_P
+Text GLabel 2850 6550 2    50   Input ~ 0
+MONO_NTC
+Text GLabel 2850 7750 2    50   Input ~ 0
+WATER_NTC_2
+Wire Wire Line
+	2650 6550 2850 6550
+Wire Wire Line
+	2650 7750 2850 7750
+Wire Wire Line
+	2650 6750 2850 6750
+Wire Wire Line
+	2650 7550 2850 7550
+Wire Wire Line
+	2250 6650 2050 6650
+Text GLabel 2050 6650 0    50   Input ~ 0
+WSS_RL
+Text GLabel 2050 6850 0    50   Input ~ 0
+WSS_RR
+Wire Wire Line
+	2250 6850 2050 6850
+Wire Wire Line
+	2050 6950 2250 6950
+Wire Wire Line
+	2050 6750 2250 6750
+Text GLabel 2050 6950 0    50   Input ~ 0
+WSS_FR
+Text GLabel 2050 6750 0    50   Input ~ 0
+WSS_FL
+Text GLabel 2050 6550 0    50   Input ~ 0
+USB_DM
+Text GLabel 2050 6450 0    50   Input ~ 0
+USB_DP
+Wire Wire Line
+	2050 6550 2250 6550
+Wire Wire Line
+	2050 6450 2250 6450
+Text GLabel 2850 7550 2    50   Input ~ 0
+WATER_NTC_1
+Text GLabel 2850 6650 2    50   Input ~ 0
+RES_REF-
+Wire Wire Line
+	2650 6650 2850 6650
+Text GLabel 2850 7850 2    50   Input ~ 0
+RES_SIN+
+Text GLabel 2850 7650 2    50   Input ~ 0
+RES_SIN-
+Wire Wire Line
+	2650 7850 2850 7850
+Wire Wire Line
+	2650 7650 2850 7650
+$Comp
+L Autosport:AS222-35PN-933 U1
+U 1 1 61A16C8B
+P 2450 4600
+F 0 "U1" H 2450 4515 50  0001 C CNN
+F 1 "AS222-35PN-933" H 2450 4424 50  0001 C CNN
+F 2 "AS222-35PN-933C:AS222-35PN-933C-ver3-drill_0.72_size_1.02" H 2450 4500 50  0001 C CNN
+F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+Sheet%7F1-1773721-8_as_interconnection%7F0919%7Fpdf%7FEnglish%7FENG_DS_1-1773721-8_as_interconnection_0919.pdf%7FAS222-35PN-933C" H 2450 4423 50  0001 C CNN
+	1    2450 4600
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2050 9550 2250 9550
+Wire Wire Line
+	2050 9450 2250 9450
+Text GLabel 2050 9550 0    50   Input ~ 0
 CAR_CAN-
-Text Label 20550 14200 2    50   ~ 0
+Text GLabel 2050 9450 0    50   Input ~ 0
 CAR_CAN+
-NoConn ~ 2500 6500
-NoConn ~ 2500 6600
-Text Label 1350 9400 0    50   ~ 0
-CAR_CAN+
-Text Label 1350 9500 0    50   ~ 0
-CAR_CAN-
 Wire Wire Line
-	1350 9400 2100 9400
+	2850 7350 2650 7350
+Text GLabel 2850 7350 2    50   Input ~ 0
+AMS
+Text GLabel 2850 7450 2    50   Input ~ 0
+TD
 Wire Wire Line
-	1350 9500 2100 9500
-Wire Notes Line rgb(0, 194, 194)
-	1525 13440 1645 13420
-Wire Notes Line rgb(0, 194, 194)
-	1645 13420 1645 13745
-Wire Notes Line rgb(0, 194, 194)
-	1645 13745 1525 13745
-Wire Notes Line rgb(0, 194, 194)
-	1525 13745 1525 13440
-Text Label 11500 6950 2    50   ~ 0
-STM_FATAL_ERROR
+	2650 7450 2850 7450
+Text GLabel 2850 6450 2    50   Input ~ 0
+SPARE
 Wire Wire Line
-	11500 6950 10750 6950
+	2650 6450 2850 6450
+Text GLabel 2850 7250 2    50   Input ~ 0
+HVD
 Wire Wire Line
-	11500 6750 10750 6750
-Text Label 11500 6750 2    50   ~ 0
-STM_OK
-Text Label 11500 7050 2    50   ~ 0
-STM_???
-Text Label 11500 6850 2    50   ~ 0
-STM_SOFT_ERROR
+	2850 7250 2650 7250
+Text GLabel 2850 9050 2    50   Input ~ 0
+TSAL_LOGIC
 Wire Wire Line
-	11500 7050 10750 7050
+	2650 9050 2850 9050
 Wire Wire Line
-	11500 6850 10750 6850
+	2850 9850 2650 9850
+Text GLabel 2850 9850 2    50   Input ~ 0
+TSAL_HV
+Wire Wire Line
+	1950 8850 2050 8850
+$Comp
+L power:PWR_FLAG #FLG0104
+U 1 1 623C4EB3
+P 1950 8850
+F 0 "#FLG0104" H 1950 8925 50  0001 C CNN
+F 1 "PWR_FLAG" V 1950 8978 50  0000 L CNN
+F 2 "" H 1950 8850 50  0001 C CNN
+F 3 "~" H 1950 8850 50  0001 C CNN
+	1    1950 8850
+	0    -1   -1   0   
+$EndComp
+Text GLabel 2850 8250 2    50   Input ~ 0
+V_PUMP
+Wire Wire Line
+	2750 8250 2850 8250
+Wire Wire Line
+	2050 4950 2250 4950
+Text GLabel 2050 5050 0    50   Input ~ 0
+FAN_L
+Text GLabel 2050 4950 0    50   Input ~ 0
+FAN_R
+Wire Wire Line
+	2150 6250 2050 6250
+Wire Wire Line
+	2150 7150 2050 7150
+Text GLabel 2050 7150 0    50   Input ~ 0
+INTEL_NUC
+Wire Wire Line
+	2850 8950 2650 8950
+Wire Wire Line
+	2850 9150 2650 9150
+Text GLabel 2850 9150 2    50   Input ~ 0
+BREAK_LIGHT_IN
+Text GLabel 2850 8950 2    50   Input ~ 0
+RTDS_IN
+Text GLabel 2050 6250 0    50   Input ~ 0
+JETSON_???
+Wire Wire Line
+	2150 7050 2250 7050
+Wire Wire Line
+	2150 7150 2150 7050
+Connection ~ 2150 7150
+Wire Wire Line
+	2150 7250 2150 7150
+Wire Wire Line
+	2250 7250 2150 7250
+Wire Wire Line
+	2250 7150 2150 7150
+Wire Wire Line
+	2850 9550 2650 9550
+Wire Wire Line
+	2850 8750 2650 8750
+Text GLabel 2850 8750 2    50   Input ~ 0
+LED_2_IN
+Wire Wire Line
+	2650 8850 2850 8850
+Text GLabel 2850 9550 2    50   Input ~ 0
+LED_1_IN
+Text GLabel 2850 8850 2    50   Input ~ 0
+BUZZER_IN
+Wire Wire Line
+	2150 6150 2150 6250
+Connection ~ 2150 6250
+Wire Wire Line
+	2150 6150 2250 6150
+Wire Wire Line
+	2150 6350 2150 6250
+Wire Wire Line
+	2250 6350 2150 6350
+Wire Wire Line
+	2750 8450 2650 8450
+Wire Wire Line
+	2750 8550 2750 8450
+Wire Wire Line
+	2750 8550 2650 8550
+Connection ~ 2750 8550
+Wire Wire Line
+	2750 8650 2750 8550
+Wire Wire Line
+	2650 8650 2750 8650
+Wire Wire Line
+	2750 8350 2750 8250
+Connection ~ 2750 8250
+Wire Wire Line
+	2650 8350 2750 8350
+Wire Wire Line
+	2750 8250 2750 8150
+Wire Wire Line
+	2650 8250 2750 8250
+Wire Wire Line
+	2650 8150 2750 8150
+Wire Wire Line
+	2250 6250 2150 6250
+Text GLabel 2050 5650 0    50   Input ~ 0
+DASHBOARD
+Text GLabel 2050 5150 0    50   Input ~ 0
+WS_RL
+Wire Wire Line
+	2050 5150 2250 5150
+Text GLabel 2050 5350 0    50   Input ~ 0
+WS_RR
+Wire Wire Line
+	2050 5350 2250 5350
+Text GLabel 2050 5450 0    50   Input ~ 0
+WS_FL
+Wire Wire Line
+	2050 5450 2250 5450
+Text GLabel 2850 9650 2    50   Input ~ 0
+APPS
+Wire Wire Line
+	2650 9650 2850 9650
+Text GLabel 2850 9750 2    50   Input ~ 0
+BOX_DV
+Wire Wire Line
+	2650 9750 2850 9750
+Text GLabel 2050 5550 0    50   Input ~ 0
+WS_FR
+Wire Wire Line
+	2650 9450 2850 9450
+Text GLabel 2850 9450 2    50   Input ~ 0
+BOXF_MB
+Text GLabel 2850 8550 2    50   Input ~ 0
+INVERTER
+Wire Wire Line
+	2050 5650 2250 5650
+Wire Wire Line
+	2050 5550 2250 5550
+Wire Wire Line
+	2050 5050 2250 5050
+Wire Wire Line
+	2850 8550 2750 8550
+$Comp
+L power:GND #PWR06
+U 1 1 61D7F83D
+P 3000 7050
+F 0 "#PWR06" H 3000 6800 50  0001 C CNN
+F 1 "GND" H 3005 6877 50  0000 C CNN
+F 2 "" H 3000 7050 50  0001 C CNN
+F 3 "" H 3000 7050 50  0001 C CNN
+	1    3000 7050
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2650 6950 2850 6950
+Wire Wire Line
+	2850 6950 2850 7050
+Wire Wire Line
+	2850 7050 2850 7150
+Connection ~ 2850 7050
+Wire Wire Line
+	2650 7050 2850 7050
+Wire Wire Line
+	2850 7050 3000 7050
+Wire Wire Line
+	2650 7150 2850 7150
+$Comp
+L power:GND #PWR04
+U 1 1 61D61F2A
+P 2950 6050
+F 0 "#PWR04" H 2950 5800 50  0001 C CNN
+F 1 "GND" H 2955 5877 50  0000 C CNN
+F 2 "" H 2950 6050 50  0001 C CNN
+F 3 "" H 2950 6050 50  0001 C CNN
+	1    2950 6050
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2850 5850 2650 5850
+Wire Wire Line
+	2850 5950 2850 5850
+Connection ~ 2850 5950
+Wire Wire Line
+	2650 5950 2850 5950
+Wire Wire Line
+	2850 6050 2850 5950
+Wire Wire Line
+	2850 6050 2850 6150
+Connection ~ 2850 6050
+Wire Wire Line
+	2650 6050 2850 6050
+Wire Wire Line
+	2850 6050 2950 6050
+Wire Wire Line
+	2650 6150 2850 6150
+$Comp
+L power:GND #PWR02
+U 1 1 61D45519
+P 1900 9850
+F 0 "#PWR02" H 1900 9600 50  0001 C CNN
+F 1 "GND" H 1905 9677 50  0000 C CNN
+F 2 "" H 1900 9850 50  0001 C CNN
+F 3 "" H 1900 9850 50  0001 C CNN
+	1    1900 9850
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2050 9850 1900 9850
+Connection ~ 2050 9850
+Wire Wire Line
+	2250 9750 2050 9750
+Wire Wire Line
+	2050 9850 2050 9750
+Wire Wire Line
+	2250 9850 2050 9850
+Wire Wire Line
+	2050 8950 2250 8950
+Connection ~ 2050 8850
+Wire Wire Line
+	2050 8850 2050 8950
+Wire Wire Line
+	2050 8750 2050 8850
+$Comp
+L power:+24V #PWR05
+U 1 1 6249BDB5
+P 3000 4950
+F 0 "#PWR05" H 3000 4800 50  0001 C CNN
+F 1 "+24V" H 3015 5123 50  0000 C CNN
+F 2 "" H 3000 4950 50  0001 C CNN
+F 3 "" H 3000 4950 50  0001 C CNN
+	1    3000 4950
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2850 4950 3000 4950
+Connection ~ 2850 4950
+Wire Wire Line
+	2650 5050 2850 5050
+$Comp
+L power:+24V #PWR03
+U 1 1 62317911
+P 1950 8750
+F 0 "#PWR03" H 1950 8600 50  0001 C CNN
+F 1 "+24V" H 1965 8923 50  0000 C CNN
+F 2 "" H 1950 8750 50  0001 C CNN
+F 3 "" H 1950 8750 50  0001 C CNN
+	1    1950 8750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:+24V #PWR01
+U 1 1 622CE5ED
+P 1900 7750
+F 0 "#PWR01" H 1900 7600 50  0001 C CNN
+F 1 "+24V" H 1915 7923 50  0000 C CNN
+F 2 "" H 1900 7750 50  0001 C CNN
+F 3 "" H 1900 7750 50  0001 C CNN
+	1    1900 7750
+	0    -1   -1   0   
+$EndComp
+Text GLabel 2850 9350 2    50   Input ~ 0
+V_EBS
+Text GLabel 2850 9250 2    50   Input ~ 0
+V_BSPD
+Wire Wire Line
+	2650 9250 2850 9250
+Wire Wire Line
+	2650 9350 2850 9350
+Wire Wire Line
+	2250 7850 2050 7850
+Wire Wire Line
+	2050 7850 2050 7750
+Wire Wire Line
+	2050 7750 2050 7650
+Connection ~ 2050 7750
+Wire Wire Line
+	2250 7750 2050 7750
+Wire Wire Line
+	2050 7750 1900 7750
+Wire Wire Line
+	2250 7650 2050 7650
+Wire Wire Line
+	2250 8850 2050 8850
+Wire Wire Line
+	2050 8750 2050 8650
+Connection ~ 2050 8750
+Wire Wire Line
+	2250 8750 2050 8750
+Wire Wire Line
+	2050 8750 1950 8750
+Wire Wire Line
+	2250 8650 2050 8650
+Wire Wire Line
+	2850 4950 2850 5050
+Wire Wire Line
+	2650 4950 2850 4950
+Text Notes 2900 4100 2    118  ~ 24
+Autosport conector\n
+$Sheet
+S 11500 -2100 1850 1250
+U 62DA3DA3
+F0 "Fusses" 50
+F1 "Fusses.sch" 50
+$EndSheet
+$Sheet
+S 14550 -2100 2150 1400
+U 62DA47F9
+F0 "Power" 50
+F1 "Power.sch" 50
+$EndSheet
+$Sheet
+S 21450 13300 900  200 
+U 61B82715
+F0 "Safety" 50
+F1 "Optocoupler.sch" 50
+F2 "IN" I L 21450 13400 50 
+F3 "~OUT" O R 22350 13400 50 
+$EndSheet
+Text GLabel 22450 12900 2    50   Input ~ 0
+N_AMS
+Text GLabel 21200 12900 0    50   Input ~ 0
+AMS
+Wire Wire Line
+	22350 12900 22450 12900
+Wire Wire Line
+	21200 12900 21450 12900
+Text GLabel 22450 13400 2    50   Input ~ 0
+N_SPARE
+Text GLabel 21200 13400 0    50   Input ~ 0
+SPARE
+Wire Wire Line
+	22350 13400 22450 13400
+Wire Wire Line
+	21450 13400 21200 13400
+Text GLabel 22450 11850 2    50   Input ~ 0
+N_TD
+Wire Wire Line
+	22350 11850 22450 11850
+Text GLabel 21200 11850 0    50   Input ~ 0
+TD
+Wire Wire Line
+	21450 11850 21200 11850
+Text GLabel 22450 11300 2    50   Input ~ 0
+N_TSMS
+Wire Wire Line
+	22350 11300 22450 11300
+Text GLabel 21200 11300 0    50   Input ~ 0
+TSMS
+Wire Wire Line
+	21200 11300 21450 11300
+Text GLabel 22450 12400 2    50   Input ~ 0
+N_HVD
+Wire Wire Line
+	22350 12400 22450 12400
+Text GLabel 21200 12400 0    50   Input ~ 0
+HVD
+Wire Wire Line
+	21200 12400 21450 12400
+$Sheet
+S 21450 11750 900  200 
+U 61B7C076
+F0 "Termic discharge" 50
+F1 "Optocoupler.sch" 50
+F2 "IN" I L 21450 11850 50 
+F3 "~OUT" O R 22350 11850 50 
+$EndSheet
+$Sheet
+S 21450 12800 900  200 
+U 61B7897B
+F0 "AMS" 50
+F1 "Optocoupler.sch" 50
+F2 "IN" I L 21450 12900 50 
+F3 "~OUT" O R 22350 12900 50 
+$EndSheet
+$Sheet
+S 21450 12300 900  200 
+U 61B72450
+F0 "HVD" 50
+F1 "Optocoupler.sch" 50
+F2 "IN" I L 21450 12400 50 
+F3 "~OUT" O R 22350 12400 50 
+$EndSheet
+$Sheet
+S 21450 11200 900  200 
+U 61B6A745
+F0 "TSMS Control" 50
+F1 "Optocoupler.sch" 50
+F2 "IN" I L 21450 11300 50 
+F3 "~OUT" O R 22350 11300 50 
+$EndSheet
+$Sheet
+S 20700 -2050 2250 1450
+U 62DA7878
+F0 "Outputs" 50
+F1 "Outputs.sch" 50
+$EndSheet
+Wire Wire Line
+	10750 6150 10850 6150
+NoConn ~ 10850 6150
+Wire Wire Line
+	10750 6250 10850 6250
+NoConn ~ 10850 6250
+Wire Wire Line
+	10750 6350 10850 6350
+NoConn ~ 10850 6350
+Wire Wire Line
+	10750 6450 10850 6450
+NoConn ~ 10850 6450
+Wire Wire Line
+	10750 6550 10850 6550
+NoConn ~ 10850 6550
+Wire Wire Line
+	10750 7150 10850 7150
+NoConn ~ 10850 7150
+Wire Wire Line
+	10750 7250 10850 7250
+NoConn ~ 10850 7250
+Wire Wire Line
+	10750 7350 10850 7350
+NoConn ~ 10850 7350
+Wire Wire Line
+	10750 7450 10850 7450
+NoConn ~ 10850 7450
+Wire Wire Line
+	10750 7550 10850 7550
+NoConn ~ 10850 7550
+Wire Wire Line
+	10750 7650 10850 7650
+NoConn ~ 10850 7650
+Wire Wire Line
+	10750 7750 10850 7750
+NoConn ~ 10850 7750
+Wire Wire Line
+	10750 7850 10850 7850
+NoConn ~ 10850 7850
+Wire Wire Line
+	10750 7950 10850 7950
+NoConn ~ 10850 7950
+Wire Wire Line
+	10750 8050 10850 8050
+NoConn ~ 10850 8050
+Wire Wire Line
+	10750 8250 10850 8250
+NoConn ~ 10850 8250
+Wire Wire Line
+	8350 7750 8250 7750
+NoConn ~ 8250 7750
+Wire Wire Line
+	8350 7650 8250 7650
+NoConn ~ 8250 7650
+Wire Wire Line
+	8350 7550 8250 7550
+NoConn ~ 8250 7550
+Wire Wire Line
+	8350 8250 8250 8250
+NoConn ~ 8250 8250
+Wire Wire Line
+	8350 6750 8250 6750
+NoConn ~ 8250 6750
+Wire Wire Line
+	8350 5850 8250 5850
+NoConn ~ 8250 5850
+Wire Wire Line
+	8350 5750 8250 5750
+NoConn ~ 8250 5750
+$Sheet
+S 6150 1500 1100 300 
+U 6262347B
+F0 "BREAK_LIGHT mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 6150 1600 50 
+F3 "CRL" I L 6150 1700 50 
+$EndSheet
+Text GLabel 11100 1700 0    50   Input ~ 0
+LED_2_CRL_OUT
+Wire Wire Line
+	11100 1700 11200 1700
+$Sheet
+S 8600 1500 1100 300 
+U 625EC444
+F0 "RTDS mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 8600 1600 50 
+F3 "CRL" I L 8600 1700 50 
+$EndSheet
+$Sheet
+S 13700 1500 1100 300 
+U 62432F8F
+F0 "LED_1 mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 13700 1600 50 
+F3 "CRL" I L 13700 1700 50 
+$EndSheet
+$Sheet
+S 11200 1500 1100 300 
+U 6231E241
+F0 "LED_2 mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 11200 1600 50 
+F3 "CRL" I L 11200 1700 50 
+$EndSheet
+$Sheet
+S 16350 1500 1100 300 
+U 61F846F6
+F0 "Buzzer mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 16350 1600 50 
+F3 "CRL" I L 16350 1700 50 
+$EndSheet
+Wire Wire Line
+	16250 1700 16350 1700
+Text GLabel 6050 1700 0    50   Input ~ 0
+BREAK_LIGHT_GATE
+Text GLabel 8500 1700 0    50   Input ~ 0
+RTDS_GATE
+Wire Wire Line
+	6050 1600 6150 1600
+Text GLabel 6050 1600 0    50   Input ~ 0
+BREAK_LIGHT_IN
+Wire Wire Line
+	8500 1600 8600 1600
+Text GLabel 8500 1600 0    50   Input ~ 0
+RTDS_IN
+Wire Wire Line
+	16250 1600 16350 1600
+Wire Wire Line
+	8500 1700 8600 1700
+Wire Wire Line
+	6050 1700 6150 1700
+Text GLabel 16250 1700 0    50   Input ~ 0
+BUZZER_CRL_OUT
+Text GLabel 13600 1700 0    50   Input ~ 0
+LED_1_CRL_OUT
+Wire Wire Line
+	13600 1700 13700 1700
+Wire Wire Line
+	13600 1600 13700 1600
+Wire Wire Line
+	11100 1600 11200 1600
+Text GLabel 13600 1600 0    50   Input ~ 0
+LED_1_IN
+Text GLabel 11100 1600 0    50   Input ~ 0
+LED_2_IN
+Text GLabel 16250 1600 0    50   Input ~ 0
+BUZZER_IN
+$Sheet
+S 17650 -2050 2100 1350
+U 62DA6EC2
+F0 "Inputs" 50
+F1 "Inputs.sch" 50
+$EndSheet
 $EndSCHEMATC

@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 12 20
+Sheet 3 24
 Title ""
 Date ""
 Rev ""
@@ -62,7 +62,7 @@ AR Path="/619FCD59/6197C194" Ref="C?"  Part="1"
 AR Path="/61A7011D/6197C194" Ref="C30"  Part="1" 
 AR Path="/61A74311/6197C194" Ref="C31"  Part="1" 
 AR Path="/61DC1767/6197C194" Ref="C32"  Part="1" 
-F 0 "C32" V 5898 2700 50  0000 C CNN
+F 0 "C1" V 5898 2700 50  0000 C CNN
 F 1 "100nF" V 5989 2700 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric" H 6188 2550 50  0001 C CNN
 F 3 "~" H 6150 2700 50  0001 C CNN
@@ -256,7 +256,7 @@ AR Path="/6196D4C3/61B9BFD9" Ref="U12"  Part="1"
 AR Path="/61A7011D/61B9BFD9" Ref="U13"  Part="1" 
 AR Path="/61A74311/61B9BFD9" Ref="U14"  Part="1" 
 AR Path="/61DC1767/61B9BFD9" Ref="U15"  Part="1" 
-F 0 "U15" H 5200 3200 50  0000 C CNN
+F 0 "U12" H 5200 3200 50  0000 C CNN
 F 1 "SMART FUSE" H 5200 3100 50  0000 C CNN
 F 2 "VN9D30Q100F:QFN-32_EP_6x6_Pitch0.5mm" H 6100 3150 50  0001 C CNN
 F 3 "https://www.st.com/resource/en/datasheet/vn9d30q100f.pdf" H 6100 3150 50  0001 C CNN
@@ -278,4 +278,13 @@ F 3 "" H 5800 2600 50  0001 C CNN
 	1    5800 2600
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	6300 3800 6200 3800
+NoConn ~ 6300 3800
+Wire Wire Line
+	6300 3900 6200 3900
+NoConn ~ 6300 3900
+Wire Wire Line
+	6300 4000 6200 4000
+NoConn ~ 6300 4000
 $EndSCHEMATC

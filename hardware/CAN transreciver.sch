@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 8 20
+Sheet 2 24
 Title "High-Speed CAN Transceiver"
 Date ""
 Rev ""
@@ -13,20 +13,6 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-$Comp
-L Interface_CAN_LIN:MCP2562-E-MF U3
-U 1 1 61A168ED
-P 5700 3950
-AR Path="/61A14ADD/61A168ED" Ref="U3"  Part="1" 
-AR Path="/61A9D384/61A168ED" Ref="U4"  Part="1" 
-AR Path="/61A5C8B4/61A168ED" Ref="U11"  Part="1" 
-F 0 "U11" H 6100 4450 50  0000 C CNN
-F 1 "ATA6561-GAQW-N" H 6200 4350 50  0000 C CNN
-F 2 "Package_DFN_QFN:DFN-8-1EP_3x3mm_P0.65mm_EP1.55x2.4mm" H 5700 3450 50  0001 C CIN
-F 3 "https://pl.mouser.com/datasheet/2/268/ATA6560_ATA6561_High_Speed_CAN_Transceiver_DS20005-1384933.pdf" H 5700 3950 50  0001 C CNN
-	1    5700 3950
-	1    0    0    -1  
-$EndComp
 $Comp
 L power:GND #PWR015
 U 1 1 61A1851F
@@ -41,15 +27,6 @@ F 3 "" H 5700 4450 50  0001 C CNN
 	1    5700 4450
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5700 4450 5700 4400
-Wire Wire Line
-	5700 4400 5600 4400
-Wire Wire Line
-	5600 4400 5600 4350
-Wire Wire Line
-	5700 4400 5700 4350
-Connection ~ 5700 4400
 Wire Wire Line
 	6200 3850 6700 3850
 Wire Wire Line
@@ -1625,4 +1602,17 @@ F 3 "~" H 4450 5400 50  0001 C CNN
 	1    4450 5400
 	1    0    0    -1  
 $EndComp
+$Comp
+L Interface_CAN_LIN:MCP2558FD-xSN U11
+U 1 1 63ED2897
+P 5700 3950
+F 0 "U11" H 5700 4531 50  0000 C CNN
+F 1 "MCP2558FD-xSN" H 5700 4440 50  0000 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 5700 3350 50  0001 C CNN
+F 3 "https://ww1.microchip.com/downloads/en/DeviceDoc/20005533A.pdf" H 5700 3950 50  0001 C CNN
+	1    5700 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5700 4350 5700 4450
 $EndSCHEMATC

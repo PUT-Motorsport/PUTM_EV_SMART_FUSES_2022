@@ -1,0 +1,96 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 19 24
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Sheet
+S 2800 2650 1100 300 
+U 6373A00E
+F0 "BREAK_LIGHT mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 2800 2750 50 
+F3 "CRL" I L 2800 2850 50 
+$EndSheet
+Text GLabel 7750 2850 0    50   Input ~ 0
+LED_2_CRL_OUT
+Wire Wire Line
+	7750 2850 7850 2850
+$Sheet
+S 5250 2650 1100 300 
+U 6373A014
+F0 "RTDS mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 5250 2750 50 
+F3 "CRL" I L 5250 2850 50 
+$EndSheet
+$Sheet
+S 2800 4750 1100 300 
+U 6373A018
+F0 "LED_1 mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 2800 4850 50 
+F3 "CRL" I L 2800 4950 50 
+$EndSheet
+$Sheet
+S 7850 2650 1100 300 
+U 6373A01C
+F0 "LED_2 mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 7850 2750 50 
+F3 "CRL" I L 7850 2850 50 
+$EndSheet
+$Sheet
+S 5250 4750 1100 300 
+U 6373A020
+F0 "BUZZER mosfet" 50
+F1 "N_MOSFET.sch" 50
+F2 "IN" I L 5250 4850 50 
+F3 "CRL" I L 5250 4950 50 
+$EndSheet
+Wire Wire Line
+	5150 4950 5250 4950
+Text GLabel 2700 2850 0    50   Input ~ 0
+BREAK_LIGHT_GATE
+Text GLabel 5150 2850 0    50   Input ~ 0
+RTDS_GATE
+Wire Wire Line
+	2700 2750 2800 2750
+Text GLabel 2700 2750 0    50   Input ~ 0
+BREAK_LIGHT_IN
+Wire Wire Line
+	5150 2750 5250 2750
+Text GLabel 5150 2750 0    50   Input ~ 0
+RTDS_IN
+Wire Wire Line
+	5150 4850 5250 4850
+Wire Wire Line
+	5150 2850 5250 2850
+Wire Wire Line
+	2700 2850 2800 2850
+Text GLabel 5150 4950 0    50   Input ~ 0
+BUZZER_CRL_OUT
+Text GLabel 2700 4950 0    50   Input ~ 0
+LED_1_CRL_OUT
+Wire Wire Line
+	2700 4950 2800 4950
+Wire Wire Line
+	2700 4850 2800 4850
+Wire Wire Line
+	7750 2750 7850 2750
+Text GLabel 2700 4850 0    50   Input ~ 0
+LED_1_IN
+Text GLabel 7750 2750 0    50   Input ~ 0
+LED_2_IN
+Text GLabel 5150 4850 0    50   Input ~ 0
+BUZZER_IN
+$EndSCHEMATC

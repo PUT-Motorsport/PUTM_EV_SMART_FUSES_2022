@@ -1,0 +1,953 @@
+EESchema Schematic File Version 5
+EELAYER 36 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 20 24
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
+$EndDescr
+Connection ~ 1650 5960
+Connection ~ 1650 6960
+Connection ~ 1720 2060
+Connection ~ 1720 3060
+Connection ~ 1900 5960
+Connection ~ 1900 6960
+Connection ~ 1970 2060
+Connection ~ 1970 3060
+Connection ~ 2150 5960
+Connection ~ 2150 6960
+Connection ~ 2220 2060
+Connection ~ 2220 3060
+Connection ~ 2550 5960
+Connection ~ 2550 6960
+Connection ~ 2620 2060
+Connection ~ 2620 3060
+Connection ~ 2950 5960
+Connection ~ 2950 6960
+Connection ~ 3020 2060
+Connection ~ 3020 3060
+Connection ~ 3300 6960
+Connection ~ 3370 3060
+Connection ~ 3900 6960
+Connection ~ 3970 3060
+Connection ~ 4500 6160
+Connection ~ 4500 6960
+Connection ~ 4570 2260
+Connection ~ 4570 3060
+Connection ~ 4900 6160
+Connection ~ 4900 6960
+Connection ~ 4970 2260
+Connection ~ 4970 3060
+Connection ~ 5350 6160
+Connection ~ 5350 6960
+Connection ~ 5420 2260
+Connection ~ 5420 3060
+Connection ~ 5700 6160
+Connection ~ 5770 2260
+Connection ~ 7890 5520
+Connection ~ 7890 5920
+Connection ~ 8340 5520
+Connection ~ 8340 5920
+Connection ~ 8390 2030
+Connection ~ 8390 2280
+Connection ~ 8790 5520
+Connection ~ 8790 5920
+Connection ~ 8890 3080
+Connection ~ 8890 3180
+Connection ~ 9240 5520
+Connection ~ 9240 5920
+Connection ~ 9290 2280
+Connection ~ 9290 3080
+Connection ~ 9690 5520
+Connection ~ 9690 5920
+Connection ~ 9740 2030
+Connection ~ 9740 2280
+Connection ~ 10140 5520
+Wire Wire Line
+	1650 5960 1650 5860
+Wire Wire Line
+	1650 5960 1900 5960
+Wire Wire Line
+	1650 6260 1650 5960
+Wire Wire Line
+	1650 6560 1650 6660
+Wire Wire Line
+	1650 6860 1650 6960
+Wire Wire Line
+	1650 6960 1650 7060
+Wire Wire Line
+	1650 6960 1900 6960
+Wire Wire Line
+	1720 2060 1720 1960
+Wire Wire Line
+	1720 2060 1970 2060
+Wire Wire Line
+	1720 2360 1720 2060
+Wire Wire Line
+	1720 2660 1720 2760
+Wire Wire Line
+	1720 2960 1720 3060
+Wire Wire Line
+	1720 3060 1720 3160
+Wire Wire Line
+	1720 3060 1970 3060
+Wire Wire Line
+	1900 5960 1900 6360
+Wire Wire Line
+	1900 5960 2150 5960
+Wire Wire Line
+	1900 6960 1900 6560
+Wire Wire Line
+	1900 6960 2150 6960
+Wire Wire Line
+	1970 2060 1970 2410
+Wire Wire Line
+	1970 2060 2220 2060
+Wire Wire Line
+	1970 3060 1970 2610
+Wire Wire Line
+	1970 3060 2220 3060
+Wire Wire Line
+	2150 5960 2150 6360
+Wire Wire Line
+	2150 5960 2250 5960
+Wire Wire Line
+	2150 6960 2150 6560
+Wire Wire Line
+	2150 6960 2550 6960
+Wire Wire Line
+	2220 2060 2220 2410
+Wire Wire Line
+	2220 2060 2320 2060
+Wire Wire Line
+	2220 3060 2220 2610
+Wire Wire Line
+	2220 3060 2620 3060
+Wire Wire Line
+	2450 5960 2550 5960
+Wire Wire Line
+	2520 2060 2620 2060
+Wire Wire Line
+	2550 5960 2550 6360
+Wire Wire Line
+	2550 5960 2950 5960
+Wire Wire Line
+	2550 6960 2550 6560
+Wire Wire Line
+	2550 6960 2950 6960
+Wire Wire Line
+	2620 2060 2620 2410
+Wire Wire Line
+	2620 2060 3020 2060
+Wire Wire Line
+	2620 3060 2620 2610
+Wire Wire Line
+	2620 3060 3020 3060
+Wire Wire Line
+	2950 5960 3400 5960
+Wire Wire Line
+	2950 6360 2950 5960
+Wire Wire Line
+	2950 6960 2950 6560
+Wire Wire Line
+	2950 6960 3300 6960
+Wire Wire Line
+	3020 2060 3470 2060
+Wire Wire Line
+	3020 2410 3020 2060
+Wire Wire Line
+	3020 3060 3020 2610
+Wire Wire Line
+	3020 3060 3370 3060
+Wire Wire Line
+	3300 6160 3300 6960
+Wire Wire Line
+	3300 6960 3900 6960
+Wire Wire Line
+	3370 2260 3370 3060
+Wire Wire Line
+	3370 3060 3970 3060
+Wire Wire Line
+	3400 6160 3300 6160
+Wire Wire Line
+	3470 2260 3370 2260
+Wire Wire Line
+	3900 6960 3900 6360
+Wire Wire Line
+	3900 6960 4500 6960
+Wire Wire Line
+	3970 3060 3970 2460
+Wire Wire Line
+	3970 3060 4570 3060
+Wire Wire Line
+	4400 6160 4500 6160
+Wire Wire Line
+	4470 2260 4570 2260
+Wire Wire Line
+	4500 6160 4500 6360
+Wire Wire Line
+	4500 6160 4600 6160
+Wire Wire Line
+	4500 6960 4500 6560
+Wire Wire Line
+	4570 2260 4570 2360
+Wire Wire Line
+	4570 2260 4670 2260
+Wire Wire Line
+	4570 3060 4570 2560
+Wire Wire Line
+	4800 6160 4900 6160
+Wire Wire Line
+	4870 2260 4970 2260
+Wire Wire Line
+	4900 5960 4400 5960
+Wire Wire Line
+	4900 6160 4900 5960
+Wire Wire Line
+	4900 6160 4900 6360
+Wire Wire Line
+	4900 6160 5350 6160
+Wire Wire Line
+	4900 6560 4900 6960
+Wire Wire Line
+	4900 6960 4500 6960
+Wire Wire Line
+	4900 6960 5350 6960
+Wire Wire Line
+	4970 2060 4470 2060
+Wire Wire Line
+	4970 2260 4970 2060
+Wire Wire Line
+	4970 2260 4970 2360
+Wire Wire Line
+	4970 2260 5420 2260
+Wire Wire Line
+	4970 2560 4970 3060
+Wire Wire Line
+	4970 3060 4570 3060
+Wire Wire Line
+	4970 3060 5420 3060
+Wire Wire Line
+	5350 6160 5350 6360
+Wire Wire Line
+	5350 6160 5700 6160
+Wire Wire Line
+	5350 6960 5350 6560
+Wire Wire Line
+	5350 6960 5700 6960
+Wire Wire Line
+	5420 2260 5420 2360
+Wire Wire Line
+	5420 2260 5770 2260
+Wire Wire Line
+	5420 3060 5420 2560
+Wire Wire Line
+	5420 3060 5770 3060
+Wire Wire Line
+	5700 6160 5700 5460
+Wire Wire Line
+	5700 6160 5700 6260
+Wire Wire Line
+	5700 6560 5700 6660
+Wire Wire Line
+	5700 6960 5700 6860
+Wire Wire Line
+	5770 2260 5770 2160
+Wire Wire Line
+	5770 2260 5770 2360
+Wire Wire Line
+	5770 2660 5770 2760
+Wire Wire Line
+	5770 3060 5770 2960
+Wire Wire Line
+	7890 5220 7890 5120
+Wire Wire Line
+	7890 5420 7890 5520
+Wire Wire Line
+	7890 5520 8340 5520
+Wire Wire Line
+	7890 5620 7890 5520
+Wire Wire Line
+	7890 5820 7890 5920
+Wire Wire Line
+	7890 5920 7890 6020
+Wire Wire Line
+	8340 5520 8790 5520
+Wire Wire Line
+	8340 5620 8340 5520
+Wire Wire Line
+	8340 5920 7890 5920
+Wire Wire Line
+	8340 5920 8340 5820
+Wire Wire Line
+	8390 2030 8290 2030
+Wire Wire Line
+	8390 2030 8390 1930
+Wire Wire Line
+	8390 2280 8390 2030
+Wire Wire Line
+	8390 2280 8390 2580
+Wire Wire Line
+	8390 2280 8590 2280
+Wire Wire Line
+	8390 3080 8390 2780
+Wire Wire Line
+	8790 5520 8790 5620
+Wire Wire Line
+	8790 5520 9240 5520
+Wire Wire Line
+	8790 5920 8340 5920
+Wire Wire Line
+	8790 5920 8790 5820
+Wire Wire Line
+	8790 5920 9240 5920
+Wire Wire Line
+	8890 2580 8890 3080
+Wire Wire Line
+	8890 3080 8390 3080
+Wire Wire Line
+	8890 3080 8890 3180
+Wire Wire Line
+	8890 3080 9290 3080
+Wire Wire Line
+	8890 3180 8890 3280
+Wire Wire Line
+	8990 3180 8890 3180
+Wire Wire Line
+	9190 2280 9290 2280
+Wire Wire Line
+	9240 5520 9240 5620
+Wire Wire Line
+	9240 5520 9690 5520
+Wire Wire Line
+	9240 5920 9240 5820
+Wire Wire Line
+	9240 5920 9690 5920
+Wire Wire Line
+	9290 2280 9290 2530
+Wire Wire Line
+	9290 2280 9740 2280
+Wire Wire Line
+	9290 2730 9290 3080
+Wire Wire Line
+	9290 3080 9740 3080
+Wire Wire Line
+	9690 5520 9690 5620
+Wire Wire Line
+	9690 5520 10140 5520
+Wire Wire Line
+	9690 5920 9690 5820
+Wire Wire Line
+	9690 5920 10140 5920
+Wire Wire Line
+	9740 2030 9740 1930
+Wire Wire Line
+	9740 2030 9840 2030
+Wire Wire Line
+	9740 2280 9740 2030
+Wire Wire Line
+	9740 2280 9740 2380
+Wire Wire Line
+	9740 2680 9740 2780
+Wire Wire Line
+	9740 3080 9740 2980
+Wire Wire Line
+	10140 5520 10140 5420
+Wire Wire Line
+	10140 5520 10140 5620
+Wire Wire Line
+	10140 5820 10140 5920
+Wire Notes Line width 20 rgb(132, 0, 0)
+	480  3850 11210 3850
+Wire Notes Line width 20 rgb(132, 0, 0)
+	6950 480  6950 6550
+Text Notes 4330 4750 2    118  ~ 24
+5V Converter\n
+Text Notes 4500 1120 2    118  ~ 24
+12V Converter\n
+Text Notes 9880 1150 2    118  ~ 24
+3.3V Inline converter\n
+Text Notes 10040 4280 2    118  ~ 24
+STM Power filtration
+Text GLabel 1650 5860 1    50   Input ~ 0
+CONVERT_5V
+Text GLabel 1720 1960 1    50   Input ~ 0
+PUMP
+Text GLabel 5770 2160 1    50   Input ~ 0
+V_PUMP
+Text GLabel 10140 5420 1    50   Input ~ 0
+3.3V_STM_POWER
+$Comp
+L power:+5V #PWR015
+U 1 1 00000000
+P 5700 5460
+F 0 "#PWR015" H 5700 5310 50  0001 C CNN
+F 1 "+5V" V 5715 5588 50  0000 L CNN
+F 2 "" H 5700 5460 50  0001 C CNN
+F 3 "" H 5700 5460 50  0001 C CNN
+	1    5700 5460
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR020
+U 1 1 00000000
+P 7890 5120
+F 0 "#PWR020" H 7890 4970 50  0001 C CNN
+F 1 "+3.3V" H 7905 5293 50  0000 C CNN
+F 2 "" H 7890 5120 50  0001 C CNN
+F 3 "" H 7890 5120 50  0001 C CNN
+	1    7890 5120
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR017
+U 1 1 00000000
+P 8390 1930
+F 0 "#PWR017" H 8390 1780 50  0001 C CNN
+F 1 "+5V" V 8405 2058 50  0000 L CNN
+F 2 "" H 8390 1930 50  0001 C CNN
+F 3 "" H 8390 1930 50  0001 C CNN
+	1    8390 1930
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR0105
+U 1 1 00000000
+P 9740 1930
+F 0 "#PWR0105" H 9740 1780 50  0001 C CNN
+F 1 "+3.3V" H 9755 2103 50  0000 C CNN
+F 2 "" H 9740 1930 50  0001 C CNN
+F 3 "" H 9740 1930 50  0001 C CNN
+	1    9740 1930
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L_Small L4
+U 1 1 00000000
+P 2350 5960
+F 0 "L4" V 2450 5960 50  0000 C CNN
+F 1 "22uH" V 2300 5960 50  0000 C CNN
+F 2 "Inductor_SMD:L_12x12mm_H8mm" H 2350 5960 50  0001 C CNN
+F 3 "~" H 2350 5960 50  0001 C CNN
+	1    2350 5960
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:L_Small L3
+U 1 1 00000000
+P 2420 2060
+F 0 "L3" V 2520 2060 50  0000 C CNN
+F 1 "22uH" V 2370 2060 50  0000 C CNN
+F 2 "Inductor_SMD:L_12x12mm_H8mm" H 2420 2060 50  0001 C CNN
+F 3 "~" H 2420 2060 50  0001 C CNN
+	1    2420 2060
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:L_Small L2
+U 1 1 00000000
+P 4700 6160
+F 0 "L2" V 4800 6160 50  0000 C CNN
+F 1 "22uH" V 4650 6160 50  0000 C CNN
+F 2 "Inductor_SMD:L_12x12mm_H8mm" H 4700 6160 50  0001 C CNN
+F 3 "~" H 4700 6160 50  0001 C CNN
+	1    4700 6160
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:L_Small L1
+U 1 1 00000000
+P 4770 2260
+F 0 "L1" V 4870 2260 50  0000 C CNN
+F 1 "22uH" V 4720 2260 50  0000 C CNN
+F 2 "Inductor_SMD:L_12x12mm_H8mm" H 4770 2260 50  0001 C CNN
+F 3 "~" H 4770 2260 50  0001 C CNN
+	1    4770 2260
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0101
+U 1 1 00000000
+P 8290 2030
+F 0 "#FLG0101" H 8290 2105 50  0001 C CNN
+F 1 "PWR_FLAG" V 8290 2157 50  0000 L CNN
+F 2 "" H 8290 2030 50  0001 C CNN
+F 3 "~" H 8290 2030 50  0001 C CNN
+	1    8290 2030
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0103
+U 1 1 00000000
+P 8990 3180
+F 0 "#FLG0103" H 8990 3255 50  0001 C CNN
+F 1 "PWR_FLAG" V 8990 3308 50  0000 L CNN
+F 2 "" H 8990 3180 50  0001 C CNN
+F 3 "~" H 8990 3180 50  0001 C CNN
+	1    8990 3180
+	0    1    1    0   
+$EndComp
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 00000000
+P 9840 2030
+F 0 "#FLG0102" H 9840 2105 50  0001 C CNN
+F 1 "PWR_FLAG" V 9840 2157 50  0000 L CNN
+F 2 "" H 9840 2030 50  0001 C CNN
+F 3 "~" H 9840 2030 50  0001 C CNN
+	1    9840 2030
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR010
+U 1 1 00000000
+P 1650 7060
+F 0 "#PWR010" H 1650 6810 50  0001 C CNN
+F 1 "GND" H 1655 6887 50  0000 C CNN
+F 2 "" H 1650 7060 50  0001 C CNN
+F 3 "" H 1650 7060 50  0001 C CNN
+	1    1650 7060
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR09
+U 1 1 00000000
+P 1720 3160
+F 0 "#PWR09" H 1720 2910 50  0001 C CNN
+F 1 "GND" H 1725 2987 50  0000 C CNN
+F 2 "" H 1720 3160 50  0001 C CNN
+F 3 "" H 1720 3160 50  0001 C CNN
+	1    1720 3160
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR016
+U 1 1 00000000
+P 7890 6020
+F 0 "#PWR016" H 7890 5770 50  0001 C CNN
+F 1 "GND" H 7895 5847 50  0000 C CNN
+F 2 "" H 7890 6020 50  0001 C CNN
+F 3 "" H 7890 6020 50  0001 C CNN
+	1    7890 6020
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR018
+U 1 1 00000000
+P 8890 3280
+F 0 "#PWR018" H 8890 3030 50  0001 C CNN
+F 1 "GND" H 8895 3107 50  0000 C CNN
+F 2 "" H 8890 3280 50  0001 C CNN
+F 3 "" H 8890 3280 50  0001 C CNN
+	1    8890 3280
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D_Zener_Small D4
+U 1 1 00000000
+P 1900 6460
+F 0 "D4" V 1850 6610 50  0000 R CNN
+F 1 "D_ZEN" V 1950 6560 50  0001 R CNN
+F 2 "Diode_SMD:D_SMA" V 1900 6460 50  0001 C CNN
+F 3 "~" V 1900 6460 50  0001 C CNN
+	1    1900 6460
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_Zener_Small D3
+U 1 1 00000000
+P 1970 2510
+F 0 "D3" V 1920 2660 50  0000 R CNN
+F 1 "D_ZEN" V 2020 2610 50  0001 R CNN
+F 2 "Diode_SMD:D_SMA" V 1970 2510 50  0001 C CNN
+F 3 "~" V 1970 2510 50  0001 C CNN
+	1    1970 2510
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_Schottky_Small D6
+U 1 1 00000000
+P 2150 6460
+F 0 "D6" V 2100 6560 50  0000 C CNN
+F 1 "D_SCH" V 2200 6560 50  0001 C CNN
+F 2 "Diode_SMD:D_SMA" V 2150 6460 50  0001 C CNN
+F 3 "~" V 2150 6460 50  0001 C CNN
+	1    2150 6460
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_Schottky_Small D5
+U 1 1 00000000
+P 2220 2510
+F 0 "D5" V 2170 2610 50  0000 C CNN
+F 1 "D_SCH" V 2270 2610 50  0001 C CNN
+F 2 "Diode_SMD:D_SMA" V 2220 2510 50  0001 C CNN
+F 3 "~" V 2220 2510 50  0001 C CNN
+	1    2220 2510
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_Schottky_Small D8
+U 1 1 00000000
+P 4500 6460
+F 0 "D8" V 4450 6560 50  0000 C CNN
+F 1 "D_SCH" V 4550 6560 50  0001 C CNN
+F 2 "Diode_SMD:D_SMA" V 4500 6460 50  0001 C CNN
+F 3 "~" V 4500 6460 50  0001 C CNN
+	1    4500 6460
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D_Schottky_Small D7
+U 1 1 00000000
+P 4570 2460
+F 0 "D7" V 4520 2560 50  0000 C CNN
+F 1 "D_SCH" V 4620 2560 50  0001 C CNN
+F 2 "Diode_SMD:D_SMA" V 4570 2460 50  0001 C CNN
+F 3 "~" V 4570 2460 50  0001 C CNN
+	1    4570 2460
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:LED_Small D2
+U 1 1 00000000
+P 1650 6760
+F 0 "D2" V 1696 6690 50  0000 R CNN
+F 1 "IN" V 1605 6690 50  0001 R CNN
+F 2 "Diode_SMD:D_0603_1608Metric" V 1650 6760 50  0001 C CNN
+F 3 "~" V 1650 6760 50  0001 C CNN
+	1    1650 6760
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED_Small D1
+U 1 1 00000000
+P 1720 2860
+F 0 "D1" V 1766 2790 50  0000 R CNN
+F 1 "IN" V 1675 2790 50  0001 R CNN
+F 2 "Diode_SMD:D_0603_1608Metric" V 1720 2860 50  0001 C CNN
+F 3 "~" V 1720 2860 50  0001 C CNN
+	1    1720 2860
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED_Small D10
+U 1 1 00000000
+P 5700 6760
+F 0 "D10" V 5746 6690 50  0000 R CNN
+F 1 "OUT" V 5655 6690 50  0001 R CNN
+F 2 "Diode_SMD:D_0603_1608Metric" V 5700 6760 50  0001 C CNN
+F 3 "~" V 5700 6760 50  0001 C CNN
+	1    5700 6760
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED_Small D9
+U 1 1 00000000
+P 5770 2860
+F 0 "D9" V 5816 2790 50  0000 R CNN
+F 1 "OUT" V 5725 2790 50  0001 R CNN
+F 2 "Diode_SMD:D_0603_1608Metric" V 5770 2860 50  0001 C CNN
+F 3 "~" V 5770 2860 50  0001 C CNN
+	1    5770 2860
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:LED_Small D11
+U 1 1 00000000
+P 9740 2880
+F 0 "D11" V 9786 2810 50  0000 R CNN
+F 1 "OUT" V 9695 2810 50  0001 R CNN
+F 2 "Diode_SMD:D_0603_1608Metric" V 9740 2880 50  0001 C CNN
+F 3 "~" V 9740 2880 50  0001 C CNN
+	1    9740 2880
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:CP_Small C5
+U 1 1 00000000
+P 2950 6460
+F 0 "C5" H 3038 6506 50  0000 L CNN
+F 1 "10pF" H 3038 6415 50  0000 L CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x7.7" H 2950 6460 50  0001 C CNN
+F 3 "~" H 2950 6460 50  0001 C CNN
+	1    2950 6460
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP_Small C4
+U 1 1 00000000
+P 3020 2510
+F 0 "C4" H 3108 2556 50  0000 L CNN
+F 1 "10pF" H 3108 2465 50  0000 L CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x7.7" H 3020 2510 50  0001 C CNN
+F 3 "~" H 3020 2510 50  0001 C CNN
+	1    3020 2510
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP_Small C9
+U 1 1 00000000
+P 5350 6460
+F 0 "C9" H 5438 6506 50  0000 L CNN
+F 1 "10pF" H 5438 6415 50  0000 L CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x7.7" H 5350 6460 50  0001 C CNN
+F 3 "~" H 5350 6460 50  0001 C CNN
+	1    5350 6460
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP_Small C8
+U 1 1 00000000
+P 5420 2460
+F 0 "C8" H 5508 2506 50  0000 L CNN
+F 1 "10pF" H 5508 2415 50  0000 L CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x7.7" H 5420 2460 50  0001 C CNN
+F 3 "~" H 5420 2460 50  0001 C CNN
+	1    5420 2460
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP_Small C36
+U 1 1 00000000
+P 8390 2680
+F 0 "C36" H 8478 2726 50  0000 L CNN
+F 1 "10pF" H 8478 2635 50  0000 L CNN
+F 2 "Capacitor_SMD:CP_Elec_6.3x7.7" H 8390 2680 50  0001 C CNN
+F 3 "~" H 8390 2680 50  0001 C CNN
+	1    8390 2680
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C3
+U 1 1 00000000
+P 2550 6460
+F 0 "C3" H 2642 6506 50  0000 L CNN
+F 1 "100nF" H 2642 6415 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 2550 6460 50  0001 C CNN
+F 3 "~" H 2550 6460 50  0001 C CNN
+	1    2550 6460
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C2
+U 1 1 00000000
+P 2620 2510
+F 0 "C2" H 2712 2556 50  0000 L CNN
+F 1 "100nF" H 2712 2465 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 2620 2510 50  0001 C CNN
+F 3 "~" H 2620 2510 50  0001 C CNN
+	1    2620 2510
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C7
+U 1 1 00000000
+P 4900 6460
+F 0 "C7" H 4992 6506 50  0000 L CNN
+F 1 "100nF" H 4992 6415 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 4900 6460 50  0001 C CNN
+F 3 "~" H 4900 6460 50  0001 C CNN
+	1    4900 6460
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C6
+U 1 1 00000000
+P 4970 2460
+F 0 "C6" H 5062 2506 50  0000 L CNN
+F 1 "100nF" H 5062 2415 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 4970 2460 50  0001 C CNN
+F 3 "~" H 4970 2460 50  0001 C CNN
+	1    4970 2460
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C41
+U 1 1 00000000
+P 7890 5720
+F 0 "C41" H 7982 5766 50  0000 L CNN
+F 1 "100nF" H 7982 5675 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 7890 5720 50  0001 C CNN
+F 3 "~" H 7890 5720 50  0001 C CNN
+	1    7890 5720
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C10
+U 1 1 00000000
+P 8340 5720
+F 0 "C10" H 8432 5766 50  0000 L CNN
+F 1 "100nF" H 8432 5675 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 8340 5720 50  0001 C CNN
+F 3 "~" H 8340 5720 50  0001 C CNN
+	1    8340 5720
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C11
+U 1 1 00000000
+P 8790 5720
+F 0 "C11" H 8882 5766 50  0000 L CNN
+F 1 "100nF" H 8882 5675 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 8790 5720 50  0001 C CNN
+F 3 "~" H 8790 5720 50  0001 C CNN
+	1    8790 5720
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C12
+U 1 1 00000000
+P 9240 5720
+F 0 "C12" H 9332 5766 50  0000 L CNN
+F 1 "100nF" H 9332 5675 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 9240 5720 50  0001 C CNN
+F 3 "~" H 9240 5720 50  0001 C CNN
+	1    9240 5720
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C37
+U 1 1 00000000
+P 9290 2630
+F 0 "C37" H 9382 2676 50  0000 L CNN
+F 1 "100nF" H 9382 2585 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 9290 2630 50  0001 C CNN
+F 3 "~" H 9290 2630 50  0001 C CNN
+	1    9290 2630
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C13
+U 1 1 00000000
+P 9690 5720
+F 0 "C13" H 9782 5766 50  0000 L CNN
+F 1 "100nF" H 9782 5675 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 9690 5720 50  0001 C CNN
+F 3 "~" H 9690 5720 50  0001 C CNN
+	1    9690 5720
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C14
+U 1 1 00000000
+P 10140 5720
+F 0 "C14" H 10232 5766 50  0000 L CNN
+F 1 "100nF" H 10232 5675 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric" H 10140 5720 50  0001 C CNN
+F 3 "~" H 10140 5720 50  0001 C CNN
+	1    10140 5720
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 00000000
+P 1650 6410
+F 0 "R2" H 1720 6456 50  0000 L CNN
+F 1 "1k" H 1720 6365 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1580 6410 50  0001 C CNN
+F 3 "~" H 1650 6410 50  0001 C CNN
+	1    1650 6410
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 00000000
+P 1720 2510
+F 0 "R1" H 1790 2556 50  0000 L CNN
+F 1 "1k" H 1790 2465 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 1650 2510 50  0001 C CNN
+F 3 "~" H 1720 2510 50  0001 C CNN
+	1    1720 2510
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R5
+U 1 1 00000000
+P 5700 6410
+F 0 "R5" H 5770 6456 50  0000 L CNN
+F 1 "1k" H 5770 6365 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 5630 6410 50  0001 C CNN
+F 3 "~" H 5700 6410 50  0001 C CNN
+	1    5700 6410
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 00000000
+P 5770 2510
+F 0 "R4" H 5840 2556 50  0000 L CNN
+F 1 "1k" H 5840 2465 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 5700 2510 50  0001 C CNN
+F 3 "~" H 5770 2510 50  0001 C CNN
+	1    5770 2510
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R6
+U 1 1 00000000
+P 9740 2530
+F 0 "R6" H 9810 2576 50  0000 L CNN
+F 1 "1k" H 9810 2485 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric" V 9670 2530 50  0001 C CNN
+F 3 "~" H 9740 2530 50  0001 C CNN
+	1    9740 2530
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Ferrite_Bead_Small FB3
+U 1 1 00000000
+P 7890 5320
+F 0 "FB3" H 7990 5366 50  0000 L CNN
+F 1 "FB" H 7990 5275 50  0000 L CNN
+F 2 "Inductor_SMD:L_0603_1608Metric" V 7820 5320 50  0001 C CNN
+F 3 "~" H 7890 5320 50  0001 C CNN
+	1    7890 5320
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Linear:LP2950-3.3_TO92 U4
+U 1 1 00000000
+P 8890 2280
+F 0 "U4" H 8890 2522 50  0000 C CNN
+F 1 "LP2950-3.3_TO92" H 8890 2431 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-223-3_TabPin2" H 8890 2505 50  0001 C CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lp2950-n.pdf" H 8890 2230 50  0001 C CNN
+	1    8890 2280
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Switching:LM2596S-5 U3
+U 1 1 00000000
+P 3900 6060
+F 0 "U3" H 3900 6427 50  0000 C CNN
+F 1 "LM2596S-5" H 3900 6336 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:TO-263-5_TabPin3" H 3950 5810 50  0001 L CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lm2596.pdf" H 3900 6060 50  0001 C CNN
+	1    3900 6060
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Switching:LM2596S-ADJ U2
+U 1 1 00000000
+P 3970 2160
+F 0 "U2" H 3970 2527 50  0000 C CNN
+F 1 "LM2596S-12" H 3970 2436 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:TO-263-5_TabPin3" H 4020 1910 50  0001 L CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lm2596.pdf" H 3970 2160 50  0001 C CNN
+	1    3970 2160
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
