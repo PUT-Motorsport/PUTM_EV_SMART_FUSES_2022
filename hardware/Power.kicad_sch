@@ -2267,7 +2267,7 @@
     (property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2" (id 2) (at 225.806 52.197 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
-    (property "Datasheet" "http://www.ti.com/lit/ds/symlink/lp2950-n.pdf" (id 3) (at 225.806 59.182 0)
+    (property "Datasheet" "http://www.ti.com/lit/ds/symlink/lp2950.pdf" (id 3) (at 225.806 59.182 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (pin "1" (uuid f5d18860-7162-4a5d-b641-7bba02586b7b))

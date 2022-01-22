@@ -2447,6 +2447,30 @@
     (path "/00000000-0000-0000-0000-000062af9e21/4a16d67e-3c38-47d2-932e-516fe3337bb5"
       (reference "#PWR0132") (unit 1) (value "GND") (footprint "")
     )
+    (path "/00000000-0000-0000-0000-000062af9e21/78b5b990-5bf9-4226-b851-ba8e09906989"
+      (reference "#PWR0133") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-000062af9e21/a6efb9f6-3a78-4757-9626-0d00106647a0"
+      (reference "#PWR0134") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-000062af9e21/a5c3f03d-ebb1-4984-821e-a3e78d9a4f98"
+      (reference "#PWR0135") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-000062af9e21/004ffe44-989a-428b-ba28-e20959a030a2"
+      (reference "#PWR0136") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-000062af9e21/616912ca-533f-4386-ab2c-ef3538169265"
+      (reference "#PWR0137") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-000062af9e21/9ffbbcb9-eefa-44ed-b385-42207cce2590"
+      (reference "#PWR0138") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-000062af9e21/9fb44913-c2b2-40e8-b4d4-3cd625e890f3"
+      (reference "#PWR0139") (unit 1) (value "GND") (footprint "")
+    )
+    (path "/00000000-0000-0000-0000-000062af9e21/ae053949-4a9d-40f6-a8ea-74001132a05c"
+      (reference "#PWR0140") (unit 1) (value "GND") (footprint "")
+    )
     (path "/00000000-0000-0000-0000-000062da3da3/9b6230d8-f053-4017-bb6b-2fe984e02a8a/00000000-0000-0000-0000-00006197c194"
       (reference "C1") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_0603_1608Metric")
     )
@@ -2518,6 +2542,9 @@
     )
     (path "/00000000-0000-0000-0000-000062da6ec2/b64519e3-ee00-45a7-b4b8-340248210799/00000000-0000-0000-0000-0000616d3668"
       (reference "C24") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_0603_1608Metric")
+    )
+    (path "/00000000-0000-0000-0000-000062af9e21/423740cf-3f8a-4273-959f-7bc69baac7b1"
+      (reference "C25") (unit 1) (value "10pF") (footprint "Capacitor_SMD:CP_Elec_6.3x7.7")
     )
     (path "/00000000-0000-0000-0000-000062da6ec2/2afefb9e-e2da-46be-9d16-11521459553c/00000000-0000-0000-0000-000061aa448f"
       (reference "C27") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_0603_1608Metric")
