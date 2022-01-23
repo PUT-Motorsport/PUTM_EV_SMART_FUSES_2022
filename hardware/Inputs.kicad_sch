@@ -221,8 +221,6 @@
   )
 
 
-  (no_connect (at 236.474 136.398) (uuid e88cc2db-d213-4f9d-b640-9ce6cb22674a))
-
   (wire (pts (xy 236.474 128.778) (xy 231.394 128.778))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 2425d3d1-7476-4fcd-aa0f-cce73cb98f07)
@@ -256,7 +254,7 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 448fa9bc-c10e-40e1-9539-6f3b0e1b7484)
   )
-  (wire (pts (xy 236.474 136.398) (xy 231.394 136.398))
+  (wire (pts (xy 231.394 136.398) (xy 236.474 136.398))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 5dd88858-9a65-4137-a2c9-2232b975e159)
   )
@@ -438,6 +436,13 @@
     (uuid d426134e-e792-429e-82c3-8fc970265fd0)
     (property "Intersheet References" "${INTERSHEET_REFS}" (id 0) (at -269.494 -295.91 0)
       (effects (font (size 1.27 1.27)) hide)
+    )
+  )
+  (global_label "SWO" (shape input) (at 236.474 136.398 0) (fields_autoplaced)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid e761cc5c-0717-4901-a85b-15fffd30ebcb)
+    (property "Intersheet References" "${INTERSHEET_REFS}" (id 0) (at 242.7896 136.3186 0)
+      (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
   (global_label "N_HVD" (shape input) (at 73.152 149.352 0) (fields_autoplaced)
