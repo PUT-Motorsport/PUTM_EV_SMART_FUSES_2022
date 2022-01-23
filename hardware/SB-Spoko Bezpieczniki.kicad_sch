@@ -2589,15 +2589,6 @@
     (path "/00000000-0000-0000-0000-000062da47f9/95624bce-f7ae-48f8-a0a7-df920ce04e66"
       (reference "C37") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_0603_1608Metric")
     )
-    (path "/00000000-0000-0000-0000-000062da7878/0a21d4bb-6a63-492b-a7a4-be8168f24381/00000000-0000-0000-0000-000061aa4f82"
-      (reference "C38") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_0603_1608Metric")
-    )
-    (path "/00000000-0000-0000-0000-000062da7878/a7b0d6f7-2fc1-4420-bdd3-a8d6eb2cf913/00000000-0000-0000-0000-000061aa4f82"
-      (reference "C39") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_0603_1608Metric")
-    )
-    (path "/00000000-0000-0000-0000-000062da7878/b95cf37c-654d-489a-853a-72e5854049e9/00000000-0000-0000-0000-000061aa4f82"
-      (reference "C40") (unit 1) (value "100nF") (footprint "Capacitor_SMD:C_0603_1608Metric")
-    )
     (path "/00000000-0000-0000-0000-000062da47f9/30db16c8-891f-46c3-9dc2-740d01688736"
       (reference "D1") (unit 1) (value "IN") (footprint "Diode_SMD:D_0603_1608Metric")
     )
