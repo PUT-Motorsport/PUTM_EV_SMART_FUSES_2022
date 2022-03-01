@@ -13,3 +13,4 @@ The Smart Fuses board is responsible for two primary things:
 
 ## Basic flow chart
 ![basic_flow_chart](https://user-images.githubusercontent.com/26027009/156181450-39c9c881-8dbf-4d26-a45c-799e5b989ca9.png)
+( basic concept of the programs flow, it may or may not change depending on the needs )
