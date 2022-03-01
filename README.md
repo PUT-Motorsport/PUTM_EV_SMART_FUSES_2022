@@ -12,5 +12,5 @@ The Smart Fuses board is responsible for two primary things:
 - control over tsal (tractive system active light) and buzzer.
 
 ## Basic flow chart
-![basic_flow_chart](https://user-images.githubusercontent.com/26027009/156181450-39c9c881-8dbf-4d26-a45c-799e5b989ca9.png)
-( basic concept of the programs flow, it may or may not change depending on the needs )
+![Flow chart drawio](https://user-images.githubusercontent.com/26027009/156244890-61f16ed9-ceab-494c-89ed-fa1ca678cae2.png) <br/>
+( basic concept of the program's flow chart, it may or may not change depending on the needs )
