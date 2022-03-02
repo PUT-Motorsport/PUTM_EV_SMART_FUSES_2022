@@ -9,7 +9,7 @@ The creation of a specially designed board responsible of directing and managing
 ## Description
 The Smart Fuses board is responsible for two primary things:
 - control over chips with integrated fuses based on mosfets,
-- control over tsal (tractive system active light) and buzzer.
+- control over assi (auyonomus system status indicator) and buzzer.
 
 ## Basic flow chart
 ![Flow chart drawio](https://user-images.githubusercontent.com/26027009/156244890-61f16ed9-ceab-494c-89ed-fa1ca678cae2.png) <br/>
