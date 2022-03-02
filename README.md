@@ -12,5 +12,5 @@ The Smart Fuses board is responsible for two primary things:
 - control over assi (auyonomus system status indicator) and buzzer.
 
 ## Basic flow chart
-![Flow chart drawio](https://user-images.githubusercontent.com/26027009/156244890-61f16ed9-ceab-494c-89ed-fa1ca678cae2.png) <br/>
+![Flow chart drawio (1)](https://user-images.githubusercontent.com/26027009/156365645-1675d58c-cdfd-4cbe-8864-cd5e77c1c218.png) <br/>
 ( basic concept of the program's flow, it may or may not change depending on the needs )
