@@ -746,3 +746,93 @@
 2022-03-15 19:55:22,280 [INFO] ProjectBuilder:4183 - Time for Generating toolchain IDE Files: 3085mS.
 2022-03-15 19:55:22,288 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 8mS.
 2022-03-15 19:55:22,288 [INFO] ProjectBuilder:2785 - Time for Copy CMSIS : 0mS.
+2022-03-27 20:42:33,495 [INFO] Activator:177 - 
+
+
+2022-03-27 20:42:33,502 [INFO] Activator:178 - !SESSION log4j initialized
+2022-03-27 20:42:40,561 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-03-27 20:42:40,767 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:42:40,769 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:42:40,770 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:48:10,479 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:48:10,480 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:48:10,480 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:48:30,135 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:48:30,136 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:48:30,137 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:49:52,267 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:49:52,268 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:49:52,268 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:50:32,372 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:50:32,373 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:50:32,373 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:54:01,727 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:54:01,728 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:54:01,729 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:56:13,944 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:56:13,945 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:56:13,945 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:56:14,262 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:56:14,263 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:56:14,263 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:57:14,679 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:57:14,680 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:57:14,680 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:57:36,928 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:57:36,929 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:57:36,929 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:58:36,236 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:58:36,237 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:58:36,238 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:59:32,716 [INFO] Activator:177 - 
+
+
+2022-03-27 20:59:32,718 [INFO] Activator:178 - !SESSION log4j initialized
+2022-03-27 20:59:38,082 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-03-27 20:59:38,285 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:59:38,286 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 20:59:38,287 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:00:21,362 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:00:21,364 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:00:21,364 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:01:22,655 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:01:22,656 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:01:22,657 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:03:49,859 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:03:49,860 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:03:49,860 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:04:28,963 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:04:28,964 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:04:28,966 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:06:14,905 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:06:14,907 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:06:14,908 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:07:18,813 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:07:18,815 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:07:18,816 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:09:05,214 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:09:05,215 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:09:05,216 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:09:05,576 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:09:05,577 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:09:05,578 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:10:53,872 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:10:53,873 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:10:53,874 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:16:12,604 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:16:12,605 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:16:12,606 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:16:13,160 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:16:13,161 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:16:13,161 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:20:45,683 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:20:45,684 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-27 21:20:45,685 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-29 18:28:42,154 [INFO] Activator:177 - 
+
+
+2022-03-29 18:28:42,154 [INFO] Activator:178 - !SESSION log4j initialized
+2022-03-29 18:28:48,355 [ERROR] AnalyticsContext:980 - The ST intranet updater server is unknown: mcucrossselector.codex.cro.st.com
+2022-03-29 18:28:48,590 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-29 18:28:48,590 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com
+2022-03-29 18:28:48,590 [ERROR] ConfigurationRetriever:139 - IOException on connection: sw-center.st.com

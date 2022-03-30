@@ -1,0 +1,478 @@
+20:47:37 **** Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_can.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_exti.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_flash_ramfunc.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_gpio.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_i2c_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_pwr_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_rcc_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_spi_ex.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim.o"
+arm-none-eabi-gcc "../Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.d" -MT"Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_tim_ex.o"
+arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Core/Startup/startup_stm32l4p5rgtx.d" -MT"Core/Startup/startup_stm32l4p5rgtx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Startup/startup_stm32l4p5rgtx.o" "../Core/Startup/startup_stm32l4p5rgtx.s"
+arm-none-eabi-gcc "../Core/Src/can.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/can.d" -MT"Core/Src/can.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/can.o"
+arm-none-eabi-gcc "../Core/Src/gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/gpio.d" -MT"Core/Src/gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/gpio.o"
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/spi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/spi.d" -MT"Core/Src/spi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/spi.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+../Core/Src/main.cpp: In function 'int main()':
+../Core/Src/main.cpp:92:40: error: 'PIN_RESET' was not declared in this scope; did you mean 'GPIO_PIN_RESET'?
+   92 |   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, PIN_RESET);
+      |                                        ^~~~~~~~~
+      |                                        GPIO_PIN_RESET
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+20:48:07 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32l4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32l4xx.d" -MT"Core/Src/system_stm32l4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32l4xx.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:48:29 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:49:51 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:50:31 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:54:01 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:56:12 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:57:14 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:57:36 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:00:20 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:01:22 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:03:49 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:04:28 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:06:14 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:07:18 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:09:03 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:10:53 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8508	     20	   1708	  10236	   27fc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:13:21 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp: In function 'int main()':
+../Core/Src/main.cpp:99:41: error: invalid conversion from 'int' to 'GPIO_PinState' [-fpermissive]
+   99 |    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_0, 0);
+      |                                         ^
+      |                                         |
+      |                                         int
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:262,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h:296:91: note:   initializing argument 3 of 'void HAL_GPIO_WritePin(GPIO_TypeDef*, uint16_t, GPIO_PinState)'
+  296 | void              HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                                                             ~~~~~~~~~~~~~~^~~~~~~~
+../Core/Src/main.cpp:100:41: error: invalid conversion from 'int' to 'GPIO_PinState' [-fpermissive]
+  100 |    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, 0);
+      |                                         ^
+      |                                         |
+      |                                         int
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:262,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h:296:91: note:   initializing argument 3 of 'void HAL_GPIO_WritePin(GPIO_TypeDef*, uint16_t, GPIO_PinState)'
+  296 | void              HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                                                             ~~~~~~~~~~~~~~^~~~~~~~
+../Core/Src/main.cpp:101:41: error: invalid conversion from 'int' to 'GPIO_PinState' [-fpermissive]
+  101 |    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_2, 0);
+      |                                         ^
+      |                                         |
+      |                                         int
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:262,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h:296:91: note:   initializing argument 3 of 'void HAL_GPIO_WritePin(GPIO_TypeDef*, uint16_t, GPIO_PinState)'
+  296 | void              HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                                                             ~~~~~~~~~~~~~~^~~~~~~~
+../Core/Src/main.cpp:102:41: error: invalid conversion from 'int' to 'GPIO_PinState' [-fpermissive]
+  102 |    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_3, 0);
+      |                                         ^
+      |                                         |
+      |                                         int
+In file included from ../Core/Inc/stm32l4xx_hal_conf.h:262,
+                 from ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.cpp:20:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio.h:296:91: note:   initializing argument 3 of 'void HAL_GPIO_WritePin(GPIO_TypeDef*, uint16_t, GPIO_PinState)'
+  296 | void              HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
+      |                                                                             ~~~~~~~~~~~~~~^~~~~~~~
+../Core/Src/main.cpp:104:4: error: 'delay' was not declared in this scope
+  104 |    delay(500);
+      |    ^~~~~
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:14:25 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp: In function 'int main()':
+../Core/Src/main.cpp:104:4: error: 'delay' was not declared in this scope
+  104 |    delay(500);
+      |    ^~~~~
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:16:11 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+   8636	     20	   1708	  10364	   287c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+19:17:28 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+   8636	     20	   1708	  10364	   287c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+19:19:06 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+   8636	     20	   1708	  10364	   287c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+19:24:20 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+   8604	     20	   1708	  10332	   285c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:41:11 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10556	     20	   1708	  12284	   2ffc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:43:06 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10556	     20	   1708	  12284	   2ffc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:47:15 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp: In function 'int main()':
+../Core/Src/main.cpp:162:15: error: redeclaration of 'uint8_t transmit [3]'
+  162 |       uint8_t transmit[3] = { READ_ROM(0x02), 0, 0 };
+      |               ^~~~~~~~
+../Core/Src/main.cpp:151:12: note: 'uint8_t transmit [3]' previously declared here
+  151 |    uint8_t transmit[3] = { READ_ROM(0x02), 0, 0 };
+      |            ^~~~~~~~
+../Core/Src/main.cpp:163:15: error: redeclaration of 'uint8_t recive [3]'
+  163 |       uint8_t recive[3];
+      |               ^~~~~~
+../Core/Src/main.cpp:152:12: note: 'uint8_t recive [3]' previously declared here
+  152 |    uint8_t recive[3];
+      |            ^~~~~~
+../Core/Src/main.cpp:173:16: error: redeclaration of 'uint8_t transmit [3]'
+  173 |        uint8_t transmit[3] = { READ_ROM(0x02), 0, 0 };
+      |                ^~~~~~~~
+../Core/Src/main.cpp:151:12: note: 'uint8_t transmit [3]' previously declared here
+  151 |    uint8_t transmit[3] = { READ_ROM(0x02), 0, 0 };
+      |            ^~~~~~~~
+../Core/Src/main.cpp:174:16: error: redeclaration of 'uint8_t recive [3]'
+  174 |        uint8_t recive[3];
+      |                ^~~~~~
+../Core/Src/main.cpp:152:12: note: 'uint8_t recive [3]' previously declared here
+  152 |    uint8_t recive[3];
+      |            ^~~~~~
+../Core/Src/main.cpp:184:17: error: redeclaration of 'uint8_t transmit [3]'
+  184 |         uint8_t transmit[3] = { READ_ROM(0x02), 0, 0 };
+      |                 ^~~~~~~~
+../Core/Src/main.cpp:151:12: note: 'uint8_t transmit [3]' previously declared here
+  151 |    uint8_t transmit[3] = { READ_ROM(0x02), 0, 0 };
+      |            ^~~~~~~~
+../Core/Src/main.cpp:185:17: error: redeclaration of 'uint8_t recive [3]'
+  185 |         uint8_t recive[3];
+      |                 ^~~~~~
+../Core/Src/main.cpp:152:12: note: 'uint8_t recive [3]' previously declared here
+  152 |    uint8_t recive[3];
+      |            ^~~~~~
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+20:47:59 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp: In function 'int main()':
+../Core/Src/main.cpp:162:16: error: assigning to an array from an initializer list
+  162 |       transmit = { READ_ROM(0x02), 0, 0 };
+      |       ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.cpp:172:17: error: assigning to an array from an initializer list
+  172 |        transmit = { READ_ROM(0x02), 0, 0 };
+      |        ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.cpp:182:18: error: assigning to an array from an initializer list
+  182 |         transmit = { READ_ROM(0x02), 0, 0 };
+      |         ~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:49: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+20:48:21 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10988	     20	   1708	  12716	   31ac	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:49:57 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10980	     20	   1708	  12708	   31a4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:50:18 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10980	     20	   1708	  12708	   31a4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:51:15 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10980	     20	   1708	  12708	   31a4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:51:56 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10980	     20	   1708	  12708	   31a4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:53:18 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10980	     20	   1708	  12708	   31a4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:09:24 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10996	     20	   1708	  12724	   31b4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:11:08 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  11004	     20	   1708	  12732	   31bc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:21:22 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  11004	     20	   1708	  12732	   31bc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 

@@ -25,6 +25,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#include "stm32l4xx_hal_spi.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -34,10 +36,30 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
+#define LED_OK GPIOC, GPIO_PIN_0
+#define LED_WARNING1 GPIOC, GPIO_PIN_1
+#define LED_WARNING2 GPIOC, GPIO_PIN_2
+#define LED_ERROR GPIOC, GPIO_PIN_3
+
+#define FUSE0 GPIOA, GPIO_PIN_1
+#define FUSE1 GPIOA, GPIO_PIN_2
+#define FUSE2 GPIOA, GPIO_PIN_3
+#define FUSE3 GPIOA, GPIO_PIN_4
+
+#define SET GPIO_PIN_SET
+#define RESET GPIO_PIN_RESET
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+
+/* spi fuse command bits -----------------------------------------------------*/
+#define READ_ROM(address) ( 0b11000000 | address )
+#define READ_RAM(address) ( 0b01000000 | address )
+#define WRITE_RAM(address) ( 0b00000000 | address )
+#define GET_DATA(rx_data) ( (uint16_t)rx_data[1] << 8 | (uint16_t)rx_data[2])
 
 /* USER CODE END PM */
 
@@ -90,6 +112,19 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
 
+  __HAL_SPI_ENABLE(&hspi1);
+  HAL_SPI_MspInit(&hspi1);
+
+  HAL_GPIO_WritePin(FUSE0, RESET);
+  HAL_GPIO_WritePin(FUSE1, SET);
+  HAL_GPIO_WritePin(FUSE2, SET);
+  HAL_GPIO_WritePin(FUSE3, SET);
+
+  HAL_GPIO_WritePin(LED_OK, RESET);
+  HAL_GPIO_WritePin(LED_WARNING1, SET);
+  HAL_GPIO_WritePin(LED_WARNING2, SET);
+  HAL_GPIO_WritePin(LED_ERROR, SET);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -97,7 +132,57 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+	  /*HAL_GPIO_WritePin(LED_OK, RESET);
+	  HAL_GPIO_WritePin(LED_WARNING1, RESET);
+	  HAL_GPIO_WritePin(LED_WARNING2, RESET);
+	  HAL_GPIO_WritePin(LED_ERROR, RESET);
 
+	  HAL_Delay(500);
+
+	  HAL_GPIO_WritePin(LED_OK, SET);
+	  HAL_GPIO_WritePin(LED_WARNING1, SET);
+	  HAL_GPIO_WritePin(LED_WARNING2, SET);
+	  HAL_GPIO_WritePin(LED_ERROR, SET);
+
+	  HAL_Delay(500);*/
+
+	  HAL_Delay(500);
+	  HAL_GPIO_WritePin(FUSE0, RESET);
+	  HAL_GPIO_WritePin(FUSE1, SET);
+	  HAL_GPIO_WritePin(FUSE2, SET);
+	  HAL_GPIO_WritePin(FUSE3, SET);
+	  uint8_t transmit[3] = { READ_ROM(0x02), 0, 0 };
+	  uint8_t recive[3];
+	  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
+	  if (GET_DATA(recive) != 0x58) HAL_GPIO_WritePin(LED_WARNING1, RESET);
+	  else HAL_GPIO_WritePin(LED_WARNING1, SET);
+
+	  HAL_Delay(500);
+	  	  HAL_GPIO_WritePin(FUSE0, SET);
+	  	  HAL_GPIO_WritePin(FUSE1, RESET);
+	  	  HAL_GPIO_WritePin(FUSE2, SET);
+	  	  HAL_GPIO_WritePin(FUSE3, SET);
+	  	  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
+	  	  if (GET_DATA(recive) != 0x58) HAL_GPIO_WritePin(LED_WARNING1, RESET);
+	  	  else HAL_GPIO_WritePin(LED_WARNING1, SET);
+
+	  	HAL_Delay(500);
+	  		  HAL_GPIO_WritePin(FUSE0, SET);
+	  		  HAL_GPIO_WritePin(FUSE1, SET);
+	  		  HAL_GPIO_WritePin(FUSE2, RESET);
+	  		  HAL_GPIO_WritePin(FUSE3, SET);
+	  		  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
+	  		  if (GET_DATA(recive) != 0x58) HAL_GPIO_WritePin(LED_WARNING1, RESET);
+	  		  else HAL_GPIO_WritePin(LED_WARNING1, SET);
+
+	  		HAL_Delay(500);
+	  			  HAL_GPIO_WritePin(FUSE0, SET);
+	  			  HAL_GPIO_WritePin(FUSE1, SET);
+	  			  HAL_GPIO_WritePin(FUSE2, SET);
+	  			  HAL_GPIO_WritePin(FUSE3, RESET);
+	  			  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
+	  			  if (GET_DATA(recive) != 0x58) HAL_GPIO_WritePin(LED_WARNING1, RESET);
+	  			  else HAL_GPIO_WritePin(LED_WARNING1, SET);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -159,6 +244,10 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
+	HAL_GPIO_WritePin(LED_OK, SET);
+	HAL_GPIO_WritePin(LED_WARNING1, SET);
+	HAL_GPIO_WritePin(LED_WARNING2, SET);
+	HAL_GPIO_WritePin(LED_ERROR, RESET);
   __disable_irq();
   while (1)
   {
