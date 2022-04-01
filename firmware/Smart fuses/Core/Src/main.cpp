@@ -60,6 +60,10 @@
 #define READ_RAM(address) ( 0b01000000 | address )
 #define WRITE_RAM(address) ( 0b00000000 | address )
 #define GET_DATA(rx_data) ( (uint16_t)rx_data[1] << 8 | (uint16_t)rx_data[2])
+#define RESET_FUSE() ( 0b11111111 )
+
+/* spi fuse handle transmit array --------------------------------------------*/
+#define MODIFY(array, _0, _1, _2) array[0] = _0; array[1] = _1; array[2] = _2;
 
 /* USER CODE END PM */
 
@@ -72,6 +76,9 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+
+void selectFuse(int num);
+void deselectAllFuses();
 
 /* USER CODE END PFP */
 
@@ -112,77 +119,56 @@ int main(void)
   MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
 
-  __HAL_SPI_ENABLE(&hspi1);
   HAL_SPI_MspInit(&hspi1);
-
-  HAL_GPIO_WritePin(FUSE0, RESET);
-  HAL_GPIO_WritePin(FUSE1, SET);
-  HAL_GPIO_WritePin(FUSE2, SET);
-  HAL_GPIO_WritePin(FUSE3, SET);
 
   HAL_GPIO_WritePin(LED_OK, RESET);
   HAL_GPIO_WritePin(LED_WARNING1, SET);
   HAL_GPIO_WritePin(LED_WARNING2, SET);
   HAL_GPIO_WritePin(LED_ERROR, SET);
 
+  for(int i = 0; i < 4; i++)
+  {
+	  selectFuse(i + 1);
+	  uint8_t tx_init[3] = { READ_RAM(0x14), 0, 0 };
+	  uint8_t rx_init[3] = { 0, 0, 0 };
+	  HAL_Delay(10);
+	  if (HAL_SPI_TransmitReceive(&hspi1, tx_init, rx_init, 3, 100) != HAL_OK) Error_Handler();
+	  HAL_Delay(1);
+	  MODIFY(tx_init, WRITE_RAM(0x14), 1 << 6, 0);
+	  if (HAL_SPI_TransmitReceive(&hspi1, tx_init, rx_init, 3, 100) != HAL_OK) Error_Handler();
+	  HAL_Delay(1);
+	  MODIFY(tx_init, WRITE_RAM(0x14), 1 << 3, 0);
+	  if (HAL_SPI_TransmitReceive(&hspi1, tx_init, rx_init, 3, 100) != HAL_OK) Error_Handler();
+	  HAL_Delay(1);
+	  MODIFY(tx_init, READ_RAM(0x14), 0, 0);
+	  if (HAL_SPI_TransmitReceive(&hspi1, tx_init, rx_init, 3, 100) != HAL_OK) Error_Handler();
+	  HAL_Delay(1);
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  for(int i = 0; i < 4; i++)
+	  {
+		  HAL_Delay(500);
+		  selectFuse(i + 1);
+		  uint8_t transmit[3] = { READ_ROM(0x03), 0, 0 };
+		  uint8_t recive[3];
+		  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
+		  int con = 0x56;
+		  if (recive[1] != con) HAL_GPIO_WritePin(LED_WARNING1, RESET);
+		  else HAL_GPIO_WritePin(LED_WARNING1, SET);
+		  MODIFY(transmit, READ_RAM(0x14), 0, 0);
+		  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
+		  volatile int rec1 = recive[1];
+		  volatile int rec2 = recive[2];
+		  //deselectAllFuses();
+	  }
+
     /* USER CODE END WHILE */
-	  /*HAL_GPIO_WritePin(LED_OK, RESET);
-	  HAL_GPIO_WritePin(LED_WARNING1, RESET);
-	  HAL_GPIO_WritePin(LED_WARNING2, RESET);
-	  HAL_GPIO_WritePin(LED_ERROR, RESET);
 
-	  HAL_Delay(500);
-
-	  HAL_GPIO_WritePin(LED_OK, SET);
-	  HAL_GPIO_WritePin(LED_WARNING1, SET);
-	  HAL_GPIO_WritePin(LED_WARNING2, SET);
-	  HAL_GPIO_WritePin(LED_ERROR, SET);
-
-	  HAL_Delay(500);*/
-
-	  HAL_Delay(500);
-	  HAL_GPIO_WritePin(FUSE0, RESET);
-	  HAL_GPIO_WritePin(FUSE1, SET);
-	  HAL_GPIO_WritePin(FUSE2, SET);
-	  HAL_GPIO_WritePin(FUSE3, SET);
-	  uint8_t transmit[3] = { READ_ROM(0x02), 0, 0 };
-	  uint8_t recive[3];
-	  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
-	  if (GET_DATA(recive) != 0x58) HAL_GPIO_WritePin(LED_WARNING1, RESET);
-	  else HAL_GPIO_WritePin(LED_WARNING1, SET);
-
-	  HAL_Delay(500);
-	  	  HAL_GPIO_WritePin(FUSE0, SET);
-	  	  HAL_GPIO_WritePin(FUSE1, RESET);
-	  	  HAL_GPIO_WritePin(FUSE2, SET);
-	  	  HAL_GPIO_WritePin(FUSE3, SET);
-	  	  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
-	  	  if (GET_DATA(recive) != 0x58) HAL_GPIO_WritePin(LED_WARNING1, RESET);
-	  	  else HAL_GPIO_WritePin(LED_WARNING1, SET);
-
-	  	HAL_Delay(500);
-	  		  HAL_GPIO_WritePin(FUSE0, SET);
-	  		  HAL_GPIO_WritePin(FUSE1, SET);
-	  		  HAL_GPIO_WritePin(FUSE2, RESET);
-	  		  HAL_GPIO_WritePin(FUSE3, SET);
-	  		  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
-	  		  if (GET_DATA(recive) != 0x58) HAL_GPIO_WritePin(LED_WARNING1, RESET);
-	  		  else HAL_GPIO_WritePin(LED_WARNING1, SET);
-
-	  		HAL_Delay(500);
-	  			  HAL_GPIO_WritePin(FUSE0, SET);
-	  			  HAL_GPIO_WritePin(FUSE1, SET);
-	  			  HAL_GPIO_WritePin(FUSE2, SET);
-	  			  HAL_GPIO_WritePin(FUSE3, RESET);
-	  			  if (HAL_SPI_TransmitReceive(&hspi1, transmit, recive, 3, 100) != HAL_OK) Error_Handler();
-	  			  if (GET_DATA(recive) != 0x58) HAL_GPIO_WritePin(LED_WARNING1, RESET);
-	  			  else HAL_GPIO_WritePin(LED_WARNING1, SET);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -233,6 +219,28 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void selectFuse(int num)
+{
+	//HAL_GPIO_WritePin(FUSE0, ( num == 1 ? RESET : SET));
+	//HAL_GPIO_WritePin(FUSE1, ( num == 2 ? RESET : SET));
+	//HAL_GPIO_WritePin(FUSE2, ( num == 3 ? RESET : SET));
+	//HAL_GPIO_WritePin(FUSE3, ( num == 4 ? RESET : SET));
+	HAL_GPIO_WritePin(FUSE0, ( num == 1 ? SET : RESET));
+	HAL_GPIO_WritePin(FUSE1, ( num == 2 ? SET : RESET));
+	HAL_GPIO_WritePin(FUSE2, ( num == 3 ? SET : RESET));
+	HAL_GPIO_WritePin(FUSE3, ( num == 4 ? SET : RESET));
+	HAL_Delay(1);
+}
+
+void deselectAllFuses()
+{
+	HAL_Delay(1);
+	HAL_GPIO_WritePin(FUSE0, SET );
+	HAL_GPIO_WritePin(FUSE1, SET );
+	HAL_GPIO_WritePin(FUSE2, SET );
+	HAL_GPIO_WritePin(FUSE3, SET );
+}
 
 /* USER CODE END 4 */
 
