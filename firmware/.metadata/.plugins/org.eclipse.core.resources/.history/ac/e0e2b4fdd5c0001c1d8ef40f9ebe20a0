@@ -1,0 +1,33 @@
+/*
+ * fuse.cpp
+ *
+ *  Created on: 7 kwi 2022
+ *      Author: pile
+ */
+
+#include "fuse.h"
+
+Fuse::Fuse()
+{
+	active = false;
+	duty_cykle = 0x3FF;
+	current = 0x0000;
+}
+
+SmartFuse::SmartFuse(GPIO_TypeDef *port, uint32_t pin, SPI_HandleTypeDef *hspi);
+
+void init(void);
+void handle(void);
+
+void setFuseDutyCykle(uint8_t fuse, uint16_t duty_cykle);
+void activeFuse(uint8_t fuse);
+void deactivateFuse(uint8_t fuse);
+
+void activeAllFuses();
+void deactivateAllFuses();
+
+uint16_t readFuseCurrent(uint8_t fuse);
+
+uint16_t readAllFusesCurrent();
+
+FuseControlerState getFuseState();

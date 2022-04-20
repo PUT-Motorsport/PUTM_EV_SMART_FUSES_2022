@@ -44,8 +44,7 @@
 #define FUSE1 GPIOA, GPIO_PIN_2
 #define FUSE2 GPIOA, GPIO_PIN_3
 #define FUSE3 GPIOA, GPIO_PIN_4
-#define SET GPIO_PIN_SET
-#define RESET GPIO_PIN_RESET
+
 
 /*USER CODE END PD */
 
@@ -65,8 +64,8 @@
 #define MODIFY(array, _0, _1, _2) array[0] = _0; array[1] = _1; array[2] = _2;
 
 /*some shit -----------------------------------------------------------------*/
-#define DELAY_FOR(x) for(int i = 0; i < x; i++);
-#define delay(x) HAL_Delay(x);
+
+
 
 /*USER CODE END PM */
 

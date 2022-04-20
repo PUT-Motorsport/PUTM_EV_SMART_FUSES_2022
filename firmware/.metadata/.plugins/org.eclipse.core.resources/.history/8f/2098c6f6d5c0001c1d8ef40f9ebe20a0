@@ -1,0 +1,15 @@
+/*
+ * fuse.cpp
+ *
+ *  Created on: 7 kwi 2022
+ *      Author: pile
+ */
+
+#include "fuse.h"
+
+Fuse::Fuse()
+{
+	active = false;
+	duty_cykle = 0x3FF;
+	current = 0x0000;
+}
