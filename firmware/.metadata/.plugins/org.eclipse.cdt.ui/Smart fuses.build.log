@@ -1,10 +1,17 @@
-19:12:17 **** Incremental Build of configuration Debug for project Smart fuses ****
+19:28:21 **** Incremental Build of configuration Debug for project Smart fuses ****
 make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
 arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
    text	   data	    bss	    dec	    hex	filename
-  11032	     20	   1708	  12760	   31d8	Smart fuses.elf
+   9728	     24	   1716	  11468	   2ccc	Smart fuses.elf
 Finished building: default.size.stdout
  
+Finished building: Smart fuses.list
+ 
 
-19:12:18 Build Finished. 0 errors, 0 warnings. (took 297ms)
+19:28:22 Build Finished. 0 errors, 0 warnings. (took 969ms)
 

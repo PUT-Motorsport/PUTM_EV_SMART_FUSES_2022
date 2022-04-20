@@ -1,0 +1,2 @@
+../Core/Src/spi24bit.cpp:10:6:void spi24_Transmit(SPI_HandleTypeDef*, Spi24TransmitData&)	16	static
+../Core/Src/spi24bit.cpp:28:6:void spi24_Receive(SPI_HandleTypeDef*, Spi24ReceiveData&)	0	static

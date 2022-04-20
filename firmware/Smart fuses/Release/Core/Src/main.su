@@ -1,0 +1,7 @@
+../Core/Src/main.cpp:245:6:void selectFuse(int)	8	static
+../Core/Src/main.cpp:258:6:void deselectAllFuses()	8	static
+../Core/Src/main.cpp:271:6:void transfer(short unsigned int)	0	static
+../Core/Src/main.cpp:303:6:void Error_Handler()	8	static,ignoring_inline_asm
+../Core/Src/main.cpp:203:6:void SystemClock_Config()	104	static
+../Core/Src/main.cpp:279:6:void sendDataToFuse(uint8_t, uint8_t*, uint8_t*)	16	static
+../Core/Src/main.cpp:98:5:int main()	16	static

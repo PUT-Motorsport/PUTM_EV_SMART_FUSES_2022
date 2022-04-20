@@ -8,6 +8,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="HAL_"/>
 			<item value="__HAL_SPI_ENABLE"/>
 			<item value="enable"/>
 		</list>
