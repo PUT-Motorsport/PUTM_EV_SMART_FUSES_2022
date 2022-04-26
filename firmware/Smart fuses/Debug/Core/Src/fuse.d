@@ -1,4 +1,4 @@
-Core/Src/fuse.o: ../Core/Src/fuse.cpp ../Core/Inc/fuse.h \
+Core/Src/fuse.o: ../Core/Src/fuse.cpp ../Core/Inc/fuse.hpp \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h \
  ../Core/Inc/stm32l4xx_hal_conf.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h \
@@ -74,7 +74,7 @@ Core/Src/fuse.o: ../Core/Src/fuse.cpp ../Core/Inc/fuse.h \
  ../Core/Inc/include/etl/private/../iterator.h \
  ../Core/Inc/include/etl/private/minmax_push.h \
  ../Core/Inc/include/etl/private/minmax_pop.h
-../Core/Inc/fuse.h:
+../Core/Inc/fuse.hpp:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_rcc.h:

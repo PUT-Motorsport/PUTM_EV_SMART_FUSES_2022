@@ -17,10 +17,12 @@
  */
 /*USER CODE END Header */
 /*Includes ------------------------------------------------------------------*/
+
 #include "main.h"
 #include "can.h"
 #include "spi.h"
 #include "gpio.h"
+#include "fuse.hpp"
 
 /*Private includes ----------------------------------------------------------*/
 /*USER CODE BEGIN Includes */
@@ -45,7 +47,6 @@
 #define FUSE2 GPIOA, GPIO_PIN_3
 #define FUSE3 GPIOA, GPIO_PIN_4
 
-
 /*USER CODE END PD */
 
 /*Private macro -------------------------------------------------------------*/
@@ -62,10 +63,6 @@
 
 /*spi fuse handle transmit array --------------------------------------------*/
 #define MODIFY(array, _0, _1, _2) array[0] = _0; array[1] = _1; array[2] = _2;
-
-/*some shit -----------------------------------------------------------------*/
-
-
 
 /*USER CODE END PM */
 
@@ -103,6 +100,33 @@ int main(void)
 {
 	/*USER CODE BEGIN 1 */
 
+	SmartFuseHandler<4> sf_handler;
+
+	FusesSettings fuses_settings
+	{
+		{ true, true, true, true, true, true },
+		{ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
+		{ SamplingMode::Filtered, SamplingMode::Filtered, SamplingMode::Filtered,
+		  SamplingMode::Filtered, SamplingMode::Filtered, SamplingMode::Filtered },
+		{ 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff },
+		{ { 0x0000, 0xffff },  { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff } }
+	};
+
+//	SmartFuse sf_0(GPIOA, GPIO_PIN_1, &hspi1, fuses_settings);
+//	SmartFuse sf_1(GPIOA, GPIO_PIN_2, &hspi1, fuses_settings);
+//	SmartFuse sf_2(GPIOA, GPIO_PIN_3, &hspi1, fuses_settings);
+//	SmartFuse sf_3(GPIOA, GPIO_PIN_4, &hspi1, fuses_settings);
+
+//	sf_handler.smart_fuses.push_back(&sf_0);
+//	sf_handler.smart_fuses.push_back(&sf_1);
+//	sf_handler.smart_fuses.push_back(&sf_2);
+//	sf_handler.smart_fuses.push_back(&sf_3);
+
+	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_1, &hspi1, fuses_settings);
+	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_2, &hspi1, fuses_settings);
+	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_3, &hspi1, fuses_settings);
+	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_4, &hspi1, fuses_settings);
+
 	/*USER CODE END 1 */
 
 	/*MCU Configuration--------------------------------------------------------*/
@@ -127,179 +151,15 @@ int main(void)
 	MX_SPI1_Init();
 	/*USER CODE BEGIN 2 */
 
-	HAL_GPIO_WritePin(LED_OK, RESET);
-	HAL_GPIO_WritePin(LED_WARNING1, SET);
-	HAL_GPIO_WritePin(LED_WARNING2, SET);
-	HAL_GPIO_WritePin(LED_ERROR, SET);
+	sf_handler.init_all();
 
-	HAL_Delay(2000);
-
-	uint8_t tx_data[3];
-	uint8_t rx_data[3];
-
-	const uint8_t fuse__ = 2;
-
-//	/// dummy frame
-//	MODIFY(tx_data, 0, 0, 0);
-//	calculateParityBit(tx_data);
-//	sendDataToFuse(fuse__, tx_data, rx_data);
-//
-//	//while(EMPTY_OR_RESET_STATE(rx_data)) sendDataToFuse(fuse__, tx_data, rx_data);
-//	//sendDataToFuse(fuse__, tx_data, rx_data);
-//	//HAL_Delay(0);
-//
-//	/// set unclock bit in ctrl reg
-//	MODIFY(tx_data, WRITE_RAM(0x14), 1 << 6, 0);
-//	calculateParityBit(tx_data);
-//	sendDataToFuse(fuse__, tx_data, rx_data);
-//
-//	/// set enable bit in ctrl reg
-//	MODIFY(tx_data, WRITE_RAM(0x14), 1 << 3, 0);
-//	calculateParityBit(tx_data);
-//	sendDataToFuse(fuse__, tx_data, rx_data);
-//
-//	/// read watch dog bit
-//	MODIFY(tx_data, READ_RAM(0x13), 0, 0);
-//	calculateParityBit(tx_data);
-//	sendDataToFuse(fuse__, tx_data, rx_data);
-//	uint8_t toggle = (rx_data[2] & (1 << 1)) >> 1;
-//	fuse_watch_dog.restart();
-//
-//	fuses_cotrol.restart();
-//	bool toggle_fuses = true;
-//
-//	for(int i = 0; i < 6; i++)
-//	{
-//		MODIFY(tx_data, WRITE_RAM(0x00 + i), 0x3F, 0xF0);
-//		calculateParityBit(tx_data);
-//		sendDataToFuse(fuse__, tx_data, rx_data);
-//	}
-
-//	uint16_t kek2[6];
-//
-//	for(int i = 0; i < 6; i++)
-//	{
-//		MODIFY(tx_data, READ_RAM(0x00 + i), 0x00, 0x00);
-//		calculateParityBit(tx_data);
-//		sendDataToFuse(fuse__, tx_data, rx_data);
-//		kek2[i] = uint16_t(rx_data[1]) << 8 | uint16_t(rx_data[2]);
-//	}
-
-	//volatile uint16_t a = kek2[0];
-
-//	MODIFY(tx_data, WRITE_RAM(0x10), 0xff, 0xf0);
-//	calculateParityBit(tx_data);
-//	sendDataToFuse(fuse__, tx_data, rx_data);
-
-//	MODIFY(tx_data, WRITE_RAM(0x11), 0xff, 0xf0);
-//	calculateParityBit(tx_data);
-//	sendDataToFuse(fuse__, tx_data, rx_data);
-
-//	for(int i = 0; i < 6; i++)
-//	{
-//		MODIFY(tx_data, READ_AND_CLEAR(0x20 + i), 0, 0)
-//		calculateParityBit(tx_data);
-//		sendDataToFuse(fuse__, tx_data, rx_data);
-//	}
-//
 	/*USER CODE END 2 */
 
 	/*Infinite loop */
 	/*USER CODE BEGIN WHILE */
-//
-//	while (1)
-//	{
-//		if(fuses_cotrol.getPassedTime() >= 1000)
-//		{
-//			if(toggle_fuses)
-//			{
-//				MODIFY(tx_data, READ_RAM(0x13), 0, 0)
-//				calculateParityBit(tx_data);
-//				sendDataToFuse(fuse__, tx_data, rx_data);
-//				MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1] |= 0b00111111, rx_data[2]);
-//				calculateParityBit(tx_data);
-//				sendDataToFuse(fuse__, tx_data, rx_data);
-//
-//				HAL_GPIO_WritePin(LED_WARNING2, SET);
-//
-//				fuses_cotrol.restart();
-//				toggle_fuses = false;
-//			}
-//			else
-//			{
-//				MODIFY(tx_data, READ_RAM(0x13), 0, 0)
-//				calculateParityBit(tx_data);
-//				sendDataToFuse(fuse__, tx_data, rx_data);
-//				MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1] &= ~(0b00111111), rx_data[2]);
-//				calculateParityBit(tx_data);
-//				sendDataToFuse(fuse__, tx_data, rx_data);
-//
-//				HAL_GPIO_WritePin(LED_WARNING2, RESET);
-//
-//				fuses_cotrol.restart();
-//				toggle_fuses = true;
-//			}
-//			volatile uint8_t kek[6];
-//			for(int i = 0; i < 6; i++)
-//			{
-//				MODIFY(tx_data, READ_RAM(0x20 + i), 0, 0)
-//				calculateParityBit(tx_data);
-//				sendDataToFuse(fuse__, tx_data, rx_data);
-//				kek[i] = rx_data[2];
-//			}
-//			kek[0] = kek[0];
-//		}
-//
-//		if(toggle == 1 && fuse_watch_dog.getPassedTime() >= 40)
-//		{
-//			MODIFY(tx_data, READ_RAM(0x13), 0, 0)
-//			calculateParityBit(tx_data);
-//			sendDataToFuse(fuse__, tx_data, rx_data);
-//			MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] &= ~(1 << 1));
-////			MODIFY(tx_data, WRITE_RAM(0x13), 0, 0);
-//			calculateParityBit(tx_data);
-//			sendDataToFuse(fuse__, tx_data, rx_data);
-//			fuse_watch_dog.restart();
-//
-//			toggle = 0;
-//		}
-//		else if(fuse_watch_dog.getPassedTime() >= 40)
-//		{
-//			MODIFY(tx_data, READ_RAM(0x13), 0, 0)
-//			calculateParityBit(tx_data);
-//			sendDataToFuse(fuse__, tx_data, rx_data);
-//			MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] | 1 << 1);
-////			MODIFY(tx_data, WRITE_RAM(0x13), 0, 1 << 1);
-//			calculateParityBit(tx_data);
-//			sendDataToFuse(fuse__, tx_data, rx_data);
-//			fuse_watch_dog.restart();
-//
-//			toggle = 1;
-//		}
-//
-//		MODIFY(tx_data, READ_RAM(0x13), 0, 0);
-//		calculateParityBit(tx_data);
-//		sendDataToFuse(fuse__, tx_data, rx_data);
-//		//HAL_Delay(1);
-//
-////		if(!toggle_fuses && !(rx_data[1] & 0b00111111))
-////		{
-////			HAL_GPIO_WritePin(LED_WARNING1, RESET);
-////		}
-////		if(toggle_fuses && (rx_data[1] & 0b00111111))
-////		{
-////			HAL_GPIO_WritePin(LED_WARNING1, RESET);
-////		}
-////		else HAL_GPIO_WritePin(LED_WARNING1, SET);
-//
-//		MODIFY(tx_data, READ_RAM(0x14), 0, 0);
-//		calculateParityBit(tx_data);
-//		sendDataToFuse(fuse__, tx_data, rx_data);
-//		//HAL_Delay(1);
-//
-//		if (!(rx_data[0] & (1 << 7)) ||
-//			(rx_data[0] & (1 << 5 | 1 << 4 | 1 << 3 | 1 << 2 | 1 << 1))) HAL_GPIO_WritePin(LED_WARNING1, RESET);
-//		else HAL_GPIO_WritePin(LED_WARNING1, SET);
+	while (1)
+	{
+		sf_handler.handle_all();
 		/*USER CODE END WHILE */
 
 		/*USER CODE BEGIN 3 */
@@ -317,15 +177,17 @@ void SystemClock_Config(void)
 	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
 	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
 
-	/**Configure the main internal regulator output voltage
+	/*
+	 * Configure the main internal regulator output voltage
 	 */
 	if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
 	{
 		Error_Handler();
 	}
 
-	/**Initializes the RCC Oscillators according to the specified parameters
-	 *in the RCC_OscInitTypeDef structure.
+	/*
+	 * Initializes the RCC Oscillators according to the specified parameters
+	 * in the RCC_OscInitTypeDef structure.
 	 */
 	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_MSI;
 	RCC_OscInitStruct.MSIState = RCC_MSI_ON;
@@ -434,10 +296,10 @@ void Error_Handler(void)
 {
 	/*USER CODE BEGIN Error_Handler_Debug */
 	/*User can add his own implementation to report the HAL error return state */
-	HAL_GPIO_WritePin(LED_OK, SET);
-	HAL_GPIO_WritePin(LED_WARNING1, SET);
-	HAL_GPIO_WritePin(LED_WARNING2, SET);
-	HAL_GPIO_WritePin(LED_ERROR, RESET);
+	HAL_GPIO_WritePin(LED_OK, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_WARNING1, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_WARNING2, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(LED_ERROR, GPIO_PIN_RESET);
 	__disable_irq();
 	while (1) {}
 

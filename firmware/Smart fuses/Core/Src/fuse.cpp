@@ -5,7 +5,7 @@
  *      Author: Piotr Lesicki
  */
 
-#include "fuse.h"
+#include <fuse.hpp>
 
 /*Private defines ---------------------------------------------------------------------------------------------------*/
 
@@ -14,7 +14,7 @@
 #define READ_AND_CLEAR(address)				(0b10000000 | (address))
 #define WRITE_RAM(address)					(0b00000000 | (address))
 #define RESET_SMARTFUSE()					(0b11111111)
-#define WAIT_FOR_VALID_RESPONSE(x) 			((x[0] == 0x00 && x[1] == 0x00 && x[2] == 0x00) || (x[0] & (1 << 6)))
+#define IF_RESET_STATE(x) 			((x[0] == 0x00 && x[1] == 0x00 && x[2] == 0x00) || (x[0] & (1 << 6)))
 #define MODIFY(array, x0, x1, x2) 			array[0] = x0; array[1] = x1; array[2] = x2;
 
 /*Static functions --------------------------------------------------------------------------------------------------*/
@@ -52,7 +52,7 @@ static SmartFuseState checkGSB(uint8_t gsb)
 
 /*Fuse declarations -------------------------------------------------------------------------------------------------*/
 
-Fuse::Fuse()
+SmartFuse::Fuse::Fuse()
 {
 	active = false;
 	current = 0x0000;
@@ -60,20 +60,15 @@ Fuse::Fuse()
 
 /*SmartFuse declarations --------------------------------------------------------------------------------------------*/
 
-SmartFuse::SmartFuse(const GPIO_TypeDef *port, const uint32_t pin, const SPI_HandleTypeDef *hspi, const FusesSettings *fuses_settings) :
+SmartFuse::SmartFuse(const GPIO_TypeDef *port, const uint32_t pin, const SPI_HandleTypeDef *hspi, const FusesSettings &fuses_settings) :
 					 port(port), pin(pin), hspi(hspi), fuses_settings(fuses_settings)
 {
-	this->port = port;
-	this->pin = pin;
-	this->hspi = hspi;
-	this->fuses_settings = fuses_settings;
 	this->toggle = false;
-	this->fuse_state_changed = false;
 
 	for (int i = 0; i < 6; i++)
 	{
-		this->fuses[i].clamping_currents = fuses_settings->clamping_currents[i];
-		this->fuses[i].active = fuses_settings->active[i];
+		this->fuses[i].clamping_currents = fuses_settings.clamping_currents[i];
+		this->fuses[i].active = fuses_settings.active[i];
 	}
 
 	slaveDeselect();
@@ -81,12 +76,12 @@ SmartFuse::SmartFuse(const GPIO_TypeDef *port, const uint32_t pin, const SPI_Han
 
 void SmartFuse::slaveSelect(void)
 {
-	HAL_GPIO_WritePin(this->port, this-pin, RESET);
+	HAL_GPIO_WritePin( (GPIO_TypeDef*)(this->port), this->pin, GPIO_PIN_RESET);
 }
 
 void SmartFuse::slaveDeselect(void)
 {
-	HAL_GPIO_WritePin(this->port, this-pin, SET);
+	HAL_GPIO_WritePin((GPIO_TypeDef*)(this->port), this->pin, GPIO_PIN_SET);
 }
 
 SmartFuseState SmartFuse::init(void)
@@ -95,7 +90,7 @@ SmartFuseState SmartFuse::init(void)
 	uint8_t rx_data[3] = { 0, 0, 0 };
 
 	/// reset smart fuse
-	tx_data[0] = RESET_SAMRTFUSE();
+	tx_data[0] = RESET_SMARTFUSE();
 	transmitReceiveData(tx_data, rx_data);
 
 	/// wait for smart fuse to wake up
@@ -140,7 +135,7 @@ SmartFuseState SmartFuse::init(void)
 			case SamplingMode::Continuous: tx_data[2] = 0x80; break;
 			case SamplingMode::Filtered: tx_data[2] = 0xc0; break;
 		}
-		tx_data = WRITE_RAM(0x08 + i);
+		tx_data[0] = WRITE_RAM(0x08 + i);
 		transmitReceiveData(tx_data, rx_data);
 
 		/// just in case
@@ -150,7 +145,7 @@ SmartFuseState SmartFuse::init(void)
 			transmitReceiveData(tx_data, rx_data);
 			MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] ^= (1 << 1));
 			transmitReceiveData(tx_data, rx_data);
-			fuse_watch_dog.restart();
+			this->watch_dog.restart();
 			this->toggle = !this->toggle;
 		}
 	}
@@ -191,11 +186,11 @@ SmartFuseState SmartFuse::handle(void)
 		transmitReceiveData(tx_data, rx_data);
 		MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] ^= (1 << 1));
 		transmitReceiveData(tx_data, rx_data);
-		fuse_watch_dog.restart();
+		this->watch_dog.restart();
 		this->toggle = !this->toggle;
 	}
 
-	for(int i = 0; i , 6; i++)
+	for(int i = 0; i < 6; i++)
 	{
 		tx_data[0] = READ_RAM(0x28 + i);
 		transmitReceiveData(tx_data, rx_data);
@@ -206,11 +201,35 @@ SmartFuseState SmartFuse::handle(void)
 	return this->state;
 }
 
+
+SmartFuseState SmartFuse::handle_timer(void)
+{
+	uint8_t tx_data[3] = { 0, 0, 0 };
+	uint8_t rx_data[3] = { 0, 0, 0 };
+
+	if(watch_dog.getPassedTime() >= 30)
+	{
+		tx_data[0] = READ_RAM(0x13);
+		transmitReceiveData(tx_data, rx_data);
+		MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] ^= (1 << 1));
+		transmitReceiveData(tx_data, rx_data);
+		this->watch_dog.restart();
+		this->toggle = !this->toggle;
+	}
+
+	this->state = checkGSB(rx_data[0]);
+	return this->state;
+}
+
 SmartFuseState SmartFuse::setFuseDutyCykle(FuseNumber fuse, uint16_t duty_cykle)
 {
-	uint8_t hbit = uint8_t(this->fuse_settings->duty_cykle[i] >> 8);
-	uint8_t lbit = uint8_t(this->fuse_settings->duty_cykle[i] << 4) | this->toggle << 1;
-	MODIFY(tx_data, WRITE_RAM(0x00 + fuse), hbit, lbit);
+	uint8_t hbit = uint8_t(duty_cykle >> 8);
+	uint8_t lbit = uint8_t(duty_cykle << 4) | this->toggle << 1;
+
+	uint8_t tx_data[3];
+	uint8_t rx_data[3];
+
+	MODIFY(tx_data, WRITE_RAM(0x00 + int(fuse)), hbit, lbit);
 	transmitReceiveData(tx_data, rx_data);
 
 	this->state = checkGSB(rx_data[0]);
@@ -222,7 +241,7 @@ SmartFuseState SmartFuse::activeFuse(FuseNumber fuse)
 	uint8_t tx_data[3] = { 0, 0, 0 };
 	uint8_t rx_data[3] = { 0, 0, 0 };
 
-	this->fuses[fuse].active = true;
+	this->fuses[int(fuse)].active = true;
 
 	for(int i = 0; i < 6; i++)
 		tx_data[1] |= this->fuses[i].active << i;
@@ -230,7 +249,7 @@ SmartFuseState SmartFuse::activeFuse(FuseNumber fuse)
 	tx_data[0] = WRITE_RAM(0x13);
 	transmitReceiveData(tx_data, rx_data);
 
-	this->state = checkGSB(rx_data);
+	this->state = checkGSB(rx_data[0]);
 	return this->state;
 }
 
@@ -239,7 +258,7 @@ SmartFuseState SmartFuse::deactivateFuse(FuseNumber fuse)
 	uint8_t tx_data[3] = { 0, 0, 0 };
 	uint8_t rx_data[3];
 
-	this->fuses[fuse].active = false;
+	this->fuses[int(fuse)].active = false;
 
 	for(int i = 0; i < 6; i++)
 		tx_data[1] |= this->fuses[i].active << i;
@@ -247,7 +266,7 @@ SmartFuseState SmartFuse::deactivateFuse(FuseNumber fuse)
 	tx_data[0] = WRITE_RAM(0x13);
 	transmitReceiveData(tx_data, rx_data);
 
-	this->state = checkGSB(rx_data);
+	this->state = checkGSB(rx_data[0]);
 	return this->state;
 }
 
@@ -258,12 +277,12 @@ SmartFuseState SmartFuse::activeAllFuses(void)
 
 	for(int i = 0; i < 6; i++)
 		this->fuses[i].active = true;
-	tx_data[1] |= 0x3f;
+	tx_data[1] = 0x3f;
 	tx_data[2] = this->toggle << 1;
 	tx_data[0] = WRITE_RAM(0x13);
 	transmitReceiveData(tx_data, rx_data);
 
-	this->state = checkGSB(rx_data);
+	this->state = checkGSB(rx_data[0]);
 	return this->state;
 }
 
@@ -279,7 +298,7 @@ SmartFuseState SmartFuse::deactivateAllFuses(void)
 	tx_data[0] = WRITE_RAM(0x13);
 	transmitReceiveData(tx_data, rx_data);
 
-	this->state = checkGSB(rx_data);
+	this->state = checkGSB(rx_data[0]);
 	return this->state;
 }
 
@@ -319,10 +338,28 @@ void SmartFuse::transmitReceiveData(uint8_t *tx_data, uint8_t *rx_data)
 }
 
 template <int num_of_sf>
-bool SmartFuseHandler<num_of_sf>::handle(void)
+bool SmartFuseHandler<num_of_sf>::handle_all()
 {
-	bool result;
+	bool result = false;
 
-	for(auto smart_fuse = this->smart_fuses.begin(); fuse != this->smart_fuses.end(); smart_fuse++)
-		if(smart_fuse->handle() != SmartFuseState::Ok) result = false;
+	for(auto smart_fuse : smart_fuses)
+		if(smart_fuse.handle() != SmartFuseState::Ok) result = true;
+
+	return result;
 }
+
+template <int num_of_sf>
+bool SmartFuseHandler<num_of_sf>::init_all()
+{
+	bool result = false;
+
+	for(auto smart_fuse : smart_fuses)
+	{
+		for(auto sf = this->smart_fuses.begin(); sf != &smart_fuse; ++sf)
+			sf->handle_timer();
+		if(smart_fuse.init() != SmartFuseState::Ok) result = true;
+	}
+
+	return result;
+}
+

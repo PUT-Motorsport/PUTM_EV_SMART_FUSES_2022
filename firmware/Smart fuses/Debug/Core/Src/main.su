@@ -1,9 +1,4 @@
-../Core/Src/main.cpp:358:6:void selectFuse(int)	8	static
-../Core/Src/main.cpp:366:6:void deselectAllFuses()	8	static
-../Core/Src/main.cpp:375:6:void transferReceive(uint8_t*, uint8_t*)	0	static
-../Core/Src/main.cpp:383:6:void sendDataToFuse(uint8_t, uint8_t*, uint8_t*)	16	static
-../Core/Src/main.cpp:408:6:void calculateParityBit(uint8_t*)	12	static
-../Core/Src/main.cpp:434:6:void Error_Handler()	8	static,ignoring_inline_asm
-../Core/Src/main.cpp:316:6:void SystemClock_Config()	104	static
-../Core/Src/main.cpp:103:5:int main()	48	static
-../Core/Src/main.cpp:446:1:cpp)	8	static
+../Core/Src/main.cpp:295:6:void Error_Handler()	8	static,ignoring_inline_asm
+../Core/Src/main.cpp:175:6:void SystemClock_Config()	104	static
+../Core/Src/main.cpp:99:5:int main()	600	static
+../Core/Src/main.cpp:307:1:cpp)	8	static

@@ -5,8 +5,8 @@
  *      Author: Piotr Lesicki
  */
 
-#ifndef INC_FUSE_H_
-#define INC_FUSE_H_
+#ifndef INC_FUSE_HPP_
+#define INC_FUSE_HPP_
 
 #include "stm32l4xx_hal.h"
 #include "spi.h"
@@ -21,7 +21,7 @@
 
 //using namespace etl;
 
-enum struct SmartFuseState
+enum struct SmartFuseState : uint8_t
 {
 	Ok,
 	ResetState,
@@ -47,7 +47,7 @@ enum struct SmartFuseState
 	NotResponding,
 };
 
-enum struct SamplingMode
+enum struct SamplingMode : uint8_t
 {
 	Stop,
 	Start,
@@ -95,17 +95,17 @@ struct FusesSettings
 	 * clamping currents of respective fuses
 	 * first is the bottom clamp and second is the upper clamp
 	 */
-	pair<uint16_t, uint16_t> clamping_currents[6];
+	etl::pair<uint16_t, uint16_t> clamping_currents[6];
 
 	/*
 	 * there is more but this much is enough for now
 	 */
 };
 
-class SmartFuse final
+class SmartFuse
 {
 	public:
-		SmartFuse(const GPIO_TypeDef *port, const uint32_t pin, const SPI_HandleTypeDef *hspi, const FusesSettings fuses_settings);
+		SmartFuse(const GPIO_TypeDef *port, const uint32_t pin, const SPI_HandleTypeDef *hspi, const FusesSettings &fuses_settings);
 
 		SmartFuseState activeFuse(FuseNumber fuse);
 		SmartFuseState deactivateFuse(FuseNumber fuse);
@@ -116,13 +116,29 @@ class SmartFuse final
 
 		SmartFuseState init(void);
 		SmartFuseState handle(void);
+		SmartFuseState handle_timer(void);
 
 		SmartFuseState setFuseDutyCykle(FuseNumber fuse, uint16_t duty_cykle);
 
 		SmartFuseState getSmartFuseState(void);
 
 	private:
-		struct Fuse;
+		/*
+		 * helps the management of fuses
+		 */
+		struct Fuse
+		{
+			Fuse();
+
+			bool active;
+
+			uint16_t current;
+
+			/*
+			 * clamping currents
+			 */
+			etl::pair<uint16_t, uint16_t> clamping_currents;
+		};
 
 		/*
 		 * smart fuse has a watch dog timer toggle bit which needs to be toggled within
@@ -140,11 +156,11 @@ class SmartFuse final
 
 		Fuse fuses[6];
 
-		const GPIO_TypeDef *port;
+		const GPIO_TypeDef * const port;
 
-		const SPI_HandleTypeDef *hspi;
+		const SPI_HandleTypeDef  *hspi;
 
-		constexpr FusesSettings fuses_settings;
+		const FusesSettings fuses_settings;
 
 		Timer watch_dog;
 
@@ -154,38 +170,24 @@ class SmartFuse final
 		void slaveDeselect();
 		void transmitReceiveData(uint8_t *tx_data, uint8_t *rx_data);
 
-		/*
-		 * helps the management of fuses
-		 */
-		struct Fuse
-		{
-			Fuse();
 
-			bool active;
-
-			uint16_t current;
-
-			/*
-			 * clamping currents
-			 */
-			etl::pair<uint16_t, uint16_t> clamping_currents;
-		};
 };
 
 template <int num_of_sf>
-class SmartFuseHandler final
+class SmartFuseHandler
 {
 	public:
-		etl::vector<SmartFuse*, num_of_sf> smart_fuses;
+		etl::vector<SmartFuse, num_of_sf> smart_fuses;
 
 		/*
-		 * true - if ok
-		 * false - if not ok
+		 * false - if ok
+		 * true - if not ok
 		 */
-		bool handle(void);
-
-	private:
+		bool handle_all();
+		bool init_all();
 
 };
 
-#endif /* INC_FUSE_H_ */
+template class SmartFuseHandler<4>;
+
+#endif /* INC_FUSE_HPP_ */
