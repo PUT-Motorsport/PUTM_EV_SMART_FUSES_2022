@@ -10,7 +10,7 @@
 
 ///quality of life
 #define delay(x) HAL_Delay(x);
-#define writePin(x, y, z) HAL_GPIO_WritePin(x, y, z)
+//#define writePin(x, y, z) HAL_GPIO_WritePin(x, y, z)
 
 #define SET GPIO_PIN_SET
 #define RESET GPIO_PIN_RESET

@@ -82,11 +82,11 @@ Timer fuses_cotrol;
 void SystemClock_Config(void);
 /*USER CODE BEGIN PFP */
 
-void selectFuse(int num);
-void deselectAllFuses();
+//void selectFuse(int num);
+//void deselectAllFuses();
 
-void sendDataToFuse(uint8_t, uint8_t *, uint8_t *);
-void calculateParityBit(uint8_t*);
+//void sendDataToFuse(uint8_t, uint8_t *, uint8_t *);
+//void calculateParityBit(uint8_t*);
 
 /*USER CODE END PFP */
 
@@ -139,35 +139,35 @@ int main(void)
 
 	const uint8_t fuse__ = 2;
 
-	/// dummy frame
-	MODIFY(tx_data, 0, 0, 0);
-	calculateParityBit(tx_data);
-	sendDataToFuse(fuse__, tx_data, rx_data);
-
-	//while(EMPTY_OR_RESET_STATE(rx_data)) sendDataToFuse(fuse__, tx_data, rx_data);
-	//sendDataToFuse(fuse__, tx_data, rx_data);
-	//HAL_Delay(0);
-
-	/// set unclock bit in ctrl reg
-	MODIFY(tx_data, WRITE_RAM(0x14), 1 << 6, 0);
-	calculateParityBit(tx_data);
-	sendDataToFuse(fuse__, tx_data, rx_data);
-
-	/// set enable bit in ctrl reg
-	MODIFY(tx_data, WRITE_RAM(0x14), 1 << 3, 0);
-	calculateParityBit(tx_data);
-	sendDataToFuse(fuse__, tx_data, rx_data);
-
-	/// read watch dog bit
-	MODIFY(tx_data, READ_RAM(0x13), 0, 0);
-	calculateParityBit(tx_data);
-	sendDataToFuse(fuse__, tx_data, rx_data);
-	uint8_t toggle = (rx_data[2] & (1 << 1)) >> 1;
-	fuse_watch_dog.restart();
-
-	fuses_cotrol.restart();
-	bool toggle_fuses = true;
-
+//	/// dummy frame
+//	MODIFY(tx_data, 0, 0, 0);
+//	calculateParityBit(tx_data);
+//	sendDataToFuse(fuse__, tx_data, rx_data);
+//
+//	//while(EMPTY_OR_RESET_STATE(rx_data)) sendDataToFuse(fuse__, tx_data, rx_data);
+//	//sendDataToFuse(fuse__, tx_data, rx_data);
+//	//HAL_Delay(0);
+//
+//	/// set unclock bit in ctrl reg
+//	MODIFY(tx_data, WRITE_RAM(0x14), 1 << 6, 0);
+//	calculateParityBit(tx_data);
+//	sendDataToFuse(fuse__, tx_data, rx_data);
+//
+//	/// set enable bit in ctrl reg
+//	MODIFY(tx_data, WRITE_RAM(0x14), 1 << 3, 0);
+//	calculateParityBit(tx_data);
+//	sendDataToFuse(fuse__, tx_data, rx_data);
+//
+//	/// read watch dog bit
+//	MODIFY(tx_data, READ_RAM(0x13), 0, 0);
+//	calculateParityBit(tx_data);
+//	sendDataToFuse(fuse__, tx_data, rx_data);
+//	uint8_t toggle = (rx_data[2] & (1 << 1)) >> 1;
+//	fuse_watch_dog.restart();
+//
+//	fuses_cotrol.restart();
+//	bool toggle_fuses = true;
+//
 //	for(int i = 0; i < 6; i++)
 //	{
 //		MODIFY(tx_data, WRITE_RAM(0x00 + i), 0x3F, 0xF0);
@@ -201,105 +201,105 @@ int main(void)
 //		calculateParityBit(tx_data);
 //		sendDataToFuse(fuse__, tx_data, rx_data);
 //	}
-
+//
 	/*USER CODE END 2 */
 
 	/*Infinite loop */
 	/*USER CODE BEGIN WHILE */
-
-	while (1)
-	{
-		if(fuses_cotrol.getPassedTime() >= 1000)
-		{
-			if(toggle_fuses)
-			{
-				MODIFY(tx_data, READ_RAM(0x13), 0, 0)
-				calculateParityBit(tx_data);
-				sendDataToFuse(fuse__, tx_data, rx_data);
-				MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1] |= 0b00111111, rx_data[2]);
-				calculateParityBit(tx_data);
-				sendDataToFuse(fuse__, tx_data, rx_data);
-
-				HAL_GPIO_WritePin(LED_WARNING2, SET);
-
-				fuses_cotrol.restart();
-				toggle_fuses = false;
-			}
-			else
-			{
-				MODIFY(tx_data, READ_RAM(0x13), 0, 0)
-				calculateParityBit(tx_data);
-				sendDataToFuse(fuse__, tx_data, rx_data);
-				MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1] &= ~(0b00111111), rx_data[2]);
-				calculateParityBit(tx_data);
-				sendDataToFuse(fuse__, tx_data, rx_data);
-
-				HAL_GPIO_WritePin(LED_WARNING2, RESET);
-
-				fuses_cotrol.restart();
-				toggle_fuses = true;
-			}
-			volatile uint8_t kek[6];
-			for(int i = 0; i < 6; i++)
-			{
-				MODIFY(tx_data, READ_RAM(0x20 + i), 0, 0)
-				calculateParityBit(tx_data);
-				sendDataToFuse(fuse__, tx_data, rx_data);
-				kek[i] = rx_data[2];
-			}
-			kek[0] = kek[0];
-		}
-
-		if(toggle == 1 && fuse_watch_dog.getPassedTime() >= 40)
-		{
-			MODIFY(tx_data, READ_RAM(0x13), 0, 0)
-			calculateParityBit(tx_data);
-			sendDataToFuse(fuse__, tx_data, rx_data);
-			MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] &= ~(1 << 1));
-//			MODIFY(tx_data, WRITE_RAM(0x13), 0, 0);
-			calculateParityBit(tx_data);
-			sendDataToFuse(fuse__, tx_data, rx_data);
-			fuse_watch_dog.restart();
-
-			toggle = 0;
-		}
-		else if(fuse_watch_dog.getPassedTime() >= 40)
-		{
-			MODIFY(tx_data, READ_RAM(0x13), 0, 0)
-			calculateParityBit(tx_data);
-			sendDataToFuse(fuse__, tx_data, rx_data);
-			MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] | 1 << 1);
-//			MODIFY(tx_data, WRITE_RAM(0x13), 0, 1 << 1);
-			calculateParityBit(tx_data);
-			sendDataToFuse(fuse__, tx_data, rx_data);
-			fuse_watch_dog.restart();
-
-			toggle = 1;
-		}
-
-		MODIFY(tx_data, READ_RAM(0x13), 0, 0);
-		calculateParityBit(tx_data);
-		sendDataToFuse(fuse__, tx_data, rx_data);
-		//HAL_Delay(1);
-
-//		if(!toggle_fuses && !(rx_data[1] & 0b00111111))
+//
+//	while (1)
+//	{
+//		if(fuses_cotrol.getPassedTime() >= 1000)
 //		{
-//			HAL_GPIO_WritePin(LED_WARNING1, RESET);
+//			if(toggle_fuses)
+//			{
+//				MODIFY(tx_data, READ_RAM(0x13), 0, 0)
+//				calculateParityBit(tx_data);
+//				sendDataToFuse(fuse__, tx_data, rx_data);
+//				MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1] |= 0b00111111, rx_data[2]);
+//				calculateParityBit(tx_data);
+//				sendDataToFuse(fuse__, tx_data, rx_data);
+//
+//				HAL_GPIO_WritePin(LED_WARNING2, SET);
+//
+//				fuses_cotrol.restart();
+//				toggle_fuses = false;
+//			}
+//			else
+//			{
+//				MODIFY(tx_data, READ_RAM(0x13), 0, 0)
+//				calculateParityBit(tx_data);
+//				sendDataToFuse(fuse__, tx_data, rx_data);
+//				MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1] &= ~(0b00111111), rx_data[2]);
+//				calculateParityBit(tx_data);
+//				sendDataToFuse(fuse__, tx_data, rx_data);
+//
+//				HAL_GPIO_WritePin(LED_WARNING2, RESET);
+//
+//				fuses_cotrol.restart();
+//				toggle_fuses = true;
+//			}
+//			volatile uint8_t kek[6];
+//			for(int i = 0; i < 6; i++)
+//			{
+//				MODIFY(tx_data, READ_RAM(0x20 + i), 0, 0)
+//				calculateParityBit(tx_data);
+//				sendDataToFuse(fuse__, tx_data, rx_data);
+//				kek[i] = rx_data[2];
+//			}
+//			kek[0] = kek[0];
 //		}
-//		if(toggle_fuses && (rx_data[1] & 0b00111111))
+//
+//		if(toggle == 1 && fuse_watch_dog.getPassedTime() >= 40)
 //		{
-//			HAL_GPIO_WritePin(LED_WARNING1, RESET);
+//			MODIFY(tx_data, READ_RAM(0x13), 0, 0)
+//			calculateParityBit(tx_data);
+//			sendDataToFuse(fuse__, tx_data, rx_data);
+//			MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] &= ~(1 << 1));
+////			MODIFY(tx_data, WRITE_RAM(0x13), 0, 0);
+//			calculateParityBit(tx_data);
+//			sendDataToFuse(fuse__, tx_data, rx_data);
+//			fuse_watch_dog.restart();
+//
+//			toggle = 0;
 //		}
+//		else if(fuse_watch_dog.getPassedTime() >= 40)
+//		{
+//			MODIFY(tx_data, READ_RAM(0x13), 0, 0)
+//			calculateParityBit(tx_data);
+//			sendDataToFuse(fuse__, tx_data, rx_data);
+//			MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] | 1 << 1);
+////			MODIFY(tx_data, WRITE_RAM(0x13), 0, 1 << 1);
+//			calculateParityBit(tx_data);
+//			sendDataToFuse(fuse__, tx_data, rx_data);
+//			fuse_watch_dog.restart();
+//
+//			toggle = 1;
+//		}
+//
+//		MODIFY(tx_data, READ_RAM(0x13), 0, 0);
+//		calculateParityBit(tx_data);
+//		sendDataToFuse(fuse__, tx_data, rx_data);
+//		//HAL_Delay(1);
+//
+////		if(!toggle_fuses && !(rx_data[1] & 0b00111111))
+////		{
+////			HAL_GPIO_WritePin(LED_WARNING1, RESET);
+////		}
+////		if(toggle_fuses && (rx_data[1] & 0b00111111))
+////		{
+////			HAL_GPIO_WritePin(LED_WARNING1, RESET);
+////		}
+////		else HAL_GPIO_WritePin(LED_WARNING1, SET);
+//
+//		MODIFY(tx_data, READ_RAM(0x14), 0, 0);
+//		calculateParityBit(tx_data);
+//		sendDataToFuse(fuse__, tx_data, rx_data);
+//		//HAL_Delay(1);
+//
+//		if (!(rx_data[0] & (1 << 7)) ||
+//			(rx_data[0] & (1 << 5 | 1 << 4 | 1 << 3 | 1 << 2 | 1 << 1))) HAL_GPIO_WritePin(LED_WARNING1, RESET);
 //		else HAL_GPIO_WritePin(LED_WARNING1, SET);
-
-		MODIFY(tx_data, READ_RAM(0x14), 0, 0);
-		calculateParityBit(tx_data);
-		sendDataToFuse(fuse__, tx_data, rx_data);
-		//HAL_Delay(1);
-
-		if (!(rx_data[0] & (1 << 7)) ||
-			(rx_data[0] & (1 << 5 | 1 << 4 | 1 << 3 | 1 << 2 | 1 << 1))) HAL_GPIO_WritePin(LED_WARNING1, RESET);
-		else HAL_GPIO_WritePin(LED_WARNING1, SET);
 		/*USER CODE END WHILE */
 
 		/*USER CODE BEGIN 3 */
@@ -354,75 +354,75 @@ void SystemClock_Config(void)
 
 /*USER CODE BEGIN 4 */
 
-void selectFuse(int num)
-{
-	HAL_GPIO_WritePin(FUSE0, (num == 1 ? RESET : SET));
-	HAL_GPIO_WritePin(FUSE1, (num == 2 ? RESET : SET));
-	HAL_GPIO_WritePin(FUSE2, (num == 3 ? RESET : SET));
-	HAL_GPIO_WritePin(FUSE3, (num == 4 ? RESET : SET));
-}
+//void selectFuse(int num)
+//{
+//	HAL_GPIO_WritePin(FUSE0, (num == 1 ? RESET : SET));
+//	HAL_GPIO_WritePin(FUSE1, (num == 2 ? RESET : SET));
+//	HAL_GPIO_WritePin(FUSE2, (num == 3 ? RESET : SET));
+//	HAL_GPIO_WritePin(FUSE3, (num == 4 ? RESET : SET));
+//}
 
-void deselectAllFuses()
-{
-	HAL_GPIO_WritePin(FUSE0, SET);
-	HAL_GPIO_WritePin(FUSE1, SET);
-	HAL_GPIO_WritePin(FUSE2, SET);
-	HAL_GPIO_WritePin(FUSE3, SET);
-	//HAL_Delay(100);
-}
+//void deselectAllFuses()
+//{
+//	HAL_GPIO_WritePin(FUSE0, SET);
+//	HAL_GPIO_WritePin(FUSE1, SET);
+//	HAL_GPIO_WritePin(FUSE2, SET);
+//	HAL_GPIO_WritePin(FUSE3, SET);
+//	//HAL_Delay(100);
+//}
 
-void transferReceive(uint8_t *tx_data, uint8_t *rx_data)
-{
-	while(!__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_TXE));
-	*(__IO uint8_t *) &(&hspi1)->Instance->DR = (*tx_data);
-	while(!__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_RXNE));
-	(*(uint8_t*) rx_data) = *(__IO uint8_t *) &(&hspi1)->Instance->DR;
-}
+//void transferReceive(uint8_t *tx_data, uint8_t *rx_data)
+//{
+//	while(!__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_TXE));
+//	*(__IO uint8_t *) &(&hspi1)->Instance->DR = (*tx_data);
+//	while(!__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_RXNE));
+//	(*(uint8_t*) rx_data) = *(__IO uint8_t *) &(&hspi1)->Instance->DR;
+//}
 
-void sendDataToFuse(uint8_t fuse, uint8_t *tx_data, uint8_t *rx_data)
-{
-	/// just check
-	if (((&hspi1)->Instance->CR1 &SPI_CR1_SPE) != SPI_CR1_SPE) __HAL_SPI_ENABLE(&hspi1);
+//void sendDataToFuse(uint8_t fuse, uint8_t *tx_data, uint8_t *rx_data)
+//{
+//	/// just check
+//	if (((&hspi1)->Instance->CR1 &SPI_CR1_SPE) != SPI_CR1_SPE) __HAL_SPI_ENABLE(&hspi1);
+//
+//	selectFuse(fuse);
+//	for (uint8_t tx = 0, rx = 0; tx < 3 || rx < 3;)
+//	{
+//		if (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_RXNE) && rx < 3)
+//		{
+//			(*(uint8_t*) rx_data) = *(__IO uint8_t *) &(&hspi1)->Instance->DR;
+//			rx_data++;
+//			rx++;
+//		}
+//
+//		if (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_TXE) && tx < 3)
+//		{
+//			*(__IO uint8_t *) &(&hspi1)->Instance->DR = (*tx_data);
+//			tx_data++;
+//			tx++;
+//		}
+//	}
+//	deselectAllFuses();
+//}
 
-	selectFuse(fuse);
-	for (uint8_t tx = 0, rx = 0; tx < 3 || rx < 3;)
-	{
-		if (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_RXNE) && rx < 3)
-		{
-			(*(uint8_t*) rx_data) = *(__IO uint8_t *) &(&hspi1)->Instance->DR;
-			rx_data++;
-			rx++;
-		}
-
-		if (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_TXE) && tx < 3)
-		{
-			*(__IO uint8_t *) &(&hspi1)->Instance->DR = (*tx_data);
-			tx_data++;
-			tx++;
-		}
-	}
-	deselectAllFuses();
-}
-
-void calculateParityBit(uint8_t* x)
-{
-	///clear parity bit
-	*(x + 2) &= ~(1 << 0);
-
-	uint8_t num_of_bits = 0;
-	for (int i = 0; i < 3; i++)
-	{
-		uint8_t bit = *(x + i);
-		for (int j = 0; j < 8; j++)
-		{
-			if (bit & (1 << j)) num_of_bits++;
-		}
-	}
-	if(num_of_bits % 2 == 0 )
-	{
-		*(x + 2) |= (1 << 0);
-	}
-}
+//void calculateParityBit(uint8_t* x)
+//{
+//	///clear parity bit
+//	*(x + 2) &= ~(1 << 0);
+//
+//	uint8_t num_of_bits = 0;
+//	for (int i = 0; i < 3; i++)
+//	{
+//		uint8_t bit = *(x + i);
+//		for (int j = 0; j < 8; j++)
+//		{
+//			if (bit & (1 << j)) num_of_bits++;
+//		}
+//	}
+//	if(num_of_bits % 2 == 0 )
+//	{
+//		*(x + 2) |= (1 << 0);
+//	}
+//}
 
 /*USER CODE END 4 */
 

@@ -2,7 +2,7 @@
  * fuse.h
  *
  *  Created on: 7 kwi 2022
- *      Author: pile
+ *      Author: Piotr Lesicki
  */
 
 #ifndef INC_FUSE_H_
@@ -13,22 +13,41 @@
 #include "timer.h"
 #include "include/etl/vector.h"
 
-using namespace etl;
+/*
+ * checks n number of times for fuse, the number shouldn't be too big
+ * commonly VN100..afasdfhas sth responds relatively fast
+ */
+#define FUSE_TIMEOUT 6
 
-enum FuseControlerState
+//using namespace etl;
+
+enum struct SmartFuseState
 {
 	Ok,
 	ResetState,
 	SPIError,
+	/*
+	 * over temperature event +
+	 * power limitation event +
+	 * VDS mask idk what it is xd
+	 */
 	OTPLVDS,
 	TempFail,
 	LatchOff,
+	/*
+	 * open load event  +
+	 * shorted to ground
+	 */
 	OLOFF,
+	/*
+	 * device enters FailSafe on start up or when watch dog is
+	 * failed to be toggled within 30 ms to 70 ms
+	 */
 	FailSafe,
-	TargetDoesntRespond,
+	NotResponding,
 };
 
-enum SamplingMode
+enum struct SamplingMode
 {
 	Stop,
 	Start,
@@ -36,12 +55,22 @@ enum SamplingMode
 	Filtered
 };
 
+enum struct FuseNumber : uint8_t
+{
+	f0,
+	f1,
+	f2,
+	f3,
+	f4,
+	f5
+};
+
 struct FusesSettings
 {
 	bool active[6];
 
 	/*
-	 * how long it takes for latch-off event to reset to latch on
+	 * how long it takes for latch-off event to reset to latch-on
 	 * 0x0 - stays latched off
 	 * 0x1 / 0xF - 16ms to 240 ms
 	 */
@@ -58,7 +87,7 @@ struct FusesSettings
 
 	/*
 	 * PWM duty cykle:
-	 * 0 / 1023 - 0% to 100% fill
+	 * 0 to 1023 - 0% to 100% fill
 	 */
 	uint16_t duty_cykle[6];
 
@@ -76,47 +105,54 @@ struct FusesSettings
 class SmartFuse final
 {
 	public:
-		SmartFuse(GPIO_TypeDef *port, uint32_t pin, SPI_HandleTypeDef *hspi, FusesSettings& fuses_settings);
+		SmartFuse(const GPIO_TypeDef *port, const uint32_t pin, const SPI_HandleTypeDef *hspi, const FusesSettings fuses_settings);
 
-		void init(void);
-		void handle(void);
-		//void setClampingCurrent(uint16_t bottom, uint16_t up);
+		SmartFuseState activeFuse(FuseNumber fuse);
+		SmartFuseState deactivateFuse(FuseNumber fuse);
+		SmartFuseState activeAllFuses(void);
+		SmartFuseState deactivateAllFuses(void);
 
-		void setFuseDutyCykle(uint8_t fuse, uint16_t duty_cykle);
-		void activeFuse(uint8_t fuse);
-		void deactivateFuse(uint8_t fuse);
+		uint16_t readFuseCurrent(FuseNumber fuse);
 
-		void activeAllFuses();
-		void deactivateAllFuses();
+		SmartFuseState init(void);
+		SmartFuseState handle(void);
 
-		uint16_t readFuseCurrent(uint8_t fuse);
+		SmartFuseState setFuseDutyCykle(FuseNumber fuse, uint16_t duty_cykle);
 
-		uint16_t readAllFusesCurrent();
-
-		FuseControlerState getSmartFuseState();
+		SmartFuseState getSmartFuseState(void);
 
 	private:
+		struct Fuse;
+
+		/*
+		 * smart fuse has a watch dog timer toggle bit which needs to be toggled within
+		 * a certain amount of time
+		 */
+		bool toggle;
+
 		/*
 		 * global state bit
 		 * is read at each spi communication
 		 */
 		uint8_t last_gsb;
 
-		/*
-		 * clamping currents
-		 */
+		const uint32_t pin;
 
-		uint32_t pin;
+		Fuse fuses[6];
 
-		vector<Fuse, 6> fuse;
+		const GPIO_TypeDef *port;
 
-		GPIO_TypeDef *port;
+		const SPI_HandleTypeDef *hspi;
 
-		SPI_HandleTypeDef *hspi;
+		constexpr FusesSettings fuses_settings;
 
 		Timer watch_dog;
 
-		FuseControlerState fuse_state;
+		SmartFuseState state;
+
+		void slaveSelect();
+		void slaveDeselect();
+		void transmitReceiveData(uint8_t *tx_data, uint8_t *rx_data);
 
 		/*
 		 * helps the management of fuses
@@ -129,18 +165,27 @@ class SmartFuse final
 
 			uint16_t current;
 
-			pair<uint16_t, uint16_t> clamping_currents;
+			/*
+			 * clamping currents
+			 */
+			etl::pair<uint16_t, uint16_t> clamping_currents;
 		};
 };
 
-template <int num_of_fuse_controlers>
+template <int num_of_sf>
 class SmartFuseHandler final
 {
 	public:
-		vector<SmartFuse*, num_of_fuse_controlers> fuses;
+		etl::vector<SmartFuse*, num_of_sf> smart_fuses;
 
-		void handle(void);
+		/*
+		 * true - if ok
+		 * false - if not ok
+		 */
+		bool handle(void);
+
 	private:
+
 };
 
 #endif /* INC_FUSE_H_ */
