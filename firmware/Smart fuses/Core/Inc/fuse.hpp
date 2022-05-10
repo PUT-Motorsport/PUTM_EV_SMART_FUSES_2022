@@ -3,6 +3,18 @@
  *
  *  Created on: 7 kwi 2022
  *      Author: Piotr Lesicki
+ *
+ *			================================================
+ *  		||  ABC of fuses library with PUT Motosport   ||
+ *  		================================================
+ *
+ *  1. 	Unfortunately compiler for some reasons can mess up template compiling
+ *  	so it became a necessity to hint compiler in the hpp file what types of templates
+ *  	we need - at the bottom of this file there is a hinting section.
+ *
+ *  2.	Most of values have their explanation in place so definitely check those.
+ *
+ *  3.	Fuses use a handler object, which handles all fuses, which needs to be called. It became a
  */
 
 #ifndef INC_FUSE_HPP_
@@ -105,7 +117,7 @@ struct FusesSettings
 class SmartFuse
 {
 	public:
-		SmartFuse(const GPIO_TypeDef *port, const uint32_t pin, const SPI_HandleTypeDef *hspi, const FusesSettings &fuses_settings);
+		SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef *const hspi, const FusesSettings &fuses_settings);
 
 		SmartFuseState activeFuse(FuseNumber fuse);
 		SmartFuseState deactivateFuse(FuseNumber fuse);
@@ -158,7 +170,7 @@ class SmartFuse
 
 		const GPIO_TypeDef * const port;
 
-		const SPI_HandleTypeDef  *hspi;
+		const SPI_HandleTypeDef * const hspi;
 
 		const FusesSettings fuses_settings;
 
@@ -180,14 +192,18 @@ class SmartFuseHandler
 		etl::vector<SmartFuse, num_of_sf> smart_fuses;
 
 		/*
-		 * false - if ok
-		 * true - if not ok
+		 * false - if not ok
+		 * true - if ok
 		 */
 		bool handle_all();
 		bool init_all();
-
 };
 
+/*
+ * template hinting section
+ */
+
+/// hinting compiler that we need this template couse it wouldn't work without it
 template class SmartFuseHandler<4>;
 
 #endif /* INC_FUSE_HPP_ */

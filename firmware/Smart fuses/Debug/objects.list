@@ -1,5 +1,6 @@
 "./Core/Src/can.o"
 "./Core/Src/fuse.o"
+"./Core/Src/gpio elements.o"
 "./Core/Src/gpio.o"
 "./Core/Src/main.o"
 "./Core/Src/spi.o"

@@ -22,12 +22,13 @@
 #include "can.h"
 #include "spi.h"
 #include "gpio.h"
-#include "fuse.hpp"
 
 /*Private includes ----------------------------------------------------------*/
 /*USER CODE BEGIN Includes */
 #include "stm32l4xx_hal_spi.h"
 #include "timer.h"
+#include "fuse.hpp"
+#include "gpio elements.hpp"
 
 /*USER CODE END Includes */
 
@@ -42,27 +43,11 @@
 #define LED_WARNING1 GPIOC, GPIO_PIN_1
 #define LED_WARNING2 GPIOC, GPIO_PIN_2
 #define LED_ERROR GPIOC, GPIO_PIN_3
-#define FUSE0 GPIOA, GPIO_PIN_1
-#define FUSE1 GPIOA, GPIO_PIN_2
-#define FUSE2 GPIOA, GPIO_PIN_3
-#define FUSE3 GPIOA, GPIO_PIN_4
 
 /*USER CODE END PD */
 
 /*Private macro -------------------------------------------------------------*/
 /*USER CODE BEGIN PM */
-
-/*spi fuse command bits -----------------------------------------------------*/
-#define READ_ROM(address)(0b11000000 | (address))
-#define READ_RAM(address)(0b01000000 | (address))
-#define READ_AND_CLEAR(address)(0b10000000 | (address))
-#define WRITE_RAM(address)(0b00000000 | (address))
-#define GET_DATA(rx_data)((uint16_t) rx_data[1] << 8 | (uint16_t) rx_data[2])
-#define RESET_FUSE()(0b11111111)
-#define EMPTY_OR_RESET_STATE(x) ((x[0] == 0x00 && x[1] == 0x00 && x[2] == 0x00) || (x[0] & (1 << 6)))
-
-/*spi fuse handle transmit array --------------------------------------------*/
-#define MODIFY(array, _0, _1, _2) array[0] = _0; array[1] = _1; array[2] = _2;
 
 /*USER CODE END PM */
 
@@ -112,20 +97,15 @@ int main(void)
 		{ { 0x0000, 0xffff },  { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff } }
 	};
 
-//	SmartFuse sf_0(GPIOA, GPIO_PIN_1, &hspi1, fuses_settings);
-//	SmartFuse sf_1(GPIOA, GPIO_PIN_2, &hspi1, fuses_settings);
-//	SmartFuse sf_2(GPIOA, GPIO_PIN_3, &hspi1, fuses_settings);
-//	SmartFuse sf_3(GPIOA, GPIO_PIN_4, &hspi1, fuses_settings);
-
-//	sf_handler.smart_fuses.push_back(&sf_0);
-//	sf_handler.smart_fuses.push_back(&sf_1);
-//	sf_handler.smart_fuses.push_back(&sf_2);
-//	sf_handler.smart_fuses.push_back(&sf_3);
-
 	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_1, &hspi1, fuses_settings);
 	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_2, &hspi1, fuses_settings);
 	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_3, &hspi1, fuses_settings);
 	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_4, &hspi1, fuses_settings);
+
+	GpioOutElement led_ok(GPIOC, GPIO_PIN_0, true);
+	GpioOutElement led_warning_1(GPIOC, GPIO_PIN_1, true);
+	GpioOutElement led_warning_2(GPIOC, GPIO_PIN_2, true);
+	GpioOutElement led_error(GPIOC, GPIO_PIN_3, true);
 
 	/*USER CODE END 1 */
 
@@ -151,15 +131,39 @@ int main(void)
 	MX_SPI1_Init();
 	/*USER CODE BEGIN 2 */
 
-	sf_handler.init_all();
+	//sf_handler.init_all();
+	sf_handler.smart_fuses[1].init();
+
+	led_ok.activate();
+	led_warning_1.deactivate();
+	led_warning_2.deactivate();
+	led_error.deactivate();
 
 	/*USER CODE END 2 */
 
 	/*Infinite loop */
 	/*USER CODE BEGIN WHILE */
+	Timer tim;
+	bool tog = false;
+	SmartFuseState state;
 	while (1)
 	{
-		sf_handler.handle_all();
+		sf_handler.smart_fuses[1].handle();
+		state = sf_handler.smart_fuses[1].getSmartFuseState();
+		if(state != SmartFuseState::Ok ) led_error.activate();
+
+ 		if(tim.getPassedTime() >= 1000)
+		{
+			if (tog)
+			{
+				sf_handler.smart_fuses[1].activeAllFuses();
+			}
+			else
+			{
+				sf_handler.smart_fuses[1].deactivateAllFuses();
+			}
+			tog = !tog;
+		}
 		/*USER CODE END WHILE */
 
 		/*USER CODE BEGIN 3 */

@@ -30,8 +30,8 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
  ../Core/Inc/can.h ../Core/Inc/main.h ../Core/Inc/spi.h \
- ../Core/Inc/gpio.h ../Core/Inc/fuse.hpp ../Core/Inc/spi.h \
- ../Core/Inc/timer.h ../Core/Inc/include/etl/vector.h \
+ ../Core/Inc/gpio.h ../Core/Inc/timer.h ../Core/Inc/fuse.hpp \
+ ../Core/Inc/spi.h ../Core/Inc/timer.h ../Core/Inc/include/etl/vector.h \
  ../Core/Inc/include/etl/platform.h \
  ../Core/Inc/include/etl/file_error_numbers.h \
  ../Core/Inc/include/etl/profiles/determine_compiler_version.h \
@@ -75,7 +75,8 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Inc/include/etl/private/../functional.h \
  ../Core/Inc/include/etl/private/../iterator.h \
  ../Core/Inc/include/etl/private/minmax_push.h \
- ../Core/Inc/include/etl/private/minmax_pop.h ../Core/Inc/timer.h
+ ../Core/Inc/include/etl/private/minmax_pop.h \
+ ../Core/Inc/gpio\ elements.hpp
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -111,6 +112,7 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/main.h:
 ../Core/Inc/spi.h:
 ../Core/Inc/gpio.h:
+../Core/Inc/timer.h:
 ../Core/Inc/fuse.hpp:
 ../Core/Inc/spi.h:
 ../Core/Inc/timer.h:
@@ -165,4 +167,4 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/include/etl/private/../iterator.h:
 ../Core/Inc/include/etl/private/minmax_push.h:
 ../Core/Inc/include/etl/private/minmax_pop.h:
-../Core/Inc/timer.h:
+../Core/Inc/gpio\ elements.hpp:

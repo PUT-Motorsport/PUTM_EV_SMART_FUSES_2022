@@ -17,24 +17,51 @@
 #define IF_RESET_STATE(x) 			((x[0] == 0x00 && x[1] == 0x00 && x[2] == 0x00) || (x[0] & (1 << 6)))
 #define MODIFY(array, x0, x1, x2) 			array[0] = x0; array[1] = x1; array[2] = x2;
 
+#define FOR_SLOWPOKES true
+
 /*Static functions --------------------------------------------------------------------------------------------------*/
 
-static void calculateParityBit(uint8_t* x)
+
+/// return false if odd parity, returns true if even parity, the pointer should point to a 3 elem tab
+/*
+ * Dla Wegrzyna
+ * Drogi Janku,
+ * Niestey nie znalzlem bibioteki, ktora robila by to czego potrzebuje,
+ * a biblioteka bits/stdc++.h nie istenieje w kompilatorze, wywalalo (przynamniej
+ * mi, że nie ma takiej biblioteki), jednakze dodalem inna opcje tego kodu oraz troche
+ * wiecej komentarzy, majac nadziej ze rozjasni to troche jak dziala ta funkcja.
+ * Z Pozdrowieniami
+ * Piotr
+ */
+static bool checkParity3Byte(uint8_t* const x)
 {
-	///some memory hacking don't do this at home kids
+#if !FOR_SLOWPOKES
+	/// some memory hacking don't do this at home kids
+	/// convert 3 element table into one 32 bit for managment
 	uint32_t buff = *(uint32_t*)(x);
 
-	/// clear unwanted trash and parity bit
-	buff &= ~(0xff << 24 | 1 << 0);
+	/// clear unwanted trash and parity bit from tx (in total last 9 bits)
+	buff &= ~(0x01ff);
 
 	/// some math wizardry to quickly calculate if parity bit is needed
+	/// check if our data has even num of bit or
 	buff ^= (buff >> 16);
 	buff ^= (buff >> 8);
 	buff ^= (buff >> 4);
 	buff ^= (buff >> 2);
 	buff ^= (buff >> 1);
 
-	if (buff & 0x01) *(x + 2) |= (1 << 0);
+	return bool(buff & 0x01);
+#else
+	uint8_t buff = 0;
+	for(int i = 0; i < 3; i++) for(int j = 0; j < 8; j++) if(x[i] & 1 << j) buff++;
+	return (buff % 2 == 0 ? true : false);
+#endif
+}
+
+static void calculateParityBit3Byte(uint8_t* x)
+{
+	if (checkParity3Byte(x)) *(x + 2) |= (1 << 0);
 }
 
 static SmartFuseState checkGSB(uint8_t gsb)
@@ -60,7 +87,7 @@ SmartFuse::Fuse::Fuse()
 
 /*SmartFuse declarations --------------------------------------------------------------------------------------------*/
 
-SmartFuse::SmartFuse(const GPIO_TypeDef *port, const uint32_t pin, const SPI_HandleTypeDef *hspi, const FusesSettings &fuses_settings) :
+SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
 					 port(port), pin(pin), hspi(hspi), fuses_settings(fuses_settings)
 {
 	this->toggle = false;
@@ -94,16 +121,17 @@ SmartFuseState SmartFuse::init(void)
 	transmitReceiveData(tx_data, rx_data);
 
 	/// wait for smart fuse to wake up
-	tx_data[0] = READ_ROM(0x00);
+	tx_data[0] = READ_ROM(0x01);
 	for (int i = 0; i < FUSE_TIMEOUT; i++)
 	{
 		if(!IF_RESET_STATE(rx_data)) break;
-		else if(i == 5)
+		else if(i == FUSE_TIMEOUT - 1)
 		{
 			this->state = SmartFuseState::NotResponding;
 			goto end;
 		}
 		transmitReceiveData(tx_data, rx_data);
+		HAL_Delay(1);
 	}
 
 	/// set unlock bit in ctrl reg
@@ -112,6 +140,9 @@ SmartFuseState SmartFuse::init(void)
 
 	/// set enable bit in ctrl reg
 	MODIFY(tx_data, WRITE_RAM(0x14), 1 << 3, 0);
+	transmitReceiveData(tx_data, rx_data);
+
+	MODIFY(tx_data, READ_RAM(0x14), 1 << 3, 0);
 	transmitReceiveData(tx_data, rx_data);
 
 	/// start watch dog timer management
@@ -175,33 +206,41 @@ end:
 	return this->state;
 }
 
+//handle everything
 SmartFuseState SmartFuse::handle(void)
 {
 	uint8_t tx_data[3] = { 0, 0, 0 };
 	uint8_t rx_data[3] = { 0, 0, 0 };
 
-	if(watch_dog.getPassedTime() >= 30)
+	if(watch_dog.getPassedTime() >= 40)
 	{
 		tx_data[0] = READ_RAM(0x13);
 		transmitReceiveData(tx_data, rx_data);
+		/// clear watch dog bit
+		/// rx_data[2] &= ~(1 << 1);
 		MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] ^= (1 << 1));
 		transmitReceiveData(tx_data, rx_data);
 		this->watch_dog.restart();
 		this->toggle = !this->toggle;
 	}
-
-	for(int i = 0; i < 6; i++)
+	else
 	{
-		tx_data[0] = READ_RAM(0x28 + i);
-		transmitReceiveData(tx_data, rx_data);
-		this->fuses[i].current = (*(uint16_t*)(rx_data + 1) >> 4) & 0x03ff;
+		return this->state;
 	}
+
+
+//	for(int i = 0; i < 6; i++)
+//	{
+//		tx_data[0] = READ_RAM(0x28 + i);
+//		transmitReceiveData(tx_data, rx_data);
+//		this->fuses[i].current = (*(uint16_t*)(rx_data + 1) >> 4) & 0x03ff;
+//	}
 
 	this->state = checkGSB(rx_data[0]);
 	return this->state;
 }
 
-
+/// handle timer only
 SmartFuseState SmartFuse::handle_timer(void)
 {
 	uint8_t tx_data[3] = { 0, 0, 0 };
@@ -313,7 +352,7 @@ void SmartFuse::transmitReceiveData(uint8_t *tx_data, uint8_t *rx_data)
 	if (((&hspi1)->Instance->CR1 &SPI_CR1_SPE) != SPI_CR1_SPE) __HAL_SPI_ENABLE(&hspi1);
 
 	/// data needs to have a parity check bit
-	calculateParityBit(tx_data);
+	calculateParityBit3Byte(tx_data);
 
 	slaveSelect();
 
@@ -340,10 +379,10 @@ void SmartFuse::transmitReceiveData(uint8_t *tx_data, uint8_t *rx_data)
 template <int num_of_sf>
 bool SmartFuseHandler<num_of_sf>::handle_all()
 {
-	bool result = false;
+	bool result = true;
 
 	for(auto smart_fuse : smart_fuses)
-		if(smart_fuse.handle() != SmartFuseState::Ok) result = true;
+		if(smart_fuse.handle() != SmartFuseState::Ok) result = false;
 
 	return result;
 }
@@ -351,14 +390,18 @@ bool SmartFuseHandler<num_of_sf>::handle_all()
 template <int num_of_sf>
 bool SmartFuseHandler<num_of_sf>::init_all()
 {
-	bool result = false;
+	bool result = true;
+
+	int buff = 0;
 
 	for(auto smart_fuse : smart_fuses)
 	{
-		for(auto sf = this->smart_fuses.begin(); sf != &smart_fuse; ++sf)
-			sf->handle_timer();
-		if(smart_fuse.init() != SmartFuseState::Ok) result = true;
+		for(int i = 0; i < buff; i++) this->smart_fuses[i].handle();
+		if(smart_fuse.init() != SmartFuseState::Ok) result = false;
+		buff++;
 	}
+
+	this->handle_all();
 
 	return result;
 }
