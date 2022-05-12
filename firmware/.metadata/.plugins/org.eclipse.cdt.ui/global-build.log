@@ -1,0 +1,790 @@
+20:31:18 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10736	    124	   1728	  12588	   312c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:31:33 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10736	    124	   1728	  12588	   312c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:33:31 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp: In function 'int main()':
+../Core/Src/main.cpp:165:14: warning: variable 'sf' set but not used [-Wunused-but-set-variable]
+  165 |    SmartFuse sf = sf_handler.smart_fuses[1];
+      |              ^~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10824	    124	   1728	  12676	   3184	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:35:23 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10736	    124	   1728	  12588	   312c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:36:04 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10736	    124	   1728	  12588	   312c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:39:21 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10416	    124	   1728	  12268	   2fec	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:40:06 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10416	    124	   1728	  12268	   2fec	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:41:10 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10416	    124	   1728	  12268	   2fec	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:42:18 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10444	    124	   1728	  12296	   3008	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:46:19 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10444	    124	   1728	  12296	   3008	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:48:55 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10444	    124	   1728	  12296	   3008	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:52:05 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10444	    124	   1728	  12296	   3008	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:53:18 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10584	    124	   1728	  12436	   3094	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:53:56 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10584	    124	   1728	  12436	   3094	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:54:46 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10584	    124	   1728	  12436	   3094	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:55:09 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10584	    124	   1728	  12436	   3094	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:56:09 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10760	    124	   1728	  12612	   3144	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+20:56:43 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10760	    124	   1728	  12612	   3144	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+20:59:04 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10784	    124	   1728	  12636	   315c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:01:48 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp: In function 'int main()':
+../Core/Src/main.cpp:147:7: warning: unused variable 'tog' [-Wunused-variable]
+  147 |  bool tog = false;
+      |       ^~~
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10564	    124	   1728	  12416	   3080	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:02:41 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp: In function 'int main()':
+../Core/Src/main.cpp:147:7: warning: unused variable 'tog' [-Wunused-variable]
+  147 |  bool tog = false;
+      |       ^~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10552	    124	   1728	  12404	   3074	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:03:13 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10552	    124	   1728	  12404	   3074	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:03:43 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10760	    124	   1728	  12612	   3144	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:04:23 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10760	    124	   1728	  12612	   3144	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:04:51 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10760	    124	   1728	  12612	   3144	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:06:13 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O1 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  10768	    124	   1728	  12620	   314c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:07:02 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10768	    124	   1728	  12620	   314c	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:08:55 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/can.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/can.d" -MT"Core/Src/can.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/can.o"
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+arm-none-eabi-g++ "../Core/Src/gpio elements.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/gpio elements.d" -MT"Core/Src/gpio elements.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/gpio elements.o"
+arm-none-eabi-gcc "../Core/Src/gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/gpio.d" -MT"Core/Src/gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/gpio.o"
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/spi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/spi.d" -MT"Core/Src/spi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/spi.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+In file included from ../Core/Src/gpio elements.cpp:8:
+../Core/Inc/gpio elements.hpp: In constructor 'GpioElement::GpioElement(const GPIO_TypeDef*, uint32_t, bool)':
+../Core/Inc/gpio elements.hpp:27:30: warning: 'GpioElement::port' will be initialized after [-Wreorder]
+   27 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/gpio elements.hpp:25:18: warning:   'const uint32_t GpioElement::pin' [-Wreorder]
+   25 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/gpio elements.cpp:10:1: warning:   when initialized here [-Wreorder]
+   10 | GpioElement::GpioElement(const GPIO_TypeDef * const port, const uint32_t pin, const bool is_inverted) :
+      | ^~~~~~~~~~~
+In file included from ../Core/Src/gpio elements.cpp:8:
+../Core/Inc/gpio elements.hpp:25:18: warning: 'GpioElement::pin' will be initialized after [-Wreorder]
+   25 |   const uint32_t pin;
+      |                  ^~~
+../Core/Inc/gpio elements.hpp:23:8: warning:   'bool GpioElement::is_inverted' [-Wreorder]
+   23 |   bool is_inverted;
+      |        ^~~~~~~~~~~
+../Core/Src/gpio elements.cpp:10:1: warning:   when initialized here [-Wreorder]
+   10 | GpioElement::GpioElement(const GPIO_TypeDef * const port, const uint32_t pin, const bool is_inverted) :
+      | ^~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32l4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32l4xx.d" -MT"Core/Src/system_stm32l4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32l4xx.o"
+arm-none-eabi-g++ "../Core/Src/timer.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/timer.d" -MT"Core/Src/timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/timer.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  13912	    124	   1728	  15764	   3d94	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:10:19 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13912	    124	   1728	  15764	   3d94	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:10:53 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13912	    124	   1728	  15764	   3d94	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:13:31 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  13940	    124	   1728	  15792	   3db0	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:14:11 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13940	    124	   1728	  15792	   3db0	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:16:10 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  13688	    124	   1728	  15540	   3cb4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:16:27 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13688	    124	   1728	  15540	   3cb4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:18:31 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  13708	    124	   1728	  15560	   3cc8	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:20:12 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  13728	    124	   1728	  15580	   3cdc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:20:53 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+../Core/Src/main.cpp: In function 'int main()':
+../Core/Src/main.cpp:171:8: error: 'class Timer' has no member named 'reset'; did you mean 'restart'?
+  171 |    tim.reset();
+      |        ^~~~~
+      |        restart
+make: *** [Core/Src/subdir.mk:58: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:21:05 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  13736	    124	   1728	  15588	   3ce4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:24:12 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ "../Core/Src/timer.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/timer.d" -MT"Core/Src/timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/timer.o"
+../Core/Src/timer.cpp: In function 'uint32_t getPassedTimeAndRestart()':
+../Core/Src/timer.cpp:27:34: error: invalid use of 'this' in non-member function
+   27 |  uint32_t buff = HAL_GetTick() - this->start_time;
+      |                                  ^~~~
+../Core/Src/timer.cpp:28:2: error: invalid use of 'this' in non-member function
+   28 |  this->start_time = HAL_GetTick();
+      |  ^~~~
+make: *** [Core/Src/subdir.mk:58: Core/Src/timer.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:24:32 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/timer.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/timer.d" -MT"Core/Src/timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/timer.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  13728	    124	   1728	  15580	   3cdc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:26:16 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13728	    124	   1728	  15580	   3cdc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:27:23 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  13728	    124	   1728	  15580	   3cdc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+21:31:43 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/timer.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/timer.d" -MT"Core/Src/timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/timer.o"
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  13732	    124	   1728	  15584	   3ce0	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:32:44 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ "../Core/Src/timer.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/timer.d" -MT"Core/Src/timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/timer.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  13696	    124	   1728	  15548	   3cbc	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:34:02 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/can.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/can.d" -MT"Core/Src/can.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/can.o"
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O3 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+arm-none-eabi-g++ "../Core/Src/gpio elements.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O3 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/gpio elements.d" -MT"Core/Src/gpio elements.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/gpio elements.o"
+arm-none-eabi-gcc "../Core/Src/gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/gpio.d" -MT"Core/Src/gpio.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/gpio.o"
+arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O3 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/spi.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/spi.d" -MT"Core/Src/spi.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/spi.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_hal_msp.d" -MT"Core/Src/stm32l4xx_hal_msp.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32l4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/stm32l4xx_it.d" -MT"Core/Src/stm32l4xx_it.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/stm32l4xx_it.o"
+In file included from ../Core/Src/gpio elements.cpp:8:
+../Core/Inc/gpio elements.hpp: In constructor 'GpioElement::GpioElement(const GPIO_TypeDef*, uint32_t, bool)':
+../Core/Inc/gpio elements.hpp:27:30: warning: 'GpioElement::port' will be initialized after [-Wreorder]
+   27 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/gpio elements.hpp:25:18: warning:   'const uint32_t GpioElement::pin' [-Wreorder]
+   25 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/gpio elements.cpp:10:1: warning:   when initialized here [-Wreorder]
+   10 | GpioElement::GpioElement(const GPIO_TypeDef * const port, const uint32_t pin, const bool is_inverted) :
+      | ^~~~~~~~~~~
+In file included from ../Core/Src/gpio elements.cpp:8:
+../Core/Inc/gpio elements.hpp:25:18: warning: 'GpioElement::pin' will be initialized after [-Wreorder]
+   25 |   const uint32_t pin;
+      |                  ^~~
+../Core/Inc/gpio elements.hpp:23:8: warning:   'bool GpioElement::is_inverted' [-Wreorder]
+   23 |   bool is_inverted;
+      |        ^~~~~~~~~~~
+../Core/Src/gpio elements.cpp:10:1: warning:   when initialized here [-Wreorder]
+   10 | GpioElement::GpioElement(const GPIO_TypeDef * const port, const uint32_t pin, const bool is_inverted) :
+      | ^~~~~~~~~~~
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32l4xx.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/system_stm32l4xx.d" -MT"Core/Src/system_stm32l4xx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/system_stm32l4xx.o"
+arm-none-eabi-g++ "../Core/Src/timer.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O3 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/timer.d" -MT"Core/Src/timer.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/timer.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  11060	    124	   1728	  12912	   3270	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:37:58 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-g++ "../Core/Src/fuse.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L4P5xx -c -I../Core/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O3 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Core/Src/fuse.d" -MT"Core/Src/fuse.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Core/Src/fuse.o"
+In file included from ../Core/Src/fuse.cpp:8:
+../Core/Inc/fuse.hpp: In constructor 'SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)':
+../Core/Inc/fuse.hpp:170:30: warning: 'SmartFuse::port' will be initialized after [-Wreorder]
+  170 |   const GPIO_TypeDef * const port;
+      |                              ^~~~
+../Core/Inc/fuse.hpp:166:18: warning:   'const uint32_t SmartFuse::pin' [-Wreorder]
+  166 |   const uint32_t pin;
+      |                  ^~~
+../Core/Src/fuse.cpp:69:1: warning:   when initialized here [-Wreorder]
+   69 | SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
+      | ^~~~~~~~~
+arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: Smart fuses.elf
+ 
+arm-none-eabi-size   Smart\ fuses.elf 
+arm-none-eabi-objdump -h -S  Smart\ fuses.elf  > "Smart fuses.list"
+   text	   data	    bss	    dec	    hex	filename
+  11128	    124	   1728	  12980	   32b4	Smart fuses.elf
+Finished building: default.size.stdout
+ 
+Finished building: Smart fuses.list
+ 
+21:38:58 **** Incremental Build of configuration Debug for project Smart fuses ****
+make -j8 all 
+arm-none-eabi-size   Smart\ fuses.elf 
+   text	   data	    bss	    dec	    hex	filename
+  11128	    124	   1728	  12980	   32b4	Smart fuses.elf
+Finished building: default.size.stdout
+ 

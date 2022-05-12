@@ -1,0 +1,33 @@
+/*
+ * gpio elements.cpp
+ *
+ *  Created on: 6 maj 2022
+ *      Author: Piotr Lesicki
+ */
+
+#include "gpio elements.hpp"
+
+GpioOutElement::GpioOutElement(const GPIO_TypeDef * const port, const uint32_t pin) :
+							   port(port), pin(pin) { };
+
+void GpioOutElement::activate()
+{
+
+}
+
+void GpioOutElement::deactivate()
+{
+
+}
+
+GpioInElement::GpioInElement(const GPIO_TypeDef * const port, const uint32_t pin) :
+							 port(port), pin(pin) { }
+
+bool GpioInElement::read()
+{
+
+}
+
+
+
+

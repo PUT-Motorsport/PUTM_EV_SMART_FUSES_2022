@@ -1,0 +1,33 @@
+/*
+ * gpio elements.cpp
+ *
+ *  Created on: 6 maj 2022
+ *      Author: Piotr Lesicki
+ */
+
+#include "gpio elements.hpp"
+
+GpioOutElement::GpioOutElement(const GPIO_TypeDef * const port, const uint32_t pin) :
+							   port(port), pin(pin) { };
+
+void GpioOutElement::activate()
+{
+	HAL_GPIO_WritePin((GPIO_TypeDef*)(this->port), this->pin, this->is_inverted ? GPIO_PIN_RESET : GPIO_PIN_SET);
+}
+
+void GpioOutElement::deactivate()
+{
+	HAL_GPIO_WritePin((GPIO_TypeDef*)(this->port), this->pin, this->is_inverted ? GPIO_PIN_SET : GPIO_PIN_RESET);
+}
+
+GpioInElement::GpioInElement(const GPIO_TypeDef * const port, const uint32_t pin) :
+							 port(port), pin(pin) { }
+
+bool GpioInElement::read()
+{
+
+}
+
+
+
+

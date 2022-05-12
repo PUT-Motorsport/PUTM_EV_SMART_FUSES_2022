@@ -1,17 +1,16 @@
-../Core/Src/fuse.cpp:67:23:SmartFuseState checkGSB(uint8_t)	0	static
-../Core/Src/fuse.cpp:82:1:SmartFuse::Fuse::Fuse()	0	static
-../Core/Src/fuse.cpp:104:6:void SmartFuse::slaveSelect()	8	static
-../Core/Src/fuse.cpp:109:6:void SmartFuse::slaveDeselect()	8	static
-../Core/Src/fuse.cpp:90:1:SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)	32	static
-../Core/Src/fuse.cpp:344:16:SmartFuseState SmartFuse::getSmartFuseState()	0	static
-../Core/Src/fuse.cpp:349:6:void SmartFuse::transmitReceiveData(uint8_t*, uint8_t*)	16	static
-../Core/Src/fuse.cpp:114:16:SmartFuseState SmartFuse::init()	40	static
-../Core/Src/fuse.cpp:210:16:SmartFuseState SmartFuse::handle()	24	static
-../Core/Src/fuse.cpp:380:6:bool SmartFuseHandler<num_of_sf>::handle_all() [with int num_of_sf = 4]	152	static
-../Core/Src/fuse.cpp:391:6:bool SmartFuseHandler<num_of_sf>::init_all() [with int num_of_sf = 4]	160	static
-../Core/Src/fuse.cpp:244:16:SmartFuseState SmartFuse::handle_timer()	24	static
-../Core/Src/fuse.cpp:263:16:SmartFuseState SmartFuse::setFuseDutyCykle(FuseNumber, uint16_t)	16	static
-../Core/Src/fuse.cpp:278:16:SmartFuseState SmartFuse::activeFuse(FuseNumber)	16	static
-../Core/Src/fuse.cpp:295:16:SmartFuseState SmartFuse::deactivateFuse(FuseNumber)	16	static
-../Core/Src/fuse.cpp:312:16:SmartFuseState SmartFuse::activeAllFuses()	16	static
-../Core/Src/fuse.cpp:328:16:SmartFuseState SmartFuse::deactivateAllFuses()	16	static
+../Core/Src/fuse.cpp:61:1:SmartFuse::Fuse::Fuse()	0	static
+../Core/Src/fuse.cpp:69:1:SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const FusesSettings&)	16	static
+../Core/Src/fuse.cpp:83:6:void SmartFuse::slaveSelect()	0	static
+../Core/Src/fuse.cpp:88:6:void SmartFuse::slaveDeselect()	0	static
+../Core/Src/fuse.cpp:312:16:SmartFuseState SmartFuse::getSmartFuseState()	0	static
+../Core/Src/fuse.cpp:317:6:void SmartFuse::transmitReceiveData(std::array<unsigned char, 3>, std::array<unsigned char, 3>&)	40	static
+../Core/Src/fuse.cpp:209:16:SmartFuseState SmartFuse::handle_timer()	24	static
+../Core/Src/fuse.cpp:230:16:SmartFuseState SmartFuse::setFuseDutyCykle(FuseNumber, uint16_t)	24	static
+../Core/Src/fuse.cpp:93:16:SmartFuseState SmartFuse::init()	48	static
+../Core/Src/fuse.cpp:177:16:SmartFuseState SmartFuse::handle()	32	static
+../Core/Src/fuse.cpp:346:6:bool SmartFuseHandler<num_of_sf>::handle_all() [with int num_of_sf = 4]	144	static
+../Core/Src/fuse.cpp:357:6:bool SmartFuseHandler<num_of_sf>::init_all() [with int num_of_sf = 4]	160	static
+../Core/Src/fuse.cpp:245:16:SmartFuseState SmartFuse::activeFuse(FuseNumber)	24	static
+../Core/Src/fuse.cpp:262:16:SmartFuseState SmartFuse::deactivateFuse(FuseNumber)	24	static
+../Core/Src/fuse.cpp:279:16:SmartFuseState SmartFuse::activeAllFuses()	16	static
+../Core/Src/fuse.cpp:295:16:SmartFuseState SmartFuse::deactivateAllFuses()	24	static

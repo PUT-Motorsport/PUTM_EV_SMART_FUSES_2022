@@ -15,53 +15,32 @@
 #define WRITE_RAM(address)					(0b00000000 | (address))
 #define RESET_SMARTFUSE()					(0b11111111)
 #define IF_RESET_STATE(x) 			((x[0] == 0x00 && x[1] == 0x00 && x[2] == 0x00) || (x[0] & (1 << 6)))
-#define MODIFY(array, x0, x1, x2) 			array[0] = x0; array[1] = x1; array[2] = x2;
 
 #define FOR_SLOWPOKES true
 
 /*Static functions --------------------------------------------------------------------------------------------------*/
 
-
 /// return false if odd parity, returns true if even parity, the pointer should point to a 3 elem tab
-/*
- * Dla Wegrzyna
- * Drogi Janku,
- * Niestey nie znalzlem bibioteki, ktora robila by to czego potrzebuje,
- * a biblioteka bits/stdc++.h nie istenieje w kompilatorze, wywalalo (przynamniej
- * mi, że nie ma takiej biblioteki), jednakze dodalem inna opcje tego kodu oraz troche
- * wiecej komentarzy, majac nadziej ze rozjasni to troche jak dziala ta funkcja.
- * Z Pozdrowieniami
- * Piotr
- */
-static bool checkParity3Byte(uint8_t* const x)
+static bool checkParity(std::array<uint8_t, 3> x)
 {
-#if !FOR_SLOWPOKES
-	/// some memory hacking don't do this at home kids
-	/// convert 3 element table into one 32 bit for managment
-	uint32_t buff = *(uint32_t*)(x);
-
-	/// clear unwanted trash and parity bit from tx (in total last 9 bits)
-	buff &= ~(0x01ff);
-
-	/// some math wizardry to quickly calculate if parity bit is needed
-	/// check if our data has even num of bit or
-	buff ^= (buff >> 16);
-	buff ^= (buff >> 8);
-	buff ^= (buff >> 4);
-	buff ^= (buff >> 2);
-	buff ^= (buff >> 1);
-
-	return bool(buff & 0x01);
-#else
 	uint8_t buff = 0;
 	for(int i = 0; i < 3; i++) for(int j = 0; j < 8; j++) if(x[i] & 1 << j) buff++;
 	return (buff % 2 == 0 ? true : false);
-#endif
 }
 
-static void calculateParityBit3Byte(uint8_t* x)
+/// checks whenever data needs parity bit and adds it or erases it
+static void calculateParityBit(std::array<uint8_t, 3> &data)
 {
-	if (checkParity3Byte(x)) *(x + 2) |= (1 << 0);
+	//clear parity bit just in case
+	data[2] &= ~(1 << 0);
+	if (checkParity(data)) data[2] |= (1 << 0);
+}
+
+static void modifyTab(std::array<uint8_t, 3> &tab, uint8_t dat_1, uint8_t dat_2, uint8_t dat_3)
+{
+	tab[0] = dat_1;
+	tab[1] = dat_2;
+	tab[2] = dat_3;
 }
 
 static SmartFuseState checkGSB(uint8_t gsb)
@@ -113,8 +92,8 @@ void SmartFuse::slaveDeselect(void)
 
 SmartFuseState SmartFuse::init(void)
 {
-	uint8_t tx_data[3] = { 0, 0, 0 };
-	uint8_t rx_data[3] = { 0, 0, 0 };
+	std::array<uint8_t, 3> tx_data{ 0, 0, 0 };
+	std::array<uint8_t, 3> rx_data{ 0, 0, 0 };
 
 	/// reset smart fuse
 	tx_data[0] = RESET_SMARTFUSE();
@@ -135,14 +114,11 @@ SmartFuseState SmartFuse::init(void)
 	}
 
 	/// set unlock bit in ctrl reg
-	MODIFY(tx_data, WRITE_RAM(0x14), 1 << 6, 0);
+	modifyTab(tx_data, WRITE_RAM(0x14), 1 << 6, 0);
 	transmitReceiveData(tx_data, rx_data);
 
 	/// set enable bit in ctrl reg
-	MODIFY(tx_data, WRITE_RAM(0x14), 1 << 3, 0);
-	transmitReceiveData(tx_data, rx_data);
-
-	MODIFY(tx_data, READ_RAM(0x14), 1 << 3, 0);
+	modifyTab(tx_data, WRITE_RAM(0x14), 1 << 3, 0);
 	transmitReceiveData(tx_data, rx_data);
 
 	/// start watch dog timer management
@@ -152,9 +128,9 @@ SmartFuseState SmartFuse::init(void)
 	for(int i = 0; i < 6; i++)
 	{
 		/// 0x00 to 0x05 - Outputs Control Register - set pwm duty cycles for each chanel
-		tx_data[1] = uint8_t(this->fuses_settings.duty_cykle[i] >> 8);
-		tx_data[2] = uint8_t(this->fuses_settings.duty_cykle[i] << 4) | this->toggle << 1;
 		tx_data[0] = WRITE_RAM(0x00 + i);
+		tx_data[1] = uint8_t(this->fuses_settings.duty_cykle[i] >> 4);
+		tx_data[2] = uint8_t(this->fuses_settings.duty_cykle[i] << 4) | this->toggle << 1;
 		transmitReceiveData(tx_data, rx_data);
 
 		/// 0x08 to 0x0d - Outputs Configuration Register - set sampling mode
@@ -170,35 +146,26 @@ SmartFuseState SmartFuse::init(void)
 		transmitReceiveData(tx_data, rx_data);
 
 		/// just in case
-		if(watch_dog.getPassedTime() >= 30)
-		{
-			tx_data[0] = READ_RAM(0x13);
-			transmitReceiveData(tx_data, rx_data);
-			MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] ^= (1 << 1));
-			transmitReceiveData(tx_data, rx_data);
-			this->watch_dog.restart();
-			this->toggle = !this->toggle;
-		}
+		this->handle_timer();
 	}
 
 	/// 0x10 to 0x11 - Channel Latch OFF Timer Control register - set latch off
-	tx_data[1] = this->fuses_settings.latch_off_time_out[2] << 4 |
-		   this->fuses_settings.latch_off_time_out[1];
-	tx_data[2] = this->fuses_settings.latch_off_time_out[1] << 4;
-	tx_data[0] = WRITE_RAM(0x10);
-	transmitReceiveData(tx_data, rx_data);
-	tx_data[1] = this->fuses_settings.latch_off_time_out[5] << 4 |
-	       this->fuses_settings.latch_off_time_out[4];
-	tx_data[2] = this->fuses_settings.latch_off_time_out[3] << 4;
-	tx_data[0] = WRITE_RAM(0x11);
-	transmitReceiveData(tx_data, rx_data);
+//	tx_data[1] = this->fuses_settings.latch_off_time_out[2] << 4 |
+//		   this->fuses_settings.latch_off_time_out[1];
+//	tx_data[2] = this->fuses_settings.latch_off_time_out[1] << 4;
+//	tx_data[0] = WRITE_RAM(0x10);
+//	transmitReceiveData(tx_data, rx_data);
+//	tx_data[1] = this->fuses_settings.latch_off_time_out[5] << 4 |
+//	       this->fuses_settings.latch_off_time_out[4];
+//	tx_data[2] = this->fuses_settings.latch_off_time_out[3] << 4;
+//	tx_data[0] = WRITE_RAM(0x11);
+//	transmitReceiveData(tx_data, rx_data);
 
 	/// 0x13 - Channel Control register - enable channels
-	tx_data[1] = 0x00;
-	for(int i = 0; i < 6; i++)
-		tx_data[1] |= this->fuses[i].active << i;
-	tx_data[2] = this->toggle << 1;
 	tx_data[0] = WRITE_RAM(0x13);
+	tx_data[1] = 0x00;
+	for(int i = 0; i < 6; i++) tx_data[1] |= this->fuses[i].active << i;
+	tx_data[2] = this->toggle << 1;
 	transmitReceiveData(tx_data, rx_data);
 
 end:
@@ -209,32 +176,30 @@ end:
 //handle everything
 SmartFuseState SmartFuse::handle(void)
 {
-	uint8_t tx_data[3] = { 0, 0, 0 };
-	uint8_t rx_data[3] = { 0, 0, 0 };
+	std::array < uint8_t, 3 > tx_data { 0, 0, 0 };
+	std::array < uint8_t, 3 > rx_data { 0, 0, 0 };
 
 	if(watch_dog.getPassedTime() >= 40)
 	{
+		this->toggle = !this->toggle;
 		tx_data[0] = READ_RAM(0x13);
 		transmitReceiveData(tx_data, rx_data);
-		/// clear watch dog bit
-		/// rx_data[2] &= ~(1 << 1);
-		MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] ^= (1 << 1));
+		rx_data[2] &= ~(1 << 1);
+		modifyTab(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] |= (toggle << 1));
 		transmitReceiveData(tx_data, rx_data);
 		this->watch_dog.restart();
-		this->toggle = !this->toggle;
 	}
-	else
-	{
-		return this->state;
-	}
-
-
-//	for(int i = 0; i < 6; i++)
+//	else
 //	{
-//		tx_data[0] = READ_RAM(0x28 + i);
-//		transmitReceiveData(tx_data, rx_data);
-//		this->fuses[i].current = (*(uint16_t*)(rx_data + 1) >> 4) & 0x03ff;
+//		return this->state;
 //	}
+
+	for(int i = 0; i < 6; i++)
+	{
+		tx_data[0] = READ_RAM(0x28 + i);
+		transmitReceiveData(tx_data, rx_data);
+		this->fuses[i].current = uint16_t(rx_data[1]) << 4 | uint16_t(rx_data[2]) >> 4;//(*(uint16_t*)(rx_data + 1) >> 4) & 0x03ff;
+	}
 
 	this->state = checkGSB(rx_data[0]);
 	return this->state;
@@ -243,20 +208,22 @@ SmartFuseState SmartFuse::handle(void)
 /// handle timer only
 SmartFuseState SmartFuse::handle_timer(void)
 {
-	uint8_t tx_data[3] = { 0, 0, 0 };
-	uint8_t rx_data[3] = { 0, 0, 0 };
-
 	if(watch_dog.getPassedTime() >= 30)
 	{
-		tx_data[0] = READ_RAM(0x13);
-		transmitReceiveData(tx_data, rx_data);
-		MODIFY(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] ^= (1 << 1));
-		transmitReceiveData(tx_data, rx_data);
-		this->watch_dog.restart();
+		std::array < uint8_t, 3 >  tx_data { 0, 0, 0 };
+		std::array < uint8_t, 3 >  rx_data { 0, 0, 0 };
+
 		this->toggle = !this->toggle;
+		tx_data[0] = READ_RAM(0x13);
+		this->transmitReceiveData(tx_data, rx_data);
+		modifyTab(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] ^= (1 << 1));
+		this->transmitReceiveData(tx_data, rx_data);
+		this->watch_dog.restart();
+
+		this->state = checkGSB(rx_data[0]);
+		return this->state;
 	}
 
-	this->state = checkGSB(rx_data[0]);
 	return this->state;
 }
 
@@ -265,11 +232,11 @@ SmartFuseState SmartFuse::setFuseDutyCykle(FuseNumber fuse, uint16_t duty_cykle)
 	uint8_t hbit = uint8_t(duty_cykle >> 8);
 	uint8_t lbit = uint8_t(duty_cykle << 4) | this->toggle << 1;
 
-	uint8_t tx_data[3];
-	uint8_t rx_data[3];
+	std::array < uint8_t, 3 >  tx_data { 0, 0, 0 };
+	std::array < uint8_t, 3 >  rx_data { 0, 0, 0 };
 
-	MODIFY(tx_data, WRITE_RAM(0x00 + int(fuse)), hbit, lbit);
-	transmitReceiveData(tx_data, rx_data);
+	modifyTab(tx_data, WRITE_RAM(0x00 + int(fuse)), hbit, lbit);
+	this->transmitReceiveData(tx_data, rx_data);
 
 	this->state = checkGSB(rx_data[0]);
 	return this->state;
@@ -277,8 +244,8 @@ SmartFuseState SmartFuse::setFuseDutyCykle(FuseNumber fuse, uint16_t duty_cykle)
 
 SmartFuseState SmartFuse::activeFuse(FuseNumber fuse)
 {
-	uint8_t tx_data[3] = { 0, 0, 0 };
-	uint8_t rx_data[3] = { 0, 0, 0 };
+	std::array < uint8_t, 3 >  tx_data { 0, 0, 0 };
+	std::array < uint8_t, 3 >  rx_data { 0, 0, 0 };
 
 	this->fuses[int(fuse)].active = true;
 
@@ -286,7 +253,7 @@ SmartFuseState SmartFuse::activeFuse(FuseNumber fuse)
 		tx_data[1] |= this->fuses[i].active << i;
 	tx_data[2] = this->toggle << 1;
 	tx_data[0] = WRITE_RAM(0x13);
-	transmitReceiveData(tx_data, rx_data);
+	this->transmitReceiveData(tx_data, rx_data);
 
 	this->state = checkGSB(rx_data[0]);
 	return this->state;
@@ -294,16 +261,16 @@ SmartFuseState SmartFuse::activeFuse(FuseNumber fuse)
 
 SmartFuseState SmartFuse::deactivateFuse(FuseNumber fuse)
 {
-	uint8_t tx_data[3] = { 0, 0, 0 };
-	uint8_t rx_data[3];
+	std::array < uint8_t, 3 >  tx_data { 0, 0, 0 };
+	std::array < uint8_t, 3 >  rx_data;
 
 	this->fuses[int(fuse)].active = false;
 
 	for(int i = 0; i < 6; i++)
-		tx_data[1] |= this->fuses[i].active << i;
+		tx_data[0] |= this->fuses[i].active << i;
 	tx_data[2] = this->toggle << 1;
 	tx_data[0] = WRITE_RAM(0x13);
-	transmitReceiveData(tx_data, rx_data);
+	this->transmitReceiveData(tx_data, rx_data);
 
 	this->state = checkGSB(rx_data[0]);
 	return this->state;
@@ -311,15 +278,15 @@ SmartFuseState SmartFuse::deactivateFuse(FuseNumber fuse)
 
 SmartFuseState SmartFuse::activeAllFuses(void)
 {
-	uint8_t tx_data[3];
-	uint8_t rx_data[3];
+	std::array < uint8_t, 3 >  tx_data;
+	std::array < uint8_t, 3 >  rx_data;
 
-	for(int i = 0; i < 6; i++)
-		this->fuses[i].active = true;
-	tx_data[1] = 0x3f;
-	tx_data[2] = this->toggle << 1;
-	tx_data[0] = WRITE_RAM(0x13);
-	transmitReceiveData(tx_data, rx_data);
+	for(int i = 0; i < 6; i++) this->fuses[i].active = true;
+	modifyTab(tx_data, WRITE_RAM(0x13), 0x3f, this->toggle << 1);
+	this->transmitReceiveData(tx_data, rx_data);
+
+//	modifyTab(tx_data, READ_RAM(0x13), 0x00, 0x00);
+//	this->transmitReceiveData(tx_data, rx_data);
 
 	this->state = checkGSB(rx_data[0]);
 	return this->state;
@@ -327,15 +294,16 @@ SmartFuseState SmartFuse::activeAllFuses(void)
 
 SmartFuseState SmartFuse::deactivateAllFuses(void)
 {
-	uint8_t tx_data[3];
-	uint8_t rx_data[3];
+	std::array < uint8_t, 3 >  tx_data;
+	std::array < uint8_t, 3 >  rx_data;
 
 	for(int i = 0; i < 6; i++)
 		this->fuses[i].active = false;
-	tx_data[1] = 0x00;
-	tx_data[2] = this->toggle << 1;
-	tx_data[0] = WRITE_RAM(0x13);
-	transmitReceiveData(tx_data, rx_data);
+	modifyTab(tx_data, WRITE_RAM(0x13), 0x00, this->toggle << 1);
+	this->transmitReceiveData(tx_data, rx_data);
+
+//	modifyTab(tx_data, READ_RAM(0x13), 0x00, 0x00);
+//	this->transmitReceiveData(tx_data, rx_data);
 
 	this->state = checkGSB(rx_data[0]);
 	return this->state;
@@ -346,34 +314,32 @@ SmartFuseState SmartFuse::getSmartFuseState(void)
 	return this->state;
 }
 
-void SmartFuse::transmitReceiveData(uint8_t *tx_data, uint8_t *rx_data)
+void SmartFuse::transmitReceiveData(std::array<uint8_t, 3> tx_data, std::array<uint8_t, 3> &rx_data)
 {
 	/// just check
 	if (((&hspi1)->Instance->CR1 &SPI_CR1_SPE) != SPI_CR1_SPE) __HAL_SPI_ENABLE(&hspi1);
 
 	/// data needs to have a parity check bit
-	calculateParityBit3Byte(tx_data);
+	calculateParityBit(tx_data);
 
-	slaveSelect();
+	this->slaveSelect();
 
 	for (uint8_t tx = 0, rx = 0; tx < 3 || rx < 3;)
 	{
 		if (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_RXNE) && rx < 3)
 		{
-			(*(uint8_t*) rx_data) = *(__IO uint8_t *) &(&hspi1)->Instance->DR;
-			rx_data++;
+			(*(uint8_t*) &rx_data[rx]) = *(__IO uint8_t *) &(&hspi1)->Instance->DR;
 			rx++;
 		}
 
 		if (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_TXE) && tx < 3)
 		{
-			*(__IO uint8_t *) &(&hspi1)->Instance->DR = (*tx_data);
-			tx_data++;
+			*(__IO uint8_t *) &(&hspi1)->Instance->DR = tx_data[tx];
 			tx++;
 		}
 	}
 
-	slaveDeselect();
+	this->slaveDeselect();
 }
 
 template <int num_of_sf>

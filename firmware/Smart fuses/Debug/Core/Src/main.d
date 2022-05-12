@@ -31,7 +31,7 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
  ../Core/Inc/can.h ../Core/Inc/main.h ../Core/Inc/spi.h \
  ../Core/Inc/gpio.h ../Core/Inc/timer.h ../Core/Inc/fuse.hpp \
- ../Core/Inc/spi.h ../Core/Inc/timer.h ../Core/Inc/include/etl/vector.h \
+ ../Core/Inc/spi.h ../Core/Inc/timer.h ../Core/Inc/include/etl/array.h \
  ../Core/Inc/include/etl/platform.h \
  ../Core/Inc/include/etl/file_error_numbers.h \
  ../Core/Inc/include/etl/profiles/determine_compiler_version.h \
@@ -47,13 +47,14 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Inc/include/etl/functional.h \
  ../Core/Inc/include/etl/private/minmax_push.h \
  ../Core/Inc/include/etl/private/minmax_pop.h \
- ../Core/Inc/include/etl/error_handler.h \
- ../Core/Inc/include/etl/exception.h ../Core/Inc/include/etl/function.h \
- ../Core/Inc/include/etl/memory.h ../Core/Inc/include/etl/alignment.h \
- ../Core/Inc/include/etl/placement_new.h ../Core/Inc/include/etl/array.h \
+ ../Core/Inc/include/etl/exception.h \
  ../Core/Inc/include/etl/parameter_type.h \
- ../Core/Inc/include/etl/nth_type.h \
+ ../Core/Inc/include/etl/error_handler.h \
+ ../Core/Inc/include/etl/function.h ../Core/Inc/include/etl/nth_type.h \
  ../Core/Inc/include/etl/initializer_list.h \
+ ../Core/Inc/include/etl/vector.h ../Core/Inc/include/etl/memory.h \
+ ../Core/Inc/include/etl/alignment.h \
+ ../Core/Inc/include/etl/placement_new.h ../Core/Inc/include/etl/array.h \
  ../Core/Inc/include/etl/debug_count.h ../Core/Inc/include/etl/atomic.h \
  ../Core/Inc/include/etl/atomic/atomic_std.h \
  ../Core/Inc/include/etl/atomic/../platform.h \
@@ -116,7 +117,7 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/fuse.hpp:
 ../Core/Inc/spi.h:
 ../Core/Inc/timer.h:
-../Core/Inc/include/etl/vector.h:
+../Core/Inc/include/etl/array.h:
 ../Core/Inc/include/etl/platform.h:
 ../Core/Inc/include/etl/file_error_numbers.h:
 ../Core/Inc/include/etl/profiles/determine_compiler_version.h:
@@ -134,16 +135,17 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/include/etl/functional.h:
 ../Core/Inc/include/etl/private/minmax_push.h:
 ../Core/Inc/include/etl/private/minmax_pop.h:
-../Core/Inc/include/etl/error_handler.h:
 ../Core/Inc/include/etl/exception.h:
+../Core/Inc/include/etl/parameter_type.h:
+../Core/Inc/include/etl/error_handler.h:
 ../Core/Inc/include/etl/function.h:
+../Core/Inc/include/etl/nth_type.h:
+../Core/Inc/include/etl/initializer_list.h:
+../Core/Inc/include/etl/vector.h:
 ../Core/Inc/include/etl/memory.h:
 ../Core/Inc/include/etl/alignment.h:
 ../Core/Inc/include/etl/placement_new.h:
 ../Core/Inc/include/etl/array.h:
-../Core/Inc/include/etl/parameter_type.h:
-../Core/Inc/include/etl/nth_type.h:
-../Core/Inc/include/etl/initializer_list.h:
 ../Core/Inc/include/etl/debug_count.h:
 ../Core/Inc/include/etl/atomic.h:
 ../Core/Inc/include/etl/atomic/atomic_std.h:

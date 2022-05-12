@@ -1,0 +1,48 @@
+/*
+ * gpio elements.hpp
+ *
+ *  Created on: 6 maj 2022
+ *      Author: Piotr Lesicki
+ */
+
+#ifndef INC_GPIO_ELEMENTS_HPP_
+#define INC_GPIO_ELEMENTS_HPP_
+
+#include "stm32l4xx_hal.h"
+
+class GpioElement
+{
+	public:
+		GpioElement(const GPIO_TypeDef * const port, const uint32_t pin);
+
+		bool is_inverted;
+
+		virtual ~GpioElement() = 0;
+
+	protected:
+		bool state;
+
+		const uint32_t pin;
+
+		const GPIO_TypeDef * const port;
+};
+
+class GpioOutElement : public GpioElement
+{
+	public:
+		GpioOutElement(const GPIO_TypeDef * const port, const uint32_t pin);
+
+		void activate();
+		void deactivate();
+		//void toogle();
+};
+
+class GpioInElement : public GpioElement
+{
+	public:
+		GpioInElement(const GPIO_TypeDef * const port, const uint32_t pin);
+
+		bool read();
+};
+
+#endif /* INC_GPIO_ELEMENTS_HPP_ */

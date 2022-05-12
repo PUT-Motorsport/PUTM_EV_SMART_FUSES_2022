@@ -152,8 +152,10 @@ int main(void)
 		state = sf_handler.smart_fuses[1].getSmartFuseState();
 		if(state != SmartFuseState::Ok ) led_error.activate();
 
- 		if(tim.getPassedTime() >= 1000)
+
+ 		if(tim.getPassedTime() >= 5000)
 		{
+ 			tim.restart();
 			if (tog)
 			{
 				sf_handler.smart_fuses[1].activeAllFuses();

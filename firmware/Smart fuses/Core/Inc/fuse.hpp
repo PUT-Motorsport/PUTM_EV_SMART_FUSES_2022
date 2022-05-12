@@ -23,6 +23,7 @@
 #include "stm32l4xx_hal.h"
 #include "spi.h"
 #include "timer.h"
+#include "include/etl/array.h"
 #include "include/etl/vector.h"
 
 /*
@@ -30,8 +31,6 @@
  * commonly VN100..afasdfhas sth responds relatively fast
  */
 #define FUSE_TIMEOUT 6
-
-//using namespace etl;
 
 enum struct SmartFuseState : uint8_t
 {
@@ -166,7 +165,7 @@ class SmartFuse
 
 		const uint32_t pin;
 
-		Fuse fuses[6];
+		std::array < Fuse, 6 > fuses;
 
 		const GPIO_TypeDef * const port;
 
@@ -180,7 +179,7 @@ class SmartFuse
 
 		void slaveSelect();
 		void slaveDeselect();
-		void transmitReceiveData(uint8_t *tx_data, uint8_t *rx_data);
+		void transmitReceiveData(std::array<uint8_t, 3> tx_data, std::array<uint8_t, 3> &rx_data);
 
 
 };
