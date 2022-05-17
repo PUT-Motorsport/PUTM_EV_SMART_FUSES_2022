@@ -92,15 +92,18 @@ void SmartFuse::slaveDeselect(void)
 
 SmartFuseState SmartFuse::init(void)
 {
-	std::array<uint8_t, 3> tx_data{ 0, 0, 0 };
-	std::array<uint8_t, 3> rx_data{ 0, 0, 0 };
+	std::array<uint8_t, 3> tx_data { 0, 0, 0 };
+	std::array<uint8_t, 3> rx_data { 0, 0, 0 };
+
+	//modifyTab(tx_data, 0, 0, 0);
 
 	/// reset smart fuse
-	tx_data[0] = RESET_SMARTFUSE();
+	modifyTab(tx_data, RESET_SMARTFUSE(), 0, 0);
 	transmitReceiveData(tx_data, rx_data);
 
 	/// wait for smart fuse to wake up
-	tx_data[0] = READ_ROM(0x01);
+
+	modifyTab(tx_data, READ_ROM(0x01), 0, 0);
 	for (int i = 0; i < FUSE_TIMEOUT; i++)
 	{
 		if(!IF_RESET_STATE(rx_data)) break;
@@ -134,6 +137,7 @@ SmartFuseState SmartFuse::init(void)
 		transmitReceiveData(tx_data, rx_data);
 
 		/// 0x08 to 0x0d - Outputs Configuration Register - set sampling mode
+		tx_data[0] = WRITE_RAM(0x08 + i);
 		tx_data[1] = 0x00;
 		switch (this->fuses_settings.sampling_mode[i])
 		{
@@ -142,7 +146,6 @@ SmartFuseState SmartFuse::init(void)
 			case SamplingMode::Continuous: tx_data[2] = 0x80; break;
 			case SamplingMode::Filtered: tx_data[2] = 0xc0; break;
 		}
-		tx_data[0] = WRITE_RAM(0x08 + i);
 		transmitReceiveData(tx_data, rx_data);
 
 		/// just in case
@@ -189,16 +192,12 @@ SmartFuseState SmartFuse::handle(void)
 		transmitReceiveData(tx_data, rx_data);
 		this->watch_dog.restart();
 	}
-//	else
-//	{
-//		return this->state;
-//	}
 
 	for(int i = 0; i < 6; i++)
 	{
 		tx_data[0] = READ_RAM(0x28 + i);
 		transmitReceiveData(tx_data, rx_data);
-		this->fuses[i].current = uint16_t(rx_data[1]) << 4 | uint16_t(rx_data[2]) >> 4;//(*(uint16_t*)(rx_data + 1) >> 4) & 0x03ff;
+		this->fuses[i].current = uint16_t(rx_data[1]) << 4 | uint16_t(rx_data[2]) >> 4;
 	}
 
 	this->state = checkGSB(rx_data[0]);
@@ -208,20 +207,20 @@ SmartFuseState SmartFuse::handle(void)
 /// handle timer only
 SmartFuseState SmartFuse::handle_timer(void)
 {
-	if(watch_dog.getPassedTime() >= 30)
+	if(watch_dog.getPassedTime() >= 40)
 	{
-		std::array < uint8_t, 3 >  tx_data { 0, 0, 0 };
-		std::array < uint8_t, 3 >  rx_data { 0, 0, 0 };
+		std::array < uint8_t, 3 > tx_data { 0, 0, 0 };
+		std::array < uint8_t, 3 > rx_data { 0, 0, 0 };
 
 		this->toggle = !this->toggle;
 		tx_data[0] = READ_RAM(0x13);
-		this->transmitReceiveData(tx_data, rx_data);
-		modifyTab(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] ^= (1 << 1));
-		this->transmitReceiveData(tx_data, rx_data);
+		transmitReceiveData(tx_data, rx_data);
+		rx_data[2] &= ~(1 << 1);
+		modifyTab(tx_data, WRITE_RAM(0x13), rx_data[1], rx_data[2] |= (toggle << 1));
+		transmitReceiveData(tx_data, rx_data);
 		this->watch_dog.restart();
 
-		this->state = checkGSB(rx_data[0]);
-		return this->state;
+		this->state = checkGSB(rx_data[2]);
 	}
 
 	return this->state;
@@ -285,9 +284,6 @@ SmartFuseState SmartFuse::activeAllFuses(void)
 	modifyTab(tx_data, WRITE_RAM(0x13), 0x3f, this->toggle << 1);
 	this->transmitReceiveData(tx_data, rx_data);
 
-//	modifyTab(tx_data, READ_RAM(0x13), 0x00, 0x00);
-//	this->transmitReceiveData(tx_data, rx_data);
-
 	this->state = checkGSB(rx_data[0]);
 	return this->state;
 }
@@ -342,7 +338,12 @@ void SmartFuse::transmitReceiveData(std::array<uint8_t, 3> tx_data, std::array<u
 	this->slaveDeselect();
 }
 
-template <int num_of_sf>
+uint16_t SmartFuse::getFuseCurrent(FuseNumber fuse)
+{
+	return this->fuses[size_t(fuse)].current;
+}
+
+template <uint32_t num_of_sf>
 bool SmartFuseHandler<num_of_sf>::handle_all()
 {
 	bool result = true;
@@ -353,7 +354,7 @@ bool SmartFuseHandler<num_of_sf>::handle_all()
 	return result;
 }
 
-template <int num_of_sf>
+template <uint32_t num_of_sf>
 bool SmartFuseHandler<num_of_sf>::init_all()
 {
 	bool result = true;
@@ -362,7 +363,7 @@ bool SmartFuseHandler<num_of_sf>::init_all()
 
 	for(auto smart_fuse : smart_fuses)
 	{
-		for(int i = 0; i < buff; i++) this->smart_fuses[i].handle();
+		for(int i = 0; i < buff; i++) this->smart_fuses[i].handle_timer();
 		if(smart_fuse.init() != SmartFuseState::Ok) result = false;
 		buff++;
 	}

@@ -75,6 +75,20 @@ void SystemClock_Config(void);
 /*Private user code ---------------------------------------------------------*/
 /*USER CODE BEGIN 0 */
 
+GpioOutElement led_ok(GPIOC, GPIO_PIN_0, true);
+GpioOutElement led_warning_1(GPIOC, GPIO_PIN_1, true);
+GpioOutElement led_warning_2(GPIOC, GPIO_PIN_2, true);
+GpioOutElement led_error(GPIOC, GPIO_PIN_3, true);
+
+uint16_t curr0 = 0;
+uint16_t curr1 = 0;
+uint16_t curr2 = 0;
+uint16_t curr3 = 0;
+uint16_t curr4 = 0;
+uint16_t curr5 = 0;
+
+SmartFuseState state_kek;
+
 /*USER CODE END 0 */
 
 /**
@@ -91,8 +105,8 @@ int main(void)
 	{
 		{ true, true, true, true, true, true },
 		{ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-		{ SamplingMode::Filtered, SamplingMode::Filtered, SamplingMode::Filtered,
-		  SamplingMode::Filtered, SamplingMode::Filtered, SamplingMode::Filtered },
+		{ SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous,
+		  SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous },
 		{ 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff },
 		{ { 0x0000, 0xffff },  { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff } }
 	};
@@ -101,11 +115,6 @@ int main(void)
 	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_2, &hspi1, fuses_settings);
 	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_3, &hspi1, fuses_settings);
 	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_4, &hspi1, fuses_settings);
-
-	GpioOutElement led_ok(GPIOC, GPIO_PIN_0, true);
-	GpioOutElement led_warning_1(GPIOC, GPIO_PIN_1, true);
-	GpioOutElement led_warning_2(GPIOC, GPIO_PIN_2, true);
-	GpioOutElement led_error(GPIOC, GPIO_PIN_3, true);
 
 	/*USER CODE END 1 */
 
@@ -131,10 +140,11 @@ int main(void)
 	MX_SPI1_Init();
 	/*USER CODE BEGIN 2 */
 
-	//sf_handler.init_all();
-	sf_handler.smart_fuses[1].init();
+	sf_handler.init_all();
+	//const int fuse_num = 2;
+	//sf_handler.smart_fuses[fuse_num].init();
 
-	led_ok.activate();
+	led_ok.deactivate();
 	led_warning_1.deactivate();
 	led_warning_2.deactivate();
 	led_error.deactivate();
@@ -144,28 +154,44 @@ int main(void)
 	/*Infinite loop */
 	/*USER CODE BEGIN WHILE */
 	Timer tim;
-	bool tog = false;
-	SmartFuseState state;
+	Timer tim2;
+	//bool tog = false;
+	//SmartFuseState state;
 	while (1)
 	{
-		sf_handler.smart_fuses[1].handle();
-		state = sf_handler.smart_fuses[1].getSmartFuseState();
-		if(state != SmartFuseState::Ok ) led_error.activate();
+		//sf_handler.smart_fuses[fuse_num].handle();
+		//state = sf_handler.smart_fuses[fuse_num].getSmartFuseState();
+//		if(state != SmartFuseState::Ok ) led_error.activate();
+//		state_kek = sf_handler.smart_fuses[fuse_num].getSmartFuseState();
+		if(!sf_handler.handle_all()) led_error.activate();
+		else led_error.deactivate();
 
 
- 		if(tim.getPassedTime() >= 5000)
-		{
- 			tim.restart();
-			if (tog)
-			{
-				sf_handler.smart_fuses[1].activeAllFuses();
-			}
-			else
-			{
-				sf_handler.smart_fuses[1].deactivateAllFuses();
-			}
-			tog = !tog;
-		}
+//		if(tim2.getPassedTime() >= 500)
+//		{
+//			tim2.restart();
+//			curr0 = sf_handler.smart_fuses[fuse_num].getFuseCurrent(FuseNumber::f0);
+//			curr1 = sf_handler.smart_fuses[fuse_num].getFuseCurrent(FuseNumber::f1);
+//			curr2 = sf_handler.smart_fuses[fuse_num].getFuseCurrent(FuseNumber::f2);
+//			curr3 = sf_handler.smart_fuses[fuse_num].getFuseCurrent(FuseNumber::f3);
+//			curr4 = sf_handler.smart_fuses[fuse_num].getFuseCurrent(FuseNumber::f4);
+//			curr5 = sf_handler.smart_fuses[fuse_num].getFuseCurrent(FuseNumber::f5);
+//		}
+
+// 		if(tim.getPassedTime() >= 5000)
+//		{
+// 			tim.restart();
+//			if (tog)
+//			{
+//				sf_handler.smart_fuses[fuse_num].activeAllFuses();
+//			}
+//			else
+//			{
+//				sf_handler.smart_fuses[fuse_num].deactivateAllFuses();
+//			}
+//			tog = !tog;
+//		}
+
 		/*USER CODE END WHILE */
 
 		/*USER CODE BEGIN 3 */
@@ -222,76 +248,6 @@ void SystemClock_Config(void)
 
 /*USER CODE BEGIN 4 */
 
-//void selectFuse(int num)
-//{
-//	HAL_GPIO_WritePin(FUSE0, (num == 1 ? RESET : SET));
-//	HAL_GPIO_WritePin(FUSE1, (num == 2 ? RESET : SET));
-//	HAL_GPIO_WritePin(FUSE2, (num == 3 ? RESET : SET));
-//	HAL_GPIO_WritePin(FUSE3, (num == 4 ? RESET : SET));
-//}
-
-//void deselectAllFuses()
-//{
-//	HAL_GPIO_WritePin(FUSE0, SET);
-//	HAL_GPIO_WritePin(FUSE1, SET);
-//	HAL_GPIO_WritePin(FUSE2, SET);
-//	HAL_GPIO_WritePin(FUSE3, SET);
-//	//HAL_Delay(100);
-//}
-
-//void transferReceive(uint8_t *tx_data, uint8_t *rx_data)
-//{
-//	while(!__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_TXE));
-//	*(__IO uint8_t *) &(&hspi1)->Instance->DR = (*tx_data);
-//	while(!__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_RXNE));
-//	(*(uint8_t*) rx_data) = *(__IO uint8_t *) &(&hspi1)->Instance->DR;
-//}
-
-//void sendDataToFuse(uint8_t fuse, uint8_t *tx_data, uint8_t *rx_data)
-//{
-//	/// just check
-//	if (((&hspi1)->Instance->CR1 &SPI_CR1_SPE) != SPI_CR1_SPE) __HAL_SPI_ENABLE(&hspi1);
-//
-//	selectFuse(fuse);
-//	for (uint8_t tx = 0, rx = 0; tx < 3 || rx < 3;)
-//	{
-//		if (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_RXNE) && rx < 3)
-//		{
-//			(*(uint8_t*) rx_data) = *(__IO uint8_t *) &(&hspi1)->Instance->DR;
-//			rx_data++;
-//			rx++;
-//		}
-//
-//		if (__HAL_SPI_GET_FLAG(&hspi1, SPI_FLAG_TXE) && tx < 3)
-//		{
-//			*(__IO uint8_t *) &(&hspi1)->Instance->DR = (*tx_data);
-//			tx_data++;
-//			tx++;
-//		}
-//	}
-//	deselectAllFuses();
-//}
-
-//void calculateParityBit(uint8_t* x)
-//{
-//	///clear parity bit
-//	*(x + 2) &= ~(1 << 0);
-//
-//	uint8_t num_of_bits = 0;
-//	for (int i = 0; i < 3; i++)
-//	{
-//		uint8_t bit = *(x + i);
-//		for (int j = 0; j < 8; j++)
-//		{
-//			if (bit & (1 << j)) num_of_bits++;
-//		}
-//	}
-//	if(num_of_bits % 2 == 0 )
-//	{
-//		*(x + 2) |= (1 << 0);
-//	}
-//}
-
 /*USER CODE END 4 */
 
 /**
@@ -302,10 +258,11 @@ void Error_Handler(void)
 {
 	/*USER CODE BEGIN Error_Handler_Debug */
 	/*User can add his own implementation to report the HAL error return state */
-	HAL_GPIO_WritePin(LED_OK, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(LED_WARNING1, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(LED_WARNING2, GPIO_PIN_SET);
-	HAL_GPIO_WritePin(LED_ERROR, GPIO_PIN_RESET);
+	led_ok.deactivate();
+	led_warning_1.deactivate();
+	led_warning_2.deactivate();
+	led_error.activate();
+
 	__disable_irq();
 	while (1) {}
 

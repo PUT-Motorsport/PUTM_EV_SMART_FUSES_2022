@@ -348,6 +348,11 @@
     (effects (font (size 2.9972 2.9972) (thickness 0.5994) bold) (justify right bottom))
     (uuid 1f09363c-7843-4225-abce-00a32f9e850d)
   )
+  (text "odrive zamiast dashboarda\n8\n9\n10\ndashboard na spara_2"
+    (at 147.32 115.57 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 40e33ece-dd4f-4678-80aa-892779bad634)
+  )
 
   (global_label "V_BSPD" (shape input) (at 208.534 97.028 0) (fields_autoplaced)
     (effects (font (size 1.27 1.27)) (justify left))

@@ -123,7 +123,7 @@ class SmartFuse
 		SmartFuseState activeAllFuses(void);
 		SmartFuseState deactivateAllFuses(void);
 
-		uint16_t readFuseCurrent(FuseNumber fuse);
+		uint16_t getFuseCurrent(FuseNumber fuse);
 
 		SmartFuseState init(void);
 		SmartFuseState handle(void);
@@ -184,7 +184,7 @@ class SmartFuse
 
 };
 
-template <int num_of_sf>
+template <uint32_t num_of_sf>
 class SmartFuseHandler
 {
 	public:

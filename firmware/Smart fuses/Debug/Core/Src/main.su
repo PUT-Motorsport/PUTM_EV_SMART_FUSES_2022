@@ -1,4 +1,23 @@
-../Core/Src/main.cpp:301:6:void Error_Handler()	8	static,ignoring_inline_asm
-../Core/Src/main.cpp:181:6:void SystemClock_Config()	104	static
-../Core/Src/main.cpp:84:5:int main()	672	static
-../Core/Src/main.cpp:313:1:cpp)	8	static
+d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+fp/hard/bits/gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
+d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\new:174:33:void* operator new(std::size_t, void*)	16	static
+../Core/Inc/include/etl/private/vector_base.h:150:5:etl::vector_base::vector_base(size_t)	16	static
+../Core/Inc/gpio elements.hpp:19:11:GpioElement::~GpioElement()	16	static
+../Core/Inc/gpio elements.hpp:19:11:virtual GpioElement::~GpioElement()	16	static
+../Core/Inc/fuse.hpp:188:7:SmartFuseHandler<4>::SmartFuseHandler()	16	static
+../Core/Src/main.cpp:98:5:int main()	664	static
+../Core/Src/main.cpp:207:6:void SystemClock_Config()	104	static
+../Core/Src/main.cpp:257:6:void Error_Handler()	8	static,ignoring_inline_asm
+../Core/Inc/include/etl/vector.h:1197:5:etl::vector<T, MAX_SIZE_>::vector() [with T = SmartFuse; unsigned int MAX_SIZE_ = 4]	16	static
+../Core/Inc/include/etl/utility.h:60:17:constexpr T&& etl::forward(typename etl::remove_reference<T>::type&) [with T = GPIO_TypeDef*]	16	static
+../Core/Inc/include/etl/utility.h:60:17:constexpr T&& etl::forward(typename etl::remove_reference<T>::type&) [with T = short unsigned int]	16	static
+../Core/Inc/include/etl/utility.h:60:17:constexpr T&& etl::forward(typename etl::remove_reference<T>::type&) [with T = __SPI_HandleTypeDef*]	16	static
+../Core/Inc/include/etl/vector.h:467:10:) [with Args = {GPIO_TypeDef*, short unsigned int, __SPI_HandleTypeDef*, FusesSettings&}; T = SmartFuse]	48	static
+../Core/Inc/include/etl/vector.h:1003:5:etl::ivector<T>::ivector(T*, size_t) [with T = SmartFuse]	24	static
+../Core/Inc/include/etl/vector.h:1013:10:void etl::ivector<T>::initialise() [with T = SmartFuse]	16	static
+../Core/Inc/include/etl/utility.h:60:17:constexpr T&& etl::forward(typename etl::remove_reference<T>::type&) [with T = FusesSettings&]	16	static
+../Core/Inc/include/etl/memory.h:1067:5:typename etl::enable_if<etl::is_trivially_destructible<typename etl::iterator_traits<TIterator>::value_type>::value, void>::type etl::destroy(TIterator, TIterator) [with TIterator = SmartFuse*]	16	static
+../Core/Inc/gpio elements.hpp:30:7:GpioOutElement::~GpioOutElement()	16	static
+../Core/Inc/gpio elements.hpp:30:7:virtual GpioOutElement::~GpioOutElement()	16	static
+../Core/Src/main.cpp:270:1:void __static_initialization_and_destruction_0(int, int)	16	static
+../Core/Src/main.cpp:270:1:cpp)	8	static
+../Core/Src/main.cpp:270:1:cpp)	8	static
