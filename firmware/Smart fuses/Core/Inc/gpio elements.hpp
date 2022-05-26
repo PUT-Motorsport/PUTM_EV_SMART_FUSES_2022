@@ -37,7 +37,7 @@ class GpioOutElement : public GpioElement
 		void deactivate();
 
 		//void handle() override;
-		//void toogle();
+		void toggle();
 };
 
 class GpioInElement : public GpioElement

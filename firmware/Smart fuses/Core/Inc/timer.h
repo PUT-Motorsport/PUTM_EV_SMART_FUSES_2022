@@ -14,13 +14,18 @@ class Timer
 {
 	public:
 		Timer();
+		Timer(uint32_t timeout);
 
 		void restart();
 
+		bool checkIfTimedOutAndReset();
+
 		uint32_t getPassedTime();
+		uint32_t getPassedTimeAndReset();
 
 	private:
-		uint32_t start_time;
+		volatile uint32_t start_time;
+		volatile uint32_t timeout = 0;
 };
 
 #endif /* INC_TIMER_HPP_ */

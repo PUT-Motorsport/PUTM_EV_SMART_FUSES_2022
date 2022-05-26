@@ -18,12 +18,17 @@ GpioOutElement::GpioOutElement(const GPIO_TypeDef *port, const uint32_t pin, con
 
 void GpioOutElement::activate()
 {
-	HAL_GPIO_WritePin((GPIO_TypeDef*)(this->port), this->pin, this->is_inverted ? GPIO_PIN_RESET : GPIO_PIN_SET);
+	HAL_GPIO_WritePin((GPIO_TypeDef*)(this->port), this->pin, (this->is_inverted ? GPIO_PIN_RESET : GPIO_PIN_SET));
 }
 
 void GpioOutElement::deactivate()
 {
-	HAL_GPIO_WritePin((GPIO_TypeDef*)(this->port), this->pin, this->is_inverted ? GPIO_PIN_SET : GPIO_PIN_RESET);
+	HAL_GPIO_WritePin((GPIO_TypeDef*)(this->port), this->pin, (this->is_inverted ? GPIO_PIN_SET : GPIO_PIN_RESET));
+}
+
+void GpioOutElement::toggle()
+{
+	HAL_GPIO_TogglePin((GPIO_TypeDef*)(this->port), this->pin);
 }
 
 GpioInElement::GpioInElement(const GPIO_TypeDef * const port, const uint32_t pin) :
@@ -47,7 +52,7 @@ bool GpioInElement::isActive()
 	 *	  basically a XOR operation
 	 *
 	 */
-	return (HAL_GPIO_ReadPin((GPIO_TypeDef*)(this->port), this->pin) == GPIO_PIN_RESET) != this->is_inverted;
+	return ((HAL_GPIO_ReadPin((GPIO_TypeDef*)(this->port), this->pin) == GPIO_PIN_SET) != this->is_inverted);
 }
 
 

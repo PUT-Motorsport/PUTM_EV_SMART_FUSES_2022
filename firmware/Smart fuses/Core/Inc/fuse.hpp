@@ -14,7 +14,11 @@
  *
  *  2.	Most of values have their explanation in place so definitely check those.
  *
- *  3.	Fuses use a handler object, which handles all fuses, which needs to be called. It became a
+ *  3.	Fuses use a handler object, which handles all fuses, which needs to be called.
+ *
+ *  4.  Well settings are a mess i guess.
+ *
+ *  5. 	How to pro
  */
 
 #ifndef INC_FUSE_HPP_
@@ -23,14 +27,15 @@
 #include "stm32l4xx_hal.h"
 #include "spi.h"
 #include "timer.h"
-#include "include/etl/array.h"
-#include "include/etl/vector.h"
+#include "etl/array.h"
+#include "etl/vector.h"
 
 /*
  * checks n number of times for fuse, the number shouldn't be too big
  * commonly VN100..afasdfhas sth responds relatively fast
  */
-#define FUSE_TIMEOUT 6
+
+constexpr size_t fuse_timeout = 6;
 
 enum struct SmartFuseState : uint8_t
 {
@@ -56,6 +61,14 @@ enum struct SmartFuseState : uint8_t
 	 */
 	FailSafe,
 	NotResponding,
+};
+
+enum struct FuseState : uint8_t
+{
+	Ok,
+	UnderCurrent,
+	OverCurrent,
+	ShortedToGround
 };
 
 enum struct SamplingMode : uint8_t
@@ -97,16 +110,16 @@ struct FusesSettings
 	SamplingMode sampling_mode[6];
 
 	/*
-	 * PWM duty cykle:
+	 * PWM duty cycle:
 	 * 0 to 1023 - 0% to 100% fill
 	 */
-	uint16_t duty_cykle[6];
+	uint16_t duty_cycle[6];
 
 	/*
 	 * clamping currents of respective fuses
 	 * first is the bottom clamp and second is the upper clamp
 	 */
-	etl::pair<uint16_t, uint16_t> clamping_currents[6];
+	std::pair<uint16_t, uint16_t> clamping_currents[6];
 
 	/*
 	 * there is more but this much is enough for now
@@ -120,18 +133,32 @@ class SmartFuse
 
 		SmartFuseState activeFuse(FuseNumber fuse);
 		SmartFuseState deactivateFuse(FuseNumber fuse);
-		SmartFuseState activeAllFuses(void);
-		SmartFuseState deactivateAllFuses(void);
+		SmartFuseState activeAllFuses();
+		SmartFuseState deactivateAllFuses();
 
 		uint16_t getFuseCurrent(FuseNumber fuse);
 
-		SmartFuseState init(void);
-		SmartFuseState handle(void);
-		SmartFuseState handle_timer(void);
+		SmartFuseState init();
+		/*
+		 * shouldn't be used outside of handler if there is more than two
+		 * smartfuses, because it can couse some inconsistencies in timing of
+		 * SmarFuses watch dogs
+		 */
+		SmartFuseState enable();
+		SmartFuseState disable();
+		/*
+		 * handles the smart fuse watchdog, current read / clamping, also if for
+		 * some reason, a channel was switched off, program assumes that the channel
+		 * was shorted to ground
+		 */
+		SmartFuseState handle();
+		SmartFuseState handleTimer();
 
-		SmartFuseState setFuseDutyCykle(FuseNumber fuse, uint16_t duty_cykle);
+		SmartFuseState setFuseDutyCykle(FuseNumber fuse, uint16_t duty_cycle);
 
-		SmartFuseState getSmartFuseState(void);
+		SmartFuseState getState() const;
+
+		uint8_t getLastGSB() const;
 
 	private:
 		/*
@@ -148,12 +175,14 @@ class SmartFuse
 			/*
 			 * clamping currents
 			 */
-			etl::pair<uint16_t, uint16_t> clamping_currents;
+			std::pair < uint16_t, uint16_t > clamping_currents;
+
+			FuseState state;
 		};
 
 		/*
 		 * smart fuse has a watch dog timer toggle bit which needs to be toggled within
-		 * a certain amount of time
+		 * a certain amount of time. It's handled by handle() and handleTimer()
 		 */
 		bool toggle;
 
@@ -179,23 +208,36 @@ class SmartFuse
 
 		void slaveSelect();
 		void slaveDeselect();
-		void transmitReceiveData(std::array<uint8_t, 3> tx_data, std::array<uint8_t, 3> &rx_data);
 
+		void reset();
+		void setUpAllDutyCycles();
+		void setUpAllSamplingModes();
+		void setUpAllLatchOffTimers();
+		void setUpAllChanelsStates();
 
+		void transmitReceiveData(std::array < uint8_t, 3 > tx_data, std::array < uint8_t, 3 > &rx_data);
+
+		SmartFuseState getGSB(std::array < uint8_t, 3 > x);
 };
 
 template <uint32_t num_of_sf>
 class SmartFuseHandler
 {
 	public:
-		etl::vector<SmartFuse, num_of_sf> smart_fuses;
+		etl::vector < SmartFuse, num_of_sf > smart_fuses;
 
 		/*
-		 * false - if not ok
-		 * true - if ok
+		 * all functions return summed up states
 		 */
-		bool handle_all();
-		bool init_all();
+		SmartFuseState handleAll();
+		SmartFuseState initAll();
+		/*
+		 * halting function - num_of_fuses * 5 ms
+		 * it's there prevent watchdog time frames overlapping, which coused
+		 * some timing issues.
+		 */
+		SmartFuseState enableAll();
+		SmartFuseState disableAll();
 };
 
 /*
