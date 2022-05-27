@@ -2463,12 +2463,6 @@
     (path "/00000000-0000-0000-0000-000062af9e21/a6efb9f6-3a78-4757-9626-0d00106647a0"
       (reference "#PWR0134") (unit 1) (value "GND") (footprint "")
     )
-    (path "/00000000-0000-0000-0000-000062af9e21/a5c3f03d-ebb1-4984-821e-a3e78d9a4f98"
-      (reference "#PWR0135") (unit 1) (value "GND") (footprint "")
-    )
-    (path "/00000000-0000-0000-0000-000062af9e21/004ffe44-989a-428b-ba28-e20959a030a2"
-      (reference "#PWR0136") (unit 1) (value "GND") (footprint "")
-    )
     (path "/00000000-0000-0000-0000-000062af9e21/616912ca-533f-4386-ab2c-ef3538169265"
       (reference "#PWR0137") (unit 1) (value "GND") (footprint "")
     )
@@ -2848,7 +2842,7 @@
       (reference "SW1") (unit 1) (value "RESET") (footprint "Button_Switch_THT:SW_PUSH_6mm")
     )
     (path "/00000000-0000-0000-0000-000062af9e21/00282a1d-12c8-48e8-981c-18223cd3a1b8"
-      (reference "U1") (unit 1) (value "AS222-35PN-933") (footprint "AS222-35PN-933C:AS222-35PN-933C-ver3-drill_0.72_size_1.02")
+      (reference "U1") (unit 1) (value "AS222-35PN-933") (footprint "Autosport:AS222-35PN-933C-ver4-drill_0.72_size_1.02")
     )
     (path "/00000000-0000-0000-0000-000062da47f9/f4e36f63-739f-4be2-b843-b4326a4d07c2"
       (reference "U2") (unit 1) (value "LM2596S-12") (footprint "Package_TO_SOT_SMD:TO-263-5_TabPin3")

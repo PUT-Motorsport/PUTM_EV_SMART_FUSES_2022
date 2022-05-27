@@ -28,7 +28,7 @@
 #include "timer.h"
 #include "fuse.hpp"
 #include "gpio elements.hpp"
-#include "can_interface.hpp"
+
 
 /* USER CODE END Includes */
 
