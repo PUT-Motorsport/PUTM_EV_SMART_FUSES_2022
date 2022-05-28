@@ -1,0 +1,6 @@
+[submodule "PUTM_EV_CAN_LIBRARY"]
+	path = PUTM_EV_CAN_LIBRARY
+	url = https://github.com/PUT-Motorsport/PUTM_EV_CAN_LIBRARY.git
+[submodule "firmware/Smart fuses/Core/Inc/PUTM_EV_CAN_LIBRARY"]
+	path = firmware/Smart fuses/Core/Inc/PUTM_EV_CAN_LIBRARY
+	url = https://github.com/PUT-Motorsport/PUTM_EV_CAN_LIBRARY.git
