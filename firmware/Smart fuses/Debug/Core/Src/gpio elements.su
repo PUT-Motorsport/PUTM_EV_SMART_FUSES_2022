@@ -5,9 +5,10 @@
 ../Core/Src/gpio elements.cpp:16:1:GpioOutElement::GpioOutElement(const GPIO_TypeDef*, uint32_t, bool)	24	static
 ../Core/Src/gpio elements.cpp:19:6:void GpioOutElement::activate()	16	static
 ../Core/Src/gpio elements.cpp:24:6:void GpioOutElement::deactivate()	16	static
-../Core/Src/gpio elements.cpp:29:1:GpioInElement::GpioInElement(const GPIO_TypeDef*, uint32_t)	24	static
-../Core/Src/gpio elements.cpp:32:1:GpioInElement::GpioInElement(const GPIO_TypeDef*, uint32_t, bool)	24	static
-../Core/Src/gpio elements.cpp:35:6:bool GpioInElement::isActive()	16	static
+../Core/Src/gpio elements.cpp:29:6:void GpioOutElement::toggle()	16	static
+../Core/Src/gpio elements.cpp:34:1:GpioInElement::GpioInElement(const GPIO_TypeDef*, uint32_t)	24	static
+../Core/Src/gpio elements.cpp:37:1:GpioInElement::GpioInElement(const GPIO_TypeDef*, uint32_t, bool)	24	static
+../Core/Src/gpio elements.cpp:40:6:bool GpioInElement::isActive()	16	static
 ../Core/Inc/gpio elements.hpp:43:7:GpioInElement::~GpioInElement()	16	static
 ../Core/Inc/gpio elements.hpp:43:7:virtual GpioInElement::~GpioInElement()	16	static
 ../Core/Inc/gpio elements.hpp:30:7:GpioOutElement::~GpioOutElement()	16	static

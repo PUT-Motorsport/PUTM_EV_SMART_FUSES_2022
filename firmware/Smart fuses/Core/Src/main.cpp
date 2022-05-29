@@ -1,4 +1,4 @@
- /* USER CODE BEGIN Header */
+/* USER CODE BEGIN Header */
 /**
  ******************************************************************************
  *@file           : main.c
@@ -28,7 +28,7 @@
 #include "timer.h"
 #include "fuse.hpp"
 #include "gpio elements.hpp"
-
+#include "PUTM_EV_CAN_LIBRARY/lib/can_interface.hpp"
 
 /* USER CODE END Includes */
 
@@ -78,7 +78,31 @@ GpioInElement safety_tms(GPIOB, GPIO_PIN_2, true);
 GpioInElement safety_td(GPIOB, GPIO_PIN_4, true);
 GpioInElement safety_hvd(GPIOB, GPIO_PIN_6, true);
 
-std::array < bool, 5 > states;
+//std::array < bool, 5 > states;
+
+std::array < SmartFuseState, 4 > states;
+std::array < std::array < FuseState, 6 >, 4 > chanel_states;
+
+enum struct Kek
+{
+	cos1,
+	cos2,
+	cos3
+};
+
+template < size_t size >
+class Map
+{
+	public:
+		std::array < FuseState, size > elems;
+
+		FuseState operator [] (const Kek& index)
+		{
+			return this->elems[static_cast<size_t>(index)];
+		}
+};
+
+Map < 3 > map_test;
 
 /* USER CODE END 0 */
 
@@ -137,7 +161,6 @@ int main(void)
 	led_warning_2.deactivate();
 	led_error.deactivate();
 
-	std::array < GpioOutElement, 4 > leds { led_ok, led_warning_1, led_warning_2, led_error };
 	std::array < GpioInElement, 5 > optos { safety_ams, safety_spare, safety_tms, safety_td, safety_hvd };
 
   /* USER CODE END 2 */
@@ -148,27 +171,48 @@ int main(void)
 	sf_handler.enableAll();
 	enable_mosfets.activate();
 
+	led_ok.activate();
+
+	map_test.elems[0] = FuseState::Ok;
+	map_test.elems[1] = FuseState::Error;
+	map_test.elems[2] = FuseState::Ok;
+
 	while (1)
 	{
-		sf_handler.handleAll();
-
-		SF_main sf_test
+		//----------------------------------------------------------------------------------------
+		// handle smart fuses and show as Ok/Warnings/Error
+		auto state = sf_handler.handleAll();
+		switch (state)
 		{
+			case SmartFuseState::LatchOff: led_warning_1.activate(); break;
+			case SmartFuseState::ResetState: led_warning_2.activate(); break;
+			case SmartFuseState::OLOFF: led_warning_2.activate(); break;
+			case SmartFuseState::OTPLVDS: led_warning_2.activate(); break;
+			case SmartFuseState::TempFail: led_warning_2.activate(); break;
+			case SmartFuseState::NotResponding: led_error.activate(); break;
+			case SmartFuseState::SPIError: led_error.activate(); break;
+			case SmartFuseState::FailSafe: led_error.activate(); break;
+			default:
 			{
-				.ok = 1,
-				.overheat = 0,
-				.undercurrent = 0,
-				.overcurrent = 0,
-				.current = 0
-			},
-			SF_states::OK
-		};
+				led_warning_1.deactivate();
+				led_warning_2.deactivate();
+				led_error.deactivate();
+			}
+		}
+		// debug stuff
+		states = sf_handler.getStates();
+		chanel_states = sf_handler.getChanelsStates();
 
-		auto sf_main_frame = PUTM_CAN::Can_tx_message<SF_main>(sf_test, can_tx_header_SF_MAIN);
-		auto status = sf_main_frame.send(hcan1);
-		if(status != HAL_StatusTypeDef::HAL_OK) led_error.activate();
-		else led_error.deactivate();
+		//----------------------------------------------------------------------------------------
+		// handle safety
+		for (auto& safety : optos)
+		{
+			safety.isActive();
+		}
 
+		//----------------------------------------------------------------------------------------
+		// can kek
+		//SF_main
 
     /* USER CODE END WHILE */
 
@@ -189,7 +233,7 @@ void SystemClock_Config(void)
 
   /** Configure the main internal regulator output voltage
   */
-  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
+  if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1_BOOST) != HAL_OK)
   {
     Error_Handler();
   }
@@ -201,7 +245,13 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.MSIState = RCC_MSI_ON;
   RCC_OscInitStruct.MSICalibrationValue = 0;
   RCC_OscInitStruct.MSIClockRange = RCC_MSIRANGE_6;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_MSI;
+  RCC_OscInitStruct.PLL.PLLM = 1;
+  RCC_OscInitStruct.PLL.PLLN = 60;
+  RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
+  RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
+  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -211,12 +261,12 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_MSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
   {
     Error_Handler();
   }

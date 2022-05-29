@@ -30,51 +30,53 @@ Core/Src/fuse.o: ../Core/Src/fuse.cpp ../Core/Inc/fuse.hpp \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_spi_ex.h \
  ../Core/Inc/spi.h ../Core/Inc/main.h ../Core/Inc/timer.h \
- ../Core/Inc/include/etl/array.h ../Core/Inc/include/etl/platform.h \
- ../Core/Inc/include/etl/file_error_numbers.h \
- ../Core/Inc/include/etl/profiles/determine_compiler_version.h \
- ../Core/Inc/include/etl/profiles/determine_compiler.h \
- ../Core/Inc/include/etl/profiles/determine_compiler_language_support.h \
- ../Core/Inc/include/etl/profiles/determine_development_os.h \
- ../Core/Inc/include/etl/profiles/determine_builtin_support.h \
- ../Core/Inc/include/etl/private/choose_namespace.h \
- ../Core/Inc/include/etl/algorithm.h \
- ../Core/Inc/include/etl/type_traits.h ../Core/Inc/include/etl/nullptr.h \
- ../Core/Inc/include/etl/static_assert.h \
- ../Core/Inc/include/etl/iterator.h ../Core/Inc/include/etl/utility.h \
- ../Core/Inc/include/etl/functional.h \
- ../Core/Inc/include/etl/private/minmax_push.h \
- ../Core/Inc/include/etl/private/minmax_pop.h \
- ../Core/Inc/include/etl/exception.h \
- ../Core/Inc/include/etl/parameter_type.h \
- ../Core/Inc/include/etl/error_handler.h \
- ../Core/Inc/include/etl/function.h ../Core/Inc/include/etl/nth_type.h \
- ../Core/Inc/include/etl/initializer_list.h \
- ../Core/Inc/include/etl/vector.h ../Core/Inc/include/etl/memory.h \
- ../Core/Inc/include/etl/alignment.h \
- ../Core/Inc/include/etl/placement_new.h ../Core/Inc/include/etl/array.h \
- ../Core/Inc/include/etl/debug_count.h ../Core/Inc/include/etl/atomic.h \
- ../Core/Inc/include/etl/atomic/atomic_std.h \
- ../Core/Inc/include/etl/atomic/../platform.h \
- ../Core/Inc/include/etl/atomic/../nullptr.h \
- ../Core/Inc/include/etl/atomic/../char_traits.h \
- ../Core/Inc/include/etl/atomic/../platform.h \
- ../Core/Inc/include/etl/atomic/../algorithm.h \
- ../Core/Inc/include/etl/atomic/../iterator.h \
- ../Core/Inc/include/etl/private/vector_base.h \
- ../Core/Inc/include/etl/private/../platform.h \
- ../Core/Inc/include/etl/private/../exception.h \
- ../Core/Inc/include/etl/private/../error_handler.h \
- ../Core/Inc/include/etl/private/../debug_count.h \
- ../Core/Inc/include/etl/private/ivectorpointer.h \
- ../Core/Inc/include/etl/private/pvoidvector.h \
- ../Core/Inc/include/etl/private/../algorithm.h \
- ../Core/Inc/include/etl/private/vector_base.h \
- ../Core/Inc/include/etl/private/../type_traits.h \
- ../Core/Inc/include/etl/private/../functional.h \
- ../Core/Inc/include/etl/private/../iterator.h \
- ../Core/Inc/include/etl/private/minmax_push.h \
- ../Core/Inc/include/etl/private/minmax_pop.h
+ ../Core/Inc/etl/array.h ../Core/Inc/etl/platform.h \
+ ../Core/Inc/etl/file_error_numbers.h \
+ ../Core/Inc/etl/profiles/determine_compiler_version.h \
+ ../Core/Inc/etl/profiles/determine_compiler.h \
+ ../Core/Inc/etl/profiles/determine_compiler_language_support.h \
+ ../Core/Inc/etl/profiles/determine_development_os.h \
+ ../Core/Inc/etl/profiles/determine_builtin_support.h \
+ ../Core/Inc/etl/private/choose_namespace.h ../Core/Inc/etl/algorithm.h \
+ ../Core/Inc/etl/type_traits.h ../Core/Inc/etl/nullptr.h \
+ ../Core/Inc/etl/static_assert.h ../Core/Inc/etl/iterator.h \
+ ../Core/Inc/etl/utility.h ../Core/Inc/etl/functional.h \
+ ../Core/Inc/etl/private/minmax_push.h \
+ ../Core/Inc/etl/private/minmax_pop.h ../Core/Inc/etl/exception.h \
+ ../Core/Inc/etl/parameter_type.h ../Core/Inc/etl/error_handler.h \
+ ../Core/Inc/etl/function.h ../Core/Inc/etl/nth_type.h \
+ ../Core/Inc/etl/initializer_list.h ../Core/Inc/etl/vector.h \
+ ../Core/Inc/etl/memory.h ../Core/Inc/etl/alignment.h \
+ ../Core/Inc/etl/placement_new.h ../Core/Inc/etl/array.h \
+ ../Core/Inc/etl/debug_count.h ../Core/Inc/etl/atomic.h \
+ ../Core/Inc/etl/atomic/atomic_std.h ../Core/Inc/etl/atomic/../platform.h \
+ ../Core/Inc/etl/atomic/../nullptr.h \
+ ../Core/Inc/etl/atomic/../char_traits.h \
+ ../Core/Inc/etl/atomic/../platform.h \
+ ../Core/Inc/etl/atomic/../algorithm.h \
+ ../Core/Inc/etl/atomic/../iterator.h \
+ ../Core/Inc/etl/private/vector_base.h \
+ ../Core/Inc/etl/private/../platform.h \
+ ../Core/Inc/etl/private/../exception.h \
+ ../Core/Inc/etl/private/../error_handler.h \
+ ../Core/Inc/etl/private/../debug_count.h \
+ ../Core/Inc/etl/private/ivectorpointer.h \
+ ../Core/Inc/etl/private/pvoidvector.h \
+ ../Core/Inc/etl/private/../algorithm.h \
+ ../Core/Inc/etl/private/vector_base.h \
+ ../Core/Inc/etl/private/../type_traits.h \
+ ../Core/Inc/etl/private/../functional.h \
+ ../Core/Inc/etl/private/../iterator.h \
+ ../Core/Inc/etl/private/minmax_push.h \
+ ../Core/Inc/etl/private/minmax_pop.h ../Core/Inc/etl/bitset.h \
+ ../Core/Inc/etl/integral_limits.h ../Core/Inc/etl/log.h \
+ ../Core/Inc/etl/binary.h ../Core/Inc/etl/limits.h \
+ ../Core/Inc/etl/char_traits.h ../Core/Inc/etl/power.h \
+ ../Core/Inc/etl/smallest.h ../Core/Inc/etl/span.h ../Core/Inc/etl/hash.h \
+ ../Core/Inc/etl/fnv_1.h ../Core/Inc/etl/ihash.h \
+ ../Core/Inc/etl/frame_check_sequence.h ../Core/Inc/etl/string.h \
+ ../Core/Inc/etl/basic_string.h ../Core/Inc/etl/flags.h \
+ ../Core/Inc/etl/string_view.h
 ../Core/Inc/fuse.hpp:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -109,55 +111,72 @@ Core/Src/fuse.o: ../Core/Src/fuse.cpp ../Core/Inc/fuse.hpp \
 ../Core/Inc/spi.h:
 ../Core/Inc/main.h:
 ../Core/Inc/timer.h:
-../Core/Inc/include/etl/array.h:
-../Core/Inc/include/etl/platform.h:
-../Core/Inc/include/etl/file_error_numbers.h:
-../Core/Inc/include/etl/profiles/determine_compiler_version.h:
-../Core/Inc/include/etl/profiles/determine_compiler.h:
-../Core/Inc/include/etl/profiles/determine_compiler_language_support.h:
-../Core/Inc/include/etl/profiles/determine_development_os.h:
-../Core/Inc/include/etl/profiles/determine_builtin_support.h:
-../Core/Inc/include/etl/private/choose_namespace.h:
-../Core/Inc/include/etl/algorithm.h:
-../Core/Inc/include/etl/type_traits.h:
-../Core/Inc/include/etl/nullptr.h:
-../Core/Inc/include/etl/static_assert.h:
-../Core/Inc/include/etl/iterator.h:
-../Core/Inc/include/etl/utility.h:
-../Core/Inc/include/etl/functional.h:
-../Core/Inc/include/etl/private/minmax_push.h:
-../Core/Inc/include/etl/private/minmax_pop.h:
-../Core/Inc/include/etl/exception.h:
-../Core/Inc/include/etl/parameter_type.h:
-../Core/Inc/include/etl/error_handler.h:
-../Core/Inc/include/etl/function.h:
-../Core/Inc/include/etl/nth_type.h:
-../Core/Inc/include/etl/initializer_list.h:
-../Core/Inc/include/etl/vector.h:
-../Core/Inc/include/etl/memory.h:
-../Core/Inc/include/etl/alignment.h:
-../Core/Inc/include/etl/placement_new.h:
-../Core/Inc/include/etl/array.h:
-../Core/Inc/include/etl/debug_count.h:
-../Core/Inc/include/etl/atomic.h:
-../Core/Inc/include/etl/atomic/atomic_std.h:
-../Core/Inc/include/etl/atomic/../platform.h:
-../Core/Inc/include/etl/atomic/../nullptr.h:
-../Core/Inc/include/etl/atomic/../char_traits.h:
-../Core/Inc/include/etl/atomic/../platform.h:
-../Core/Inc/include/etl/atomic/../algorithm.h:
-../Core/Inc/include/etl/atomic/../iterator.h:
-../Core/Inc/include/etl/private/vector_base.h:
-../Core/Inc/include/etl/private/../platform.h:
-../Core/Inc/include/etl/private/../exception.h:
-../Core/Inc/include/etl/private/../error_handler.h:
-../Core/Inc/include/etl/private/../debug_count.h:
-../Core/Inc/include/etl/private/ivectorpointer.h:
-../Core/Inc/include/etl/private/pvoidvector.h:
-../Core/Inc/include/etl/private/../algorithm.h:
-../Core/Inc/include/etl/private/vector_base.h:
-../Core/Inc/include/etl/private/../type_traits.h:
-../Core/Inc/include/etl/private/../functional.h:
-../Core/Inc/include/etl/private/../iterator.h:
-../Core/Inc/include/etl/private/minmax_push.h:
-../Core/Inc/include/etl/private/minmax_pop.h:
+../Core/Inc/etl/array.h:
+../Core/Inc/etl/platform.h:
+../Core/Inc/etl/file_error_numbers.h:
+../Core/Inc/etl/profiles/determine_compiler_version.h:
+../Core/Inc/etl/profiles/determine_compiler.h:
+../Core/Inc/etl/profiles/determine_compiler_language_support.h:
+../Core/Inc/etl/profiles/determine_development_os.h:
+../Core/Inc/etl/profiles/determine_builtin_support.h:
+../Core/Inc/etl/private/choose_namespace.h:
+../Core/Inc/etl/algorithm.h:
+../Core/Inc/etl/type_traits.h:
+../Core/Inc/etl/nullptr.h:
+../Core/Inc/etl/static_assert.h:
+../Core/Inc/etl/iterator.h:
+../Core/Inc/etl/utility.h:
+../Core/Inc/etl/functional.h:
+../Core/Inc/etl/private/minmax_push.h:
+../Core/Inc/etl/private/minmax_pop.h:
+../Core/Inc/etl/exception.h:
+../Core/Inc/etl/parameter_type.h:
+../Core/Inc/etl/error_handler.h:
+../Core/Inc/etl/function.h:
+../Core/Inc/etl/nth_type.h:
+../Core/Inc/etl/initializer_list.h:
+../Core/Inc/etl/vector.h:
+../Core/Inc/etl/memory.h:
+../Core/Inc/etl/alignment.h:
+../Core/Inc/etl/placement_new.h:
+../Core/Inc/etl/array.h:
+../Core/Inc/etl/debug_count.h:
+../Core/Inc/etl/atomic.h:
+../Core/Inc/etl/atomic/atomic_std.h:
+../Core/Inc/etl/atomic/../platform.h:
+../Core/Inc/etl/atomic/../nullptr.h:
+../Core/Inc/etl/atomic/../char_traits.h:
+../Core/Inc/etl/atomic/../platform.h:
+../Core/Inc/etl/atomic/../algorithm.h:
+../Core/Inc/etl/atomic/../iterator.h:
+../Core/Inc/etl/private/vector_base.h:
+../Core/Inc/etl/private/../platform.h:
+../Core/Inc/etl/private/../exception.h:
+../Core/Inc/etl/private/../error_handler.h:
+../Core/Inc/etl/private/../debug_count.h:
+../Core/Inc/etl/private/ivectorpointer.h:
+../Core/Inc/etl/private/pvoidvector.h:
+../Core/Inc/etl/private/../algorithm.h:
+../Core/Inc/etl/private/vector_base.h:
+../Core/Inc/etl/private/../type_traits.h:
+../Core/Inc/etl/private/../functional.h:
+../Core/Inc/etl/private/../iterator.h:
+../Core/Inc/etl/private/minmax_push.h:
+../Core/Inc/etl/private/minmax_pop.h:
+../Core/Inc/etl/bitset.h:
+../Core/Inc/etl/integral_limits.h:
+../Core/Inc/etl/log.h:
+../Core/Inc/etl/binary.h:
+../Core/Inc/etl/limits.h:
+../Core/Inc/etl/char_traits.h:
+../Core/Inc/etl/power.h:
+../Core/Inc/etl/smallest.h:
+../Core/Inc/etl/span.h:
+../Core/Inc/etl/hash.h:
+../Core/Inc/etl/fnv_1.h:
+../Core/Inc/etl/ihash.h:
+../Core/Inc/etl/frame_check_sequence.h:
+../Core/Inc/etl/string.h:
+../Core/Inc/etl/basic_string.h:
+../Core/Inc/etl/flags.h:
+../Core/Inc/etl/string_view.h:

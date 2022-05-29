@@ -151,6 +151,9 @@ SmartFuseState SmartFuse::handle(void)
 	std::array < uint8_t, 3 > tx_data { 0 };
 	std::array < uint8_t, 3 > rx_data { 0 };
 
+	// reset fuses states
+	for(size_t i = 0; i < 6; i++) this->fuses[i].state = FuseState::Ok;
+
 	//handle timer
 	if(watch_dog.getPassedTime() >= 31)
 	{
@@ -211,6 +214,17 @@ SmartFuseState SmartFuse::handle(void)
 			lock_state = true;
 			this->state = SmartFuseState::OLOFF;
 		}
+	}
+
+	/// read chanel states from sf and handle
+	for(size_t i = 0; i < 6; i++)
+	{
+		tx_data[0] = READ_AND_CLEAR(0x20 + i);
+		this->transmitReceiveData(tx_data, rx_data);
+		if(rx_data[1] & (1 << 0)) this->fuses[i].state = FuseState::LatchOff;
+		if(rx_data[1] & (1 << 2)) this->fuses[i].state = FuseState::STKFLTR;
+		if(rx_data[1] & (1 << 3)) this->fuses[i].state = FuseState::VDSFS;
+		if(rx_data[1] & (1 << 4)) this->fuses[i].state = FuseState::CHFBSR;
 	}
 
 	if (!lock_state) this->state = getGSB(rx_data);
@@ -320,6 +334,11 @@ SmartFuseState SmartFuse::getState() const
 	return this->state;
 }
 
+std::array < FuseState, 6 > SmartFuse::getFuseStates()
+{
+	return { this->fuses[0].state, this->fuses[1].state, this->fuses[2].state,
+			 this->fuses[3].state, this->fuses[4].state, this->fuses[5].state };
+}
 
 uint8_t SmartFuse::getLastGSB() const
 {
@@ -513,4 +532,30 @@ SmartFuseState SmartFuseHandler<num_of_sf>::disableAll()
 	}
 
 	return result;
+}
+
+template <uint32_t num_of_sf>
+std::array < SmartFuseState, num_of_sf >  SmartFuseHandler<num_of_sf>::getStates()
+{
+	std::array < SmartFuseState, num_of_sf > x;
+
+	for(size_t i = 0; i < num_of_sf; i++)
+	{
+		x[i] = this->smart_fuses[i].getState();
+	}
+
+	return x;
+}
+
+template <uint32_t num_of_sf>
+std::array < std::array < FuseState, 6 >, num_of_sf > SmartFuseHandler<num_of_sf>::getChanelsStates()
+{
+	std::array < std::array < FuseState, 6 >, num_of_sf > x;
+
+	for(size_t i = 0; i < num_of_sf; i++)
+	{
+		x[i] = this->smart_fuses[i].getFuseStates();
+	}
+
+	return x;
 }

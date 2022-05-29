@@ -68,7 +68,27 @@ enum struct FuseState : uint8_t
 	Ok,
 	UnderCurrent,
 	OverCurrent,
-	ShortedToGround
+	ShortedToGround,
+	LatchOff,
+	/*
+	 *  Output stuck to VCC/openload off state status.
+	 */
+	STKFLTR,
+	/*
+	 * This bit is ‘1’ if VDS is high at turn-off,
+	 * indicative of a potential overload condition
+	 */
+	VDSFS,
+	/*
+	 * Channel feedback status. Combination of Power limitation, OT,
+	 * OVERLOAD detection (VDS at turn-off). This bit is latched
+	 * during OFF-state of the channel in order to allow asynchronous
+	 * diagnostic and it is automatically cleared when the PL/OT/VDS
+	 * junction temperature falls below the thermal reset temperature
+	 * of OT detection, TRS.
+	 */
+	CHFBSR,
+	Error
 };
 
 enum struct SamplingMode : uint8_t
@@ -158,6 +178,8 @@ class SmartFuse
 
 		SmartFuseState getState() const;
 
+		std::array < FuseState, 6 > getFuseStates();
+
 		uint8_t getLastGSB() const;
 
 	private:
@@ -224,6 +246,7 @@ template <uint32_t num_of_sf>
 class SmartFuseHandler
 {
 	public:
+
 		etl::vector < SmartFuse, num_of_sf > smart_fuses;
 
 		/*
@@ -238,6 +261,9 @@ class SmartFuseHandler
 		 */
 		SmartFuseState enableAll();
 		SmartFuseState disableAll();
+
+		std::array < SmartFuseState, num_of_sf > getStates();
+		std::array < std::array < FuseState, 6 >, num_of_sf > getChanelsStates();
 };
 
 /*

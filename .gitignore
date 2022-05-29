@@ -1,2 +1,5 @@
 *.zip
-firmware/.metadata
+firmware/.metadata/
+*.d
+*.su
+*.o
