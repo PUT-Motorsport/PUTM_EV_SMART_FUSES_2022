@@ -83,27 +83,6 @@ GpioInElement safety_hvd(GPIOB, GPIO_PIN_6, true);
 std::array < SmartFuseState, 4 > states;
 std::array < std::array < FuseState, 6 >, 4 > chanel_states;
 
-enum struct Kek
-{
-	cos1,
-	cos2,
-	cos3
-};
-
-template < size_t size >
-class Map
-{
-	public:
-		std::array < FuseState, size > elems;
-
-		FuseState operator [] (const Kek& index)
-		{
-			return this->elems[static_cast<size_t>(index)];
-		}
-};
-
-Map < 3 > map_test;
-
 /* USER CODE END 0 */
 
 /**
@@ -173,10 +152,6 @@ int main(void)
 
 	led_ok.activate();
 
-	map_test.elems[0] = FuseState::Ok;
-	map_test.elems[1] = FuseState::Error;
-	map_test.elems[2] = FuseState::Ok;
-
 	while (1)
 	{
 		//----------------------------------------------------------------------------------------
@@ -211,8 +186,32 @@ int main(void)
 		}
 
 		//----------------------------------------------------------------------------------------
-		// can kek
-		//SF_main
+		// transmit receive can and handle
+
+		auto device_state = PUTM_CAN::SF_states::OK;
+		for(size_t i = 0; i < 4; i++)
+		{
+			if(states[i] != SmartFuseStates::OK)
+				devices_state = static_cast<PUTM_CAN::SF_states>(i);
+		}
+
+		uint16_t current_sum = 0;
+
+		for(auto& sf : sf_handler.smart_fuses)
+		{
+			for(size_t i = 0; i < 6; i++)
+			{
+				current_sum += sf.getFuseCurrent(static_cast<FuseNumber>(i));
+			}
+		}
+
+		PUTM_CAN::SF_main sf_main
+		{
+			{ 1, 0, 0, 0, current_sum },
+			device_state
+		};
+
+
 
     /* USER CODE END WHILE */
 
