@@ -3,3 +3,4 @@ firmware/.metadata*
 *.d
 *.su
 *.o
+*.resources
