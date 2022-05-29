@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename resource &apos;Smart fuses/Core/Inc/fuse.h&apos; to &apos;fuse.hpp&apos;" description="Rename resource &apos;fuse.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/fuse.h" name="fuse.hpp" stamp="1651001433511" updateReferences="true"/>
-</session>
