@@ -1,3 +1,8 @@
 (fp_lib_table
   (lib (name "Autosport")(type "KiCad")(uri "${KIPRJMOD}/AS222-35PN-933C")(options "")(descr ""))
+  (lib (name "FOD8802DR2")(type "KiCad")(uri "${KIPRJMOD}/FOD8802DR2")(options "")(descr ""))
+  (lib (name "NIS6351MT2TXG")(type "KiCad")(uri "${KIPRJMOD}/NIS6351MT2TXG")(options "")(descr ""))
+  (lib (name "NIS4461MT1TXG")(type "KiCad")(uri "${KIPRJMOD}/NIS4461MT1TXG")(options "")(descr ""))
+  (lib (name "M80-8420445")(type "KiCad")(uri "${KIPRJMOD}/M80-8420445")(options "")(descr ""))
+  (lib (name "NCS20061MUTAG")(type "KiCad")(uri "${KIPRJMOD}/NCS20061MUTAG")(options "")(descr ""))
 )

@@ -57,6 +57,8 @@
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
+void initCAN();
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -78,6 +80,8 @@ GpioInElement safety_tms(GPIOB, GPIO_PIN_2, true);
 GpioInElement safety_td(GPIOB, GPIO_PIN_4, true);
 GpioInElement safety_hvd(GPIOB, GPIO_PIN_6, true);
 
+CAN_FilterTypeDef can_filtering_config;
+
 //std::array < bool, 5 > states;
 
 std::array < SmartFuseState, 4 > states;
@@ -94,14 +98,16 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	SmartFuseHandler<4> sf_handler;
 
+	uint8_t _1 = 0x2;
+
 	FusesSettings fuses_settings
 	{
-		{ true, true, true, true, true, true },
-		{ 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-		{ SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous,
-		  SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous },
-		{ 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff },
-		{ { 0x0000, 0xffff },  { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff } }
+		.active = { true, true, true, true, true, true },
+		.latch_off_time_out = { _1, _1, _1, _1, _1, _1 },
+		.sampling_mode = { SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous,
+							SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous },
+		.duty_cycle = { 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff },
+		.clamping_currents = { { 0x0000, 0xffff },  { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff } }
 	};
 
 	sf_handler.smart_fuses.emplace_back(GPIOA, GPIO_PIN_1, &hspi1, fuses_settings);
@@ -134,6 +140,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
 	sf_handler.initAll();
+	initCAN();
 
 	led_ok.deactivate();
 	led_warning_1.deactivate();
@@ -148,6 +155,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 
 	sf_handler.enableAll();
+
 	enable_mosfets.activate();
 
 	led_ok.activate();
@@ -191,8 +199,8 @@ int main(void)
 		auto device_state = PUTM_CAN::SF_states::OK;
 		for(size_t i = 0; i < 4; i++)
 		{
-			if(states[i] != SmartFuseStates::OK)
-				devices_state = static_cast<PUTM_CAN::SF_states>(i);
+			if(states[i] != SmartFuseState::Ok)
+				device_state = static_cast<PUTM_CAN::SF_states>(i);
 		}
 
 		uint16_t current_sum = 0;
@@ -207,11 +215,13 @@ int main(void)
 
 		PUTM_CAN::SF_main sf_main
 		{
-			{ 1, 0, 0, 0, current_sum },
+			{ 1, 1, 1, 1, 500 },
 			device_state
 		};
 
-
+		PUTM_CAN::Can_tx_message<PUTM_CAN::SF_main> can_sender(sf_main, PUTM_CAN::can_tx_header_SF_MAIN);
+		if(can_sender.send(hcan1) != HAL_StatusTypeDef::HAL_OK) led_error.activate();
+		else led_error.deactivate();
 
     /* USER CODE END WHILE */
 
@@ -272,6 +282,58 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void initCAN()
+{
+//	can_filtering_config.FilterBank = 0;
+//	can_filtering_config.FilterMode = CAN_FILTERMODE_IDMASK;
+//	can_filtering_config.FilterScale = CAN_FILTERSCALE_32BIT;
+//	can_filtering_config.FilterIdHigh = 0x0000;
+//	can_filtering_config.FilterIdLow = 0x0000;
+//	can_filtering_config.FilterMaskIdHigh = 0x0000;
+//	can_filtering_config.FilterMaskIdLow = 0x0000;
+//	can_filtering_config.FilterFIFOAssignment = CAN_RX_FIFO0;
+//	can_filtering_config.FilterActivation = ENABLE;
+//	can_filtering_config.SlaveStartFilterBank = 0;//14;
+//
+//	if (HAL_CAN_ConfigFilter(&hcan1, &can_filtering_config) != HAL_OK)
+//		Error_Handler();
+//
+//	if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
+//		Error_Handler();
+//
+//	if ( HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK )
+//		Error_Handler();
+//
+//	if (HAL_CAN_Start(&hcan1) != HAL_OK)
+//		Error_Handler();
+	  CAN_FilterTypeDef sFilterConfig;
+	  sFilterConfig.FilterBank = 0;
+	  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
+	  sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
+	  sFilterConfig.FilterIdHigh = 0x0000;
+	  sFilterConfig.FilterIdLow = 0x0000;
+	  sFilterConfig.FilterMaskIdHigh = 0x0000;
+	  sFilterConfig.FilterMaskIdLow = 0x0000;
+	  sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
+	  sFilterConfig.FilterActivation = ENABLE;
+
+
+		if (HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig) != HAL_OK) {
+			Error_Handler();
+		}
+
+		if (HAL_CAN_Start(&hcan1) != HAL_OK) {
+			Error_Handler();
+		}
+
+		if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK) {
+			Error_Handler();
+		}
+
+
+		  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+}
 
 /* USER CODE END 4 */
 

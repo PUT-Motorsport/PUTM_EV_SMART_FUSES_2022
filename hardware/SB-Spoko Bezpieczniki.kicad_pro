@@ -462,16 +462,12 @@
       ""
     ],
     [
-      "27bccf66-b13c-4c0c-8df4-fe6e9c4dd7a5",
-      "HVD"
-    ],
-    [
       "b22a7610-0890-4bb7-90de-4fc8b04abd66",
       "Buzzer mosfet"
     ],
     [
-      "b95cf37c-654d-489a-853a-72e5854049e9",
-      "LED_1_CONTROL_OUTPUT"
+      "f31d9640-c2cb-4895-b335-dbabe61fa937",
+      "HVD-HV_SENSE"
     ],
     [
       "5efe9c3a-aa09-40cd-8c6e-7c01fb70f66d",
@@ -502,10 +498,6 @@
       "Fusses"
     ],
     [
-      "b64519e3-ee00-45a7-b4b8-340248210799",
-      "Safety"
-    ],
-    [
       "00000000-0000-0000-0000-000062da6ec2",
       "Inputs"
     ],
@@ -514,16 +506,8 @@
       "BREAK_LIGHT mosfet"
     ],
     [
-      "0a21d4bb-6a63-492b-a7a4-be8168f24381",
-      "BUZZER_CONTROL_OUTPUT"
-    ],
-    [
       "b6639180-bea8-43f2-ad64-88a75d93e197",
       "RTDS mosfet"
-    ],
-    [
-      "3641bfa2-6d64-48e6-beb6-41bd7614f834",
-      "AMS"
     ],
     [
       "00000000-0000-0000-0000-000062da7878",
@@ -534,20 +518,20 @@
       "Power"
     ],
     [
-      "a7b0d6f7-2fc1-4420-bdd3-a8d6eb2cf913",
-      "LED_2_CONTROL_OUTPUT"
+      "4195fcdd-9188-47c0-94bc-268baa1b4f8a",
+      "BSPD-ESB"
     ],
     [
-      "f955ddba-8d9d-4035-bf6e-eb15c620694a",
-      "TSMS Control"
-    ],
-    [
-      "ddfe04a8-f382-40b3-abaa-a0d9833303ac",
-      "Termic discharge"
+      "c7ead01f-098a-4afe-91cf-01e2525778f4",
+      "WATER-POTENTIOMMETER"
     ],
     [
       "af30b0b2-ff8d-44ee-b5c3-fb80a26240ac",
       "Fuse 3"
+    ],
+    [
+      "8324c05f-802a-411e-a541-d79fe4b30d7e",
+      "DV-FIREWALL_SENSE"
     ],
     [
       "8ca36b6a-d95c-4a1f-8c4a-748210a38097",
