@@ -285,54 +285,25 @@ void SystemClock_Config(void)
 
 void initCAN()
 {
-//	can_filtering_config.FilterBank = 0;
-//	can_filtering_config.FilterMode = CAN_FILTERMODE_IDMASK;
-//	can_filtering_config.FilterScale = CAN_FILTERSCALE_32BIT;
-//	can_filtering_config.FilterIdHigh = 0x0000;
-//	can_filtering_config.FilterIdLow = 0x0000;
-//	can_filtering_config.FilterMaskIdHigh = 0x0000;
-//	can_filtering_config.FilterMaskIdLow = 0x0000;
-//	can_filtering_config.FilterFIFOAssignment = CAN_RX_FIFO0;
-//	can_filtering_config.FilterActivation = ENABLE;
-//	can_filtering_config.SlaveStartFilterBank = 0;//14;
-//
-//	if (HAL_CAN_ConfigFilter(&hcan1, &can_filtering_config) != HAL_OK)
-//		Error_Handler();
-//
-//	if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK)
-//		Error_Handler();
-//
-//	if ( HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK )
-//		Error_Handler();
-//
-//	if (HAL_CAN_Start(&hcan1) != HAL_OK)
-//		Error_Handler();
-	  CAN_FilterTypeDef sFilterConfig;
-	  sFilterConfig.FilterBank = 0;
-	  sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;
-	  sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT;
-	  sFilterConfig.FilterIdHigh = 0x0000;
-	  sFilterConfig.FilterIdLow = 0x0000;
-	  sFilterConfig.FilterMaskIdHigh = 0x0000;
-	  sFilterConfig.FilterMaskIdLow = 0x0000;
-	  sFilterConfig.FilterFIFOAssignment = CAN_RX_FIFO0;
-	  sFilterConfig.FilterActivation = ENABLE;
+	can_filtering_config.FilterBank = 0;
+	can_filtering_config.FilterMode = CAN_FILTERMODE_IDMASK;
+	can_filtering_config.FilterScale = CAN_FILTERSCALE_32BIT;
+	can_filtering_config.FilterIdHigh = 0x0000;
+	can_filtering_config.FilterIdLow = 0x0000;
+	can_filtering_config.FilterMaskIdHigh = 0x0000;
+	can_filtering_config.FilterMaskIdLow = 0x0000;
+	can_filtering_config.FilterFIFOAssignment = CAN_RX_FIFO0;
+	can_filtering_config.FilterActivation = ENABLE;
+	can_filtering_config.SlaveStartFilterBank = 14;
 
+	if ( HAL_CAN_ConfigFilter(&hcan1, &can_filtering_config) != HAL_OK )
+		Error_Handler();
 
-		if (HAL_CAN_ConfigFilter(&hcan1, &sFilterConfig) != HAL_OK) {
-			Error_Handler();
-		}
+	if ( HAL_CAN_Start(&hcan1) != HAL_OK )
+		Error_Handler();
 
-		if (HAL_CAN_Start(&hcan1) != HAL_OK) {
-			Error_Handler();
-		}
-
-		if (HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK) {
-			Error_Handler();
-		}
-
-
-		  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+	if ( HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING | CAN_IT_TX_MAILBOX_EMPTY) != HAL_OK )
+		Error_Handler();
 }
 
 /* USER CODE END 4 */

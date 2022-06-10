@@ -5,4 +5,5 @@
   (lib (name "NIS4461MT1TXG")(type "KiCad")(uri "${KIPRJMOD}/NIS4461MT1TXG")(options "")(descr ""))
   (lib (name "M80-8420445")(type "KiCad")(uri "${KIPRJMOD}/M80-8420445")(options "")(descr ""))
   (lib (name "NCS20061MUTAG")(type "KiCad")(uri "${KIPRJMOD}/NCS20061MUTAG")(options "")(descr ""))
+  (lib (name "M80-8661022")(type "KiCad")(uri "${KIPRJMOD}/M80-8661022")(options "")(descr ""))
 )

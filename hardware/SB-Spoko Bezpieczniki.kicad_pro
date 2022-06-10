@@ -462,6 +462,10 @@
       ""
     ],
     [
+      "392ddc49-85df-4512-9b12-420d2e1cb67d",
+      "INVERTER-SPARE_1"
+    ],
+    [
       "b22a7610-0890-4bb7-90de-4fc8b04abd66",
       "Buzzer mosfet"
     ],
@@ -494,6 +498,10 @@
       "Fuse 0"
     ],
     [
+      "5f0f3220-b2e7-48cf-99c1-fc2fda14fbf8",
+      "SPARE_2-3"
+    ],
+    [
       "00000000-0000-0000-0000-000062da3da3",
       "Fusses"
     ],
@@ -520,6 +528,10 @@
     [
       "4195fcdd-9188-47c0-94bc-268baa1b4f8a",
       "BSPD-ESB"
+    ],
+    [
+      "aebdd0e4-8393-4b6a-a54e-222c39c88ad5",
+      "Supply"
     ],
     [
       "c7ead01f-098a-4afe-91cf-01e2525778f4",

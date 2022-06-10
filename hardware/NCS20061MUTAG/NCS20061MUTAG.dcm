@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP NCS20061MUTAG
+D 3 MHz, 125 A Low Power Operational Amplifier
+K
+F https://www.onsemi.com/pdf/datasheet/ncs2006-d.pdf
+$ENDCMP
+#
+#End Doc Library
