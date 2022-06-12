@@ -285,6 +285,7 @@
     )
   )
 
+
   (junction (at 114.935 99.695) (diameter 0) (color 0 0 0 0)
     (uuid 29cd8b46-378f-44e5-abca-e91a7365ed5d)
   )
@@ -322,6 +323,8 @@
     (uuid fd3a62f2-2ec6-4184-bba3-c9c91ce7c611)
   )
 
+  (no_connect (at 128.27 84.455) (uuid 53424b57-b9da-45dc-a838-77033ba30373))
+
   (wire (pts (xy 114.935 99.695) (xy 121.285 99.695))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 01457fc7-dfd6-4ac4-b917-efe6fdf5d358)
@@ -354,7 +357,7 @@
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 30b14a9c-dc0d-4e3e-97d0-b9d636b00b76)
   )
-  (wire (pts (xy 108.585 84.455) (xy 130.81 84.455))
+  (wire (pts (xy 128.27 84.455) (xy 130.81 84.455))
     (stroke (width 0) (type default) (color 0 0 0 0))
     (uuid 314362fb-61d3-4f78-8fc3-4b5a2a33bc6d)
   )
@@ -509,11 +512,6 @@
     (uuid b1efbb01-026f-46c4-bb5f-160f392c0a99)
   )
 
-  (label "EN{slash}FAULT" (at 108.585 84.455 180)
-    (effects (font (size 1.27 1.27)) (justify right bottom))
-    (uuid df02fa8c-fd10-4280-b832-b26a8f16e3f2)
-  )
-
   (hierarchical_label "VOUT" (shape output) (at 171.45 107.95 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 3802d2f0-df72-489e-888d-664620bf9807)
@@ -527,7 +525,7 @@
     (uuid eb8078de-ff51-4f86-94f9-0b0c42acab07)
   )
 
-  (symbol (lib_id "NIS4461MT1TXG:NIS4461MT1TXG") (at 130.81 79.375 0) (unit 1)
+  (symbol (lib_id "NIS4461MT1TXG:NIS4461MT1TXG") (at 130.81 79.375 0)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 3557c1b1-c755-4afc-9625-2e37f19efd03)
     (property "Reference" "IC5" (id 0) (at 148.59 71.12 0))
@@ -569,7 +567,7 @@
     (pin "9" (uuid 8d78515d-a141-4166-9c25-c3a48703ea98))
   )
 
-  (symbol (lib_id "Device:R_Small") (at 160.655 119.38 270) (unit 1)
+  (symbol (lib_id "Device:R_Small") (at 160.655 119.38 270)
     (in_bom yes) (on_board yes)
     (uuid 50e4d8d9-1ebc-46f7-a93b-e908eb2aeb33)
     (property "Reference" "ILIM6" (id 0) (at 160.655 121.92 90))
@@ -584,7 +582,7 @@
     (pin "2" (uuid f37b5e60-9c84-4db4-92c9-bf0868ce050d))
   )
 
-  (symbol (lib_id "Device:R_Small") (at 112.395 94.615 0) (unit 1)
+  (symbol (lib_id "Device:R_Small") (at 112.395 94.615 0)
     (in_bom yes) (on_board yes)
     (uuid 6eb43579-7241-426e-98d2-cee3235a7c38)
     (property "Reference" "IMON2" (id 0) (at 105.41 93.345 0)
@@ -603,7 +601,7 @@
     (pin "2" (uuid 3de8e29d-068a-4856-afe5-f47349772eca))
   )
 
-  (symbol (lib_id "power:GND") (at 114.935 111.76 0) (unit 1)
+  (symbol (lib_id "power:GND") (at 114.935 111.76 0)
     (in_bom yes) (on_board yes) (fields_autoplaced)
     (uuid 7dab4216-02a3-4c04-ae87-20794c6b6927)
     (property "Reference" "#PWR0150" (id 0) (at 114.935 118.11 0)
@@ -619,7 +617,7 @@
     (pin "1" (uuid 6106ab3b-59cb-4297-ba77-9725a590ece1))
   )
 
-  (symbol (lib_id "Device:Polyfuse") (at 161.29 107.95 270) (unit 1)
+  (symbol (lib_id "Device:Polyfuse") (at 161.29 107.95 270)
     (in_bom yes) (on_board yes)
     (uuid bd1291be-e0ac-49a9-b263-faa2fbe4fa37)
     (property "Reference" "F3" (id 0) (at 161.29 105.41 90))
@@ -636,7 +634,7 @@
     (pin "2" (uuid c5c65571-264b-4826-83af-46fd9b458fa4))
   )
 
-  (symbol (lib_id "Device:C_Small") (at 102.235 94.615 0) (unit 1)
+  (symbol (lib_id "Device:C_Small") (at 102.235 94.615 0)
     (in_bom yes) (on_board yes)
     (uuid c8968304-52c5-4dc6-952e-85bb9fadd408)
     (property "Reference" "C15" (id 0) (at 96.52 93.345 0)
@@ -655,7 +653,7 @@
     (pin "2" (uuid 483598b3-9a28-4b77-87be-fe054358f445))
   )
 
-  (symbol (lib_id "Device:C_Small") (at 121.285 94.615 0) (unit 1)
+  (symbol (lib_id "Device:C_Small") (at 121.285 94.615 0)
     (in_bom yes) (on_board yes)
     (uuid d1aeb674-cfbc-4c74-a628-09c6b5b6eeee)
     (property "Reference" "C16" (id 0) (at 116.205 93.345 0)
@@ -674,7 +672,7 @@
     (pin "2" (uuid 09616042-1355-483c-a1c4-310b3572796f))
   )
 
-  (symbol (lib_id "Device:R_Small") (at 160.655 111.76 270) (unit 1)
+  (symbol (lib_id "Device:R_Small") (at 160.655 111.76 270)
     (in_bom yes) (on_board yes)
     (uuid e8de8c23-2ab9-427f-a8bb-8c57ac62aa25)
     (property "Reference" "ILIM5" (id 0) (at 160.655 114.3 90))

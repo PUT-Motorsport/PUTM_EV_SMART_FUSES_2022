@@ -260,6 +260,7 @@
     )
   )
 
+
   (junction (at 129.54 91.44) (diameter 0) (color 0 0 0 0)
     (uuid 1d20c966-0439-42a1-b5e3-5e76b52f827f)
   )
@@ -641,7 +642,7 @@
   (symbol (lib_id "Device:C") (at 156.21 68.58 270)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-00006197c194)
-    (property "Reference" "C32" (id 0) (at 156.21 62.1792 90))
+    (property "Reference" "C1" (id 0) (at 156.21 62.1792 90))
     (property "Value" "100nF" (id 1) (at 156.21 64.4906 90))
     (property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (id 2) (at 152.4 69.5452 0)
       (effects (font (size 1.27 1.27)) hide)
@@ -672,7 +673,7 @@
   (symbol (lib_id "VN9D30Q100F:VN9D30Q100F") (at 144.78 76.2 0)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000061b9bfd9)
-    (property "Reference" "U15" (id 0) (at 132.08 71.12 0))
+    (property "Reference" "U12" (id 0) (at 132.08 71.12 0))
     (property "Value" "SMART FUSE" (id 1) (at 132.08 73.66 0))
     (property "Footprint" "VN9D30Q100F:QFN-32_EP_6x6_Pitch0.5mm" (id 2) (at 154.94 72.39 0)
       (effects (font (size 1.27 1.27)) hide)

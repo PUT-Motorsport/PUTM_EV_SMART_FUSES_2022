@@ -14,7 +14,8 @@
  *
  *  2.	Most of values have their explanation in place so definitely check those.
  *
- *  3.	Fuses use a handler object, which handles all fuses, which needs to be called.
+ *  3.	Fuses use a handler object, which handles all fuses, which needs to be called every
+ *  	loop iteration.
  *
  *  4.  Well settings are a mess i guess.
  *
@@ -57,7 +58,7 @@ enum struct SmartFuseState : uint8_t
 	OLOFF,
 	/*
 	 * device enters FailSafe on start up or when watch dog is
-	 * failed to be toggled within 30 ms to 70 ms
+	 * failed to be toggled within every 30 ms to 70 ms
 	 */
 	FailSafe,
 	NotResponding,
@@ -114,7 +115,10 @@ struct FusesSettings
 	bool active[6];
 
 	/*
-	 * how long it takes for latch-off event to reset to latch-on
+	 * how long it takes for latch-off event to reset to latch-on,
+	 * the chip will try to restart the corresponding channel within
+	 * the specified time out if the couse of the latch-off event
+	 * isn't cleared in that time, the channel will stay latched-off
 	 * 0x0 - stays latched off
 	 * 0x1 / 0xF - 16ms to 240 ms
 	 */
@@ -123,9 +127,9 @@ struct FusesSettings
 	/*
 	 * SamplingMode - there are 4 configurations:
 	 * Stop,
-	 * Start,
+	 * Start, (fires once)
 	 * Continuous,
-	 * Filtered
+	 * Filtered (uses low pass filter)
 	 */
 	SamplingMode sampling_mode[6];
 
@@ -161,14 +165,14 @@ class SmartFuse
 		SmartFuseState init();
 		/*
 		 * shouldn't be used outside of handler if there is more than two
-		 * smartfuses, because it can couse some inconsistencies in timing of
+		 * smart fuses, because it can cause some inconsistencies in timing of
 		 * SmarFuses watch dogs
 		 */
 		SmartFuseState enable();
 		SmartFuseState disable();
 		/*
 		 * handles the smart fuse watchdog, current read / clamping, also if for
-		 * some reason, a channel was switched off, program assumes that the channel
+		 * any reason, a channel was switched off, program assumes that the channel
 		 * was shorted to ground
 		 */
 		SmartFuseState handle();
@@ -256,7 +260,7 @@ class SmartFuseHandler
 		SmartFuseState initAll();
 		/*
 		 * halting function - num_of_fuses * 5 ms
-		 * it's there prevent watchdog time frames overlapping, which coused
+		 * it's there prevent watchdog time frames overlapping, which caused
 		 * some timing issues.
 		 */
 		SmartFuseState enableAll();
@@ -270,7 +274,7 @@ class SmartFuseHandler
  * template hinting section
  */
 
-/// hinting compiler that we need this template couse it wouldn't work without it
+/// hinting compiler that we need this template cause it wouldn't work without it
 template class SmartFuseHandler<4>;
 
 #endif /* INC_FUSE_HPP_ */

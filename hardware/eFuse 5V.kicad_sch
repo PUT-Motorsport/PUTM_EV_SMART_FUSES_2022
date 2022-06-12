@@ -678,6 +678,7 @@
     )
   )
 
+
   (junction (at 214.63 98.425) (diameter 0) (color 0 0 0 0)
     (uuid 268e3e1a-d2a8-48e7-a763-e39c5faa0de3)
   )
@@ -1055,7 +1056,7 @@
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 071c1e5d-eb2c-45ae-b10d-5b8737dba527)
   )
-  (hierarchical_label "~{EN}" (shape input) (at 193.04 93.345 180)
+  (hierarchical_label "~{ENABLE}" (shape input) (at 193.04 93.345 180)
     (effects (font (size 1.27 1.27)) (justify right))
     (uuid 33f3c509-7c6b-4234-a13e-e809f4bda1cd)
   )

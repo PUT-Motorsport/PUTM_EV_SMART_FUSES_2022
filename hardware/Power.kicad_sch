@@ -674,6 +674,7 @@
     )
   )
 
+
   (junction (at 212.725 150.495) (diameter 0) (color 0 0 0 0)
     (uuid 01ba8599-22c6-43f9-9d46-eb8ac9d385dd)
   )
@@ -1906,7 +1907,7 @@
     (uuid caac0e38-825b-4418-85eb-5eff686ca659)
     (property "Reference" "L5" (id 0) (at 217.805 135.255 90))
     (property "Value" "L_Small" (id 1) (at 217.805 137.795 90))
-    (property "Footprint" "" (id 2) (at 217.805 140.335 0)
+    (property "Footprint" "Inductor_SMD:L_0603_1608Metric" (id 2) (at 217.805 140.335 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (id 3) (at 217.805 140.335 0)
