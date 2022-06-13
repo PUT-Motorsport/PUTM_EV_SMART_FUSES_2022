@@ -344,7 +344,7 @@
     (uuid f43ddca2-c4a9-4dfe-ac02-8bef3e93a3a0)
   )
 
-  (text "Inputs" (at 102.108 43.434 180)
+  (text "SAFETY/SENSE" (at 110.49 43.18 180)
     (effects (font (size 2.9972 2.9972) (thickness 0.5994) bold) (justify right bottom))
     (uuid 13eda933-ebb5-4552-ab2d-53708348bf89)
   )
