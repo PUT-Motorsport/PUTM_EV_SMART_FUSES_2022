@@ -6,4 +6,5 @@
   (lib (name "M80-8420445")(type "KiCad")(uri "${KIPRJMOD}/M80-8420445")(options "")(descr ""))
   (lib (name "NCS20061MUTAG")(type "KiCad")(uri "${KIPRJMOD}/NCS20061MUTAG")(options "")(descr ""))
   (lib (name "M80-8661022")(type "KiCad")(uri "${KIPRJMOD}/M80-8661022")(options "")(descr ""))
+  (lib (name "Logos")(type "KiCad")(uri "${KIPRJMOD}/Logos.pretty")(options "")(descr ""))
 )

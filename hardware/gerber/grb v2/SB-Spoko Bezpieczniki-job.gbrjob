@@ -1,0 +1,170 @@
+{
+  "Header": {
+    "GenerationSoftware": {
+      "Vendor": "KiCad",
+      "Application": "Pcbnew",
+      "Version": "(6.0.2)"
+    },
+    "CreationDate": "2022-06-14T20:32:42+02:00"
+  },
+  "GeneralSpecs": {
+    "ProjectId": {
+      "Name": "SB-Spoko Bezpieczniki",
+      "GUID": "53422d53-706f-46b6-9f20-42657a706965",
+      "Revision": "rev?"
+    },
+    "Size": {
+      "X": 166.48,
+      "Y": 60.1
+    },
+    "LayerNumber": 4,
+    "BoardThickness": 1.6,
+    "Finish": "None"
+  },
+  "DesignRules": [
+    {
+      "Layers": "Outer",
+      "PadToPad": 0.19,
+      "PadToTrack": 0.19,
+      "TrackToTrack": 0.19,
+      "MinLineWidth": 0.25,
+      "TrackToRegion": 0.2,
+      "RegionToRegion": 0.2
+    },
+    {
+      "Layers": "Inner",
+      "PadToPad": 0.0,
+      "PadToTrack": 0.0,
+      "TrackToTrack": 0.19,
+      "MinLineWidth": 0.25,
+      "TrackToRegion": 0.2,
+      "RegionToRegion": 0.2
+    }
+  ],
+  "FilesAttributes": [
+    {
+      "Path": "SB-Spoko Bezpieczniki-G\\u00F3rna sygna\\u0142owa.gbr",
+      "FileFunction": "Copper,L1,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-Wewn\\u0119trzna 1 sygna\\u0142owa.gbr",
+      "FileFunction": "Copper,L2,Inr",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-Wewn\\u0119trzna 2 sygna\\u0142owa.gbr",
+      "FileFunction": "Copper,L3,Inr",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-Dolna sygna\\u0142owa.gbr",
+      "FileFunction": "Copper,L4,Bot",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-G\\u00F3rna pasty.gbr",
+      "FileFunction": "SolderPaste,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-Dolna pasty.gbr",
+      "FileFunction": "SolderPaste,Bot",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-F_Silkscreen.gbr",
+      "FileFunction": "Legend,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-B_Silkscreen.gbr",
+      "FileFunction": "Legend,Bot",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-G\\u00F3rna soldermaski.gbr",
+      "FileFunction": "SolderMask,Top",
+      "FilePolarity": "Negative"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-Dolna sodermaski.gbr",
+      "FileFunction": "SolderMask,Bot",
+      "FilePolarity": "Negative"
+    },
+    {
+      "Path": "SB-Spoko Bezpieczniki-Kraw\\u0119dziowa.gbr",
+      "FileFunction": "Profile",
+      "FilePolarity": "Positive"
+    }
+  ],
+  "MaterialStackup": [
+    {
+      "Type": "Legend",
+      "Name": "Top Silk Screen"
+    },
+    {
+      "Type": "SolderPaste",
+      "Name": "Top Solder Paste"
+    },
+    {
+      "Type": "SolderMask",
+      "Thickness": 0.01,
+      "Name": "Top Solder Mask"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "F.Cu"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.48,
+      "Material": "FR4",
+      "Name": "F.Cu/In1.Cu",
+      "Notes": "Type: dielectric layer 1 (from F.Cu to In1.Cu)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "In1.Cu"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.48,
+      "Material": "FR4",
+      "Name": "In1.Cu/In2.Cu",
+      "Notes": "Type: dielectric layer 2 (from In1.Cu to In2.Cu)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "In2.Cu"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.48,
+      "Material": "FR4",
+      "Name": "In2.Cu/B.Cu",
+      "Notes": "Type: dielectric layer 3 (from In2.Cu to B.Cu)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "B.Cu"
+    },
+    {
+      "Type": "SolderMask",
+      "Thickness": 0.01,
+      "Name": "Bottom Solder Mask"
+    },
+    {
+      "Type": "SolderPaste",
+      "Name": "Bottom Solder Paste"
+    },
+    {
+      "Type": "Legend",
+      "Name": "Bottom Silk Screen"
+    }
+  ]
+}
