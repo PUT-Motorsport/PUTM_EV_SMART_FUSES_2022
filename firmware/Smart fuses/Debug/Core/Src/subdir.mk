@@ -5,6 +5,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../Core/Src/adc.c \
 ../Core/Src/can.c \
 ../Core/Src/gpio.c \
 ../Core/Src/spi.c \
@@ -21,6 +22,7 @@ CPP_SRCS += \
 ../Core/Src/timer.cpp 
 
 C_DEPS += \
+./Core/Src/adc.d \
 ./Core/Src/can.d \
 ./Core/Src/gpio.d \
 ./Core/Src/spi.d \
@@ -31,6 +33,7 @@ C_DEPS += \
 ./Core/Src/system_stm32l4xx.d 
 
 OBJS += \
+./Core/Src/adc.o \
 ./Core/Src/can.o \
 ./Core/Src/fuse.o \
 ./Core/Src/gpio\ elements.o \
@@ -62,7 +65,7 @@ Core/Src/gpio\ elements.o: ../Core/Src/gpio\ elements.cpp Core/Src/subdir.mk
 clean: clean-Core-2f-Src
 
 clean-Core-2f-Src:
-	-$(RM) ./Core/Src/can.d ./Core/Src/can.o ./Core/Src/can.su ./Core/Src/fuse.d ./Core/Src/fuse.o ./Core/Src/fuse.su ./Core/Src/gpio\ elements.d ./Core/Src/gpio\ elements.o ./Core/Src/gpio\ elements.su ./Core/Src/gpio.d ./Core/Src/gpio.o ./Core/Src/gpio.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/spi.d ./Core/Src/spi.o ./Core/Src/spi.su ./Core/Src/stm32l4xx_hal_msp.d ./Core/Src/stm32l4xx_hal_msp.o ./Core/Src/stm32l4xx_hal_msp.su ./Core/Src/stm32l4xx_it.d ./Core/Src/stm32l4xx_it.o ./Core/Src/stm32l4xx_it.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32l4xx.d ./Core/Src/system_stm32l4xx.o ./Core/Src/system_stm32l4xx.su ./Core/Src/timer.d ./Core/Src/timer.o ./Core/Src/timer.su
+	-$(RM) ./Core/Src/adc.d ./Core/Src/adc.o ./Core/Src/adc.su ./Core/Src/can.d ./Core/Src/can.o ./Core/Src/can.su ./Core/Src/fuse.d ./Core/Src/fuse.o ./Core/Src/fuse.su ./Core/Src/gpio\ elements.d ./Core/Src/gpio\ elements.o ./Core/Src/gpio\ elements.su ./Core/Src/gpio.d ./Core/Src/gpio.o ./Core/Src/gpio.su ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/spi.d ./Core/Src/spi.o ./Core/Src/spi.su ./Core/Src/stm32l4xx_hal_msp.d ./Core/Src/stm32l4xx_hal_msp.o ./Core/Src/stm32l4xx_hal_msp.su ./Core/Src/stm32l4xx_it.d ./Core/Src/stm32l4xx_it.o ./Core/Src/stm32l4xx_it.su ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/sysmem.d ./Core/Src/sysmem.o ./Core/Src/sysmem.su ./Core/Src/system_stm32l4xx.d ./Core/Src/system_stm32l4xx.o ./Core/Src/system_stm32l4xx.su ./Core/Src/timer.d ./Core/Src/timer.o ./Core/Src/timer.su
 
 .PHONY: clean-Core-2f-Src
 

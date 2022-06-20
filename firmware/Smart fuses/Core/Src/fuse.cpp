@@ -17,9 +17,37 @@
 #define RESET_SMARTFUSE()					(0b11111111)
 #define IF_RESET_STATE(x) 					((x[0] == 0x00 && x[1] == 0x00 && x[2] == 0x00) || (x[0] & (1 << 6)))
 
-/*Private enums -----------------------------------------------------------------------------------------------------*/
+/* Static functions --------------------------------------------------------------------------------------------------*/
 
-/*Static functions --------------------------------------------------------------------------------------------------*/
+//static std::array < uint8_t, 3 > readRomCommand(uint8_t address)
+//{
+//	return { 0b11000000 | (address), 0, 0 };
+//}
+//
+//static std::array < uint8_t, 3 > readRamCommand(uint8_t address)
+//{
+//	return { 0b01000000 | (address), 0, 0 };
+//}
+//
+//static std::array < uint8_t, 3 > readAndClearRamCommand(uint8_t address)
+//{
+//	return { 0b10000000 | (address), 0, 0 };
+//}
+//
+//static std::array < uint8_t, 3 > writeRamCommand(uint8_t address, uint8_t data1, uint8_t data2)
+//{
+//	return { 0b00000000 | (address), data1, data2 };
+//}
+//
+//static std::array < uint8_t, 3 > resetCommand()
+//{
+//	return { 0b11111111, 0, 0 };
+//}
+//
+//static bool ifResetState(std::array < uint8_t, 3 > x)
+//{
+//	return ((x[0] == 0x00 && x[1] == 0x00 && x[2] == 0x00) || (x[0] & (1 << 6)))
+//}
 
 /// return false if odd parity, returns true if even parity, the pointer should point to a 3 elem tab
 static bool checkParity(std::array < uint8_t, 3 > x)
@@ -57,22 +85,22 @@ SmartFuseState SmartFuse::getGSB(std::array < uint8_t, 3 > x)
 
 /*Fuse declarations -------------------------------------------------------------------------------------------------*/
 
-SmartFuse::Fuse::Fuse()
+SmartFuse::ChannelData::ChannelData()
 {
 	active = false;
 	current = 0x0000;
-	state = FuseState::Ok;
+	state = ChannelState::Ok;
 }
 
 /*SmartFuse declarations --------------------------------------------------------------------------------------------*/
 
-SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const FusesSettings &fuses_settings) :
-					 port(port), pin(pin), hspi(hspi), fuses_settings(fuses_settings), toggle(false)
+SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, const ChannelsSettings &fuses_settings) :
+					 port(port), pin(pin), hspi(hspi), channels_settings(channels_settings), toggle(false)
 {
 	for (int i = 0; i < 6; i++)
 	{
-		this->fuses[i].clamping_currents = fuses_settings.clamping_currents[i];
-		this->fuses[i].active = fuses_settings.active[i];
+		this->channels[i].clamping_currents = channels_settings.clamping_currents[i];
+		this->channels[i].active = channels_settings.active[i];
 	}
 
 	slaveDeselect();
@@ -98,7 +126,7 @@ SmartFuseState SmartFuse::init(void)
 
 	this->setUpAllLatchOffTimers();
 
-	this->setUpAllChanelsStates();
+	this->setUpAllChannelsStates();
 
 	return this->state;
 }
@@ -116,7 +144,7 @@ SmartFuseState SmartFuse::enable()
 	tx_data = { WRITE_RAM(0x14), 1 << 3, 0 };
 	this->transmitReceiveData(tx_data, rx_data);
 
-	/// start timer for watchdog timer
+	/// start timer for watchdog timers
 	this->watch_dog.restart();
 	this->toggle = false;
 
@@ -146,13 +174,13 @@ SmartFuseState SmartFuse::handle(void)
 	bool lock_state = false;
 	bool fuse_state_changed = false;
 
-	std::array < bool, 6 > read_fuses_states { false };
+	std::array < bool, number_of_channels_per_fuse > read_fuses_states { false };
 
-	std::array < uint8_t, 3 > tx_data { 0 };
-	std::array < uint8_t, 3 > rx_data { 0 };
+	std::array < uint8_t, 3 > tx_data { };
+	std::array < uint8_t, 3 > rx_data { };
 
 	// reset fuses states
-	for(size_t i = 0; i < 6; i++) this->fuses[i].state = FuseState::Ok;
+	for(size_t i = 0; i < number_of_channels_per_fuse; i++) this->channels[i].state = ChannelState::Ok;
 
 	//handle timer
 	if(watch_dog.getPassedTime() >= 31)
@@ -167,32 +195,32 @@ SmartFuseState SmartFuse::handle(void)
 	}
 
 	//read currents
-	for(size_t i = 0; i < 6; i++)
+	for(size_t i = 0; i < number_of_channels_per_fuse; i++)
 	{
 		tx_data[0] = READ_RAM(0x28 + i);
 		this->transmitReceiveData(tx_data, rx_data);
-		this->fuses[i].current = uint16_t(rx_data[1]) << 4 | uint16_t(rx_data[2]) >> 4;
+		this->channels[i].current = uint16_t(rx_data[1]) << 4 | uint16_t(rx_data[2]) >> 4;
 		read_fuses_states[i] = bool(rx_data[2] & (1 << 2));
 	}
 
 	//check currents
-	for(size_t i = 0; i < 6; i++)
+	for(size_t i = 0; i < number_of_channels_per_fuse; i++)
 	{
-		if (this->fuses[i].current < this->fuses[i].clamping_currents.first)
+		if (this->channels[i].current < this->channels[i].clamping_currents.first)
 		{
-			this->fuses[i].active = false;
+			this->channels[i].active = false;
 			lock_state = true;
 			fuse_state_changed = true;
 			this->state = SmartFuseState::OTPLVDS;
-			this->fuses[i].state = FuseState::UnderCurrent;
+			this->channels[i].state = ChannelState::UnderCurrent;
 		}
-		if (this->fuses[i].current > this->fuses[i].clamping_currents.second)
+		if (this->channels[i].current > this->channels[i].clamping_currents.second)
 		{
-			this->fuses[i].active = false;
+			this->channels[i].active = false;
 			lock_state = true;
 			fuse_state_changed = true;
 			this->state = SmartFuseState::OTPLVDS;
-			this->fuses[i].state = FuseState::OverCurrent;
+			this->channels[i].state = ChannelState::OverCurrent;
 		}
 	}
 
@@ -200,31 +228,31 @@ SmartFuseState SmartFuse::handle(void)
 	{
 		tx_data[0] = WRITE_RAM(0x13);
 		tx_data[1] = 0x00;
-		for(int i = 0; i < 6; i++) tx_data[1] |= this->fuses[i].active << i;
+		for(int i = 0; i < number_of_channels_per_fuse; i++) tx_data[1] |= this->channels[i].active << i;
 		tx_data[2] = this->toggle << 1;
 		this->transmitReceiveData(tx_data, rx_data);
 	}
 
-	//check chanel state
-	for(size_t i = 0; i < 6; i++)
+	//check channel state
+	for(size_t i = 0; i < number_of_channels_per_fuse; i++)
 	{
-		if(this->fuses[i].active != read_fuses_states[i])
+		if(this->channels[i].active != read_fuses_states[i])
 		{
-			this->fuses[i].state = FuseState::ShortedToGround;
+			this->channels[i].state = ChannelState::ShortedToGround;
 			lock_state = true;
 			this->state = SmartFuseState::OLOFF;
 		}
 	}
 
-	/// read chanel states from sf and handle
-	for(size_t i = 0; i < 6; i++)
+	/// read channel states from sf and handle
+	for(size_t i = 0; i < number_of_channels_per_fuse; i++)
 	{
 		tx_data[0] = READ_AND_CLEAR(0x20 + i);
 		this->transmitReceiveData(tx_data, rx_data);
-		if(rx_data[1] & (1 << 0)) this->fuses[i].state = FuseState::LatchOff;
-		if(rx_data[1] & (1 << 2)) this->fuses[i].state = FuseState::STKFLTR;
-		if(rx_data[1] & (1 << 3)) this->fuses[i].state = FuseState::VDSFS;
-		if(rx_data[1] & (1 << 4)) this->fuses[i].state = FuseState::CHFBSR;
+		if(rx_data[1] & (1 << 0)) this->channels[i].state = ChannelState::LatchOff;
+		if(rx_data[1] & (1 << 2)) this->channels[i].state = ChannelState::STKFLTR;
+		if(rx_data[1] & (1 << 3)) this->channels[i].state = ChannelState::VDSFS;
+		if(rx_data[1] & (1 << 4)) this->channels[i].state = ChannelState::CHFBSR;
 	}
 
 	if (!lock_state) this->state = getGSB(rx_data);
@@ -253,27 +281,27 @@ SmartFuseState SmartFuse::handleTimer(void)
 	return this->state;
 }
 
-SmartFuseState SmartFuse::setFuseDutyCykle(FuseNumber fuse, uint16_t duty_cykle)
+SmartFuseState SmartFuse::setChannelDutyCykle(Channel channel, uint16_t duty_cykle)
 {
 	std::array < uint8_t, 3 >  tx_data { 0, 0, 0 };
 	std::array < uint8_t, 3 >  rx_data { 0, 0, 0 };
 
-	tx_data = { WRITE_RAM(0x00 + int(fuse)), uint8_t(duty_cykle >> 8), uint8_t(duty_cykle << 4) | this->toggle << 1 };
+	tx_data = { WRITE_RAM(0x00 + int(channel)), uint8_t(duty_cykle >> 8), uint8_t(duty_cykle << 4) | this->toggle << 1 };
 	this->transmitReceiveData(tx_data, rx_data);
 
 	this->state = getGSB(rx_data);
 	return this->state;
 }
 
-SmartFuseState SmartFuse::activeFuse(FuseNumber fuse)
+SmartFuseState SmartFuse::activeChannel(Channel channel)
 {
 	std::array < uint8_t, 3 >  tx_data { 0, 0, 0 };
 	std::array < uint8_t, 3 >  rx_data { 0, 0, 0 };
 
-	this->fuses[int(fuse)].active = true;
+	this->channels[size_t(channel)].active = true;
 
-	for(int i = 0; i < 6; i++)
-		tx_data[1] |= this->fuses[i].active << i;
+	for(int i = 0; i < number_of_channels_per_fuse; i++)
+		tx_data[1] |= this->channels[i].active << i;
 	tx_data[2] = this->toggle << 1;
 	tx_data[0] = WRITE_RAM(0x13);
 	this->transmitReceiveData(tx_data, rx_data);
@@ -282,29 +310,29 @@ SmartFuseState SmartFuse::activeFuse(FuseNumber fuse)
 	return this->state;
 }
 
-SmartFuseState SmartFuse::deactivateFuse(FuseNumber fuse)
+SmartFuseState SmartFuse::deactivateChannel(Channel channel)
 {
-	std::array < uint8_t, 3 >  tx_data { 0, 0, 0 };
+	std::array < uint8_t, 3 >  tx_data { };
 	std::array < uint8_t, 3 >  rx_data;
 
-	this->fuses[int(fuse)].active = false;
+	this->channels[int(channel)].active = false;
 
-	for(int i = 0; i < 6; i++)
-		tx_data[0] |= this->fuses[i].active << i;
-	tx_data[2] = this->toggle << 1;
 	tx_data[0] = WRITE_RAM(0x13);
+	for(int i = 0; i < number_of_channels_per_fuse; i++)
+		tx_data[1] |= this->channels[i].active << i;
+	tx_data[2] = this->toggle << 1;
 	this->transmitReceiveData(tx_data, rx_data);
 
 	this->state = getGSB(rx_data);
 	return this->state;
 }
 
-SmartFuseState SmartFuse::activeAllFuses(void)
+SmartFuseState SmartFuse::activeAllChannels()
 {
 	std::array < uint8_t, 3 >  tx_data;
 	std::array < uint8_t, 3 >  rx_data;
 
-	for(int i = 0; i < 6; i++) this->fuses[i].active = true;
+	for(int i = 0; i < 6; i++) this->channels[i].active = true;
 	tx_data = { WRITE_RAM(0x13), 0x3f, this->toggle << 1 };
 	this->transmitReceiveData(tx_data, rx_data);
 
@@ -312,13 +340,13 @@ SmartFuseState SmartFuse::activeAllFuses(void)
 	return this->state;
 }
 
-SmartFuseState SmartFuse::deactivateAllFuses()
+SmartFuseState SmartFuse::deactivateAllChannels()
 {
 	std::array < uint8_t, 3 >  tx_data;
 	std::array < uint8_t, 3 >  rx_data;
 
-	for(int i = 0; i < 6; i++)
-		this->fuses[i].active = false;
+	for(int i = 0; i < number_of_channels_per_fuse; i++)
+		this->channels[i].active = false;
 	tx_data = { WRITE_RAM(0x13), 0x00, this->toggle << 1 };
 	this->transmitReceiveData(tx_data, rx_data);
 
@@ -334,10 +362,22 @@ SmartFuseState SmartFuse::getState() const
 	return this->state;
 }
 
-std::array < FuseState, 6 > SmartFuse::getFuseStates()
+ChannelState SmartFuse::getChannelState(Channel channel)
 {
-	return { this->fuses[0].state, this->fuses[1].state, this->fuses[2].state,
-			 this->fuses[3].state, this->fuses[4].state, this->fuses[5].state };
+	return this->channels[size_t(channel)].state;
+}
+
+std::array < ChannelState, number_of_channels_per_fuse > SmartFuse::getChannelsStates()
+{
+	return { this->channels[0].state, this->channels[1].state, this->channels[2].state,
+			 this->channels[3].state, this->channels[4].state, this->channels[5].state };
+}
+
+
+std::array < uint16_t, number_of_channels_per_fuse > SmartFuse::getChannelsCurrents()
+{
+	return { this->channels[0].current, this->channels[1].current, this->channels[2].current,
+			 this->channels[3].current, this->channels[4].current, this->channels[5].current };
 }
 
 uint8_t SmartFuse::getLastGSB() const
@@ -362,6 +402,7 @@ void SmartFuse::reset()
 		else if(i == fuse_timeout - 1)
 		{
 			this->state = SmartFuseState::NotResponding;
+			return;
 		}
 		this->transmitReceiveData(tx_data, rx_data);
 		HAL_Delay(1);
@@ -377,10 +418,10 @@ void SmartFuse::setUpAllDutyCycles()
 
 	for(size_t i = 0; i < 6; i++)
 	{
-		/// 0x00 to 0x05 - Outputs Control Register - set pwm duty cycles for each chanel
+		/// 0x00 to 0x05 - Outputs Control Register - set pwm duty cycles for each channel
 		tx_data[0] = WRITE_RAM(0x00 + i);
-		tx_data[1] = uint8_t(this->fuses_settings.duty_cycle[i] >> 4);
-		tx_data[2] = uint8_t(this->fuses_settings.duty_cycle[i] << 4) | this->toggle << 1;
+		tx_data[1] = uint8_t(this->channels_settings.duty_cycle[i] >> 4);
+		tx_data[2] = uint8_t(this->channels_settings.duty_cycle[i] << 4) | this->toggle << 1;
 		this->transmitReceiveData(tx_data, rx_data);
 	}
 
@@ -393,10 +434,10 @@ void SmartFuse::setUpAllSamplingModes()
 	std::array < uint8_t, 3 > rx_data;
 
 	/// 0x08 to 0x0d - Outputs Configuration Register - set sampling mode
-	for(size_t i = 0; i < 6; i++)
+	for(size_t i = 0; i < number_of_channels_per_fuse; i++)
 	{
 		tx_data[0] = WRITE_RAM(0x08 + i);
-		switch (this->fuses_settings.sampling_mode[i])
+		switch (this->channels_settings.sampling_mode[i])
 		{
 			case SamplingMode::Stop: tx_data[2] = 0x00; break;
 			case SamplingMode::Start: tx_data[2] = 0x40; break;
@@ -415,21 +456,21 @@ void SmartFuse::setUpAllLatchOffTimers()
 	std::array < uint8_t, 3 > rx_data { 0, 0, 0 };
 
 	/// 0x10 to 0x11 - Channel Latch OFF Timer Control register - set latch off
-	tx_data[1] = this->fuses_settings.latch_off_time_out[2] << 4 |
-		   this->fuses_settings.latch_off_time_out[1];
-	tx_data[2] = this->fuses_settings.latch_off_time_out[1] << 4;
+	tx_data[1] = this->channels_settings.latch_off_time_out[2] << 4 |
+		   this->channels_settings.latch_off_time_out[1];
+	tx_data[2] = this->channels_settings.latch_off_time_out[1] << 4;
 	tx_data[0] = WRITE_RAM(0x10);
 	this->transmitReceiveData(tx_data, rx_data);
-	tx_data[1] = this->fuses_settings.latch_off_time_out[5] << 4 |
-	       this->fuses_settings.latch_off_time_out[4];
-	tx_data[2] = this->fuses_settings.latch_off_time_out[3] << 4;
+	tx_data[1] = this->channels_settings.latch_off_time_out[5] << 4 |
+	       this->channels_settings.latch_off_time_out[4];
+	tx_data[2] = this->channels_settings.latch_off_time_out[3] << 4;
 	tx_data[0] = WRITE_RAM(0x11);
 	this->transmitReceiveData(tx_data, rx_data);
 
 	this->state = getGSB(rx_data);
 }
 
-void SmartFuse::setUpAllChanelsStates()
+void SmartFuse::setUpAllChannelsStates()
 {
 	std::array < uint8_t, 3 > tx_data;
 	std::array < uint8_t, 3 > rx_data;
@@ -437,7 +478,7 @@ void SmartFuse::setUpAllChanelsStates()
 	/// 0x13 - Channel Control register - enable channels
 	tx_data[0] = WRITE_RAM(0x13);
 	tx_data[1] = 0x00;
-	for(int i = 0; i < 6; i++) tx_data[1] |= this->fuses[i].active << i;
+	for(int i = 0; i < number_of_channels_per_fuse; i++) tx_data[1] |= this->channels[i].active << i;
 	tx_data[2] = this->toggle << 1;
 	this->transmitReceiveData(tx_data, rx_data);
 
@@ -472,9 +513,15 @@ void SmartFuse::transmitReceiveData(std::array<uint8_t, 3> tx_data, std::array<u
 	this->slaveDeselect();
 }
 
-uint16_t SmartFuse::getFuseCurrent(FuseNumber fuse)
+uint16_t SmartFuse::getChannelCurrent(Channel channel)
 {
-	return this->fuses[size_t(fuse)].current;
+	return this->channels[size_t(channel)].current;
+}
+
+template <uint32_t num_of_sf>
+void SmartFuseHandler<num_of_sf>::emplaceBack(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef *const hspi, const ChannelsSettings &channels_settings)
+{
+	this->smart_fuses.emplace_back(port, pin, hspi, channels_settings);
 }
 
 template <uint32_t num_of_sf>
@@ -548,14 +595,32 @@ std::array < SmartFuseState, num_of_sf >  SmartFuseHandler<num_of_sf>::getStates
 }
 
 template <uint32_t num_of_sf>
-std::array < std::array < FuseState, 6 >, num_of_sf > SmartFuseHandler<num_of_sf>::getChanelsStates()
+std::array < std::array < ChannelState, number_of_channels_per_fuse >, num_of_sf > SmartFuseHandler<num_of_sf>::getChannelsStates()
 {
-	std::array < std::array < FuseState, 6 >, num_of_sf > x;
+	std::array < std::array < ChannelState, number_of_channels_per_fuse >, num_of_sf > x;
 
 	for(size_t i = 0; i < num_of_sf; i++)
 	{
-		x[i] = this->smart_fuses[i].getFuseStates();
+		x[i] = this->smart_fuses[i].getChannelsStates();
 	}
 
 	return x;
+}
+
+template <uint32_t num_of_sf>
+std::array < std::array < uint16_t, number_of_channels_per_fuse >, num_of_sf > SmartFuseHandler<num_of_sf>::getChannelsCurrents()
+{
+	std::array < std::array < uint16_t, number_of_channels_per_fuse >, num_of_sf > x;
+	for(size_t i = 0; i < num_of_sf; i++)
+	{
+		x[i] = this->smart_fuses[i].getChannelsCurrents();
+	}
+
+	return x;
+}
+
+template <uint32_t num_of_sf>
+const etl::vector < SmartFuse, num_of_sf >& SmartFuseHandler<num_of_sf>::getSmartFuses() const
+{
+	return this->smart_fuses;
 }

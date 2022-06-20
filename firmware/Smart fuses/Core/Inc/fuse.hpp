@@ -31,12 +31,65 @@
 #include "etl/array.h"
 #include "etl/vector.h"
 
+enum struct Channel : uint8_t
+{
+	c0,
+	c1,
+	c2,
+	c3,
+	c4,
+	c5
+};
+
 /*
  * checks n number of times for fuse, the number shouldn't be too big
  * commonly VN100..afasdfhas sth responds relatively fast
  */
+const size_t fuse_timeout = 6;
 
-constexpr size_t fuse_timeout = 6;
+/*
+ * number of channels per fuse. WARNING this constant should't be ever changed
+ */
+const size_t number_of_channels_per_fuse = 6;
+
+/*
+ * number of fuses being used in program / on board
+ */
+const size_t number_of_fuses = 4;
+
+/*
+ * channels name to number definitions,
+ */
+
+//fuse 0
+const Channel fuse_0_inverter = Channel::c0;
+const Channel fuse_0_box = Channel::c1;
+const Channel fuse_0_tsal_assi = Channel::c2;
+const Channel fuse_0_motec = Channel::c3;
+const Channel fuse_0_break_light = Channel::c4;
+const Channel fuse_0_fan_mono = Channel::c5;
+
+//fuse 1
+const Channel fuse_1_wheel_speed_1 = Channel::c0;
+const Channel fuse_1_dash = Channel::c1;
+const Channel fuse_1_lapimer = Channel::c2;
+const Channel fuse_1_fan_l = Channel::c3;
+const Channel fuse_1_fan_r = Channel::c4;
+const Channel fuse_1_odrive = Channel::c5;
+
+//fuse 2
+const Channel fuse_2_spare_1 = Channel::c0;
+const Channel fuse_2_asms = Channel::c1;
+const Channel fuse_2_lidar = Channel::c2;
+const Channel fuse_2_wheel_speed_2 = Channel::c3;
+const Channel fuse_2_box_dv = Channel::c4;
+const Channel fuse_2_jetson = Channel::c5;
+
+//fuse 3
+const Channel fuse_3_bat_hv = Channel::c2;
+const Channel fuse_3_spare_2 = Channel::c3;
+const Channel fuse_3_diagport = Channel::c4;
+const Channel fuse_3_pump = Channel::c5;
 
 enum struct SmartFuseState : uint8_t
 {
@@ -64,7 +117,7 @@ enum struct SmartFuseState : uint8_t
 	NotResponding,
 };
 
-enum struct FuseState : uint8_t
+enum struct ChannelState : uint8_t
 {
 	Ok,
 	UnderCurrent,
@@ -100,24 +153,14 @@ enum struct SamplingMode : uint8_t
 	Filtered
 };
 
-enum struct FuseNumber : uint8_t
-{
-	f0,
-	f1,
-	f2,
-	f3,
-	f4,
-	f5
-};
-
-struct FusesSettings
+struct ChannelsSettings
 {
 	bool active[6];
 
 	/*
 	 * how long it takes for latch-off event to reset to latch-on,
 	 * the chip will try to restart the corresponding channel within
-	 * the specified time out if the couse of the latch-off event
+	 * the specified time out if the cause of the latch-off event
 	 * isn't cleared in that time, the channel will stay latched-off
 	 * 0x0 - stays latched off
 	 * 0x1 / 0xF - 16ms to 240 ms
@@ -153,14 +196,16 @@ struct FusesSettings
 class SmartFuse
 {
 	public:
-		SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef *const hspi, const FusesSettings &fuses_settings);
+		SmartFuse(const GPIO_TypeDef* const, const uint32_t, const SPI_HandleTypeDef* const, const ChannelsSettings&);
 
-		SmartFuseState activeFuse(FuseNumber fuse);
-		SmartFuseState deactivateFuse(FuseNumber fuse);
-		SmartFuseState activeAllFuses();
-		SmartFuseState deactivateAllFuses();
+		uint8_t getLastGSB() const;
 
-		uint16_t getFuseCurrent(FuseNumber fuse);
+		uint16_t getChannelCurrent(Channel);
+
+		SmartFuseState activeChannel(Channel);
+		SmartFuseState deactivateChannel(Channel);
+		SmartFuseState activeAllChannels();
+		SmartFuseState deactivateAllChannels();
 
 		SmartFuseState init();
 		/*
@@ -178,21 +223,22 @@ class SmartFuse
 		SmartFuseState handle();
 		SmartFuseState handleTimer();
 
-		SmartFuseState setFuseDutyCykle(FuseNumber fuse, uint16_t duty_cycle);
+		SmartFuseState setChannelDutyCykle(Channel, uint16_t);
 
 		SmartFuseState getState() const;
 
-		std::array < FuseState, 6 > getFuseStates();
+		ChannelState getChannelState(Channel);
 
-		uint8_t getLastGSB() const;
+		std::array < ChannelState, number_of_channels_per_fuse > getChannelsStates();
+		std::array < uint16_t, number_of_channels_per_fuse > getChannelsCurrents();
 
 	private:
 		/*
 		 * helps the management of fuses
 		 */
-		struct Fuse
+		struct ChannelData
 		{
-			Fuse();
+			ChannelData();
 
 			bool active;
 
@@ -203,7 +249,7 @@ class SmartFuse
 			 */
 			std::pair < uint16_t, uint16_t > clamping_currents;
 
-			FuseState state;
+			ChannelState state;
 		};
 
 		/*
@@ -220,13 +266,13 @@ class SmartFuse
 
 		const uint32_t pin;
 
-		std::array < Fuse, 6 > fuses;
+		std::array < ChannelData, number_of_channels_per_fuse > channels;
 
-		const GPIO_TypeDef * const port;
+		const GPIO_TypeDef* const port;
 
-		const SPI_HandleTypeDef * const hspi;
+		const SPI_HandleTypeDef* const hspi;
 
-		const FusesSettings fuses_settings;
+		const ChannelsSettings channels_settings;
 
 		Timer watch_dog;
 
@@ -239,7 +285,7 @@ class SmartFuse
 		void setUpAllDutyCycles();
 		void setUpAllSamplingModes();
 		void setUpAllLatchOffTimers();
-		void setUpAllChanelsStates();
+		void setUpAllChannelsStates();
 
 		void transmitReceiveData(std::array < uint8_t, 3 > tx_data, std::array < uint8_t, 3 > &rx_data);
 
@@ -250,8 +296,10 @@ template <uint32_t num_of_sf>
 class SmartFuseHandler
 {
 	public:
-
-		etl::vector < SmartFuse, num_of_sf > smart_fuses;
+		/*
+		 * just passes args to a private vector's emplace_back
+		 */
+		void emplaceBack(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef *const hspi, const ChannelsSettings &fuses_settings);
 
 		/*
 		 * all functions return summed up states
@@ -267,7 +315,12 @@ class SmartFuseHandler
 		SmartFuseState disableAll();
 
 		std::array < SmartFuseState, num_of_sf > getStates();
-		std::array < std::array < FuseState, 6 >, num_of_sf > getChanelsStates();
+		std::array < std::array < ChannelState, number_of_channels_per_fuse >, num_of_sf > getChannelsStates();
+		std::array < std::array < uint16_t, number_of_channels_per_fuse >, num_of_sf > getChannelsCurrents();
+		const etl::vector < SmartFuse, num_of_sf >& getSmartFuses() const;
+
+	private:
+		etl::vector < SmartFuse, num_of_sf > smart_fuses;
 };
 
 /*
@@ -275,6 +328,6 @@ class SmartFuseHandler
  */
 
 /// hinting compiler that we need this template cause it wouldn't work without it
-template class SmartFuseHandler<4>;
+template class SmartFuseHandler<number_of_fuses>;
 
 #endif /* INC_FUSE_HPP_ */

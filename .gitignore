@@ -1,7 +1,8 @@
 *.zip
-firmware/.metadata*
+firmware/.metadata/
 *.d
 *.su
 *.o
 *.resources
-hardware/SB-Spoko Bezpieczniki-backups*
+hardware/SB-Spoko Bezpieczniki-backups/
+hardware/gerber/grb v3/
