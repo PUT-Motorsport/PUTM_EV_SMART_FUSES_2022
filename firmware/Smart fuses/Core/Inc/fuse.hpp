@@ -231,6 +231,9 @@ class SmartFuse
 		SmartFuseState handle();
 		SmartFuseState handleTimer();
 
+		/*
+		 * set dutyCycle on specified channel
+		 */
 		SmartFuseState setChannelDutyCykle(Channel, uint16_t);
 
 		SmartFuseState getState() const;
@@ -242,12 +245,11 @@ class SmartFuse
 		 * arg 2: ref rx_data - data recived from smart fuse
 		 */
 		SmartFuseState transmitReceiveCustomCommand(std::array < uint8_t, 3 >, std::array < uint8_t, 3 >&);
-
+#endif
 		ChannelState getChannelState(Channel);
 
 		std::array < ChannelState, number_of_channels_per_fuse > getChannelsStates();
 		std::array < uint16_t, number_of_channels_per_fuse > getChannelsCurrents();
-#endif
 
 	private:
 		/*

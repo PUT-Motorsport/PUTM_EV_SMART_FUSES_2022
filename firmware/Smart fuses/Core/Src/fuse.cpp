@@ -115,7 +115,7 @@ void SmartFuse::setActionInterval(uint32_t interval)
 	this->action_timer.restart();
 }
 
-void SmartFuse::setAction(void (* action)(SmartFuse*, void*))
+void SmartFuse::setAction(void (* action)(SmartFuse*))
 {
 	this->action = action;
 	this->action_defined = true;
@@ -305,6 +305,8 @@ SmartFuseState SmartFuse::setChannelDutyCykle(Channel channel, uint16_t duty_cyk
 {
 	std::array < uint8_t, 3 >  tx_data { 0, 0, 0 };
 	std::array < uint8_t, 3 >  rx_data { 0, 0, 0 };
+
+	if(duty_cykle > 1023) duty_cykle = 1023;
 
 	tx_data = { WRITE_RAM(0x00 + int(channel)), uint8_t(duty_cykle >> 8), uint8_t(duty_cykle << 4) | this->toggle << 1 };
 	this->transmitReceiveData(tx_data, rx_data);
@@ -505,6 +507,8 @@ void SmartFuse::setUpAllChannelsStates()
 	this->state = getGSB(rx_data);
 }
 
+#if SMART_FUSE_CUSTOM_SEND_ENABLE
+
 SmartFuseState SmartFuse::transmitReceiveCustomCommand(std::array < uint8_t, 3 > tx_data, std::array < uint8_t, 3 >& rx_data)
 {
 	this->transmitReceiveData(tx_data, rx_data);
@@ -512,6 +516,8 @@ SmartFuseState SmartFuse::transmitReceiveCustomCommand(std::array < uint8_t, 3 >
 	this->state = getGSB(rx_data);
 	return this->state;
 }
+
+#endif
 
 void SmartFuse::transmitReceiveData(std::array<uint8_t, 3> tx_data, std::array<uint8_t, 3> &rx_data)
 {
@@ -647,7 +653,7 @@ std::array < std::array < uint16_t, number_of_channels_per_fuse >, num_of_sf > S
 	return x;
 }
 
-template <uint32_t num_of_sf>
+/*template <uint32_t num_of_sf>
 const etl::vector < SmartFuse, num_of_sf >& SmartFuseHandler<num_of_sf>::getSmartFuses() const
 {
 	return this->smart_fuses;
@@ -657,4 +663,4 @@ template <uint32_t num_of_sf>
 const SmartFuse& SmartFuseHandler<num_of_sf>::getSmartFuse(uint8_t index) const
 {
 	return this->smart_fuses[index];
-}
+}*/

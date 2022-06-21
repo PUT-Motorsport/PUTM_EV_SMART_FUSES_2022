@@ -1,6 +1,7 @@
 ../Core/Src/timer.cpp:10:1:Timer::Timer()	16	static
 ../Core/Src/timer.cpp:15:1:Timer::Timer(uint32_t)	16	static
-../Core/Src/timer.cpp:20:6:void Timer::restart()	16	static
-../Core/Src/timer.cpp:25:6:bool Timer::checkIfTimedOutAndReset()	16	static
-../Core/Src/timer.cpp:36:10:uint32_t Timer::getPassedTime()	16	static
-../Core/Src/timer.cpp:41:10:uint32_t Timer::getPassedTimeAndReset()	24	static
+../Core/Src/timer.cpp:20:6:void Timer::setTimeOut(uint32_t)	16	static
+../Core/Src/timer.cpp:25:6:void Timer::restart()	16	static
+../Core/Src/timer.cpp:30:6:bool Timer::checkIfTimedOutAndReset()	16	static
+../Core/Src/timer.cpp:41:10:uint32_t Timer::getPassedTime()	16	static
+../Core/Src/timer.cpp:46:10:uint32_t Timer::getPassedTimeAndReset()	24	static

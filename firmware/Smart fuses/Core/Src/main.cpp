@@ -193,7 +193,26 @@ int main(void)
 	sf_handler.smart_fuses[1].setActionInterval(100);
 	sf_handler.smart_fuses[1].setAction([](SmartFuse* sf)
 	{
-		PUTM_CAN::Can_rx_message
+		static uint16_t previous_setting = 1023;
+
+		uint16_t setting = 0;
+
+		auto temps = PUTM_CAN::can.get_tc_temperatures();
+
+		if(temps.water_temp_in > 60) setting = 1023;
+		else if(temps.water_temp_in > 50) setting = 800;
+		else if(temps.water_temp_in > 40) setting = 500;
+		else setting = 0;
+
+		if(previous_setting != setting)
+		{
+			// fan left
+			sf->setChannelDutyCykle(Channel::c3, setting);
+			// fan right
+			sf->setChannelDutyCykle(Channel::c4, setting);
+
+			previous_setting = setting;
+		}
 	});
 
   /* USER CODE END 2 */
@@ -369,7 +388,7 @@ void initCAN()
 
 HAL_StatusTypeDef sendCanFrameFrontBox()
 {
-	auto sf_buff = sf_handler.getSmartFuses();
+	auto& sf_buff = sf_handler.smart_fuses;
 
 	PUTM_CAN::SF_FrontBox front_box
 	{
@@ -414,7 +433,7 @@ HAL_StatusTypeDef sendCanFrameFrontBox()
 
 HAL_StatusTypeDef sendCanFrameCoolingAndSafety()
 {
-	auto sf_buff = sf_handler.getSmartFuses();
+	auto& sf_buff = sf_handler.smart_fuses;
 
 	PUTM_CAN::SF_CoolingAndVSafety cooling_and_safety
 	{
@@ -459,7 +478,7 @@ HAL_StatusTypeDef sendCanFrameCoolingAndSafety()
 
 HAL_StatusTypeDef sendCanFrameDV()
 {
-	auto sf_buff = sf_handler.getSmartFuses();
+	auto& sf_buff = sf_handler.smart_fuses;
 
 	PUTM_CAN::SF_DV dv
 	{
@@ -504,7 +523,7 @@ HAL_StatusTypeDef sendCanFrameDV()
 
 HAL_StatusTypeDef sendCanFrameWS()
 {
-	auto sf_buff = sf_handler.getSmartFuses();
+	auto& sf_buff = sf_handler.smart_fuses;
 
 	PUTM_CAN::SF_WS ws
 	{
@@ -549,7 +568,7 @@ HAL_StatusTypeDef sendCanFrameWS()
 
 HAL_StatusTypeDef sendCanFrameNucs()
 {
-	auto sf_buff = sf_handler.getSmartFuses();
+	auto& sf_buff = sf_handler.smart_fuses;
 
 	PUTM_CAN::SF_NUCS nucs
 	{
@@ -578,7 +597,7 @@ HAL_StatusTypeDef sendCanFrameNucs()
 
 HAL_StatusTypeDef sendCanFrameSafety()
 {
-	auto sf_buff = sf_handler.getSmartFuses();
+	auto& sf_buff = sf_handler.smart_fuses;
 
 	PUTM_CAN::SF_safety safety
 	{

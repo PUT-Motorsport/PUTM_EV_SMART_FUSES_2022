@@ -1,14 +1,13 @@
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\bin\../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/include/c++/10.3.1/arm-none-eabi/thumb/v7e-m+fp/hard/bits/gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\new:174:33:void* operator new(std::size_t, void*)	16	static
-../Core/Src/fuse.cpp:522:6:void SmartFuseHandler<num_of_sf>::emplaceBack(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const ChannelsSettings&) [with long unsigned int num_of_sf = 4]	40	static
-../Core/Src/fuse.cpp:528:16:SmartFuseState SmartFuseHandler<num_of_sf>::handleAll() [with long unsigned int num_of_sf = 4]	40	static
-../Core/Src/fuse.cpp:542:16:SmartFuseState SmartFuseHandler<num_of_sf>::initAll() [with long unsigned int num_of_sf = 4]	40	static
-../Core/Src/fuse.cpp:556:16:SmartFuseState SmartFuseHandler<num_of_sf>::enableAll() [with long unsigned int num_of_sf = 4]	40	static
-../Core/Src/fuse.cpp:571:16:SmartFuseState SmartFuseHandler<num_of_sf>::disableAll() [with long unsigned int num_of_sf = 4]	40	static
-../Core/Src/fuse.cpp:585:43:std::array<SmartFuseState, num_of_sf> SmartFuseHandler<num_of_sf>::getStates() [with long unsigned int num_of_sf = 4]	40	static
-../Core/Src/fuse.cpp:598:84:std::array<std::array<ChannelState, 6>, num_of_sf> SmartFuseHandler<num_of_sf>::getChannelsStates() [with long unsigned int num_of_sf = 4]	40	static
-../Core/Src/fuse.cpp:611:80:std::array<std::array<short unsigned int, 6>, num_of_sf> SmartFuseHandler<num_of_sf>::getChannelsCurrents() [with long unsigned int num_of_sf = 4]	48	static
-../Core/Src/fuse.cpp:623:45:const etl::vector<SmartFuse, num_of_sf>& SmartFuseHandler<num_of_sf>::getSmartFuses() const [with long unsigned int num_of_sf = 4]	16	static
+../Core/Src/fuse.cpp:556:6:void SmartFuseHandler<num_of_sf>::emplaceBack(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const ChannelsSettings&) [with long unsigned int num_of_sf = 4]	40	static
+../Core/Src/fuse.cpp:562:16:SmartFuseState SmartFuseHandler<num_of_sf>::handleAll() [with long unsigned int num_of_sf = 4]	40	static
+../Core/Src/fuse.cpp:576:16:SmartFuseState SmartFuseHandler<num_of_sf>::initAll() [with long unsigned int num_of_sf = 4]	40	static
+../Core/Src/fuse.cpp:590:16:SmartFuseState SmartFuseHandler<num_of_sf>::enableAll() [with long unsigned int num_of_sf = 4]	40	static
+../Core/Src/fuse.cpp:605:16:SmartFuseState SmartFuseHandler<num_of_sf>::disableAll() [with long unsigned int num_of_sf = 4]	40	static
+../Core/Src/fuse.cpp:619:43:std::array<SmartFuseState, num_of_sf> SmartFuseHandler<num_of_sf>::getStates() [with long unsigned int num_of_sf = 4]	40	static
+../Core/Src/fuse.cpp:632:84:std::array<std::array<ChannelState, 6>, num_of_sf> SmartFuseHandler<num_of_sf>::getChannelsStates() [with long unsigned int num_of_sf = 4]	40	static
+../Core/Src/fuse.cpp:645:80:std::array<std::array<short unsigned int, 6>, num_of_sf> SmartFuseHandler<num_of_sf>::getChannelsCurrents() [with long unsigned int num_of_sf = 4]	48	static
 ../Core/Inc/etl/bitset.h:257:12:size_t etl::ibitset::count() const	24	static
 ../Core/Inc/etl/bitset.h:481:14:etl::ibitset& etl::ibitset::reset()	24	static
 ../Core/Inc/etl/bitset.h:881:14:etl::ibitset& etl::ibitset::initialise(long long unsigned int)	32	static
@@ -22,30 +21,32 @@ d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltool
 ../Core/Src/fuse.cpp:88:1:SmartFuse::ChannelData::ChannelData()	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:94:12:std::array<SmartFuse::ChannelData, 6>::array()	24	static
 ../Core/Src/fuse.cpp:97:1:SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const ChannelsSettings&)	48	static
-../Core/Src/fuse.cpp:109:6:void SmartFuse::slaveSelect()	16	static
-../Core/Src/fuse.cpp:114:6:void SmartFuse::slaveDeselect()	16	static
-../Core/Src/fuse.cpp:119:16:SmartFuseState SmartFuse::init()	16	static
-../Core/Src/fuse.cpp:134:16:SmartFuseState SmartFuse::enable()	24	static
-../Core/Src/fuse.cpp:155:16:SmartFuseState SmartFuse::disable()	24	static
-../Core/Src/fuse.cpp:172:16:SmartFuseState SmartFuse::handle()	72	static
-../Core/Src/fuse.cpp:263:16:SmartFuseState SmartFuse::handleTimer()	32	static
-../Core/Src/fuse.cpp:284:16:SmartFuseState SmartFuse::setChannelDutyCykle(Channel, uint16_t)	24	static
-../Core/Src/fuse.cpp:296:16:SmartFuseState SmartFuse::activeChannel(Channel)	40	static
-../Core/Src/fuse.cpp:313:16:SmartFuseState SmartFuse::deactivateChannel(Channel)	40	static
-../Core/Src/fuse.cpp:330:16:SmartFuseState SmartFuse::activeAllChannels()	32	static
-../Core/Src/fuse.cpp:343:16:SmartFuseState SmartFuse::deactivateAllChannels()	32	static
-../Core/Src/fuse.cpp:360:16:SmartFuseState SmartFuse::getState() const	16	static
-../Core/Src/fuse.cpp:365:14:ChannelState SmartFuse::getChannelState(Channel)	16	static
-../Core/Src/fuse.cpp:370:58:std::array<ChannelState, 6> SmartFuse::getChannelsStates()	16	static
-../Core/Src/fuse.cpp:377:54:std::array<short unsigned int, 6> SmartFuse::getChannelsCurrents()	16	static
-../Core/Src/fuse.cpp:383:9:uint8_t SmartFuse::getLastGSB() const	16	static
-../Core/Src/fuse.cpp:388:6:void SmartFuse::reset()	32	static
-../Core/Src/fuse.cpp:414:6:void SmartFuse::setUpAllDutyCycles()	40	static
-../Core/Src/fuse.cpp:431:6:void SmartFuse::setUpAllSamplingModes()	40	static
-../Core/Src/fuse.cpp:453:6:void SmartFuse::setUpAllLatchOffTimers()	32	static
-../Core/Src/fuse.cpp:473:6:void SmartFuse::setUpAllChannelsStates()	40	static
-../Core/Src/fuse.cpp:488:6:void SmartFuse::transmitReceiveData(std::array<unsigned char, 3>, std::array<unsigned char, 3>&)	40	static
-../Core/Src/fuse.cpp:516:10:uint16_t SmartFuse::getChannelCurrent(Channel)	16	static
+../Core/Src/fuse.cpp:112:6:void SmartFuse::setActionInterval(uint32_t)	16	static
+../Core/Src/fuse.cpp:118:6:void SmartFuse::setAction(void (*)(SmartFuse*))	16	static
+../Core/Src/fuse.cpp:124:6:void SmartFuse::slaveSelect()	16	static
+../Core/Src/fuse.cpp:129:6:void SmartFuse::slaveDeselect()	16	static
+../Core/Src/fuse.cpp:134:16:SmartFuseState SmartFuse::init()	16	static
+../Core/Src/fuse.cpp:149:16:SmartFuseState SmartFuse::enable()	24	static
+../Core/Src/fuse.cpp:170:16:SmartFuseState SmartFuse::disable()	24	static
+../Core/Src/fuse.cpp:187:16:SmartFuseState SmartFuse::handle()	72	static
+../Core/Src/fuse.cpp:283:16:SmartFuseState SmartFuse::handleTimer()	32	static
+../Core/Src/fuse.cpp:304:16:SmartFuseState SmartFuse::setChannelDutyCykle(Channel, uint16_t)	24	static
+../Core/Src/fuse.cpp:318:16:SmartFuseState SmartFuse::activeChannel(Channel)	40	static
+../Core/Src/fuse.cpp:335:16:SmartFuseState SmartFuse::deactivateChannel(Channel)	40	static
+../Core/Src/fuse.cpp:352:16:SmartFuseState SmartFuse::activeAllChannels()	32	static
+../Core/Src/fuse.cpp:365:16:SmartFuseState SmartFuse::deactivateAllChannels()	32	static
+../Core/Src/fuse.cpp:382:16:SmartFuseState SmartFuse::getState() const	16	static
+../Core/Src/fuse.cpp:387:14:ChannelState SmartFuse::getChannelState(Channel)	16	static
+../Core/Src/fuse.cpp:392:58:std::array<ChannelState, 6> SmartFuse::getChannelsStates()	16	static
+../Core/Src/fuse.cpp:399:54:std::array<short unsigned int, 6> SmartFuse::getChannelsCurrents()	16	static
+../Core/Src/fuse.cpp:405:9:uint8_t SmartFuse::getLastGSB() const	16	static
+../Core/Src/fuse.cpp:410:6:void SmartFuse::reset()	32	static
+../Core/Src/fuse.cpp:436:6:void SmartFuse::setUpAllDutyCycles()	40	static
+../Core/Src/fuse.cpp:453:6:void SmartFuse::setUpAllSamplingModes()	40	static
+../Core/Src/fuse.cpp:475:6:void SmartFuse::setUpAllLatchOffTimers()	32	static
+../Core/Src/fuse.cpp:495:6:void SmartFuse::setUpAllChannelsStates()	40	static
+../Core/Src/fuse.cpp:522:6:void SmartFuse::transmitReceiveData(std::array<unsigned char, 3>, std::array<unsigned char, 3>&)	40	static
+../Core/Src/fuse.cpp:550:10:uint16_t SmartFuse::getChannelCurrent(Channel)	16	static
 ../Core/Inc/etl/binary.h:895:5:constexpr typename etl::enable_if<((etl::is_integral<T>::value && etl::is_unsigned<T>::value) && (etl::integral_limits<T>::bits == 8)), unsigned char>::type etl::count_bits(T) [with T = unsigned char]	24	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:185:7:std::array<_Tp, _Nm>::value_type& std::array<_Tp, _Nm>::operator[](std::array<_Tp, _Nm>::size_type) [with _Tp = unsigned char; unsigned int _Nm = 3]	16	static
 ../Core/Inc/etl/bitset.h:1017:5:etl::bitset<MAXN>::bitset(long long unsigned int) [with unsigned int MAXN = 8]	24	static
