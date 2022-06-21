@@ -118,9 +118,41 @@ int main(void)
 		.clamping_currents = { { 0x0000, 0xffff },  { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff } }
 	};
 
+	/*
+	 * channel 0: inverter
+	 * channel 1: front box
+	 * channel 2: tsal/assi
+	 * channel 3: motec
+	 * channel 4: break light
+	 * channel 5: fan mono
+	 */
 	sf_handler.emplaceBack(GPIOA, GPIO_PIN_1, &hspi1, channels_settings);
+	/*
+	 * channel 0: wheel speed
+	 * channel 1: dash
+	 * channel 2: laptimer
+	 * channel 3: fan l
+	 * channel 4: fan r
+	 * channel 5: odrive
+	 */
 	sf_handler.emplaceBack(GPIOA, GPIO_PIN_2, &hspi1, channels_settings);
+	/*
+	 * channel 0: spare 1
+	 * channel 1: asms/safety
+	 * channel 2: lidar
+	 * channel 3: wheel speed
+	 * channel 4: box dv
+	 * channel 5: jetson
+	 */
 	sf_handler.emplaceBack(GPIOA, GPIO_PIN_3, &hspi1, channels_settings);
+	/*
+	 * channel 0: --
+	 * channel 1: --
+	 * channel 2: bat hv
+	 * channel 3: spare 2
+	 * channel 4: diagport
+	 * channel 5: pump
+	 */
 	sf_handler.emplaceBack(GPIOA, GPIO_PIN_4, &hspi1, channels_settings);
 
   /* USER CODE END 1 */
@@ -158,6 +190,12 @@ int main(void)
 
 	std::array < GpioInElement, 5 > optos { safety_ams, safety_spare, safety_tms, safety_td, safety_hvd };
 
+	sf_handler.smart_fuses[1].setActionInterval(100);
+	sf_handler.smart_fuses[1].setAction([](SmartFuse* sf)
+	{
+		PUTM_CAN::Can_rx_message
+	});
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -179,14 +217,8 @@ int main(void)
 		auto state = sf_handler.handleAll();
 		switch (state)
 		{
-			case SmartFuseState::LatchOff: led_warning_1.activate(); break;
-			case SmartFuseState::ResetState: led_warning_2.activate(); break;
-			case SmartFuseState::OLOFF: led_warning_2.activate(); break;
-			case SmartFuseState::OTPLVDS: led_warning_2.activate(); break;
-			case SmartFuseState::TempFail: led_warning_2.activate(); break;
 			case SmartFuseState::NotResponding: led_error.activate(); break;
 			case SmartFuseState::SPIError: led_error.activate(); break;
-			case SmartFuseState::FailSafe: led_error.activate(); break;
 			default:
 			{
 				led_warning_1.deactivate();
@@ -239,13 +271,18 @@ int main(void)
 
 		if(timer_can_send_other_frames.checkIfTimedOutAndReset())
 		{
-			if( sendCanFrameFrontBox() != HAL_OK ) led_warning_2.activate();
-			if( sendCanFrameCoolingAndSafety() != HAL_OK ) led_warning_2.activate();
-			if( sendCanFrameDV() != HAL_OK ) led_warning_2.activate();
-			if( sendCanFrameDV() != HAL_OK ) led_warning_2.activate();
-			if( sendCanFrameWS() != HAL_OK ) led_warning_2.activate();
-			if( sendCanFrameNucs() != HAL_OK ) led_warning_2.activate();
-			if( sendCanFrameSafety() != HAL_OK ) led_warning_2.activate();
+			auto can_ok = HAL_OK;
+
+			if( sendCanFrameFrontBox() != HAL_OK ) can_ok = HAL_ERROR;
+			if( sendCanFrameCoolingAndSafety() != HAL_OK ) can_ok = HAL_ERROR;
+			if( sendCanFrameDV() != HAL_OK ) can_ok = HAL_ERROR;
+			if( sendCanFrameDV() != HAL_OK ) can_ok = HAL_ERROR;
+			if( sendCanFrameWS() != HAL_OK ) can_ok = HAL_ERROR;
+			if( sendCanFrameNucs() != HAL_OK ) can_ok = HAL_ERROR;
+			if( sendCanFrameSafety() != HAL_OK ) can_ok = HAL_ERROR;
+
+			if(can_ok != HAL_OK) led_warning_2.activate();
+			else led_warning_2.deactivate();
 		}
 
     /* USER CODE END WHILE */

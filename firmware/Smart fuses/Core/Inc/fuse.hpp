@@ -25,6 +25,8 @@
 #ifndef INC_FUSE_HPP_
 #define INC_FUSE_HPP_
 
+#define SMART_FUSE_CUSTOM_SEND_ENABLE false
+
 #include "stm32l4xx_hal.h"
 #include "spi.h"
 #include "timer.h"
@@ -197,6 +199,13 @@ class SmartFuse
 	public:
 		SmartFuse(const GPIO_TypeDef* const, const uint32_t, const SPI_HandleTypeDef* const, const ChannelsSettings&);
 
+		void setActionInterval(uint32_t);
+		/*
+		 * arg 1: sender
+		 * arg 2: args
+		 */
+		void setAction(void (* action)(SmartFuse*));
+
 		uint8_t getLastGSB() const;
 
 		uint16_t getChannelCurrent(Channel);
@@ -226,10 +235,19 @@ class SmartFuse
 
 		SmartFuseState getState() const;
 
+#if SMART_FUSE_CUSTOM_SEND_ENABLE
+		/*
+		 * send custom command, shoulnd't be used unless necessary
+		 * arg 1: tx_data - data to send
+		 * arg 2: ref rx_data - data recived from smart fuse
+		 */
+		SmartFuseState transmitReceiveCustomCommand(std::array < uint8_t, 3 >, std::array < uint8_t, 3 >&);
+
 		ChannelState getChannelState(Channel);
 
 		std::array < ChannelState, number_of_channels_per_fuse > getChannelsStates();
 		std::array < uint16_t, number_of_channels_per_fuse > getChannelsCurrents();
+#endif
 
 	private:
 		/*
@@ -257,6 +275,8 @@ class SmartFuse
 		 */
 		bool toggle;
 
+		bool action_defined;
+
 		/*
 		 * global state bit
 		 * is read at each spi communication
@@ -274,8 +294,11 @@ class SmartFuse
 		const ChannelsSettings channels_settings;
 
 		Timer watch_dog;
+		Timer action_timer;
 
 		SmartFuseState state;
+
+		void (* action)(SmartFuse*);
 
 		void slaveSelect();
 		void slaveDeselect();
@@ -295,6 +318,8 @@ template <uint32_t num_of_sf>
 class SmartFuseHandler
 {
 	public:
+	etl::vector < SmartFuse, num_of_sf > smart_fuses;
+
 		/*
 		 * just passes args to a private vector's emplace_back
 		 */
@@ -316,10 +341,11 @@ class SmartFuseHandler
 		std::array < SmartFuseState, num_of_sf > getStates();
 		std::array < std::array < ChannelState, number_of_channels_per_fuse >, num_of_sf > getChannelsStates();
 		std::array < std::array < uint16_t, number_of_channels_per_fuse >, num_of_sf > getChannelsCurrents();
-		const etl::vector < SmartFuse, num_of_sf >& getSmartFuses() const;
+		//const etl::vector < SmartFuse, num_of_sf >& getSmartFuses() const;
+		//const SmartFuse& getSmartFuse(uint8_t) const;
 
 	private:
-		etl::vector < SmartFuse, num_of_sf > smart_fuses;
+		//etl::vector < SmartFuse, num_of_sf > smart_fuses;
 };
 
 /*

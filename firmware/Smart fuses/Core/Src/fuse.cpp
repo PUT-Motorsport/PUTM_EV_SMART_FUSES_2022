@@ -103,7 +103,22 @@ SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const 
 		this->channels[i].active = channels_settings.active[i];
 	}
 
+	this->action_timer.setTimeOut(100);
+	this->watch_dog.setTimeOut(31);
+
 	slaveDeselect();
+}
+
+void SmartFuse::setActionInterval(uint32_t interval)
+{
+	this->action_timer.setTimeOut(interval);
+	this->action_timer.restart();
+}
+
+void SmartFuse::setAction(void (* action)(SmartFuse*, void*))
+{
+	this->action = action;
+	this->action_defined = true;
 }
 
 void SmartFuse::slaveSelect(void)
@@ -253,6 +268,11 @@ SmartFuseState SmartFuse::handle(void)
 		if(rx_data[1] & (1 << 2)) this->channels[i].state = ChannelState::STKFLTR;
 		if(rx_data[1] & (1 << 3)) this->channels[i].state = ChannelState::VDSFS;
 		if(rx_data[1] & (1 << 4)) this->channels[i].state = ChannelState::CHFBSR;
+	}
+
+	if(this->action_defined && this->action_timer.checkIfTimedOutAndReset())
+	{
+		this->action(this);
 	}
 
 	if (!lock_state) this->state = getGSB(rx_data);
@@ -485,6 +505,14 @@ void SmartFuse::setUpAllChannelsStates()
 	this->state = getGSB(rx_data);
 }
 
+SmartFuseState SmartFuse::transmitReceiveCustomCommand(std::array < uint8_t, 3 > tx_data, std::array < uint8_t, 3 >& rx_data)
+{
+	this->transmitReceiveData(tx_data, rx_data);
+
+	this->state = getGSB(rx_data);
+	return this->state;
+}
+
 void SmartFuse::transmitReceiveData(std::array<uint8_t, 3> tx_data, std::array<uint8_t, 3> &rx_data)
 {
 	/// just check
@@ -623,4 +651,10 @@ template <uint32_t num_of_sf>
 const etl::vector < SmartFuse, num_of_sf >& SmartFuseHandler<num_of_sf>::getSmartFuses() const
 {
 	return this->smart_fuses;
+}
+
+template <uint32_t num_of_sf>
+const SmartFuse& SmartFuseHandler<num_of_sf>::getSmartFuse(uint8_t index) const
+{
+	return this->smart_fuses[index];
 }

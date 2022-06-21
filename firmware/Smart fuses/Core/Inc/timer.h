@@ -14,9 +14,10 @@ class Timer
 {
 	public:
 		Timer();
-		Timer(uint32_t timeout);
+		Timer(uint32_t);
 
 		void restart();
+		void setTimeOut(uint32_t);
 
 		bool checkIfTimedOutAndReset();
 

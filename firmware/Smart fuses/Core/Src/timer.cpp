@@ -17,6 +17,11 @@ Timer::Timer(uint32_t timeout) : timeout(timeout)
 	this->start_time = HAL_GetTick();
 }
 
+void Timer::setTimeOut(uint32_t timeout)
+{
+	this->timeout = timeout;
+}
+
 void Timer::restart()
 {
 	this->start_time = HAL_GetTick();
