@@ -63,7 +63,7 @@ const size_t number_of_fuses = 4;
 
 //fuse 0
 const Channel fuse_0_inverter = Channel::c0;
-const Channel fuse_0_box = Channel::c1;
+const Channel fuse_0_front_box = Channel::c1;
 const Channel fuse_0_tsal_assi = Channel::c2;
 const Channel fuse_0_motec = Channel::c3;
 const Channel fuse_0_break_light = Channel::c4;
@@ -79,7 +79,7 @@ const Channel fuse_1_odrive = Channel::c5;
 
 //fuse 2
 const Channel fuse_2_spare_1 = Channel::c0;
-const Channel fuse_2_asms = Channel::c1;
+const Channel fuse_2_asms_safety = Channel::c1;
 const Channel fuse_2_lidar = Channel::c2;
 const Channel fuse_2_wheel_speed_2 = Channel::c3;
 const Channel fuse_2_box_dv = Channel::c4;
@@ -122,7 +122,6 @@ enum struct ChannelState : uint8_t
 	Ok,
 	UnderCurrent,
 	OverCurrent,
-	ShortedToGround,
 	LatchOff,
 	/*
 	 *  Output stuck to VCC/openload off state status.

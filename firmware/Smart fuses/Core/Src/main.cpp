@@ -113,7 +113,7 @@ int main(void)
 		.active = { true, true, true, true, true, true },
 		.latch_off_time_out = { _1, _1, _1, _1, _1, _1 },
 		.sampling_mode = { SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous,
-							SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous },
+						   SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous },
 		.duty_cycle = { 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff },
 		.clamping_currents = { { 0x0000, 0xffff },  { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff } }
 	};
@@ -346,11 +346,11 @@ HAL_StatusTypeDef sendCanFrameFrontBox()
 		},
 		.fuse_0_boxf_mb =
 		{
-			.ok = sf_buff[0].getChannelState(fuse_0_box) == ChannelState::Ok,
+			.ok = sf_buff[0].getChannelState(fuse_0_front_box) == ChannelState::Ok,
 			.overheat = 0,
 			.undercurrent = 0,
 			.overcurrent = 0,
-			.current = sf_buff[0].getChannelCurrent(fuse_0_box)
+			.current = sf_buff[0].getChannelCurrent(fuse_0_front_box)
 		},
 		.fuse_0_apps =
 		{
@@ -391,11 +391,11 @@ HAL_StatusTypeDef sendCanFrameCoolingAndSafety()
 		},
 		.fuse_1_fan_r =
 		{
-			.ok = sf_buff[1].getChannelState(fuse_0_box) == ChannelState::Ok,
+			.ok = sf_buff[1].getChannelState(fuse_1_fan_r) == ChannelState::Ok,
 			.overheat = 0,
 			.undercurrent = 0,
 			.overcurrent = 0,
-			.current = sf_buff[1].getChannelCurrent(fuse_0_box)
+			.current = sf_buff[1].getChannelCurrent(fuse_1_fan_r)
 		},
 		.fuse_3_pump =
 		{

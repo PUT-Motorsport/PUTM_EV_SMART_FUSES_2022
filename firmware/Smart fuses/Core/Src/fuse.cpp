@@ -238,7 +238,7 @@ SmartFuseState SmartFuse::handle(void)
 	{
 		if(this->channels[i].active != read_fuses_states[i])
 		{
-			this->channels[i].state = ChannelState::ShortedToGround;
+			this->channels[i].state = ChannelState::STKFLTR;
 			lock_state = true;
 			this->state = SmartFuseState::OLOFF;
 		}
