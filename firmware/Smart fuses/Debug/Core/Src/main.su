@@ -6,37 +6,37 @@ d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltool
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:18:3:PUTM_CAN::Can_rx_message::Can_rx_message(CAN_HandleTypeDef&, uint32_t)	24	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:63:36:constexpr uint32_t PUTM_CAN::Device_base::get_ID()	16	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/can_interface.hpp:110:8:bool PUTM_CAN::Can_interface::parse_message(const PUTM_CAN::Can_rx_message&)	32	static
-../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/can_interface.hpp:125:15:PUTM_CAN::BMS_HV_main PUTM_CAN::Can_interface::get_bms_hv_main()	16	static
+../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/can_interface.hpp:158:19:PUTM_CAN::TC_temperatures PUTM_CAN::Can_interface::get_tc_temperatures()	16	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/can_interface.hpp:214:6:void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef*)	56	static
 ../Core/Inc/fuse.hpp:320:7:SmartFuseHandler<4>::SmartFuseHandler()	16	static
 ../Core/Inc/gpio elements.hpp:13:7:constexpr GpioElement::GpioElement(const GpioElement&)	16	static
 ../Core/Inc/gpio elements.hpp:43:7:constexpr GpioInElement::GpioInElement(const GpioInElement&)	16	static
 ../Core/Src/main.cpp:194:38:main()::<lambda(SmartFuse*)>	24	static
-../Core/Src/main.cpp:194:38:static void main()::<lambda(SmartFuse*)>::_FUN(SmartFuse*)	16	static
-../Core/Src/main.cpp:194:38:main()::<lambda(SmartFuse*)>::operator void (*)(SmartFuse*)() const	16	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:33:13:constexpr PUTM_CAN::Can_tx_message<T>::Can_tx_message(const T&, const CAN_TxHeaderTypeDef&) [with T = PUTM_CAN::SF_main]	32	static
-../Core/Src/main.cpp:105:5:int main()	376	static
-../Core/Src/main.cpp:305:6:void SystemClock_Config()	104	static
-../Core/Src/main.cpp:352:6:void initCAN()	8	static
+../Core/Src/main.cpp:105:5:int main()	384	static
+../Core/Src/main.cpp:319:6:void SystemClock_Config()	104	static
+../Core/Src/main.cpp:366:6:void initCAN()	8	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:33:13:constexpr PUTM_CAN::Can_tx_message<T>::Can_tx_message(const T&, const CAN_TxHeaderTypeDef&) [with T = PUTM_CAN::SF_FrontBox]	32	static
-../Core/Src/main.cpp:375:19:HAL_StatusTypeDef sendCanFrameFrontBox()	56	static
+../Core/Src/main.cpp:389:19:HAL_StatusTypeDef sendCanFrameFrontBox()	56	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:33:13:constexpr PUTM_CAN::Can_tx_message<T>::Can_tx_message(const T&, const CAN_TxHeaderTypeDef&) [with T = PUTM_CAN::SF_CoolingAndVSafety]	32	static
-../Core/Src/main.cpp:420:19:HAL_StatusTypeDef sendCanFrameCoolingAndSafety()	56	static
+../Core/Src/main.cpp:434:19:HAL_StatusTypeDef sendCanFrameCoolingAndSafety()	56	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:33:13:constexpr PUTM_CAN::Can_tx_message<T>::Can_tx_message(const T&, const CAN_TxHeaderTypeDef&) [with T = PUTM_CAN::SF_DV]	32	static
-../Core/Src/main.cpp:465:19:HAL_StatusTypeDef sendCanFrameDV()	56	static
+../Core/Src/main.cpp:479:19:HAL_StatusTypeDef sendCanFrameDV()	56	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:33:13:constexpr PUTM_CAN::Can_tx_message<T>::Can_tx_message(const T&, const CAN_TxHeaderTypeDef&) [with T = PUTM_CAN::SF_WS]	32	static
-../Core/Src/main.cpp:510:19:HAL_StatusTypeDef sendCanFrameWS()	56	static
+../Core/Src/main.cpp:524:19:HAL_StatusTypeDef sendCanFrameWS()	56	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:33:13:constexpr PUTM_CAN::Can_tx_message<T>::Can_tx_message(const T&, const CAN_TxHeaderTypeDef&) [with T = PUTM_CAN::SF_NUCS]	32	static
-../Core/Src/main.cpp:555:19:HAL_StatusTypeDef sendCanFrameNucs()	48	static
+../Core/Src/main.cpp:569:19:HAL_StatusTypeDef sendCanFrameNucs()	48	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:33:13:constexpr PUTM_CAN::Can_tx_message<T>::Can_tx_message(const T&, const CAN_TxHeaderTypeDef&) [with T = PUTM_CAN::SF_safety]	32	static
-../Core/Src/main.cpp:584:19:HAL_StatusTypeDef sendCanFrameSafety()	56	static
-../Core/Src/main.cpp:608:6:void Error_Handler()	8	static,ignoring_inline_asm
+../Core/Src/main.cpp:598:19:HAL_StatusTypeDef sendCanFrameSafety()	56	static
+../Core/Src/main.cpp:622:6:void Error_Handler()	8	static,ignoring_inline_asm
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:126:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::begin() [with _Tp = PUTM_CAN::Device_base*; unsigned int _Nm = 33]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:134:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::end() [with _Tp = PUTM_CAN::Device_base*; unsigned int _Nm = 33]	16	static
 ../Core/Inc/etl/vector.h:76:9:etl::ivector<SmartFuse>::~ivector()	16	static
 ../Core/Inc/etl/vector.h:1197:5:etl::vector<T, MAX_SIZE_>::vector() [with T = SmartFuse; unsigned int MAX_SIZE_ = 4]	16	static
 ../Core/Inc/etl/vector.h:1319:5:etl::vector<T, MAX_SIZE_>::~vector() [with T = SmartFuse; unsigned int MAX_SIZE_ = 4]	16	static
 ../Core/Inc/etl/vector.h:283:15:T& etl::ivector<T>::operator[](size_t) [with T = SmartFuse]	16	static
+../Core/Inc/etl/private/delegate_cpp11.h:390:7:)>::invocation_element::invocation_element() [with TReturn = void; TParams = {SmartFuse*}]	16	static
+../Core/Inc/etl/private/delegate_cpp11.h:115:21:)>::delegate(const TLambda&) [with TLambda = main()::<lambda(SmartFuse*)>; <template-parameter-2-2> = void; TReturn = void; TParams = {SmartFuse*}]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:126:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::begin() [with _Tp = GpioInElement; unsigned int _Nm = 5]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:134:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::end() [with _Tp = GpioInElement; unsigned int _Nm = 5]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:185:7:std::array<_Tp, _Nm>::value_type& std::array<_Tp, _Nm>::operator[](std::array<_Tp, _Nm>::size_type) [with _Tp = SmartFuseState; unsigned int _Nm = 4]	16	static
@@ -57,6 +57,8 @@ d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltool
 ../Core/Inc/etl/vector.h:1003:5:etl::ivector<T>::ivector(T*, size_t) [with T = SmartFuse]	24	static
 ../Core/Inc/etl/vector.h:1013:10:void etl::ivector<T>::initialise() [with T = SmartFuse]	16	static
 ../Core/Inc/etl/vector.h:419:10:void etl::ivector<T>::clear() [with T = SmartFuse]	16	static
+../Core/Inc/etl/private/delegate_cpp11.h:437:26:)>::stub_type) [with TReturn = void; TParams = {SmartFuse*}]	24	static
+../Core/Inc/etl/private/delegate_cpp11.h:505:36:) [with TLambda = main()::<lambda(SmartFuse*)>; TReturn = void; TParams = {SmartFuse*}]	24	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:234:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::data() [with _Tp = GpioInElement; unsigned int _Nm = 5]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:55:7:static constexpr _Tp& std::__array_traits<_Tp, _Nm>::_S_ref(const _Tp (&)[_Nm], std::size_t) [with _Tp = SmartFuseState; unsigned int _Nm = 4]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:234:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::data() [with _Tp = std::array<short unsigned int, 6>; unsigned int _Nm = 4]	16	static
@@ -64,6 +66,7 @@ d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltool
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:234:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::data() [with _Tp = SmartFuseState; unsigned int _Nm = 4]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:59:7:static constexpr _Tp* std::__array_traits<_Tp, _Nm>::_S_ptr(const _Tp (&)[_Nm]) [with _Tp = PUTM_CAN::Device_base*; unsigned int _Nm = 33]	16	static
 ../Core/Inc/etl/memory.h:1067:5:typename etl::enable_if<etl::is_trivially_destructible<typename etl::iterator_traits<TIterator>::value_type>::value, void>::type etl::destroy(TIterator, TIterator) [with TIterator = SmartFuse*]	16	static
+../Core/Inc/etl/utility.h:60:17:constexpr T&& etl::forward(typename etl::remove_reference<T>::type&) [with T = SmartFuse*]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:59:7:static constexpr _Tp* std::__array_traits<_Tp, _Nm>::_S_ptr(const _Tp (&)[_Nm]) [with _Tp = GpioInElement; unsigned int _Nm = 5]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:59:7:static constexpr _Tp* std::__array_traits<_Tp, _Nm>::_S_ptr(const _Tp (&)[_Nm]) [with _Tp = std::array<short unsigned int, 6>; unsigned int _Nm = 4]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:59:7:static constexpr _Tp* std::__array_traits<_Tp, _Nm>::_S_ptr(const _Tp (&)[_Nm]) [with _Tp = short unsigned int; unsigned int _Nm = 6]	16	static
@@ -73,7 +76,7 @@ d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltool
 ../Core/Inc/fuse.hpp:320:7:SmartFuseHandler<4>::~SmartFuseHandler()	16	static
 ../Core/Inc/gpio elements.hpp:30:7:GpioOutElement::~GpioOutElement()	16	static
 ../Core/Inc/gpio elements.hpp:30:7:virtual GpioOutElement::~GpioOutElement()	16	static
-../Core/Src/main.cpp:621:1:void __static_initialization_and_destruction_0(int, int)	16	static
+../Core/Src/main.cpp:635:1:void __static_initialization_and_destruction_0(int, int)	16	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:84:8:void PUTM_CAN::Device<Device_data_type>::set_data(const PUTM_CAN::Can_rx_message&) [with Device_data_type = PUTM_CAN::YawProbe_air_flow]	16	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:84:8:void PUTM_CAN::Device<Device_data_type>::set_data(const PUTM_CAN::Can_rx_message&) [with Device_data_type = PUTM_CAN::WheelTemp_main]	16	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:84:8:void PUTM_CAN::Device<Device_data_type>::set_data(const PUTM_CAN::Can_rx_message&) [with Device_data_type = PUTM_CAN::Telemetry_Main]	16	static
@@ -107,5 +110,5 @@ d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltool
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:84:8:void PUTM_CAN::Device<Device_data_type>::set_data(const PUTM_CAN::Can_rx_message&) [with Device_data_type = PUTM_CAN::AQ_acceleration]	16	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:84:8:void PUTM_CAN::Device<Device_data_type>::set_data(const PUTM_CAN::Can_rx_message&) [with Device_data_type = PUTM_CAN::AQ_main]	16	static
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:84:8:void PUTM_CAN::Device<Device_data_type>::set_data(const PUTM_CAN::Can_rx_message&) [with Device_data_type = PUTM_CAN::Apps_main]	16	static
-../Core/Src/main.cpp:621:1:cpp)	8	static
-../Core/Src/main.cpp:621:1:cpp)	8	static
+../Core/Src/main.cpp:635:1:cpp)	8	static
+../Core/Src/main.cpp:635:1:cpp)	8	static

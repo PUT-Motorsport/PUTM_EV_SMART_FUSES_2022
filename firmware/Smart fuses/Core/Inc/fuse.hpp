@@ -32,6 +32,7 @@
 #include "timer.h"
 #include "etl/array.h"
 #include "etl/vector.h"
+#include "etl/delegate.h"
 
 enum struct Channel : uint8_t
 {
@@ -202,9 +203,8 @@ class SmartFuse
 		void setActionInterval(uint32_t);
 		/*
 		 * arg 1: sender
-		 * arg 2: args
 		 */
-		void setAction(void (* action)(SmartFuse*));
+		void setAction(etl::delegate<void(SmartFuse*)>);
 
 		uint8_t getLastGSB() const;
 
@@ -300,7 +300,7 @@ class SmartFuse
 
 		SmartFuseState state;
 
-		void (* action)(SmartFuse*);
+		etl::delegate<void(SmartFuse*)> action;
 
 		void slaveSelect();
 		void slaveDeselect();

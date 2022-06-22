@@ -22,7 +22,7 @@ d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltool
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:94:12:std::array<SmartFuse::ChannelData, 6>::array()	24	static
 ../Core/Src/fuse.cpp:97:1:SmartFuse::SmartFuse(const GPIO_TypeDef*, uint32_t, const SPI_HandleTypeDef*, const ChannelsSettings&)	48	static
 ../Core/Src/fuse.cpp:112:6:void SmartFuse::setActionInterval(uint32_t)	16	static
-../Core/Src/fuse.cpp:118:6:void SmartFuse::setAction(void (*)(SmartFuse*))	16	static
+../Core/Src/fuse.cpp:118:6:void SmartFuse::setAction(etl::delegate<void(SmartFuse*)>)	24	static
 ../Core/Src/fuse.cpp:124:6:void SmartFuse::slaveSelect()	16	static
 ../Core/Src/fuse.cpp:129:6:void SmartFuse::slaveDeselect()	16	static
 ../Core/Src/fuse.cpp:134:16:SmartFuseState SmartFuse::init()	16	static
@@ -53,9 +53,13 @@ d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltool
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:126:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::begin() [with _Tp = etl::bitset<8>; unsigned int _Nm = 3]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:134:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::end() [with _Tp = etl::bitset<8>; unsigned int _Nm = 3]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\bits\stl_pair.h:232:26:constexpr std::pair<_T1, _T2>::pair() [with _U1 = short unsigned int; _U2 = short unsigned int; typename std::enable_if<std::__and_<std::__is_implicitly_default_constructible<_U1>, std::__is_implicitly_default_constructible<_U2> >::value, bool>::type <anonymous> = true; _T1 = short unsigned int; _T2 = short unsigned int]	16	static
+../Core/Inc/etl/private/delegate_cpp11.h:390:7:)>::invocation_element::invocation_element() [with TReturn = void; TParams = {SmartFuse*}]	16	static
+../Core/Inc/etl/private/delegate_cpp11.h:102:21:)>::delegate() [with TReturn = void; TParams = {SmartFuse*}]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:185:7:std::array<_Tp, _Nm>::value_type& std::array<_Tp, _Nm>::operator[](std::array<_Tp, _Nm>::size_type) [with _Tp = SmartFuse::ChannelData; unsigned int _Nm = 6]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\bits\stl_pair.h:390:7:std::pair<_T1, _T2>& std::pair<_T1, _T2>::operator=(typename std::conditional<std::__and_<std::is_copy_assignable<_T1>, std::is_copy_assignable<_T2> >::value, const std::pair<_T1, _T2>&, const std::__nonesuch&>::type) [with _T1 = short unsigned int; _T2 = short unsigned int]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:185:7:std::array<_Tp, _Nm>::value_type& std::array<_Tp, _Nm>::operator[](std::array<_Tp, _Nm>::size_type) [with _Tp = bool; unsigned int _Nm = 6]	16	static
+../Core/Inc/etl/private/delegate_cpp11.h:368:26:)>::is_valid() const [with TReturn = void; TParams = {SmartFuse*}]	16	static
+../Core/Inc/etl/private/delegate_cpp11.h:256:13:) const [with TReturn = void; TParams = {SmartFuse*}]	24	static
 ../Core/Inc/etl/vector.h:467:10:) [with Args = {const GPIO_TypeDef* const&, const long unsigned int&, const __SPI_HandleTypeDef* const&, const ChannelsSettings&}; T = SmartFuse]	56	static
 ../Core/Inc/etl/vector.h:105:14:T* etl::ivector<T>::begin() [with T = SmartFuse]	16	static
 ../Core/Inc/etl/vector.h:123:14:T* etl::ivector<T>::end() [with T = SmartFuse]	16	static
@@ -67,6 +71,7 @@ d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltool
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:234:7:std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::data() [with _Tp = etl::bitset<8>; unsigned int _Nm = 3]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:55:7:static constexpr _Tp& std::__array_traits<_Tp, _Nm>::_S_ref(const _Tp (&)[_Nm], std::size_t) [with _Tp = SmartFuse::ChannelData; unsigned int _Nm = 6]	16	static
 d:\stm32cubeide_1.9.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.win32_1.0.0.202111181127\tools\arm-none-eabi\include\c++\10.3.1\array:55:7:static constexpr _Tp& std::__array_traits<_Tp, _Nm>::_S_ref(const _Tp (&)[_Nm], std::size_t) [with _Tp = bool; unsigned int _Nm = 6]	16	static
+../Core/Inc/etl/utility.h:60:17:constexpr T&& etl::forward(typename etl::remove_reference<T>::type&) [with T = SmartFuse*]	16	static
 ../Core/Inc/etl/utility.h:60:17:constexpr T&& etl::forward(typename etl::remove_reference<T>::type&) [with T = const GPIO_TypeDef* const&]	16	static
 ../Core/Inc/etl/utility.h:60:17:constexpr T&& etl::forward(typename etl::remove_reference<T>::type&) [with T = const long unsigned int&]	16	static
 ../Core/Inc/etl/utility.h:60:17:constexpr T&& etl::forward(typename etl::remove_reference<T>::type&) [with T = const __SPI_HandleTypeDef* const&]	16	static

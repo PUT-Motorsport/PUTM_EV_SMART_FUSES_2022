@@ -71,7 +71,17 @@ Core/Src/fuse.o: ../Core/Src/fuse.cpp ../Core/Inc/fuse.hpp \
  ../Core/Inc/etl/private/../functional.h \
  ../Core/Inc/etl/private/../iterator.h \
  ../Core/Inc/etl/private/minmax_push.h \
- ../Core/Inc/etl/private/minmax_pop.h ../Core/Inc/etl/bitset.h \
+ ../Core/Inc/etl/private/minmax_pop.h ../Core/Inc/etl/delegate.h \
+ ../Core/Inc/etl/private/delegate_cpp11.h \
+ ../Core/Inc/etl/private/../utility.h \
+ ../Core/Inc/etl/private/../optional.h \
+ ../Core/Inc/etl/private/../platform.h \
+ ../Core/Inc/etl/private/../alignment.h \
+ ../Core/Inc/etl/private/../type_traits.h \
+ ../Core/Inc/etl/private/../exception.h \
+ ../Core/Inc/etl/private/../error_handler.h \
+ ../Core/Inc/etl/private/../utility.h \
+ ../Core/Inc/etl/private/../placement_new.h ../Core/Inc/etl/bitset.h \
  ../Core/Inc/etl/integral_limits.h ../Core/Inc/etl/log.h \
  ../Core/Inc/etl/binary.h ../Core/Inc/etl/limits.h \
  ../Core/Inc/etl/char_traits.h ../Core/Inc/etl/power.h \
@@ -169,6 +179,17 @@ Core/Src/fuse.o: ../Core/Src/fuse.cpp ../Core/Inc/fuse.hpp \
 ../Core/Inc/etl/private/../iterator.h:
 ../Core/Inc/etl/private/minmax_push.h:
 ../Core/Inc/etl/private/minmax_pop.h:
+../Core/Inc/etl/delegate.h:
+../Core/Inc/etl/private/delegate_cpp11.h:
+../Core/Inc/etl/private/../utility.h:
+../Core/Inc/etl/private/../optional.h:
+../Core/Inc/etl/private/../platform.h:
+../Core/Inc/etl/private/../alignment.h:
+../Core/Inc/etl/private/../type_traits.h:
+../Core/Inc/etl/private/../exception.h:
+../Core/Inc/etl/private/../error_handler.h:
+../Core/Inc/etl/private/../utility.h:
+../Core/Inc/etl/private/../placement_new.h:
 ../Core/Inc/etl/bitset.h:
 ../Core/Inc/etl/integral_limits.h:
 ../Core/Inc/etl/log.h:

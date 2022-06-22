@@ -72,7 +72,18 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Inc/etl/private/../functional.h \
  ../Core/Inc/etl/private/../iterator.h \
  ../Core/Inc/etl/private/minmax_push.h \
- ../Core/Inc/etl/private/minmax_pop.h ../Core/Inc/gpio\ elements.hpp \
+ ../Core/Inc/etl/private/minmax_pop.h ../Core/Inc/etl/delegate.h \
+ ../Core/Inc/etl/private/delegate_cpp11.h \
+ ../Core/Inc/etl/private/../utility.h \
+ ../Core/Inc/etl/private/../optional.h \
+ ../Core/Inc/etl/private/../platform.h \
+ ../Core/Inc/etl/private/../alignment.h \
+ ../Core/Inc/etl/private/../type_traits.h \
+ ../Core/Inc/etl/private/../exception.h \
+ ../Core/Inc/etl/private/../error_handler.h \
+ ../Core/Inc/etl/private/../utility.h \
+ ../Core/Inc/etl/private/../placement_new.h \
+ ../Core/Inc/gpio\ elements.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/can_interface.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-APPS.hpp \
@@ -182,6 +193,17 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/etl/private/../iterator.h:
 ../Core/Inc/etl/private/minmax_push.h:
 ../Core/Inc/etl/private/minmax_pop.h:
+../Core/Inc/etl/delegate.h:
+../Core/Inc/etl/private/delegate_cpp11.h:
+../Core/Inc/etl/private/../utility.h:
+../Core/Inc/etl/private/../optional.h:
+../Core/Inc/etl/private/../platform.h:
+../Core/Inc/etl/private/../alignment.h:
+../Core/Inc/etl/private/../type_traits.h:
+../Core/Inc/etl/private/../exception.h:
+../Core/Inc/etl/private/../error_handler.h:
+../Core/Inc/etl/private/../utility.h:
+../Core/Inc/etl/private/../placement_new.h:
 ../Core/Inc/gpio\ elements.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/can_interface.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/message_abstraction.hpp:

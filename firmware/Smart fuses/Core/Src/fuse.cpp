@@ -115,7 +115,7 @@ void SmartFuse::setActionInterval(uint32_t interval)
 	this->action_timer.restart();
 }
 
-void SmartFuse::setAction(void (* action)(SmartFuse*))
+void SmartFuse::setAction(etl::delegate<void(SmartFuse*)> action)
 {
 	this->action = action;
 	this->action_defined = true;
