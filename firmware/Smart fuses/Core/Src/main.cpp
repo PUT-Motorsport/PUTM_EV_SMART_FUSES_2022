@@ -108,14 +108,23 @@ int main(void)
 
 	uint8_t _1 = 0x2;
 
-	ChannelsSettings channels_settings
+	ChannelSettings channel_setting
 	{
-		.active = { true, true, true, true, true, true },
-		.latch_off_time_out = { _1, _1, _1, _1, _1, _1 },
-		.sampling_mode = { SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous,
-						   SamplingMode::Continuous, SamplingMode::Continuous, SamplingMode::Continuous },
-		.duty_cycle = { 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff, 0x03ff },
-		.clamping_currents = { { 0x0000, 0xffff },  { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff }, { 0x0000, 0xffff } }
+		.active = true,
+		.latch_off_time_out = _1,
+		.sampling_mode = SamplingMode::Continuous,
+		.duty_cycle = 0x3ff,
+		.clamping_currents = { 0x0000, 0xffff }
+	};
+
+	std::array < ChannelSettings, number_of_channels_per_fuse > channels_settings
+	{
+		channel_setting,
+		channel_setting,
+		channel_setting,
+		channel_setting,
+		channel_setting,
+		channel_setting
 	};
 
 	/*
@@ -155,6 +164,34 @@ int main(void)
 	 */
 	sf_handler.emplaceBack(GPIOA, GPIO_PIN_4, &hspi1, channels_settings);
 
+	sf_handler.smart_fuses[1].setActionInterval(100);
+	sf_handler.smart_fuses[1].setAction([](SmartFuse* sf)
+	{
+		static uint16_t previous_setting = 1023;
+
+		uint16_t setting = 0;
+
+//		auto temps = PUTM_CAN::can.get_tc_temperatures();
+//		if(temps.water_temp_in > 60) setting = 1023;
+//		else if(temps.water_temp_in > 50) setting = 800;
+//		else if(temps.water_temp_in > 40) setting = 500;
+//		else setting = 0;
+
+		auto tc_main = PUTM_CAN::can.get_tc_main();
+		if(tc_main.traction_control_enable) setting = 0x3ff;
+		else setting = 0;
+
+		if(previous_setting != setting)
+		{
+			// fan left
+			sf->setChannelDutyCykle(Channel::c3, setting);
+			// fan right
+			sf->setChannelDutyCykle(Channel::c4, setting);
+
+			previous_setting = setting;
+		}
+	});
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -190,31 +227,6 @@ int main(void)
 
 	std::array < GpioInElement, 5 > optos { safety_ams, safety_spare, safety_tms, safety_td, safety_hvd };
 
-	sf_handler.smart_fuses[1].setActionInterval(100);
-	sf_handler.smart_fuses[1].setAction([](SmartFuse* sf)
-	{
-		static uint16_t previous_setting = 1023;
-
-		uint16_t setting = 0;
-
-		auto temps = PUTM_CAN::can.get_tc_temperatures();
-
-		if(temps.water_temp_in > 60) setting = 1023;
-		else if(temps.water_temp_in > 50) setting = 800;
-		else if(temps.water_temp_in > 40) setting = 500;
-		else setting = 0;
-
-		if(previous_setting != setting)
-		{
-			// fan left
-			sf->setChannelDutyCykle(Channel::c3, setting);
-			// fan right
-			sf->setChannelDutyCykle(Channel::c4, setting);
-
-			previous_setting = setting;
-		}
-	});
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -234,17 +246,8 @@ int main(void)
 		//----------------------------------------------------------------------------------------
 		// handle smart fuses and show as Ok/Warnings/Error
 		auto state = sf_handler.handleAll();
-		switch (state)
-		{
-			case SmartFuseState::NotResponding: led_error.activate(); break;
-			case SmartFuseState::SPIError: led_error.activate(); break;
-			default:
-			{
-				led_warning_1.deactivate();
-				led_warning_2.deactivate();
-				led_error.deactivate();
-			}
-		}
+		if(state != SmartFuseState::Ok) led_error.activate();
+		else led_error.deactivate();
 		// debug stuff
 		fuses_states = sf_handler.getStates();
 		channels_states = sf_handler.getChannelsStates();

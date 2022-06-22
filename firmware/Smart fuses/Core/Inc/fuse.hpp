@@ -155,9 +155,9 @@ enum struct SamplingMode : uint8_t
 	Filtered
 };
 
-struct ChannelsSettings
+struct ChannelSettings
 {
-	bool active[6];
+	bool active;
 
 	/*
 	 * how long it takes for latch-off event to reset to latch-on,
@@ -167,7 +167,7 @@ struct ChannelsSettings
 	 * 0x0 - stays latched off
 	 * 0x1 / 0xF - 16ms to 240 ms
 	 */
-	uint8_t latch_off_time_out[6];
+	uint8_t latch_off_time_out;
 
 	/*
 	 * SamplingMode - there are 4 configurations:
@@ -176,19 +176,19 @@ struct ChannelsSettings
 	 * Continuous,
 	 * Filtered (uses low pass filter)
 	 */
-	SamplingMode sampling_mode[6];
+	SamplingMode sampling_mode;
 
 	/*
 	 * PWM duty cycle:
 	 * 0 to 1023 - 0% to 100% fill
 	 */
-	uint16_t duty_cycle[6];
+	uint16_t duty_cycle;
 
 	/*
 	 * clamping currents of respective fuses
 	 * first is the bottom clamp and second is the upper clamp
 	 */
-	std::pair<uint16_t, uint16_t> clamping_currents[6];
+	std::pair<uint16_t, uint16_t> clamping_currents;
 
 	/*
 	 * there is more but this much is enough for now
@@ -198,7 +198,10 @@ struct ChannelsSettings
 class SmartFuse
 {
 	public:
-		SmartFuse(const GPIO_TypeDef* const, const uint32_t, const SPI_HandleTypeDef* const, const ChannelsSettings&);
+		SmartFuse(const GPIO_TypeDef* const,
+				  const uint32_t,
+				  const SPI_HandleTypeDef* const,
+				  std::array < ChannelSettings, number_of_channels_per_fuse >);
 
 		void setActionInterval(uint32_t);
 		/*
@@ -255,18 +258,20 @@ class SmartFuse
 		/*
 		 * helps the management of fuses
 		 */
-		struct ChannelData
+		struct ChannelSettingsAndData
 		{
-			ChannelData();
+			ChannelSettingsAndData();
 
 			bool active;
 
+			uint8_t latch_off_time_out;
+
+			uint16_t duty_cycle;
 			uint16_t current;
 
-			/*
-			 * clamping currents
-			 */
-			std::pair < uint16_t, uint16_t > clamping_currents;
+			std::pair<uint16_t, uint16_t> clamping_currents;
+
+			SamplingMode sampling_mode;
 
 			ChannelState state;
 		};
@@ -287,13 +292,13 @@ class SmartFuse
 
 		const uint32_t pin;
 
-		std::array < ChannelData, number_of_channels_per_fuse > channels;
+		std::array < ChannelSettingsAndData, number_of_channels_per_fuse > channels;
 
 		const GPIO_TypeDef* const port;
 
 		const SPI_HandleTypeDef* const hspi;
 
-		const ChannelsSettings channels_settings;
+		//ChannelsSettings channels_settings;
 
 		Timer watch_dog;
 		Timer action_timer;
@@ -311,7 +316,7 @@ class SmartFuse
 		void setUpAllLatchOffTimers();
 		void setUpAllChannelsStates();
 
-		void transmitReceiveData(std::array < uint8_t, 3 > tx_data, std::array < uint8_t, 3 > &rx_data);
+		void transmitReceiveData(std::array < uint8_t, 3 >, std::array < uint8_t, 3 >&);
 
 		SmartFuseState getGSB(std::array < uint8_t, 3 > x);
 };
@@ -325,7 +330,7 @@ class SmartFuseHandler
 		/*
 		 * just passes args to a private vector's emplace_back
 		 */
-		void emplaceBack(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef *const hspi, const ChannelsSettings &fuses_settings);
+		void emplaceBack(const GPIO_TypeDef * const, const uint32_t, const SPI_HandleTypeDef *const, std::array < ChannelSettings, number_of_channels_per_fuse >);
 
 		/*
 		 * all functions return summed up states
