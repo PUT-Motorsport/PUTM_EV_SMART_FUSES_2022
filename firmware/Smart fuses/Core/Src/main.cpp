@@ -93,6 +93,7 @@ CAN_FilterTypeDef can_filtering_config;
 std::array < SmartFuseState, number_of_fuses > fuses_states;
 std::array < std::array < ChannelState, number_of_channels_per_fuse >, number_of_fuses > channels_states;
 std::array < std::array < uint16_t, number_of_channels_per_fuse >, number_of_fuses > channels_currents;
+std::array < bool, 5 > safeties { };
 
 SmartFuseHandler < number_of_fuses > sf_handler;
 
@@ -255,9 +256,9 @@ int main(void)
 
 		//----------------------------------------------------------------------------------------
 		// handle safety
-		for (auto& safety : optos)
+		for (size_t i = 0; i < optos.size(); i++)
 		{
-			safety.isActive();
+			safeties[i] = optos[i].isActive();
 		}
 
 		//----------------------------------------------------------------------------------------
