@@ -59,18 +59,25 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
 void initCAN();
-HAL_StatusTypeDef sendCanFrameFrontBox();
-HAL_StatusTypeDef sendCanFrameCoolingAndSafety();
-HAL_StatusTypeDef sendCanFrameDV();
-HAL_StatusTypeDef sendCanFrameDV();
-HAL_StatusTypeDef sendCanFrameWS();
-HAL_StatusTypeDef sendCanFrameNucs();
+HAL_StatusTypeDef sendCanFramePassiveElements();
+HAL_StatusTypeDef sendCanFrameLegendaryDVAndSupply();
+HAL_StatusTypeDef sendCanFrameSupply();
 HAL_StatusTypeDef sendCanFrameSafety();
+
 
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+const size_t safety_sapre_2 = 0;
+const size_t safety_sapre_3 = 1;
+const size_t safety_hv = 2;
+const size_t safety_hvd = 3;
+const size_t safety_inverter = 4;
+const size_t safety_firewall = 5;
+const size_t safety_dv = 6;
+const size_t safety_sapre_1 = 7;
 
 GpioOutElement led_ok(GPIOC, GPIO_PIN_0, true);
 GpioOutElement led_warning_1(GPIOC, GPIO_PIN_1, true);
@@ -80,20 +87,27 @@ GpioOutElement led_error(GPIOC, GPIO_PIN_3, true);
 GpioOutElement led_1_control(GPIOB, GPIO_PIN_5, false);
 GpioOutElement led_2_control(GPIOB, GPIO_PIN_7, false);
 GpioOutElement buzzer_control(GPIOB, GPIO_PIN_10, false);
-GpioOutElement enable_mosfets(GPIOB, GPIO_PIN_9, false);
 
-GpioInElement safety_ams(GPIOB, GPIO_PIN_0, true);
-GpioInElement safety_spare(GPIOB, GPIO_PIN_1, true);
-GpioInElement safety_tms(GPIOB, GPIO_PIN_2, true);
-GpioInElement safety_td(GPIOB, GPIO_PIN_4, true);
-GpioInElement safety_hvd(GPIOB, GPIO_PIN_6, true);
+GpioOutElement water_pot_enable(GPIOB, GPIO_PIN_2, false);
+
+GpioInElement water_pot_state(GPIOB, GPIO_PIN_4, false);
+
+GpioInElement spare_2_sense_sig(GPIOC, GPIO_PIN_6, false);
+GpioInElement spare_3_sense_sig(GPIOC, GPIO_PIN_7, false);
+GpioInElement hv_sense_sig(GPIOC, GPIO_PIN_8, false);
+GpioInElement hvd_sense_sig(GPIOC, GPIO_PIN_9, false);
+GpioInElement inverter_sense_sig(GPIOC, GPIO_PIN_10, false);
+GpioInElement firewall_sense_sig(GPIOC, GPIO_PIN_11, false);
+GpioInElement dv_sense_sig(GPIOC, GPIO_PIN_12, false);
+GpioInElement spare_1_sense_sig(GPIOC, GPIO_PIN_13, false);
 
 CAN_FilterTypeDef can_filtering_config;
 
 std::array < SmartFuseState, number_of_fuses > fuses_states;
 std::array < std::array < ChannelState, number_of_channels_per_fuse >, number_of_fuses > channels_states;
 std::array < std::array < uint16_t, number_of_channels_per_fuse >, number_of_fuses > channels_currents;
-std::array < bool, 5 > safeties { };
+std::array < bool, 8 > safeties { };
+std::array < HAL_StatusTypeDef, 6 > frame_send_fail { };
 
 SmartFuseHandler < number_of_fuses > sf_handler;
 
@@ -214,8 +228,8 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_CAN1_Init();
-  MX_ADC1_Init();
   MX_SPI1_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
 	sf_handler.initAll();
@@ -226,8 +240,6 @@ int main(void)
 	led_warning_2.deactivate();
 	led_error.deactivate();
 
-	std::array < GpioInElement, 5 > optos { safety_ams, safety_spare, safety_tms, safety_td, safety_hvd };
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -235,12 +247,22 @@ int main(void)
 
 	sf_handler.enableAll();
 
-	enable_mosfets.activate();
-
 	led_ok.activate();
 
 	Timer timer_can_send_main_frame(10);
-	Timer timer_can_send_other_frames(100);
+	Timer timer_can_send_other_frames(25);
+
+	std::array < GpioInElement, 8 > optos
+	{
+		spare_2_sense_sig,
+		spare_3_sense_sig,
+		hv_sense_sig,
+		hvd_sense_sig,
+		inverter_sense_sig,
+		firewall_sense_sig,
+		dv_sense_sig,
+		spare_1_sense_sig
+	};
 
 	while (1)
 	{
@@ -257,33 +279,25 @@ int main(void)
 		//----------------------------------------------------------------------------------------
 		// handle safety
 		for (size_t i = 0; i < optos.size(); i++)
-		{
 			safeties[i] = optos[i].isActive();
-		}
 
 		//----------------------------------------------------------------------------------------
 		// transmit receive can and handle
 		if(timer_can_send_main_frame.checkIfTimedOutAndReset())
 		{
-			auto device_state = PUTM_CAN::SF_states::OK;
+			auto device_state = PUTM_CAN::SF_states::Ok;
 
-			PUTM_CAN::FuseData fuses_overall_state { };
-
-			for(size_t i = 0; i < 4; i++)
-				if(fuses_states[i] != SmartFuseState::Ok)
-					device_state = static_cast<PUTM_CAN::SF_states>(i + 2);
-
-			for(auto& sf : channels_currents)
-				for(auto& ch_current : sf)
-					fuses_overall_state.current += ch_current;
-
-			for(auto& sf : fuses_states)
-				fuses_overall_state.ok |= (sf == SmartFuseState::Ok);
+			for(auto& var : frame_send_fail)
+				if(var != HAL_StatusTypeDef::HAL_OK)
+					device_state = PUTM_CAN::SF_states::Warning_2;
 
 			PUTM_CAN::SF_main sf_main
 			{
-				.fuses_overall_state = fuses_overall_state,
-				.device_state =	device_state
+				.device_state =	device_state,
+				.fuse_0_state = static_cast<PUTM_CAN::SmartFuseState>(fuses_states[0]),
+				.fuse_1_state = static_cast<PUTM_CAN::SmartFuseState>(fuses_states[1]),
+				.fuse_2_state = static_cast<PUTM_CAN::SmartFuseState>(fuses_states[2]),
+				.fuse_3_state = static_cast<PUTM_CAN::SmartFuseState>(fuses_states[3])
 			};
 
 			PUTM_CAN::Can_tx_message<PUTM_CAN::SF_main> can_sender(sf_main, PUTM_CAN::can_tx_header_SF_MAIN);
@@ -294,18 +308,24 @@ int main(void)
 
 		if(timer_can_send_other_frames.checkIfTimedOutAndReset())
 		{
-			auto can_ok = HAL_OK;
+			auto can_state = HAL_OK;
+			static size_t send_frame = 0;
 
-			if( sendCanFrameFrontBox() != HAL_OK ) can_ok = HAL_ERROR;
-			if( sendCanFrameCoolingAndSafety() != HAL_OK ) can_ok = HAL_ERROR;
-			if( sendCanFrameDV() != HAL_OK ) can_ok = HAL_ERROR;
-			if( sendCanFrameDV() != HAL_OK ) can_ok = HAL_ERROR;
-			if( sendCanFrameWS() != HAL_OK ) can_ok = HAL_ERROR;
-			if( sendCanFrameNucs() != HAL_OK ) can_ok = HAL_ERROR;
-			if( sendCanFrameSafety() != HAL_OK ) can_ok = HAL_ERROR;
+			switch (send_frame)
+			{
+				case 0: can_state = sendCanFramePassiveElements(); break;
+				case 1: can_state = sendCanFrameLegendaryDVAndSupply(); break;
+				case 2: can_state = sendCanFrameSupply(); break;
+				case 3: can_state = sendCanFrameSafety(); break;
+			}
 
-			if(can_ok != HAL_OK) led_warning_2.activate();
+			frame_send_fail[send_frame] = can_state;
+
+			if(can_state != HAL_OK) led_warning_2.activate();
 			else led_warning_2.deactivate();
+
+			send_frame++;
+			if(send_frame > 5) send_frame = 0;
 		}
 
     /* USER CODE END WHILE */
@@ -390,232 +410,85 @@ void initCAN()
 		Error_Handler();
 }
 
-HAL_StatusTypeDef sendCanFrameFrontBox()
+HAL_StatusTypeDef sendCanFramePassiveElements()
 {
 	auto& sf_buff = sf_handler.smart_fuses;
 
-	PUTM_CAN::SF_FrontBox front_box
-	{
-		.fuse_0_inverter =
+		PUTM_CAN::SF_PassiveElements frame
 		{
-			.ok = sf_buff[0].getChannelState(fuse_0_inverter) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[0].getChannelCurrent(fuse_0_inverter)
-		},
-		.fuse_0_boxf_mb =
-		{
-			.ok = sf_buff[0].getChannelState(fuse_0_front_box) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[0].getChannelCurrent(fuse_0_front_box)
-		},
-		.fuse_0_apps =
-		{
-			.ok = 0,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent =0,
-			.current = 0
-		},
-		.fuse_0_tsal_logic =
-		{
-			.ok = sf_buff[0].getChannelState(fuse_0_tsal_assi) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[0].getChannelCurrent(fuse_0_tsal_assi)
-		}
-	};
+			.break_light = static_cast<PUTM_CAN::ChannelState>(sf_buff[0].getChannelState(fuse_0_break_light)),
+			.fan_mono = static_cast<PUTM_CAN::ChannelState>(sf_buff[0].getChannelState(fuse_0_fan_mono)),
+			.fan_l = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_fan_l)),
+			.fan_r = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_fan_r)),
+			.wheel_speed_1 = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_wheel_speed_1)), // idk which is left and which is right
+			.wheel_speed_2 = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_wheel_speed_2)), // idk which is left and which is right or front or whatever
+			.water_potentiometer = static_cast<PUTM_CAN::ChannelState>(ChannelState::Ok), // they are together
+			.tsal_assi = static_cast<PUTM_CAN::ChannelState>(sf_buff[0].getChannelState(fuse_0_tsal_assi)) // supply for leds ex.
+		};
 
-	PUTM_CAN::Can_tx_message<PUTM_CAN::SF_FrontBox> sender(front_box, PUTM_CAN::can_tx_header_SF_FRONTBOX);
+		PUTM_CAN::Can_tx_message<PUTM_CAN::SF_PassiveElements> sender(frame, PUTM_CAN::can_tx_header_SF_PASSIVEELEMENTS);
 
-	return sender.send(hcan1);
+		return sender.send(hcan1);
 }
 
-HAL_StatusTypeDef sendCanFrameCoolingAndSafety()
+HAL_StatusTypeDef sendCanFrameLegendaryDVAndSupply()
 {
 	auto& sf_buff = sf_handler.smart_fuses;
 
-	PUTM_CAN::SF_CoolingAndVSafety cooling_and_safety
-	{
-		.fuse_1_fan_l =
+		PUTM_CAN::SF_LegendaryDVAndSupply frame
 		{
-			.ok = sf_buff[1].getChannelState(fuse_1_fan_l) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[1].getChannelCurrent(fuse_0_inverter)
-		},
-		.fuse_1_fan_r =
-		{
-			.ok = sf_buff[1].getChannelState(fuse_1_fan_r) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[1].getChannelCurrent(fuse_1_fan_r)
-		},
-		.fuse_3_pump =
-		{
-			.ok = sf_buff[3].getChannelState(fuse_0_tsal_assi) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[3].getChannelCurrent(fuse_0_tsal_assi)
-		},
-		.fuse_2_v_safety =
-		{
-			.ok = sf_buff[2].getChannelState(fuse_0_tsal_assi) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[2].getChannelCurrent(fuse_0_tsal_assi)
-		}
-	};
+				.lidar = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_lidar)),
+				.box_dv = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_box_dv)),
+				.jetson = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_jetson)),
+				.odrive = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_odrive)),
+				.tsal = static_cast<PUTM_CAN::ChannelState>(ChannelState::Ok),
+				.bspd_esb = static_cast<PUTM_CAN::ChannelState>(ChannelState::Ok),
+				.spare_1 = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_spare_1)),
+				.spare_2 = static_cast<PUTM_CAN::ChannelState>(sf_buff[3].getChannelState(fuse_3_spare_2))
+		};
 
-	PUTM_CAN::Can_tx_message<PUTM_CAN::SF_CoolingAndVSafety> sender(cooling_and_safety, PUTM_CAN::can_tx_header_SF_FRONTBOX);
+		PUTM_CAN::Can_tx_message<PUTM_CAN::SF_LegendaryDVAndSupply> sender(frame, PUTM_CAN::can_tx_header_SF_LEGENDARYDVANDSUPPLY);
 
-	return sender.send(hcan1);
+		return sender.send(hcan1);
 }
 
-HAL_StatusTypeDef sendCanFrameDV()
+HAL_StatusTypeDef sendCanFrameSupply()
 {
 	auto& sf_buff = sf_handler.smart_fuses;
 
-	PUTM_CAN::SF_DV dv
-	{
-		.fuse_0_box_dv =
+		PUTM_CAN::SF_Supply frame
 		{
-			.ok = sf_buff[2].getChannelState(fuse_2_box_dv) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[2].getChannelCurrent(fuse_2_box_dv)
-		},
-		.fuse_0_tsal_hv =
-		{
-			.ok = sf_buff[0].getChannelState(fuse_0_tsal_assi) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[0].getChannelCurrent(fuse_0_tsal_assi)
-		},
-		.fuse_2_wheel =
-		{
-			.ok = sf_buff[1].getChannelState(fuse_1_wheel_speed_1) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[1].getChannelCurrent(fuse_1_wheel_speed_1)
-		},
-		.fuse_1_dashboard =
-		{
-			.ok = sf_buff[1].getChannelState(fuse_1_dash) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[1].getChannelCurrent(fuse_1_dash)
-		}
-	};
+			.inverter = static_cast<PUTM_CAN::ChannelState>(sf_buff[0].getChannelState(fuse_0_inverter)),
+			.front_box = static_cast<PUTM_CAN::ChannelState>(sf_buff[0].getChannelState(fuse_0_front_box)),
+			.dash = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_dash)),
+			.laptimer = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_lapimer)),
+			.bat_hv = static_cast<PUTM_CAN::ChannelState>(sf_buff[3].getChannelState(fuse_3_bat_hv)),
+			.diagport = static_cast<PUTM_CAN::ChannelState>(sf_buff[3].getChannelState(fuse_3_diagport)),
+			.pomp = static_cast<PUTM_CAN::ChannelState>(sf_buff[3].getChannelState(fuse_3_pump)),
+			.motec = static_cast<PUTM_CAN::ChannelState>(sf_buff[0].getChannelState(fuse_0_motec))
+		};
 
-	PUTM_CAN::Can_tx_message<PUTM_CAN::SF_DV> sender(dv, PUTM_CAN::can_tx_header_SF_DV);
+		PUTM_CAN::Can_tx_message<PUTM_CAN::SF_Supply> sender(frame, PUTM_CAN::can_tx_header_SF_SUPPLY);
 
-	return sender.send(hcan1);
-}
-
-HAL_StatusTypeDef sendCanFrameWS()
-{
-	auto& sf_buff = sf_handler.smart_fuses;
-
-	PUTM_CAN::SF_WS ws
-	{
-		.fuse_1_ws_rl =
-		{
-			.ok = sf_buff[1].getChannelState(fuse_1_wheel_speed_1) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[1].getChannelCurrent(fuse_1_wheel_speed_1)
-		},
-		.fuse_1_ws_fl =
-		{
-			.ok = 0,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = 0
-		},
-		.fuse_1_ws_rr =
-		{
-			.ok = 0,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = 0
-		},
-		.fuse_2_ws_fr =
-		{
-			.ok = sf_buff[2].getChannelState(fuse_2_wheel_speed_2) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[2].getChannelCurrent(fuse_2_wheel_speed_2)
-		}
-	};
-
-	PUTM_CAN::Can_tx_message<PUTM_CAN::SF_WS> sender(ws, PUTM_CAN::can_tx_header_SF_WS);
-
-	return sender.send(hcan1);
-}
-
-HAL_StatusTypeDef sendCanFrameNucs()
-{
-	auto& sf_buff = sf_handler.smart_fuses;
-
-	PUTM_CAN::SF_NUCS nucs
-	{
-		.fuse_2_jetson =
-		{
-			.ok = sf_buff[2].getChannelState(fuse_2_jetson) == ChannelState::Ok,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = sf_buff[2].getChannelCurrent(fuse_2_jetson)
-		},
-		.fuse_2_intel_nuc =
-		{
-			.ok = 0,
-			.overheat = 0,
-			.undercurrent = 0,
-			.overcurrent = 0,
-			.current = 0
-		}
-	};
-
-	PUTM_CAN::Can_tx_message<PUTM_CAN::SF_NUCS> sender(nucs, PUTM_CAN::can_tx_header_SF_NUCS);
-
-	return sender.send(hcan1);
+		return sender.send(hcan1);
 }
 
 HAL_StatusTypeDef sendCanFrameSafety()
 {
-	auto& sf_buff = sf_handler.smart_fuses;
+		PUTM_CAN::SF_safety frame
+		{
+			.firewall = safeties[safety_firewall],
+			.hvd = safeties[safety_hvd],
+			.inverter = safeties[safety_inverter],
+			.dv = safeties[safety_dv],
+			.tsms = safeties[safety_inverter]
+		};
 
-	PUTM_CAN::SF_safety safety
-	{
-		.firewall = safety_ams.isActive(),
-		.hvd = safety_hvd.isActive(),
-		.inverter = safety_spare.isActive(),
-		.dv = safety_td.isActive(),
-		.tsms = safety_tms.isActive()
-	};
+		PUTM_CAN::Can_tx_message<PUTM_CAN::SF_safety> sender(frame, PUTM_CAN::can_tx_header_SF_SAFETY);
 
-	PUTM_CAN::Can_tx_message<PUTM_CAN::SF_safety> sender(safety, PUTM_CAN::can_tx_header_SF_SAFETY);
-
-	return sender.send(hcan1);
+		return sender.send(hcan1);
 }
+
 
 /* USER CODE END 4 */
 
