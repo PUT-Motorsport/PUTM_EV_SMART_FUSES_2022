@@ -46,7 +46,7 @@ enum struct Channel : uint8_t
 
 /*
  * checks n number of times for fuse, the number shouldn't be too big
- * commonly VN100..afasdfhas sth responds relatively fast
+ * commonly VN9D30Q100F responds relatively fast
  */
 const size_t fuse_timeout = 6;
 

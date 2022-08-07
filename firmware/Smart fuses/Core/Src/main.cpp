@@ -151,7 +151,11 @@ int main(void)
 		.latch_off_time_out = 0x2,
 		.sampling_mode = SamplingMode::Continuous,
 		.duty_cycle = 0x3ff,
-		.clamping_currents = { 0x0000, 0xffff }
+		/*
+		 * VN9D30Q100F's ADC has 10-bit precision and can measure from 0 A to 31,5 A
+		 * proportion 31,5 A / 1023 = 5A / x gives around 162,380... ~ 163 = 0x00a3
+		 */
+		.clamping_currents = { 0x0000, 0x00a3 }
 	};
 
 	std::array < ChannelSettings, number_of_channels_per_fuse > std_fuse_channels_settings
@@ -198,7 +202,7 @@ int main(void)
 			.latch_off_time_out = 0x2,
 			.sampling_mode = SamplingMode::Continuous,
 			.duty_cycle = 0x000,
-			.clamping_currents = { 0x0000, 0xffff }
+			.clamping_currents = { 0x0000, 0x00a3 }
 		},
 		{
 			// fan r
@@ -206,7 +210,7 @@ int main(void)
 			.latch_off_time_out = 0x2,
 			.sampling_mode = SamplingMode::Continuous,
 			.duty_cycle = 0x000,
-			.clamping_currents = { 0x0000, 0xffff }
+			.clamping_currents = { 0x0000, 0x00a3 }
 		},
 		std_channel_setting
 	};
@@ -286,23 +290,7 @@ int main(void)
 	 * channel 4: diagport
 	 * channel 5: pump
 	 */
-	std::array < ChannelSettings, number_of_channels_per_fuse > fuse_3_channels_settings
-	{
-		std_channel_setting,
-		std_channel_setting,
-		std_channel_setting,
-		std_channel_setting,
-		std_channel_setting,
-		{
-			// pump
-			.active = true,
-			.latch_off_time_out = 0x2,
-			.sampling_mode = SamplingMode::Continuous,
-			.duty_cycle = 0x3ff,
-			.clamping_currents = { 0x0000, 0xffff }
-		}
-	};
-	sf_handler.emplaceBack(GPIOA, GPIO_PIN_4, &hspi1, fuse_3_channels_settings);
+	sf_handler.emplaceBack(GPIOA, GPIO_PIN_4, &hspi1, std_fuse_channels_settings);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
