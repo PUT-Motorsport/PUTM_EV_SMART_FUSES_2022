@@ -413,8 +413,8 @@
       "idf": "",
       "netlist": "SB-Spoko Bezpieczniki.net",
       "specctra_dsn": "",
-      "step": "",
-      "vrml": ""
+      "step": "SB-Spoko Bezpieczniki.step",
+      "vrml": "SB-Spoko Bezpieczniki.wrl"
     },
     "page_layout_descr_file": ""
   },

@@ -30,6 +30,9 @@
 #include "fuse.hpp"
 #include "gpio elements.hpp"
 #include "PUTM_EV_CAN_LIBRARY/lib/can_interface.hpp"
+#include "math.h"
+#include "algorithm"
+#include "etl/queue.h"
 
 /* USER CODE END Includes */
 
@@ -52,6 +55,17 @@
 
 /* USER CODE BEGIN PV */
 
+class Device
+{
+	public:
+		static void raise(PUTM_CAN::SF_states);
+		static void clear(PUTM_CAN::SF_states);
+		static void handleState();
+
+	private:
+		inline static PUTM_CAN::SF_states state = PUTM_CAN::SF_states::Ok;
+};
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -59,6 +73,7 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
 void initCAN();
+
 HAL_StatusTypeDef sendCanFramePassiveElements();
 HAL_StatusTypeDef sendCanFrameLegendaryDVAndSupply();
 HAL_StatusTypeDef sendCanFrameSupply();
@@ -70,6 +85,8 @@ HAL_StatusTypeDef sendCanFrameSafety();
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+const bool use_tc_main_ts_on_for_fan_control = true;
+
 const size_t safety_sapre_2 = 0;
 const size_t safety_sapre_3 = 1;
 const size_t safety_hv = 2;
@@ -79,16 +96,18 @@ const size_t safety_firewall = 5;
 const size_t safety_dv = 6;
 const size_t safety_sapre_1 = 7;
 
-GpioOutElement led_ok(GPIOC, GPIO_PIN_0, true);
-GpioOutElement led_warning_1(GPIOC, GPIO_PIN_1, true);
-GpioOutElement led_warning_2(GPIOC, GPIO_PIN_2, true);
-GpioOutElement led_error(GPIOC, GPIO_PIN_3, true);
+bool water_pot_kek;
+
+GpioOutElement led_error(GPIOC, GPIO_PIN_0, true);
+GpioOutElement led_warning_2(GPIOC, GPIO_PIN_1, true);
+GpioOutElement led_warning_1(GPIOC, GPIO_PIN_2, true);
+GpioOutElement led_ok(GPIOC, GPIO_PIN_3, true);
 
 GpioOutElement led_1_control(GPIOB, GPIO_PIN_5, false);
 GpioOutElement led_2_control(GPIOB, GPIO_PIN_7, false);
 GpioOutElement buzzer_control(GPIOB, GPIO_PIN_10, false);
 
-GpioOutElement water_pot_enable(GPIOB, GPIO_PIN_2, false);
+GpioOutElement water_pot_enable(GPIOB, GPIO_PIN_2, true);
 
 GpioInElement water_pot_state(GPIOB, GPIO_PIN_4, false);
 
@@ -103,11 +122,14 @@ GpioInElement spare_1_sense_sig(GPIOC, GPIO_PIN_13, false);
 
 CAN_FilterTypeDef can_filtering_config;
 
+//debug stuff
 std::array < SmartFuseState, number_of_fuses > fuses_states;
 std::array < std::array < ChannelState, number_of_channels_per_fuse >, number_of_fuses > channels_states;
 std::array < std::array < uint16_t, number_of_channels_per_fuse >, number_of_fuses > channels_currents;
 std::array < bool, 8 > safeties { };
 std::array < HAL_StatusTypeDef, 6 > frame_send_fail { };
+
+PUTM_CAN::SF_states device_state;
 
 SmartFuseHandler < number_of_fuses > sf_handler;
 
@@ -121,28 +143,30 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-	uint8_t _1 = 0x2;
+	Device::init();
 
-	ChannelSettings channel_setting
+	ChannelSettings std_channel_setting
 	{
 		.active = true,
-		.latch_off_time_out = _1,
+		.latch_off_time_out = 0x2,
 		.sampling_mode = SamplingMode::Continuous,
 		.duty_cycle = 0x3ff,
 		.clamping_currents = { 0x0000, 0xffff }
 	};
 
-	std::array < ChannelSettings, number_of_channels_per_fuse > channels_settings
+	std::array < ChannelSettings, number_of_channels_per_fuse > std_fuse_channels_settings
 	{
-		channel_setting,
-		channel_setting,
-		channel_setting,
-		channel_setting,
-		channel_setting,
-		channel_setting
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting
 	};
 
+	//----------------------------------------------------------------------------------------
 	/*
+	 * fuse 0
 	 * channel 0: inverter
 	 * channel 1: front box
 	 * channel 2: tsal/assi
@@ -150,17 +174,99 @@ int main(void)
 	 * channel 4: break light
 	 * channel 5: fan mono
 	 */
-	sf_handler.emplaceBack(GPIOA, GPIO_PIN_1, &hspi1, channels_settings);
+	sf_handler.emplaceBack(GPIOA, GPIO_PIN_1, &hspi1, std_fuse_channels_settings);
+
+	//----------------------------------------------------------------------------------------
 	/*
+	 * fuse 1
 	 * channel 0: wheel speed
 	 * channel 1: dash
 	 * channel 2: laptimer
 	 * channel 3: fan l
 	 * channel 4: fan r
 	 * channel 5: odrive
+	 * action: fan control
 	 */
-	sf_handler.emplaceBack(GPIOA, GPIO_PIN_2, &hspi1, channels_settings);
+	std::array < ChannelSettings, number_of_channels_per_fuse > fuse_1_channels_settings
+	{
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		{
+			// fan l
+			.active = true,
+			.latch_off_time_out = 0x2,
+			.sampling_mode = SamplingMode::Continuous,
+			.duty_cycle = 0x000,
+			.clamping_currents = { 0x0000, 0xffff }
+		},
+		{
+			// fan r
+			.active = true,
+			.latch_off_time_out = 0x2,
+			.sampling_mode = SamplingMode::Continuous,
+			.duty_cycle = 0x000,
+			.clamping_currents = { 0x0000, 0xffff }
+		},
+		std_channel_setting
+	};
+	sf_handler.emplaceBack(GPIOA, GPIO_PIN_2, &hspi1, fuse_1_channels_settings, 100, [](SmartFuse* sf)
+	{
+
+		static uint16_t previous_setting = 0;
+
+		uint16_t setting = 0;
+
+		if constexpr(!use_tc_main_ts_on_for_fan_control)
+		{
+			/*
+			 * min difference for for the change in fan speed to occur
+			 */
+			constexpr uint16_t min_diff = 10;
+			/*
+			 * interpolation results for: (20, 0), (30, 200), (40, 500), (50, 800), (60, 1023)
+			 */
+			constexpr float a = 0.0328571429f;
+			constexpr float b = 23.8314285714f;
+			constexpr float c = - 507.8f;
+
+
+			auto tc_inv_temp = static_cast<float>(PUTM_CAN::can.get_tc_temperatures().inverter);
+			auto result = a * tc_inv_temp * tc_inv_temp + b * tc_inv_temp + c;
+			setting = static_cast<uint16_t>(etl::clamp(result, 0.f, 1023.f));
+
+			if(std::abs(previous_setting - setting) >= min_diff)
+			{
+				// fan left
+				sf->setChannelDutyCykle(Channel::c3, setting);
+				// fan right
+				sf->setChannelDutyCykle(Channel::c4, setting);
+
+				previous_setting = setting;
+			}
+		}
+		else
+		{
+			auto tc_on = PUTM_CAN::can.get_tc_main().tractive_system_on;
+
+			if(tc_on) setting = 1023;
+			else setting = 0;
+
+			if(setting != previous_setting)
+			{
+				// fan left
+				sf->setChannelDutyCykle(Channel::c3, setting);
+				// fan right
+				sf->setChannelDutyCykle(Channel::c4, setting);
+
+				previous_setting = setting;
+			}
+		}
+	});
+
+	//----------------------------------------------------------------------------------------
 	/*
+	 * fuse 2
 	 * channel 0: spare 1
 	 * channel 1: asms/safety
 	 * channel 2: lidar
@@ -168,8 +274,11 @@ int main(void)
 	 * channel 4: box dv
 	 * channel 5: jetson
 	 */
-	sf_handler.emplaceBack(GPIOA, GPIO_PIN_3, &hspi1, channels_settings);
+	sf_handler.emplaceBack(GPIOA, GPIO_PIN_3, &hspi1, std_fuse_channels_settings);
+
+	//----------------------------------------------------------------------------------------
 	/*
+	 * fuse 3
 	 * channel 0: --
 	 * channel 1: --
 	 * channel 2: bat hv
@@ -177,36 +286,23 @@ int main(void)
 	 * channel 4: diagport
 	 * channel 5: pump
 	 */
-	sf_handler.emplaceBack(GPIOA, GPIO_PIN_4, &hspi1, channels_settings);
-
-	sf_handler.smart_fuses[1].setActionInterval(100);
-	sf_handler.smart_fuses[1].setAction([](SmartFuse* sf)
+	std::array < ChannelSettings, number_of_channels_per_fuse > fuse_3_channels_settings
 	{
-		static uint16_t previous_setting = 1023;
-
-		uint16_t setting = 0;
-
-//		auto temps = PUTM_CAN::can.get_tc_temperatures();
-//		if(temps.water_temp_in > 60) setting = 1023;
-//		else if(temps.water_temp_in > 50) setting = 800;
-//		else if(temps.water_temp_in > 40) setting = 500;
-//		else setting = 0;
-
-		auto tc_main = PUTM_CAN::can.get_tc_main();
-		if(tc_main.traction_control_enable) setting = 0x3ff;
-		else setting = 0;
-
-		if(previous_setting != setting)
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
 		{
-			// fan left
-			sf->setChannelDutyCykle(Channel::c3, setting);
-			// fan right
-			sf->setChannelDutyCykle(Channel::c4, setting);
-
-			previous_setting = setting;
+			// pump
+			.active = true,
+			.latch_off_time_out = 0x2,
+			.sampling_mode = SamplingMode::Continuous,
+			.duty_cycle = 0x3ff,
+			.clamping_currents = { 0x0000, 0xffff }
 		}
-	});
-
+	};
+	sf_handler.emplaceBack(GPIOA, GPIO_PIN_4, &hspi1, fuse_3_channels_settings);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -234,6 +330,9 @@ int main(void)
 
 	sf_handler.initAll();
 	initCAN();
+	water_pot_enable.activate();
+	led_2_control.deactivate();
+	led_1_control.deactivate();
 
 	led_ok.deactivate();
 	led_warning_1.deactivate();
@@ -264,13 +363,15 @@ int main(void)
 		spare_1_sense_sig
 	};
 
-	while (1)
+	while (true)
 	{
 		//----------------------------------------------------------------------------------------
 		// handle smart fuses and show as Ok/Warnings/Error
+		Device::handleState();
 		auto state = sf_handler.handleAll();
-		if(state != SmartFuseState::Ok) led_error.activate();
-		else led_error.deactivate();
+		if(state != SmartFuseState::Ok) Device::raise(PUTM_CAN::SF_states::Warning_1);
+		else Device::clear(PUTM_CAN::SF_states::Warning_1);
+
 		// debug stuff
 		fuses_states = sf_handler.getStates();
 		channels_states = sf_handler.getChannelsStates();
@@ -283,14 +384,9 @@ int main(void)
 
 		//----------------------------------------------------------------------------------------
 		// transmit receive can and handle
+		// main frame
 		if(timer_can_send_main_frame.checkIfTimedOutAndReset())
 		{
-			auto device_state = PUTM_CAN::SF_states::Ok;
-
-			for(auto& var : frame_send_fail)
-				if(var != HAL_StatusTypeDef::HAL_OK)
-					device_state = PUTM_CAN::SF_states::Warning_2;
-
 			PUTM_CAN::SF_main sf_main
 			{
 				.device_state =	device_state,
@@ -302,10 +398,12 @@ int main(void)
 
 			PUTM_CAN::Can_tx_message<PUTM_CAN::SF_main> can_sender(sf_main, PUTM_CAN::can_tx_header_SF_MAIN);
 
-			if(can_sender.send(hcan1) != HAL_StatusTypeDef::HAL_OK) led_error.activate();
-			else led_error.deactivate();
+			if(can_sender.send(hcan1) != HAL_StatusTypeDef::HAL_OK)
+				Device::raise(PUTM_CAN::SF_states::Error);
+			else Device::clear(PUTM_CAN::SF_states::Error);
 		}
 
+		// other frames
 		if(timer_can_send_other_frames.checkIfTimedOutAndReset())
 		{
 			auto can_state = HAL_OK;
@@ -321,8 +419,9 @@ int main(void)
 
 			frame_send_fail[send_frame] = can_state;
 
-			if(can_state != HAL_OK) led_warning_2.activate();
-			else led_warning_2.deactivate();
+			if(can_state != HAL_OK)
+				Device::raise(PUTM_CAN::SF_states::Warning_2);
+			else Device::clear(PUTM_CAN::SF_states::Warning_2);
 
 			send_frame++;
 			if(send_frame > 5) send_frame = 0;
@@ -387,6 +486,38 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+void Device::handleState()
+{
+	led_ok.deactivate();
+	led_warning_1.deactivate();
+	led_warning_2.deactivate();
+	led_error.deactivate();
+
+	switch (Device::state)
+	{
+		case PUTM_CAN::SF_states::Ok:
+			led_ok.activate(); break;
+		case PUTM_CAN::SF_states::Warning_1:
+			led_warning_1.activate(); break;
+		case PUTM_CAN::SF_states::Warning_2:
+			led_warning_2.activate(); break;
+		case PUTM_CAN::SF_states::Error:
+			led_error.activate();
+	}
+}
+
+void Device::raise(PUTM_CAN::SF_states state)
+{
+	if (int(state) >= int(Device::state)) return;
+	Device::state = state;
+}
+
+void Device::clear(PUTM_CAN::SF_states state)
+{
+	if (state != Device::state) return;
+	Device::state = PUTM_CAN::SF_states::Ok;
+}
+
 void initCAN()
 {
 	can_filtering_config.FilterBank = 0;
@@ -413,6 +544,7 @@ void initCAN()
 HAL_StatusTypeDef sendCanFramePassiveElements()
 {
 	auto& sf_buff = sf_handler.smart_fuses;
+	auto wat_pot_state = (water_pot_state.isActive() ? PUTM_CAN::ChannelState::Ok : PUTM_CAN::ChannelState::Error);
 
 		PUTM_CAN::SF_PassiveElements frame
 		{
@@ -422,7 +554,7 @@ HAL_StatusTypeDef sendCanFramePassiveElements()
 			.fan_r = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_fan_r)),
 			.wheel_speed_1 = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_wheel_speed_1)), // idk which is left and which is right
 			.wheel_speed_2 = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_wheel_speed_2)), // idk which is left and which is right or front or whatever
-			.water_potentiometer = static_cast<PUTM_CAN::ChannelState>(ChannelState::Ok), // they are together
+			.water_potentiometer = wat_pot_state, // they are together
 			.tsal_assi = static_cast<PUTM_CAN::ChannelState>(sf_buff[0].getChannelState(fuse_0_tsal_assi)) // supply for leds ex.
 		};
 
@@ -437,14 +569,14 @@ HAL_StatusTypeDef sendCanFrameLegendaryDVAndSupply()
 
 		PUTM_CAN::SF_LegendaryDVAndSupply frame
 		{
-				.lidar = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_lidar)),
-				.box_dv = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_box_dv)),
-				.jetson = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_jetson)),
-				.odrive = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_odrive)),
-				.tsal = static_cast<PUTM_CAN::ChannelState>(ChannelState::Ok),
-				.bspd_esb = static_cast<PUTM_CAN::ChannelState>(ChannelState::Ok),
-				.spare_1 = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_spare_1)),
-				.spare_2 = static_cast<PUTM_CAN::ChannelState>(sf_buff[3].getChannelState(fuse_3_spare_2))
+			.lidar = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_lidar)),
+			.box_dv = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_box_dv)),
+			.jetson = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_jetson)),
+			.odrive = static_cast<PUTM_CAN::ChannelState>(sf_buff[1].getChannelState(fuse_1_odrive)),
+			.tsal = static_cast<PUTM_CAN::ChannelState>(ChannelState::Ok),
+			.bspd_esb = static_cast<PUTM_CAN::ChannelState>(ChannelState::Ok),
+			.spare_1 = static_cast<PUTM_CAN::ChannelState>(sf_buff[2].getChannelState(fuse_2_spare_1)),
+			.spare_2 = static_cast<PUTM_CAN::ChannelState>(sf_buff[3].getChannelState(fuse_3_spare_2))
 		};
 
 		PUTM_CAN::Can_tx_message<PUTM_CAN::SF_LegendaryDVAndSupply> sender(frame, PUTM_CAN::can_tx_header_SF_LEGENDARYDVANDSUPPLY);
@@ -481,6 +613,9 @@ HAL_StatusTypeDef sendCanFrameSafety()
 			.hvd = safeties[safety_hvd],
 			.inverter = safeties[safety_inverter],
 			.dv = safeties[safety_dv],
+			/*
+			 * TODO: tsms not present should be hv_sense i guess
+			 */
 			.tsms = safeties[safety_inverter]
 		};
 

@@ -26,6 +26,9 @@ class Timer
 
 	private:
 		volatile uint32_t start_time;
+		/*
+		 * if timeout == 0 timer always will return false (timer deactivated)
+		 */
 		volatile uint32_t timeout = 0;
 };
 

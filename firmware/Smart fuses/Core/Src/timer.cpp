@@ -29,6 +29,8 @@ void Timer::restart()
 
 bool Timer::checkIfTimedOutAndReset()
 {
+	if(this->timeout == 0) return false;
+
 	if(this->getPassedTime() >= this->timeout)
 	{
 		this->restart();

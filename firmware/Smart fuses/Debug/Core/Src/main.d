@@ -97,7 +97,10 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-TC.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-TELEMETRY.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-WHEELTEMP.hpp \
- ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-YAWPROBE.hpp
+ ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-YAWPROBE.hpp \
+ ../Core/Inc/etl/queue.h ../Core/Inc/etl/memory_model.h \
+ ../Core/Inc/etl/user_type.h ../Core/Inc/etl/type_lookup.h \
+ ../Core/Inc/etl/integral_limits.h ../Core/Inc/etl/null_type.h
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -219,3 +222,9 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-TELEMETRY.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-WHEELTEMP.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-YAWPROBE.hpp:
+../Core/Inc/etl/queue.h:
+../Core/Inc/etl/memory_model.h:
+../Core/Inc/etl/user_type.h:
+../Core/Inc/etl/type_lookup.h:
+../Core/Inc/etl/integral_limits.h:
+../Core/Inc/etl/null_type.h:

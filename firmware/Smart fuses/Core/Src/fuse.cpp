@@ -108,8 +108,29 @@ SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const 
 		if(this->channels[i].latch_off_time_out > 0xf) this->channels[i].latch_off_time_out = 0xf;
 	}
 
-	this->action_timer.setTimeOut(100);
 	this->watch_dog.setTimeOut(31);
+
+	slaveDeselect();
+}
+
+SmartFuse::SmartFuse(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef * const hspi, std::array < ChannelSettings, number_of_channels_per_fuse > channels_settings, const uint32_t interval, etl::delegate<void(SmartFuse*)> action) :
+					 port(port), pin(pin), hspi(hspi), toggle(false), action(action)
+{
+	for(size_t i = 0; i < number_of_channels_per_fuse; i++)
+	{
+		this->channels[i].active = channels_settings[i].active;
+		this->channels[i].clamping_currents = channels_settings[i].clamping_currents;
+		this->channels[i].duty_cycle = channels_settings[i].duty_cycle;
+		this->channels[i].latch_off_time_out = channels_settings[i].latch_off_time_out;
+		this->channels[i].sampling_mode = channels_settings[i].sampling_mode;
+
+		if(this->channels[i].duty_cycle > 0x3ff) this->channels[i].duty_cycle = 0x3ff;
+		if(this->channels[i].latch_off_time_out > 0xf) this->channels[i].latch_off_time_out = 0xf;
+	}
+
+	this->action_timer.setTimeOut(interval);
+	this->watch_dog.setTimeOut(31);
+	this->action_defined = true;
 
 	slaveDeselect();
 }
@@ -226,6 +247,7 @@ SmartFuseState SmartFuse::handle(void)
 	//check currents
 	for(auto& channel : this->channels)
 	{
+		if(channel.state == ChannelState::OverCurrent || channel.state == ChannelState::UnderCurrent) continue;
 		if (channel.current < channel.clamping_currents.first)
 		{
 			channel.active = false;
@@ -275,10 +297,9 @@ SmartFuseState SmartFuse::handle(void)
 		if(rx_data[1] & (1 << 4)) this->channels[i].state = ChannelState::CHFBSR;
 	}
 
-	if(this->action_defined && this->action_timer.checkIfTimedOutAndReset())
-	{
-		this->action(this);
-	}
+	if(this->action_defined)
+		if(this->action_timer.checkIfTimedOutAndReset())
+			this->action(this);
 
 	if (!lock_state) this->state = getGSB(rx_data);
 	return this->state;
@@ -564,6 +585,11 @@ template <uint32_t num_of_sf>
 void SmartFuseHandler<num_of_sf>::emplaceBack(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef *const hspi, std::array < ChannelSettings, number_of_channels_per_fuse >channels_settings)
 {
 	this->smart_fuses.emplace_back(port, pin, hspi, channels_settings);
+}
+template <uint32_t num_of_sf>
+void SmartFuseHandler<num_of_sf>::emplaceBack(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef *const hspi, std::array < ChannelSettings, number_of_channels_per_fuse >channels_settings, const uint32_t interval, etl::delegate<void(SmartFuse*)> action)
+{
+	this->smart_fuses.emplace_back(port, pin, hspi, channels_settings, interval, action);
 }
 
 template <uint32_t num_of_sf>

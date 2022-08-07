@@ -202,6 +202,12 @@ class SmartFuse
 				  const uint32_t,
 				  const SPI_HandleTypeDef* const,
 				  std::array < ChannelSettings, number_of_channels_per_fuse >);
+		SmartFuse(const GPIO_TypeDef* const,
+				  const uint32_t,
+				  const SPI_HandleTypeDef* const,
+				  std::array < ChannelSettings, number_of_channels_per_fuse >,
+				  const uint32_t,
+				  etl::delegate<void(SmartFuse*)>);
 
 		void setActionInterval(uint32_t);
 		/*
@@ -331,7 +337,7 @@ class SmartFuseHandler
 		 * just passes args to a private vector's emplace_back
 		 */
 		void emplaceBack(const GPIO_TypeDef * const, const uint32_t, const SPI_HandleTypeDef *const, std::array < ChannelSettings, number_of_channels_per_fuse >);
-
+		void emplaceBack(const GPIO_TypeDef * const port, const uint32_t pin, const SPI_HandleTypeDef *const hspi, std::array < ChannelSettings, number_of_channels_per_fuse >channels_settings, const uint32_t interval, etl::delegate<void(SmartFuse*)> action);
 		/*
 		 * all functions return summed up states
 		 */
