@@ -1,8 +1,15 @@
-*.zip
+.zip
 firmware/.metadata/
-*.d
-*.su
-*.o
-*.resources
+.d
+.su
+.o
+.resources
 hardware/SB-Spoko Bezpieczniki-backups/
 hardware/gerber/grb v3/
+.step
+.wrl
+hardware/bom/
+hardware/fp-info-cache/
+firmware/Smart fuses/Debug/
+.cproject
+.xml
