@@ -255,7 +255,7 @@ SmartFuseState SmartFuse::handle(void)
 	}
 
 	//check currents
-	for(auto& channel : this->channels)
+/*	for(auto& channel : this->channels)
 	{
 		if (channel.current < channel.clamping_currents.first)
 		{
@@ -282,7 +282,7 @@ SmartFuseState SmartFuse::handle(void)
 		for(int i = 0; i < number_of_channels_per_fuse; i++) tx_data[1] |= this->channels[i].active << i;
 		tx_data[2] = this->toggle << 1;
 		this->transmitReceiveData(tx_data, rx_data);
-	}
+	}*/
 
 	//check channel state
 	for(size_t i = 0; i < number_of_channels_per_fuse; i++)
