@@ -125,7 +125,7 @@ CAN_FilterTypeDef can_filtering_config;
 //debug stuff
 std::array < SmartFuseState, number_of_fuses > fuses_states;
 std::array < std::array < ChannelState, number_of_channels_per_fuse >, number_of_fuses > channels_states;
-std::array < std::array < uint16_t, number_of_channels_per_fuse >, number_of_fuses > channels_currents;
+std::array < std::array < float, number_of_channels_per_fuse >, number_of_fuses > channels_currents;
 std::array < bool, 8 > safeties { };
 std::array < HAL_StatusTypeDef, 6 > frame_send_fail { };
 
@@ -143,19 +143,13 @@ int main(void)
 {
   /* USER CODE BEGIN 1 */
 
-	Device::init();
-
 	ChannelSettings std_channel_setting
 	{
 		.active = true,
 		.latch_off_time_out = 0x2,
 		.sampling_mode = SamplingMode::Continuous,
 		.duty_cycle = 0x3ff,
-		/*
-		 * VN9D30Q100F's ADC has 10-bit precision and can measure from 0 A to 31,5 A
-		 * proportion 31,5 A / 1023 = 5A / x gives around 162,380... ~ 163 = 0x00a3
-		 */
-		.clamping_currents = { 0x0000, 0x00a3 }
+		.clamping_currents = { 0.f, 5.f }
 	};
 
 	std::array < ChannelSettings, number_of_channels_per_fuse > std_fuse_channels_settings
@@ -202,7 +196,7 @@ int main(void)
 			.latch_off_time_out = 0x2,
 			.sampling_mode = SamplingMode::Continuous,
 			.duty_cycle = 0x000,
-			.clamping_currents = { 0x0000, 0x00a3 }
+			.clamping_currents = { 0.f, 5.f}
 		},
 		{
 			// fan r
@@ -210,7 +204,7 @@ int main(void)
 			.latch_off_time_out = 0x2,
 			.sampling_mode = SamplingMode::Continuous,
 			.duty_cycle = 0x000,
-			.clamping_currents = { 0x0000, 0x00a3 }
+			.clamping_currents = { 0.f, 5.f}
 		},
 		std_channel_setting
 	};
@@ -496,7 +490,7 @@ void Device::handleState()
 
 void Device::raise(PUTM_CAN::SF_states state)
 {
-	if (int(state) >= int(Device::state)) return;
+	if (int(state) <= int(Device::state)) return;
 	Device::state = state;
 }
 

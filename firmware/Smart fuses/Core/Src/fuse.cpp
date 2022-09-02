@@ -238,16 +238,25 @@ SmartFuseState SmartFuse::handle(void)
 	//read currents
 	for(size_t i = 0; i < number_of_channels_per_fuse; i++)
 	{
+		/*
+		 * ADC gain const
+		 * for channels 0 & 5 K = 112,
+		 * for channels 1 - 4 K = 200
+		 */
+		float K  = (i == 0 || i == 5 ? 112.f : 200.f);
+
 		tx_data[0] = READ_RAM(0x28 + i);
 		this->transmitReceiveData(tx_data, rx_data);
-		this->channels[i].current = uint16_t(rx_data[1]) << 4 | uint16_t(rx_data[2]) >> 4;
+		/*
+		 * current formula = data / K
+		 */
+		this->channels[i].current = float(uint16_t(rx_data[1] & 0b00111111) << 4 | uint16_t(rx_data[2]) >> 4) / K;
 		read_fuses_states[i] = bool(rx_data[2] & (1 << 2));
 	}
 
 	//check currents
 	for(auto& channel : this->channels)
 	{
-		if(channel.state == ChannelState::OverCurrent || channel.state == ChannelState::UnderCurrent) continue;
 		if (channel.current < channel.clamping_currents.first)
 		{
 			channel.active = false;
@@ -425,7 +434,7 @@ std::array < ChannelState, number_of_channels_per_fuse > SmartFuse::getChannelsS
 }
 
 
-std::array < uint16_t, number_of_channels_per_fuse > SmartFuse::getChannelsCurrents()
+std::array < float, number_of_channels_per_fuse > SmartFuse::getChannelsCurrents()
 {
 	return { this->channels[0].current, this->channels[1].current, this->channels[2].current,
 			 this->channels[3].current, this->channels[4].current, this->channels[5].current };
@@ -676,9 +685,9 @@ std::array < std::array < ChannelState, number_of_channels_per_fuse >, num_of_sf
 }
 
 template <uint32_t num_of_sf>
-std::array < std::array < uint16_t, number_of_channels_per_fuse >, num_of_sf > SmartFuseHandler<num_of_sf>::getChannelsCurrents()
+std::array < std::array < float, number_of_channels_per_fuse >, num_of_sf > SmartFuseHandler<num_of_sf>::getChannelsCurrents()
 {
-	std::array < std::array < uint16_t, number_of_channels_per_fuse >, num_of_sf > x;
+	std::array < std::array < float, number_of_channels_per_fuse >, num_of_sf > x;
 	for(size_t i = 0; i < num_of_sf; i++)
 	{
 		x[i] = this->smart_fuses[i].getChannelsCurrents();

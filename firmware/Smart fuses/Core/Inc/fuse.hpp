@@ -182,13 +182,13 @@ struct ChannelSettings
 	 * PWM duty cycle:
 	 * 0 to 1023 - 0% to 100% fill
 	 */
-	uint16_t duty_cycle;
+	uint16_t duty_cycle : 10;
 
 	/*
 	 * clamping currents of respective fuses
 	 * first is the bottom clamp and second is the upper clamp
 	 */
-	std::pair<uint16_t, uint16_t> clamping_currents;
+	std::pair<float, float> clamping_currents;
 
 	/*
 	 * there is more but this much is enough for now
@@ -258,7 +258,7 @@ class SmartFuse
 		ChannelState getChannelState(Channel);
 
 		std::array < ChannelState, number_of_channels_per_fuse > getChannelsStates();
-		std::array < uint16_t, number_of_channels_per_fuse > getChannelsCurrents();
+		std::array < float, number_of_channels_per_fuse > getChannelsCurrents();
 
 	private:
 		/*
@@ -273,9 +273,9 @@ class SmartFuse
 			uint8_t latch_off_time_out;
 
 			uint16_t duty_cycle;
-			uint16_t current;
+			float current;
 
-			std::pair<uint16_t, uint16_t> clamping_currents;
+			std::pair<float, float> clamping_currents;
 
 			SamplingMode sampling_mode;
 
@@ -345,7 +345,7 @@ class SmartFuseHandler
 		SmartFuseState initAll();
 		/*
 		 * halting function - num_of_fuses * 5 ms
-		 * it's there prevent watchdog time frames overlapping, which caused
+		 * it's there to prevent watchdog time frames overlapping, which caused
 		 * some timing issues.
 		 */
 		SmartFuseState enableAll();
@@ -353,7 +353,7 @@ class SmartFuseHandler
 
 		std::array < SmartFuseState, num_of_sf > getStates();
 		std::array < std::array < ChannelState, number_of_channels_per_fuse >, num_of_sf > getChannelsStates();
-		std::array < std::array < uint16_t, number_of_channels_per_fuse >, num_of_sf > getChannelsCurrents();
+		std::array < std::array < float, number_of_channels_per_fuse >, num_of_sf > getChannelsCurrents();
 		//const etl::vector < SmartFuse, num_of_sf >& getSmartFuses() const;
 		//const SmartFuse& getSmartFuse(uint8_t) const;
 
