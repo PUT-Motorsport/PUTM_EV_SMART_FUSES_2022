@@ -1,12 +1,9 @@
 # PUTM_EV_SMART_FUSES_2022
 
-## Motivaion
-The main principle behind the concept of Smart Fuses was adaptability and ease of resetting fuses, what with the past designs was hard to accomplish.
-
-## Our solution 
-The creation of a specially designed board responsible of directing and managing the current flow.
-
 ## Description
+The main principle behind the concept of Smart Fuses was adaptability and ease of resetting fuses, what the past designs couldn't achive. The board uses VN9D30Q100F High-side driver with integrated short-circuit detection and programmable interface based on reliable and fast SPI communication. It features 6 programmable channels, two of them are rated for 31,5A maximum flowing current the rest is rated for 14A. As mentioned used uCs can detect when one of the managed boards are
+
+## Quick preview
 The Smart Fuses board is responsible for two primary things:
 - control over chips with integrated fuses based on mosfets,
 - control over assi (auyonomus system status indicator) and buzzer.
