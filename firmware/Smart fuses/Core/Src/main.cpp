@@ -152,14 +152,13 @@ int main(void)
 		.clamping_currents = { 0.f, 5.f }
 	};
 
-	std::array < ChannelSettings, number_of_channels_per_fuse > std_fuse_channels_settings
+	ChannelSettings channel_off_setting
 	{
-		std_channel_setting,
-		std_channel_setting,
-		std_channel_setting,
-		std_channel_setting,
-		std_channel_setting,
-		std_channel_setting
+		.active = false,
+		.latch_off_time_out = 0x2,
+		.sampling_mode = SamplingMode::Continuous,
+		.duty_cycle = 0x3ff,
+		.clamping_currents = { 0.f, 5.f }
 	};
 
 	//----------------------------------------------------------------------------------------
@@ -172,6 +171,15 @@ int main(void)
 	 * channel 4: break light
 	 * channel 5: fan mono
 	 */
+	std::array < ChannelSettings, number_of_channels_per_fuse > fuse_0_channels_settings
+	{
+		std_channel_setting, //channel_off_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting
+	};
 	sf_handler.emplaceBack(GPIOA, GPIO_PIN_1, &hspi1, std_fuse_channels_settings);
 
 	//----------------------------------------------------------------------------------------
@@ -208,7 +216,7 @@ int main(void)
 		},
 		std_channel_setting
 	};
-	sf_handler.emplaceBack(GPIOA, GPIO_PIN_2, &hspi1, fuse_1_channels_settings, 100, [](SmartFuse* sf)
+	auto cust_control = [](SmartFuse* sf)
 	{
 
 		static uint16_t previous_setting = 0;
@@ -260,7 +268,8 @@ int main(void)
 				previous_setting = setting;
 			}
 		}
-	});
+	};
+	sf_handler.emplaceBack(GPIOA, GPIO_PIN_2, &hspi1, fuse_1_channels_settings, 100, cust_control);
 
 	//----------------------------------------------------------------------------------------
 	/*
@@ -272,7 +281,16 @@ int main(void)
 	 * channel 4: box dv
 	 * channel 5: jetson
 	 */
-	sf_handler.emplaceBack(GPIOA, GPIO_PIN_3, &hspi1, std_fuse_channels_settings);
+	std::array < ChannelSettings, number_of_channels_per_fuse > fuse_2_channels_settings
+	{
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting
+	};
+	sf_handler.emplaceBack(GPIOA, GPIO_PIN_3, &hspi1, fuse_2_channels_settings);
 
 	//----------------------------------------------------------------------------------------
 	/*
@@ -284,7 +302,16 @@ int main(void)
 	 * channel 4: diagport
 	 * channel 5: pump
 	 */
-	sf_handler.emplaceBack(GPIOA, GPIO_PIN_4, &hspi1, std_fuse_channels_settings);
+	std::array < ChannelSettings, number_of_channels_per_fuse > fuse_3_channels_settings
+	{
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting,
+		std_channel_setting
+	};
+	sf_handler.emplaceBack(GPIOA, GPIO_PIN_4, &hspi1, fuse_3_channels_settings);
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
