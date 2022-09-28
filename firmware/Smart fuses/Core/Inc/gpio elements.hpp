@@ -9,14 +9,18 @@
 #define INC_GPIO_ELEMENTS_HPP_
 
 #include "stm32l4xx_hal.h"
+#include "tokens.hpp"
 
 class GpioElement
 {
 	public:
 		GpioElement(const GPIO_TypeDef * const port, const uint32_t pin, const bool is_inverted);
 
-		//virtual void handle();
-		virtual ~GpioElement() { };
+		virtual void handle() { };
+
+		HandlerTokenSource token_source;
+
+		virtual ~GpioElement() = default;
 
 	protected:
 		bool state;
@@ -36,8 +40,10 @@ class GpioOutElement : public GpioElement
 		void activate();
 		void deactivate();
 
-		//void handle() override;
+		//virtual void handle() override = 0;
 		void toggle();
+
+		~GpioOutElement() { };
 };
 
 class GpioInElement : public GpioElement
@@ -46,9 +52,11 @@ class GpioInElement : public GpioElement
 		GpioInElement(const GPIO_TypeDef * const port, const uint32_t pin);
 		GpioInElement(const GPIO_TypeDef * const port, const uint32_t pin, const bool is_inverted);
 
-		//void handle() override;
+		//virtual void handle() override = 0;
 
 		bool isActive();
+
+		~GpioInElement() { };
 };
 
 #endif /* INC_GPIO_ELEMENTS_HPP_ */

@@ -33,6 +33,9 @@
 #include "math.h"
 #include "algorithm"
 #include "etl/queue.h"
+#include "tokens.hpp"
+#include "gpio handler.hpp"
+#include "buzzer.hpp"
 
 /* USER CODE END Includes */
 
@@ -66,6 +69,18 @@ class Device
 		inline static PUTM_CAN::SF_states state = PUTM_CAN::SF_states::Ok;
 };
 
+namespace PUTM_CAN
+{
+	enum struct AutonomusSystemStatus
+	{
+		Off,
+		Ready,
+		Driving,
+		Emergency,
+		Finished
+	};
+}
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -96,6 +111,8 @@ const size_t safety_firewall = 5;
 const size_t safety_dv = 6;
 const size_t safety_sapre_1 = 7;
 
+const uint32_t buzzer_signal_lenght = 9000;
+
 bool water_pot_kek;
 
 GpioOutElement led_error(GPIOC, GPIO_PIN_0, true);
@@ -105,7 +122,8 @@ GpioOutElement led_ok(GPIOC, GPIO_PIN_3, true);
 
 GpioOutElement led_1_control(GPIOB, GPIO_PIN_5, false);
 GpioOutElement led_2_control(GPIOB, GPIO_PIN_7, false);
-GpioOutElement buzzer_control(GPIOB, GPIO_PIN_10, false);
+
+Buzzer buzzer_control(GPIOB, GPIO_PIN_10, false, buzzer_signal_lenght);
 
 GpioOutElement water_pot_enable(GPIOB, GPIO_PIN_2, true);
 
@@ -132,6 +150,12 @@ std::array < HAL_StatusTypeDef, 6 > frame_send_fail { };
 PUTM_CAN::SF_states device_state;
 
 SmartFuseHandler < number_of_fuses > sf_handler;
+
+//HandlerTokenSource led_1_token_source;
+//HandlerTokenSource led_2_token_source;
+//HandlerTokenSource buzzer_token_source;
+
+GpioOutHandler gpio_handler;
 
 /* USER CODE END 0 */
 
@@ -285,6 +309,13 @@ int main(void)
 	 * channel 5: pump
 	 */
 	sf_handler.emplaceBack(GPIOA, GPIO_PIN_4, &hspi1, std_fuse_channels_settings);
+
+	//----------------------------------------------------------------------------------------
+
+	gpio_handler.add(&led_1_control, 500, 500, led_1_control.token_source.getToken());
+	gpio_handler.add(&led_2_control, 500, 500, led_2_control.token_source.getToken());
+	gpio_handler.add(&buzzer_control, 100, 100, buzzer_control.token_source.getToken());
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -407,6 +438,65 @@ int main(void)
 
 			send_frame++;
 			if(send_frame > 5) send_frame = 0;
+		}
+
+		//----------------------------------------------------------------------------------------
+		// Handle ASSI
+
+		gpio_handler.handle();
+		buzzer_control.handle();
+
+
+
+		PUTM_CAN::AutonomusSystemStatus ass_status = PUTM_CAN::AutonomusSystemStatus::Off;//= PUTM_CAN::can.get_sf_ass();
+		static PUTM_CAN::AutonomusSystemStatus prev_ass_status = PUTM_CAN::AutonomusSystemStatus::Off;
+
+		if(prev_ass_status != ass_status)
+		{
+			prev_ass_status = ass_status;
+			switch (ass_status)
+			{
+				case PUTM_CAN::AutonomusSystemStatus::Off:
+					led_1_control.deactivate();
+					led_1_control.token_source.stop();
+					led_2_control.deactivate();
+					led_2_control.token_source.stop();
+
+					buzzer_control.token_source.stop();
+					break;
+				case PUTM_CAN::AutonomusSystemStatus::Ready:
+					led_1_control.activate();
+					led_1_control.token_source.stop();
+					led_2_control.deactivate();
+					led_2_control.token_source.stop();
+
+					buzzer_control.token_source.stop();
+					break;
+				case PUTM_CAN::AutonomusSystemStatus::Driving:
+					led_1_control.deactivate();
+					led_1_control.token_source.start();
+					led_2_control.deactivate();
+					led_2_control.token_source.stop();
+
+					buzzer_control.token_source.stop();
+					break;
+				case PUTM_CAN::AutonomusSystemStatus::Emergency:
+					led_1_control.deactivate();
+					led_1_control.token_source.stop();
+					led_2_control.deactivate();
+					led_2_control.token_source.start();
+
+					buzzer_control.token_source.start();
+					break;
+				case PUTM_CAN::AutonomusSystemStatus::Finished:
+					led_1_control.deactivate();
+					led_1_control.token_source.stop();
+					led_2_control.activate();
+					led_2_control.token_source.stop();
+
+					buzzer_control.token_source.stop();
+					break;
+			}
 		}
 
     /* USER CODE END WHILE */
