@@ -69,18 +69,6 @@ class Device
 		inline static PUTM_CAN::SF_states state = PUTM_CAN::SF_states::Ok;
 };
 
-namespace PUTM_CAN
-{
-	enum struct AutonomusSystemStatus
-	{
-		Off,
-		Ready,
-		Driving,
-		Emergency,
-		Finished
-	};
-}
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -151,11 +139,9 @@ PUTM_CAN::SF_states device_state;
 
 SmartFuseHandler < number_of_fuses > sf_handler;
 
-//HandlerTokenSource led_1_token_source;
-//HandlerTokenSource led_2_token_source;
-//HandlerTokenSource buzzer_token_source;
-
 GpioOutHandler gpio_handler;
+
+auto prev_ass_status = PUTM_CAN::AutonomousSystemStatus::Off;
 
 /* USER CODE END 0 */
 
@@ -446,17 +432,15 @@ int main(void)
 		gpio_handler.handle();
 		buzzer_control.handle();
 
-
-
-		PUTM_CAN::AutonomusSystemStatus ass_status = PUTM_CAN::AutonomusSystemStatus::Off;//= PUTM_CAN::can.get_sf_ass();
-		static PUTM_CAN::AutonomusSystemStatus prev_ass_status = PUTM_CAN::AutonomusSystemStatus::Off;
+		auto ass_status = PUTM_CAN::can.get_dv_ass().status;
 
 		if(prev_ass_status != ass_status)
 		{
 			prev_ass_status = ass_status;
 			switch (ass_status)
 			{
-				case PUTM_CAN::AutonomusSystemStatus::Off:
+				//all OFF
+				case PUTM_CAN::AutonomousSystemStatus::Off:
 					led_1_control.deactivate();
 					led_1_control.token_source.stop();
 					led_2_control.deactivate();
@@ -464,7 +448,8 @@ int main(void)
 
 					buzzer_control.token_source.stop();
 					break;
-				case PUTM_CAN::AutonomusSystemStatus::Ready:
+				// orange / yellow ON
+				case PUTM_CAN::AutonomousSystemStatus::Ready:
 					led_1_control.activate();
 					led_1_control.token_source.stop();
 					led_2_control.deactivate();
@@ -472,7 +457,8 @@ int main(void)
 
 					buzzer_control.token_source.stop();
 					break;
-				case PUTM_CAN::AutonomusSystemStatus::Driving:
+				// orange / yellow PULSING
+				case PUTM_CAN::AutonomousSystemStatus::Driving:
 					led_1_control.deactivate();
 					led_1_control.token_source.start();
 					led_2_control.deactivate();
@@ -480,7 +466,8 @@ int main(void)
 
 					buzzer_control.token_source.stop();
 					break;
-				case PUTM_CAN::AutonomusSystemStatus::Emergency:
+				// blue PULSING, buzzer PULSING
+				case PUTM_CAN::AutonomousSystemStatus::Emergency:
 					led_1_control.deactivate();
 					led_1_control.token_source.stop();
 					led_2_control.deactivate();
@@ -488,7 +475,8 @@ int main(void)
 
 					buzzer_control.token_source.start();
 					break;
-				case PUTM_CAN::AutonomusSystemStatus::Finished:
+				// blue ON
+				case PUTM_CAN::AutonomousSystemStatus::Finished:
 					led_1_control.deactivate();
 					led_1_control.token_source.stop();
 					led_2_control.activate();

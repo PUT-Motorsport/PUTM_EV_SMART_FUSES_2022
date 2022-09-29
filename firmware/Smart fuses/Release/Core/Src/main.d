@@ -91,9 +91,11 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-BMS_HV.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-BMS_LV.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-DASH.hpp \
+ ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-DV.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-LAP_TIMER.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-SF.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-STEERING_WHEEL.hpp \
+ ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-SW_SENSOR.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-TC.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-TELEMETRY.hpp \
  ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-WHEELTEMP.hpp \
@@ -218,9 +220,11 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-BMS_HV.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-BMS_LV.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-DASH.hpp:
+../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-DV.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-LAP_TIMER.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-SF.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-STEERING_WHEEL.hpp:
+../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-SW_SENSOR.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-TC.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-TELEMETRY.hpp:
 ../Core/Inc/PUTM_EV_CAN_LIBRARY/lib/CanHeaders/PM08-CANBUS-WHEELTEMP.hpp:
