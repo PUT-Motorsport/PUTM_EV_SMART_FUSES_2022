@@ -13,3 +13,8 @@ hardware/fp-info-cache/*
 firmware/Smart fuses/Debug/*
 *.cproject
 *.xml
+*.bin
+*.elf
+*.map
+*.list
+*.mk

@@ -103,7 +103,7 @@ const uint32_t buzzer_signal_lenght = 9000;
 
 bool water_pot_kek;
 
-GpioOutElement led_error(GPIOC, GPIO_PIN_0, true);
+GpioOutElement led_error(GPIOC, GPIO_PIN_0, true);//(GPIOB, GPIO_PIN_10, false);
 GpioOutElement led_warning_2(GPIOC, GPIO_PIN_1, true);
 GpioOutElement led_warning_1(GPIOC, GPIO_PIN_2, true);
 GpioOutElement led_ok(GPIOC, GPIO_PIN_3, true);
@@ -111,7 +111,7 @@ GpioOutElement led_ok(GPIOC, GPIO_PIN_3, true);
 GpioOutElement led_1_control(GPIOB, GPIO_PIN_5, false);
 GpioOutElement led_2_control(GPIOB, GPIO_PIN_7, false);
 
-Buzzer buzzer_control(GPIOB, GPIO_PIN_10, false, buzzer_signal_lenght);
+Buzzer buzzer_control(GPIOB, GPIO_PIN_10, false, buzzer_signal_lenght);//(GPIOC, GPIO_PIN_0, false, buzzer_signal_lenght);
 
 GpioOutElement water_pot_enable(GPIOB, GPIO_PIN_2, true);
 
@@ -139,7 +139,7 @@ PUTM_CAN::SF_states device_state;
 
 SmartFuseHandler < number_of_fuses > sf_handler;
 
-GpioOutHandler gpio_handler;
+GpioOutHandler assi_leds_handler;
 
 auto prev_ass_status = PUTM_CAN::AutonomousSystemStatus::Off;
 
@@ -298,9 +298,9 @@ int main(void)
 
 	//----------------------------------------------------------------------------------------
 
-	gpio_handler.add(&led_1_control, 500, 500, led_1_control.token_source.getToken());
-	gpio_handler.add(&led_2_control, 500, 500, led_2_control.token_source.getToken());
-	gpio_handler.add(&buzzer_control, 100, 100, buzzer_control.token_source.getToken());
+	assi_leds_handler.add(&led_1_control, 500, 500, led_1_control.token_source.getToken());
+	assi_leds_handler.add(&led_2_control, 500, 500, led_2_control.token_source.getToken());
+	assi_leds_handler.add(&buzzer_control, 100, 100, buzzer_control.token_source.getToken());
 
   /* USER CODE END 1 */
 
@@ -429,10 +429,10 @@ int main(void)
 		//----------------------------------------------------------------------------------------
 		// Handle ASSI
 
-		gpio_handler.handle();
+		assi_leds_handler.handle();
 		buzzer_control.handle();
 
-		auto ass_status = PUTM_CAN::can.get_dv_ass().status;
+		auto ass_status = PUTM_CAN::can.get_dv_ass().status;//PUTM_CAN::AutonomousSystemStatus::Emergency;//
 
 		if(prev_ass_status != ass_status)
 		{
@@ -448,6 +448,7 @@ int main(void)
 
 					buzzer_control.token_source.stop();
 					break;
+
 				// orange / yellow ON
 				case PUTM_CAN::AutonomousSystemStatus::Ready:
 					led_1_control.activate();
@@ -457,6 +458,7 @@ int main(void)
 
 					buzzer_control.token_source.stop();
 					break;
+
 				// orange / yellow PULSING
 				case PUTM_CAN::AutonomousSystemStatus::Driving:
 					led_1_control.deactivate();
@@ -466,6 +468,7 @@ int main(void)
 
 					buzzer_control.token_source.stop();
 					break;
+
 				// blue PULSING, buzzer PULSING
 				case PUTM_CAN::AutonomousSystemStatus::Emergency:
 					led_1_control.deactivate();
@@ -475,6 +478,7 @@ int main(void)
 
 					buzzer_control.token_source.start();
 					break;
+
 				// blue ON
 				case PUTM_CAN::AutonomousSystemStatus::Finished:
 					led_1_control.deactivate();
