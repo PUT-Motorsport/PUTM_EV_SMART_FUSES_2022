@@ -11,3 +11,6 @@ The Smart Fuses board is responsible for two primary things:
 ## Basic flow chart
 ![Flow chart drawio (1)](https://user-images.githubusercontent.com/26027009/156365645-1675d58c-cdfd-4cbe-8864-cd5e77c1c218.png) <br/>
 ( basic concept of the program's flow, it may or may not change depending on the needs )
+
+## Main Connector Pinout
+![image](https://user-images.githubusercontent.com/26027009/197857978-74c9a5fe-59e4-44ca-b566-75f75bcf2003.png)
