@@ -157,9 +157,9 @@ int main(void)
 	{
 		.active = true,
 		.latch_off_time_out = 0x2,
-		.sampling_mode = SamplingMode::Continuous,
+		.sampling_mode = SamplingMode::Filtered,
 		.duty_cycle = 0x3ff,
-		.clamping_currents = { 0.f, 5.f }
+		.clamping_currents = { 0.f, 10.f }
 	};
 
 	std::array < ChannelSettings, number_of_channels_per_fuse > std_fuse_channels_settings
@@ -204,17 +204,17 @@ int main(void)
 			// fan l
 			.active = true,
 			.latch_off_time_out = 0x2,
-			.sampling_mode = SamplingMode::Continuous,
+			.sampling_mode = SamplingMode::Filtered,
 			.duty_cycle = 0x000,
-			.clamping_currents = { 0.f, 5.f}
+			.clamping_currents = { 0.f, 10.f }
 		},
 		{
 			// fan r
 			.active = true,
 			.latch_off_time_out = 0x2,
-			.sampling_mode = SamplingMode::Continuous,
+			.sampling_mode = SamplingMode::Filtered,
 			.duty_cycle = 0x000,
-			.clamping_currents = { 0.f, 5.f}
+			.clamping_currents = { 0.f, 10.f }
 		},
 		std_channel_setting
 	};

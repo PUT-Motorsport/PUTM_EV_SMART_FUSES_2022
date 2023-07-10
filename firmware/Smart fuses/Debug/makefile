@@ -75,8 +75,8 @@ all: main-build
 main-build: Smart\ fuses.elf secondary-outputs
 
 # Tool invocations
-Smart\ fuses.elf Smart\ fuses.map: $(OBJS) $(USER_OBJS) C:\Users\pile\Desktop\wszytko\ inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart\ fuses\STM32L4P5RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\pile\Desktop\wszytko inne\prywata\folder\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Smart\ fuses.elf Smart\ fuses.map: $(OBJS) $(USER_OBJS) C:\Users\piotr\Desktop\TupTopSrotom\PUTM_EV_SMART_FUSES_2022\firmware\Smart\ fuses\STM32L4P5RGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-g++ -o "Smart fuses.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\piotr\Desktop\TupTopSrotom\PUTM_EV_SMART_FUSES_2022\firmware\Smart fuses\STM32L4P5RGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Smart fuses.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
